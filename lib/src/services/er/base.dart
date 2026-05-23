@@ -1,0 +1,30 @@
+abstract class ErService {
+  Future<dynamic> postAmbulanceCallsByidPickup(String id, Map<String, dynamic> data);
+  Future<dynamic> postAmbulanceCallsByidArrival(String id, Map<String, dynamic> data);
+  Future<dynamic> postAmbulanceCallsByidLinkErByerregistrationid(String id, String erregistrationid, Map<String, dynamic> data);
+  Future<dynamic> getAmbulanceCallsByid(String id);
+  Future<dynamic> ambulanceCalls();
+  Future<dynamic> postAmbulancecalls(Map<String, dynamic> data);
+  Future<dynamic> getBedsAvailable();
+  Future<dynamic> postBedsByidStatus(String id, Map<String, dynamic> data);
+  Future<dynamic> getBedsByid(String id);
+  Future<dynamic> putBedsByid(String id, Map<String, dynamic> data);
+  Future<dynamic> beds();
+  Future<dynamic> postBeds(Map<String, dynamic> data);
+  Future<dynamic> postRegistrationsByidDisposition(String id, Map<String, dynamic> data);
+  Future<dynamic> getRegistrationsByid(String id);
+  Future<dynamic> putRegistrationsByid(String id, Map<String, dynamic> data);
+  Future<dynamic> deleteRegistrationsByid(String id);
+  Future<dynamic> getRegistrationsByNumberByernumber(String ernumber);
+  Future<dynamic> postRegistrationsRegister(Map<String, dynamic> data);
+  Future<dynamic> registrations();
+  Future<dynamic> postTreatmentsByidComplete(String id, Map<String, dynamic> data);
+  Future<dynamic> getTreatmentsByid(String id);
+  Future<dynamic> getTreatmentsByRegistrationByregistrationid(String registrationid);
+  Future<dynamic> postTreatmentsStart(Map<String, dynamic> data);
+  Future<dynamic> treatments();
+  Future<dynamic> getTriagesByid(String id);
+  Future<dynamic> getTriagesByRegistrationByregistrationid(String registrationid);
+  Future<dynamic> triages();
+  Future<dynamic> postTriages(Map<String, dynamic> data);
+}
