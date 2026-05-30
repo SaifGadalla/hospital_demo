@@ -1,10 +1,4 @@
 import 'package:dio/dio.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-
-// It's good practice to strongly type your Provider
-final dioProvider = Provider<DioService>((ref) {
-  return DioService();
-});
 
 class DioService {
   // 1. Make the Dio instance private
@@ -16,7 +10,10 @@ class DioService {
         baseUrl: 'https://tesseroapi.runasp.net',
         connectTimeout: const Duration(seconds: 5),
         receiveTimeout: const Duration(seconds: 5),
-        headers: {'Content-Type': 'application/json', 'Accept': 'application/json'},
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
+        },
       ),
     );
 
@@ -34,9 +31,17 @@ class DioService {
   }
 
   // 3. Create wrapper methods for HTTP calls
-  Future<Response> get(String endpoint, {Map<String, dynamic>? queryParameters, Options? options}) async {
+  Future<Response> get(
+    String endpoint, {
+    Map<String, dynamic>? queryParameters,
+    Options? options,
+  }) async {
     try {
-      return await _dio.get(endpoint, queryParameters: queryParameters, options: options);
+      return await _dio.get(
+        endpoint,
+        queryParameters: queryParameters,
+        options: options,
+      );
     } on DioException catch (e) {
       throw _handleException(e);
     }
@@ -49,15 +54,30 @@ class DioService {
     Options? options,
   }) async {
     try {
-      return await _dio.post(endpoint, data: data, queryParameters: queryParameters, options: options);
+      return await _dio.post(
+        endpoint,
+        data: data,
+        queryParameters: queryParameters,
+        options: options,
+      );
     } on DioException catch (e) {
       throw _handleException(e);
     }
   }
 
-  Future<Response> put(String endpoint, {dynamic data, Map<String, dynamic>? queryParameters, Options? options}) async {
+  Future<Response> put(
+    String endpoint, {
+    dynamic data,
+    Map<String, dynamic>? queryParameters,
+    Options? options,
+  }) async {
     try {
-      return await _dio.put(endpoint, data: data, queryParameters: queryParameters, options: options);
+      return await _dio.put(
+        endpoint,
+        data: data,
+        queryParameters: queryParameters,
+        options: options,
+      );
     } on DioException catch (e) {
       throw _handleException(e);
     }
@@ -70,7 +90,12 @@ class DioService {
     Options? options,
   }) async {
     try {
-      return await _dio.delete(endpoint, data: data, queryParameters: queryParameters, options: options);
+      return await _dio.delete(
+        endpoint,
+        data: data,
+        queryParameters: queryParameters,
+        options: options,
+      );
     } on DioException catch (e) {
       throw _handleException(e);
     }

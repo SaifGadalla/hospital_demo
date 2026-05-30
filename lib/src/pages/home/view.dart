@@ -5,12 +5,20 @@ class HomePage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return Scaffold(
-      body: Column(
-        mainAxisSize: MainAxisSize.min,
+    return AppPage(
+      title: 'Welcome to CarePulse',
+      description:
+          'A unified platform for hospital operations, finance, HR, supply chain, and more.',
+      mainButtonTitle: 'Get Started',
+      mainButtonOnTap: () {},
+      customBody: Column(
         children: [
-          Text('Welcome To Our Hospital'),
-          Text('A unified platform for hospital operations, finance, HR, supply chain, and more.'),
+          const SizedBox(height: 20),
+          Text(
+            'Streamline your hospital management with CarePulse.',
+            style: Theme.of(context).textTheme.headlineSmall,
+            textAlign: TextAlign.center,
+          ),
         ],
       ),
     );

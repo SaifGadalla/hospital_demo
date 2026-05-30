@@ -1,5 +1,3 @@
-import 'package:hospital_demo/routes.dart';
-
 import '../common.dart';
 
 class MainApp extends ConsumerWidget {
@@ -10,6 +8,7 @@ class MainApp extends ConsumerWidget {
     return MaterialApp.router(
       debugShowCheckedModeBanner: false,
       title: 'hospital_demo',
+      theme: lightTheme,
       routerConfig: ref.watch(routerProvider),
       builder: (context, child) {
         return child ?? const SizedBox.shrink();

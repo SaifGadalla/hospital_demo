@@ -13,7 +13,7 @@ class AppShell extends ConsumerWidget {
     return Scaffold(
       body: Row(
         children: [
-          if (!isTablet) Expanded(flex: 1, child: AppDrawer()),
+          if (!isTablet) AppDrawer(),
           Expanded(flex: 4, child: child),
         ],
       ),

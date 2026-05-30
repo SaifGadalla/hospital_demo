@@ -1,3 +1,12 @@
 export 'home/view.dart';
 export 'dashboard/view.dart';
+export 'patients/view.dart';
 export 'shell/view.dart';
+export 'appointments/view.dart';
+export 'medical_records/view.dart';
+export 'pharmacy/view.dart';
+export 'laboratory/view.dart';
+export 'inpatient/view.dart';
+export 'emergency/view.dart';
+export 'operating_room/view.dart';
+export 'insurance/view.dart';
