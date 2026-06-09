@@ -8,11 +8,13 @@ class DioService {
     _dio = Dio(
       BaseOptions(
         baseUrl: 'https://tesseroapi.runasp.net',
-        connectTimeout: const Duration(seconds: 5),
-        receiveTimeout: const Duration(seconds: 5),
+        connectTimeout: const Duration(seconds: 30),
+        receiveTimeout: const Duration(seconds: 30),
         headers: {
           'Content-Type': 'application/json',
           'Accept': 'application/json',
+          //TODO model check
+          'X-Tenant-Id': '00000000-0000-0000-0000-000000000001',
         },
       ),
     );

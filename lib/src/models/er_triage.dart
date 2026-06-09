@@ -1,6 +1,10 @@
 class ErTriage {
+  final String? id;
+  final String? tenantId;
   final String? erRegistrationId;
+  final String? patientId;
   final String? triagedById;
+  final DateTime? triageTime;
   final int? triageLevel;
   final String? triageColor;
   final String? bloodPressure;
@@ -14,10 +18,15 @@ class ErTriage {
   final String? allergies;
   final String? currentMedications;
   final String? notes;
+  final DateTime? createdAt;
 
   ErTriage({
+    this.id,
+    this.tenantId,
     this.erRegistrationId,
+    this.patientId,
     this.triagedById,
+    this.triageTime,
     this.triageLevel,
     this.triageColor,
     this.bloodPressure,
@@ -31,12 +40,19 @@ class ErTriage {
     this.allergies,
     this.currentMedications,
     this.notes,
+    this.createdAt,
   });
 
   factory ErTriage.fromJson(Map<String, dynamic> json) {
     return ErTriage(
+      id: json['id'],
+      tenantId: json['tenantId'],
       erRegistrationId: json['erRegistrationId'],
+      patientId: json['patientId'],
       triagedById: json['triagedById'],
+      triageTime: json['triageTime'] != null
+          ? DateTime.tryParse(json['triageTime'] as String)
+          : null,
       triageLevel: json['triageLevel'],
       triageColor: json['triageColor'],
       bloodPressure: json['bloodPressure'],
@@ -50,13 +66,20 @@ class ErTriage {
       allergies: json['allergies'],
       currentMedications: json['currentMedications'],
       notes: json['notes'],
+      createdAt: json['createdAt'] != null
+          ? DateTime.tryParse(json['createdAt'] as String)
+          : null,
     );
   }
 
   Map<String, dynamic> toJson() {
     return {
+      'id': id,
+      'tenantId': tenantId,
       'erRegistrationId': erRegistrationId,
+      'patientId': patientId,
       'triagedById': triagedById,
+      'triageTime': triageTime?.toIso8601String(),
       'triageLevel': triageLevel,
       'triageColor': triageColor,
       'bloodPressure': bloodPressure,
@@ -70,12 +93,17 @@ class ErTriage {
       'allergies': allergies,
       'currentMedications': currentMedications,
       'notes': notes,
+      'createdAt': createdAt?.toIso8601String(),
     };
   }
 
   ErTriage copyWith({
+    String? id,
+    String? tenantId,
     String? erRegistrationId,
+    String? patientId,
     String? triagedById,
+    DateTime? triageTime,
     int? triageLevel,
     String? triageColor,
     String? bloodPressure,
@@ -89,10 +117,15 @@ class ErTriage {
     String? allergies,
     String? currentMedications,
     String? notes,
+    DateTime? createdAt,
   }) {
     return ErTriage(
+      id: id ?? this.id,
+      tenantId: tenantId ?? this.tenantId,
       erRegistrationId: erRegistrationId ?? this.erRegistrationId,
+      patientId: patientId ?? this.patientId,
       triagedById: triagedById ?? this.triagedById,
+      triageTime: triageTime ?? this.triageTime,
       triageLevel: triageLevel ?? this.triageLevel,
       triageColor: triageColor ?? this.triageColor,
       bloodPressure: bloodPressure ?? this.bloodPressure,
@@ -106,11 +139,12 @@ class ErTriage {
       allergies: allergies ?? this.allergies,
       currentMedications: currentMedications ?? this.currentMedications,
       notes: notes ?? this.notes,
+      createdAt: createdAt ?? this.createdAt,
     );
   }
 
   @override
   String toString() {
-    return 'ErTriage(erRegistrationId: $erRegistrationId, triagedById: $triagedById, triageLevel: $triageLevel, triageColor: $triageColor, bloodPressure: $bloodPressure, temperature: $temperature, pulseRate: $pulseRate, respiratoryRate: $respiratoryRate, oxygenSaturation: $oxygenSaturation, painScale: $painScale, chiefComplaint: $chiefComplaint, briefHistory: $briefHistory, allergies: $allergies, currentMedications: $currentMedications, notes: $notes)';
+    return 'ErTriage(id: $id, tenantId: $tenantId, erRegistrationId: $erRegistrationId, patientId: $patientId, triagedById: $triagedById, triageTime: $triageTime, triageLevel: $triageLevel, triageColor: $triageColor, bloodPressure: $bloodPressure, temperature: $temperature, pulseRate: $pulseRate, respiratoryRate: $respiratoryRate, oxygenSaturation: $oxygenSaturation, painScale: $painScale, chiefComplaint: $chiefComplaint, briefHistory: $briefHistory, allergies: $allergies, currentMedications: $currentMedications, notes: $notes, createdAt: $createdAt)';
   }
 }

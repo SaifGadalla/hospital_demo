@@ -1,9 +1,11 @@
+//TODO model check
+
 class NursingNote {
   final String? admissionId;
   final String? patientId;
   final String? nurseId;
-  final String? noteDate;
-  final String? noteTime;
+  final DateTime? noteDate;
+  final DateTime? noteTime;
   final String? bloodPressure;
   final double? temperature;
   final int? pulseRate;
@@ -34,8 +36,12 @@ class NursingNote {
       admissionId: json['admissionId'],
       patientId: json['patientId'],
       nurseId: json['nurseId'],
-      noteDate: json['noteDate'],
-      noteTime: json['noteTime'],
+      noteDate: json['noteDate'] != null
+          ? DateTime.tryParse(json['noteDate'] as String)
+          : null,
+      noteTime: json['noteTime'] != null
+          ? DateTime.tryParse(json['noteTime'] as String)
+          : null,
       bloodPressure: json['bloodPressure'],
       temperature: json['temperature'],
       pulseRate: json['pulseRate'],
@@ -52,8 +58,8 @@ class NursingNote {
       'admissionId': admissionId,
       'patientId': patientId,
       'nurseId': nurseId,
-      'noteDate': noteDate,
-      'noteTime': noteTime,
+      'noteDate': noteDate?.toIso8601String(),
+      'noteTime': noteTime?.toIso8601String(),
       'bloodPressure': bloodPressure,
       'temperature': temperature,
       'pulseRate': pulseRate,
@@ -69,8 +75,8 @@ class NursingNote {
     String? admissionId,
     String? patientId,
     String? nurseId,
-    String? noteDate,
-    String? noteTime,
+    DateTime? noteDate,
+    DateTime? noteTime,
     String? bloodPressure,
     double? temperature,
     int? pulseRate,

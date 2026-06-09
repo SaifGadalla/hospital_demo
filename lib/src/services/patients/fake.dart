@@ -1,62 +1,135 @@
+import '../../models/_exports.dart';
 import 'base.dart';
 
 class FakePatientsService implements PatientsService {
-  final List<Map<String, dynamic>> _data = [];
+  final List<Patient> _data = [
+    Patient(
+      address: '123 Main St',
+      email: 'john.doe@example.com',
+      firstName: 'John',
+      lastName: 'Doe',
+      bloodType: 'AB+',
+      dateOfBirth: DateTime(1990, 1, 1),
+      city: 'New York',
+      country: 'USA',
+      emergencyContactName: 'Jane Doe',
+      emergencyContactPhone: '555-123-4567',
+      emergencyContactRelationship: 'spouse',
+      gender: 'male',
+      maritalStatus: 'married',
+      insuranceMemberNumber: 'INS123456789',
+      insurancePolicyNumber: 'POL987654321',
+      isActive: true,
+      isVIP: false,
+      middleName: 'Michael',
+      mobile: '555-987-6543',
+      nationalId: '123456789',
+      nationality: 'American',
+      passportNumber: 'A12345678',
+      phone: '555-555-5555',
+      photoUrl: 'https://example.com/photos/john_doe.jpg',
+      primaryInsuranceId: 'INS123456789',
+      state: 'NY',
+    ),
+  ];
 
   @override
-  Future<dynamic> getPatientById(String id) async {
+  Future<Patient> getPatientById(String id) async {
     await Future.delayed(const Duration(milliseconds: 500));
-    return {'id': 'mocked_id', 'status': 'success'};
+    return _data.firstWhere((patient) => patient.nationalId == id);
   }
 
   @override
-  Future<dynamic> updatePatient(String id, Map<String, dynamic> data) async {
+  Future<Patient> updatePatient(String id, Patient data) async {
     await Future.delayed(const Duration(milliseconds: 500));
-    if (data.isNotEmpty) _data.add(data);
+    _data.add(data);
     return data;
   }
 
   @override
-  Future<dynamic> deletePatient(String id) async {
+  Future<Patient> deletePatient(String id) async {
     await Future.delayed(const Duration(milliseconds: 500));
-    return {'success': true};
+    return Patient();
   }
 
   @override
-  Future<dynamic> getPatientsMrn(String mrn) async {
+  Future<Patient> getPatientsMrn(String mrn) async {
     await Future.delayed(const Duration(milliseconds: 500));
-    return {'id': 'mocked_id', 'status': 'success'};
+    return Patient();
   }
 
   @override
-  Future<dynamic> getCheckMrnBymrn(String mrn) async {
+  Future<Patient> getCheckMrnBymrn(String mrn, {String? excludeId}) async {
     await Future.delayed(const Duration(milliseconds: 500));
-    return {'id': 'mocked_id', 'status': 'success'};
+    return Patient();
   }
 
   @override
-  Future<dynamic> getCheckEmailByemail(String email) async {
+  Future<Patient> getCheckEmailByemail(
+    String email, {
+    String? excludeId,
+  }) async {
     await Future.delayed(const Duration(milliseconds: 500));
-    return {'id': 'mocked_id', 'status': 'success'};
+    return Patient();
   }
 
   @override
-  Future<dynamic> getCheckNationalidBynationalid(String nationalid) async {
+  Future<Patient> getCheckNationalidBynationalid(
+    String nationalid, {
+    String? excludeId,
+  }) async {
     await Future.delayed(const Duration(milliseconds: 500));
-    return {'id': 'mocked_id', 'status': 'success'};
+    return Patient();
   }
 
   @override
-  Future<dynamic> getPatients([Map<String, dynamic>? queryParams]) async {
+  Future<List<Patient>> getPatients({
+    String? searchTerm,
+    String? gender,
+    String? bloodType,
+    bool? isVIP,
+    bool? isActive,
+    String? city,
+    String? country,
+    DateTime? dateOfBirthFrom,
+    DateTime? dateOfBirthTo,
+    int? ageFrom,
+    int? ageTo,
+    int? pageNumber,
+    int? pageSize,
+    String? sortBy,
+    bool? sortDescending,
+  }) async {
     await Future.delayed(const Duration(milliseconds: 500));
     return _data;
   }
 
   @override
-  Future<dynamic> createPatient(Map<String, dynamic> data) async {
+  Future<Patient> createPatient(Patient data) async {
     await Future.delayed(const Duration(milliseconds: 500));
-    if (data.isNotEmpty) _data.add(data);
+    _data.add(data);
     return data;
   }
 
+  @override
+  Future<int> getPatientsTotalCount({
+    String? searchTerm,
+    String? gender,
+    String? bloodType,
+    bool? isVIP,
+    bool? isActive,
+    String? city,
+    String? country,
+    DateTime? dateOfBirthFrom,
+    DateTime? dateOfBirthTo,
+    int? ageFrom,
+    int? ageTo,
+    int? pageNumber,
+    int? pageSize,
+    String? sortBy,
+    bool? sortDescending,
+  }) async {
+    await Future.delayed(const Duration(milliseconds: 500));
+    return _data.length;
+  }
 }

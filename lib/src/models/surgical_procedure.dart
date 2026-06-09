@@ -1,4 +1,6 @@
 class SurgicalProcedure {
+  final String? id;
+  final String? procedureCode;
   final String? procedureName;
   final String? cptCode;
   final String? specialtyId;
@@ -8,9 +10,11 @@ class SurgicalProcedure {
   final String? postOpInstructions;
   final String? description;
   final bool? isActive;
-  final String? procedureCode;
+  final DateTime? createdAt;
 
   SurgicalProcedure({
+    this.id,
+    this.procedureCode,
     this.procedureName,
     this.cptCode,
     this.specialtyId,
@@ -20,11 +24,13 @@ class SurgicalProcedure {
     this.postOpInstructions,
     this.description,
     this.isActive,
-    this.procedureCode,
+    this.createdAt,
   });
 
   factory SurgicalProcedure.fromJson(Map<String, dynamic> json) {
     return SurgicalProcedure(
+      id: json['id'],
+      procedureCode: json['procedureCode'],
       procedureName: json['procedureName'],
       cptCode: json['cptCode'],
       specialtyId: json['specialtyId'],
@@ -34,12 +40,16 @@ class SurgicalProcedure {
       postOpInstructions: json['postOpInstructions'],
       description: json['description'],
       isActive: json['isActive'],
-      procedureCode: json['procedureCode'],
+      createdAt: json['createdAt'] != null
+          ? DateTime.tryParse(json['createdAt'] as String)
+          : null,
     );
   }
 
   Map<String, dynamic> toJson() {
     return {
+      'id': id,
+      'procedureCode': procedureCode,
       'procedureName': procedureName,
       'cptCode': cptCode,
       'specialtyId': specialtyId,
@@ -49,11 +59,12 @@ class SurgicalProcedure {
       'postOpInstructions': postOpInstructions,
       'description': description,
       'isActive': isActive,
-      'procedureCode': procedureCode,
+      'createdAt': createdAt?.toIso8601String(),
     };
   }
 
   SurgicalProcedure copyWith({
+    String? procedureCode,
     String? procedureName,
     String? cptCode,
     String? specialtyId,
@@ -63,9 +74,10 @@ class SurgicalProcedure {
     String? postOpInstructions,
     String? description,
     bool? isActive,
-    String? procedureCode,
   }) {
     return SurgicalProcedure(
+      id: id,
+      procedureCode: procedureCode ?? this.procedureCode,
       procedureName: procedureName ?? this.procedureName,
       cptCode: cptCode ?? this.cptCode,
       specialtyId: specialtyId ?? this.specialtyId,
@@ -75,12 +87,12 @@ class SurgicalProcedure {
       postOpInstructions: postOpInstructions ?? this.postOpInstructions,
       description: description ?? this.description,
       isActive: isActive ?? this.isActive,
-      procedureCode: procedureCode ?? this.procedureCode,
+      createdAt: createdAt,
     );
   }
 
   @override
   String toString() {
-    return 'SurgicalProcedure(procedureName: $procedureName, cptCode: $cptCode, specialtyId: $specialtyId, estimatedDuration: $estimatedDuration, requiredEquipment: $requiredEquipment, preOpInstructions: $preOpInstructions, postOpInstructions: $postOpInstructions, description: $description, isActive: $isActive, procedureCode: $procedureCode)';
+    return 'SurgicalProcedure(id: $id, procedureCode: $procedureCode, procedureName: $procedureName, cptCode: $cptCode, specialtyId: $specialtyId, estimatedDuration: $estimatedDuration, requiredEquipment: $requiredEquipment, preOpInstructions: $preOpInstructions, postOpInstructions: $postOpInstructions, description: $description, isActive: $isActive, createdAt: $createdAt)';
   }
 }

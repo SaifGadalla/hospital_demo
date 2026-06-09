@@ -1,51 +1,113 @@
+import '../../models/_exports.dart';
 import 'base.dart';
 
 class FakeBedsService implements BedsService {
-  final List<Map<String, dynamic>> _data = [];
+  final List<Bed> _data = [
+    Bed(
+      bedCode: 'B-101',
+      bedNumber: '101',
+      roomId: 'R-100',
+      wardId: 'W-01',
+      bedType: 'Standard',
+      status: 'Occupied',
+      isActive: true,
+      dailyRate: 150.0,
+    ),
+    Bed(
+      bedCode: 'B-102',
+      bedNumber: '102',
+      roomId: 'R-100',
+      wardId: 'W-01',
+      bedType: 'Standard',
+      status: 'Available',
+      isActive: true,
+      dailyRate: 150.0,
+    ),
+    Bed(
+      bedCode: 'B-201',
+      bedNumber: '201',
+      roomId: 'R-200',
+      wardId: 'W-02',
+      bedType: 'ICU',
+      status: 'Maintenance',
+      isActive: false,
+      dailyRate: 300.0,
+    ),
+  ];
 
   @override
-  Future<dynamic> statusBed(String id, Map<String, dynamic> data) async {
+  Future<Bed> statusBed(String id, Bed data, {
+    String? status,
+  }) async {
     await Future.delayed(const Duration(milliseconds: 500));
-    if (data.isNotEmpty) _data.add(data);
+    _data.add(data);
     return data;
   }
 
   @override
-  Future<dynamic> getBedById(String id) async {
+  Future<Bed> getBedById(String id) async {
     await Future.delayed(const Duration(milliseconds: 500));
-    return {'id': 'mocked_id', 'status': 'success'};
+    return Bed();
   }
 
   @override
-  Future<dynamic> updateBed(String id, Map<String, dynamic> data) async {
+  Future<Bed> updateBed(String id, Bed data) async {
     await Future.delayed(const Duration(milliseconds: 500));
-    if (data.isNotEmpty) _data.add(data);
+    _data.add(data);
     return data;
   }
 
   @override
-  Future<dynamic> deleteBed(String id) async {
+  Future<void> deleteBed(String id) async {
     await Future.delayed(const Duration(milliseconds: 500));
-    return {'success': true};
   }
 
   @override
-  Future<dynamic> getBedsWard(String wardid) async {
-    await Future.delayed(const Duration(milliseconds: 500));
-    return {'id': 'mocked_id', 'status': 'success'};
-  }
-
-  @override
-  Future<dynamic> getBeds([Map<String, dynamic>? queryParams]) async {
+  Future<List<Bed>> getBedsByWardId(String wardid, {
+    String? status,
+  }) async {
     await Future.delayed(const Duration(milliseconds: 500));
     return _data;
   }
 
   @override
-  Future<dynamic> createBed(Map<String, dynamic> data) async {
+  Future<List<Bed>> getBeds({
+    String? searchTerm,
+    String? wardId,
+    String? roomId,
+    String? bedType,
+    String? status,
+    bool? isActive,
+    int? pageNumber,
+    int? pageSize,
+    String? sortBy,
+    bool? sortDescending,
+  }) async {
     await Future.delayed(const Duration(milliseconds: 500));
-    if (data.isNotEmpty) _data.add(data);
+    return _data;
+  }
+
+  @override
+  Future<Bed> createBed(Bed data) async {
+    await Future.delayed(const Duration(milliseconds: 500));
+    _data.add(data);
     return data;
   }
 
+  @override
+  Future<int> getBedsTotalCount({
+    String? searchTerm,
+    String? wardId,
+    String? roomId,
+    String? bedType,
+    String? status,
+    bool? isActive,
+    int? pageNumber,
+    int? pageSize,
+    String? sortBy,
+    bool? sortDescending,
+  }) async {
+    await Future.delayed(const Duration(milliseconds: 500));
+    return _data.length;
+  }
 }

@@ -1,4 +1,5 @@
+import '../../models/_exports.dart';
 abstract class DischargeSummariesService {
-  Future<dynamic> getDischargeSummaryById(String id);
-  Future<dynamic> getDischargeSummariesAdmission(String admissionid);
+  Future<DischargeSummary> getDischargeSummaryById(String id);
+  Future<DischargeSummary> getDischargeSummariesAdmission(String admissionid);
 }

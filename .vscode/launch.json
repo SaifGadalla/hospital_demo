@@ -5,21 +5,20 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "hospital_demo",
-            "request": "launch",
-            "type": "dart"
-        },
-        {
-            "name": "hospital_demo (profile mode)",
+            "name": "hospital_demo_dev",
             "request": "launch",
             "type": "dart",
-            "flutterMode": "profile"
+            "args": [
+                "--dart-define=isDev=true"
+            ]
         },
         {
-            "name": "hospital_demo (release mode)",
+            "name": "hospital_demo_prod",
             "request": "launch",
             "type": "dart",
-            "flutterMode": "release"
+            "args": [
+                "--dart-define=isDev=false"
+            ]
         }
     ]
 }

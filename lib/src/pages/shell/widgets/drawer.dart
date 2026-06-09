@@ -1,4 +1,4 @@
-import 'package:hospital_demo/common.dart';
+import '../../../../common.dart';
 
 class AppDrawer extends ConsumerWidget {
   const AppDrawer({super.key});
@@ -11,12 +11,13 @@ class AppDrawer extends ConsumerWidget {
     return Drawer(
       width: 300,
       elevation: 0,
+      backgroundColor: ColorManager.primaryDark,
       child: Container(
         decoration: BoxDecoration(
-          color: const Color(0xFF0F172A), // Slate 900
+          color: ColorManager.primaryDark,
           border: Border(
             right: BorderSide(
-              color: Colors.white.withValues(alpha: 0.06),
+              color: ColorManager.textInverse.withValues(alpha: 0.06),
               width: 1,
             ),
           ),
@@ -34,18 +35,16 @@ class AppDrawer extends ConsumerWidget {
                     decoration: BoxDecoration(
                       gradient: const LinearGradient(
                         colors: [
-                          Color(0xFF2DD4BF),
-                          Color(0xFF3B82F6),
-                        ], // Teal 400 to Blue 500
+                          ColorManager.secondaryLight,
+                          ColorManager.primaryLight,
+                        ],
                         begin: Alignment.topLeft,
                         end: Alignment.bottomRight,
                       ),
                       borderRadius: BorderRadius.circular(12),
                       boxShadow: [
                         BoxShadow(
-                          color: const Color(
-                            0xFF2DD4BF,
-                          ).withValues(alpha: 0.25),
+                          color: ColorManager.secondaryLight.withValues(alpha: 0.25),
                           blurRadius: 12,
                           offset: const Offset(0, 4),
                         ),
@@ -53,7 +52,7 @@ class AppDrawer extends ConsumerWidget {
                     ),
                     child: const Icon(
                       Icons.local_hospital_rounded,
-                      color: Colors.white,
+                      color: ColorManager.textInverse,
                       size: 24,
                     ),
                   ),
@@ -62,21 +61,17 @@ class AppDrawer extends ConsumerWidget {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const Text(
+                        Text(
                           'CarePulse',
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 20,
-                            fontWeight: FontWeight.bold,
+                          style: TextStyleManager.h3.copyWith(
+                            color: ColorManager.textInverse,
                             letterSpacing: 0.5,
                           ),
                         ),
                         Text(
                           'Hospital Systems',
-                          style: TextStyle(
-                            color: Colors.white.withValues(alpha: 0.45),
-                            fontSize: 11,
-                            fontWeight: FontWeight.w500,
+                          style: TextStyleManager.caption.copyWith(
+                            color: ColorManager.textInverse.withValues(alpha: 0.6),
                           ),
                         ),
                       ],
@@ -89,7 +84,7 @@ class AppDrawer extends ConsumerWidget {
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20),
               child: Divider(
-                color: Colors.white.withValues(alpha: 0.08),
+                color: ColorManager.textInverse.withValues(alpha: 0.08),
                 height: 1,
               ),
             ),
@@ -192,7 +187,7 @@ class AppDrawer extends ConsumerWidget {
             ),
 
             // User / Profile Info Footer
-            Divider(color: Colors.white.withValues(alpha: 0.08), height: 1),
+            Divider(color: ColorManager.textInverse.withValues(alpha: 0.08), height: 1),
             Container(
               padding: const EdgeInsets.all(20),
               color: Colors.black.withValues(alpha: 0.15),
@@ -205,25 +200,24 @@ class AppDrawer extends ConsumerWidget {
                       shape: BoxShape.circle,
                       gradient: const LinearGradient(
                         colors: [
-                          Color(0xFF3B82F6),
-                          Color(0xFF10B981),
-                        ], // Blue 500 to Emerald 500
+                          ColorManager.primaryLight,
+                          ColorManager.secondary,
+                        ],
                       ),
                       boxShadow: [
                         BoxShadow(
-                          color: const Color(0xFF3B82F6).withValues(alpha: 0.2),
+                          color: ColorManager.primaryLight.withValues(alpha: 0.2),
                           blurRadius: 8,
                           offset: const Offset(0, 2),
                         ),
                       ],
                     ),
-                    child: const Center(
+                    child: Center(
                       child: Text(
                         'SJ',
-                        style: TextStyle(
-                          color: Colors.white,
+                        style: TextStyleManager.bodyMedium.copyWith(
+                          color: ColorManager.textInverse,
                           fontWeight: FontWeight.bold,
-                          fontSize: 14,
                         ),
                       ),
                     ),
@@ -233,20 +227,18 @@ class AppDrawer extends ConsumerWidget {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const Text(
+                        Text(
                           'Dr. S. Jenkins',
-                          style: TextStyle(
-                            color: Colors.white,
+                          style: TextStyleManager.bodyMedium.copyWith(
+                            color: ColorManager.textInverse,
                             fontWeight: FontWeight.bold,
-                            fontSize: 13,
                           ),
                           overflow: TextOverflow.ellipsis,
                         ),
                         Text(
                           'Chief Administrator',
-                          style: TextStyle(
-                            color: Colors.white.withValues(alpha: 0.45),
-                            fontSize: 10,
+                          style: TextStyleManager.caption.copyWith(
+                            color: ColorManager.textInverse.withValues(alpha: 0.6),
                           ),
                           overflow: TextOverflow.ellipsis,
                         ),
@@ -256,7 +248,7 @@ class AppDrawer extends ConsumerWidget {
                   IconButton(
                     icon: Icon(
                       Icons.logout_rounded,
-                      color: Colors.white.withValues(alpha: 0.45),
+                      color: ColorManager.textInverse.withValues(alpha: 0.6),
                       size: 18,
                     ),
                     onPressed: () {
@@ -280,7 +272,7 @@ class AppDrawer extends ConsumerWidget {
     required String routePath,
     required bool isSelected,
   }) {
-    final activeColor = const Color(0xFF2DD4BF); // Teal 400
+    final activeColor = ColorManager.secondaryLight;
 
     return Container(
       decoration: BoxDecoration(
@@ -302,17 +294,16 @@ class AppDrawer extends ConsumerWidget {
             icon,
             color: isSelected
                 ? activeColor
-                : Colors.white.withValues(alpha: 0.55),
+                : ColorManager.textInverse.withValues(alpha: 0.55),
             size: 20,
           ),
           title: Text(
             title,
-            style: TextStyle(
+            style: TextStyleManager.bodyMedium.copyWith(
               color: isSelected
-                  ? Colors.white
-                  : Colors.white.withValues(alpha: 0.7),
+                  ? ColorManager.textInverse
+                  : ColorManager.textInverse.withValues(alpha: 0.7),
               fontWeight: isSelected ? FontWeight.w600 : FontWeight.w400,
-              fontSize: 14,
             ),
           ),
           horizontalTitleGap: 8,

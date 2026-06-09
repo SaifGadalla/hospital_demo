@@ -1,33 +1,64 @@
-import 'base.dart';
+import '../../models/_exports.dart';
 import '../dio_service.dart';
+import 'base.dart';
 
-class RealMedicationAdministrationsService implements MedicationAdministrationsService {
+class RealMedicationAdministrationsService
+    implements MedicationAdministrationsService {
   final DioService _dioService;
   RealMedicationAdministrationsService(this._dioService);
 
   @override
-  Future<dynamic> administeredMedicationAdministration(String id, Map<String, dynamic> data) async {
-    return await _dioService.post('/api/hospital/medication-administrations/$id/administered', data: data);
+  Future<MedicationAdministration> administeredMedicationAdministration(
+    String id,
+    MedicationAdministration data,
+  ) async {
+    final response = await _dioService.post(
+      '/api/hospital/medication-administrations/$id/administered',
+      data: data.toJson(),
+    );
+    return MedicationAdministration.fromJson(response.data);
   }
 
   @override
-  Future<dynamic> missedMedicationAdministration(String id, Map<String, dynamic> data) async {
-    return await _dioService.post('/api/hospital/medication-administrations/$id/missed', data: data);
+  Future<MedicationAdministration> missedMedicationAdministration(
+    String id,
+    MedicationAdministration data,
+  ) async {
+    final response = await _dioService.post(
+      '/api/hospital/medication-administrations/$id/missed',
+      data: data.toJson(),
+    );
+    return MedicationAdministration.fromJson(response.data);
   }
 
   @override
-  Future<dynamic> getMedicationAdministrationById(String id) async {
-    return await _dioService.get('/api/hospital/medication-administrations/$id');
+  Future<MedicationAdministration> getMedicationAdministrationById(
+    String id,
+  ) async {
+    final response = await _dioService.get(
+      '/api/hospital/medication-administrations/$id',
+    );
+    return MedicationAdministration.fromJson(response.data);
   }
 
   @override
-  Future<dynamic> getMedicationAdministrationsAdmission(String admissionid) async {
-    return await _dioService.get('/api/hospital/medication-administrations/by-admission/$admissionid');
+  Future<MedicationAdministration> getMedicationAdministrationsAdmission(
+    String admissionid,
+  ) async {
+    final response = await _dioService.get(
+      '/api/hospital/medication-administrations/by-admission/$admissionid',
+    );
+    return MedicationAdministration.fromJson(response.data);
   }
 
   @override
-  Future<dynamic> schedule(Map<String, dynamic> data) async {
-    return await _dioService.post('/api/hospital/medication-administrations/schedule', data: data);
+  Future<MedicationAdministration> schedule(
+    MedicationAdministration data,
+  ) async {
+    final response = await _dioService.post(
+      '/api/hospital/medication-administrations/schedule',
+      data: data.toJson(),
+    );
+    return MedicationAdministration.fromJson(response.data);
   }
-
 }

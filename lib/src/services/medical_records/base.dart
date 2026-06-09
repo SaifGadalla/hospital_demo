@@ -1,8 +1,22 @@
+import '../../models/_exports.dart';
+
 abstract class MedicalRecordsService {
-  Future<dynamic> getMedicalRecordById(String id);
-  Future<dynamic> updateMedicalRecord(String id, Map<String, dynamic> data);
-  Future<dynamic> deleteMedicalRecord(String id);
-  Future<dynamic> getPatientBypatientid(String patientid);
-  Future<dynamic> getMedicalRecords([Map<String, dynamic>? queryParams]);
-  Future<dynamic> createMedicalRecord(Map<String, dynamic> data);
+  Future<MedicalRecord> getMedicalRecordById(String id);
+  Future<MedicalRecord> updateMedicalRecord(String id, MedicalRecord data);
+  Future<void> deleteMedicalRecord(String id);
+  Future<MedicalRecord> getPatientBypatientid(String patientid);
+  Future<List<MedicalRecord>> getMedicalRecords({
+    String? searchTerm,
+    String? patientId,
+    String? doctorId,
+    String? appointmentId,
+    DateTime? visitDateFrom,
+    DateTime? visitDateTo,
+    String? diagnosisCode,
+    int? pageNumber,
+    int? pageSize,
+    String? sortBy,
+    bool? sortDescending,
+  });
+  Future<MedicalRecord> createMedicalRecord(MedicalRecord data);
 }

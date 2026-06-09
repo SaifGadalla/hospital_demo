@@ -1,5 +1,7 @@
+//TODO model check
+
 class ErAmbulanceCall {
-  final String? callTime;
+  final DateTime? callTime;
   final String? patientName;
   final int? age;
   final String? gender;
@@ -23,7 +25,9 @@ class ErAmbulanceCall {
 
   factory ErAmbulanceCall.fromJson(Map<String, dynamic> json) {
     return ErAmbulanceCall(
-      callTime: json['callTime'],
+      callTime: json['callTime'] != null
+          ? DateTime.tryParse(json['callTime'] as String)
+          : null,
       patientName: json['patientName'],
       age: json['age'],
       gender: json['gender'],
@@ -37,7 +41,7 @@ class ErAmbulanceCall {
 
   Map<String, dynamic> toJson() {
     return {
-      'callTime': callTime,
+      'callTime': callTime?.toIso8601String(),
       'patientName': patientName,
       'age': age,
       'gender': gender,
@@ -50,7 +54,7 @@ class ErAmbulanceCall {
   }
 
   ErAmbulanceCall copyWith({
-    String? callTime,
+    DateTime? callTime,
     String? patientName,
     int? age,
     String? gender,

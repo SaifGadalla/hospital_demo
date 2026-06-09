@@ -1,162 +1,225 @@
+import '../../models/_exports.dart';
 import 'base.dart';
 
 class FakeInsuranceService implements InsuranceService {
-  final List<Map<String, dynamic>> _data = [];
+  final List<InsuranceClaim> _claims = [];
+  final List<InsurancePlan> _plans = [];
+  final List<InsurancePreauthorization> _preauthorizations = [];
 
   @override
-  Future<dynamic> postClaimsByidSubmit(String id, Map<String, dynamic> data) async {
+  Future<InsuranceClaim> postClaimsByidSubmit(
+    String id,
+    InsuranceClaim data,
+  ) async {
     await Future.delayed(const Duration(milliseconds: 500));
-    if (data.isNotEmpty) _data.add(data);
+    _claims.add(data);
     return data;
   }
 
   @override
-  Future<dynamic> postClaimsByidApprove(String id, Map<String, dynamic> data) async {
+  Future<InsuranceClaim> postClaimsByidApprove(
+    String id,
+    InsuranceClaim data,
+  ) async {
     await Future.delayed(const Duration(milliseconds: 500));
-    if (data.isNotEmpty) _data.add(data);
+    _claims.add(data);
     return data;
   }
 
   @override
-  Future<dynamic> postClaimsByidReject(String id, Map<String, dynamic> data) async {
+  Future<InsuranceClaim> postClaimsByidReject(
+    String id,
+    InsuranceClaim data,
+  ) async {
     await Future.delayed(const Duration(milliseconds: 500));
-    if (data.isNotEmpty) _data.add(data);
+    _claims.add(data);
     return data;
   }
 
   @override
-  Future<dynamic> postClaimsByidPayment(String id, Map<String, dynamic> data) async {
+  Future<InsuranceClaim> postClaimsByidPayment(
+    String id,
+    InsuranceClaim data,
+  ) async {
     await Future.delayed(const Duration(milliseconds: 500));
-    if (data.isNotEmpty) _data.add(data);
+    _claims.add(data);
     return data;
   }
 
   @override
-  Future<dynamic> getClaimsByid(String id) async {
+  Future<InsuranceClaim> getClaimsByid(String id) async {
     await Future.delayed(const Duration(milliseconds: 500));
-    return {'id': 'mocked_id', 'status': 'success'};
+    return InsuranceClaim();
   }
 
   @override
-  Future<dynamic> putClaimsByid(String id, Map<String, dynamic> data) async {
+  Future<InsuranceClaim> putClaimsByid(String id, InsuranceClaim data) async {
     await Future.delayed(const Duration(milliseconds: 500));
-    if (data.isNotEmpty) _data.add(data);
+    _claims.add(data);
     return data;
   }
 
   @override
-  Future<dynamic> deleteClaimsByid(String id) async {
+  Future<InsuranceClaim> deleteClaimsByid(String id) async {
     await Future.delayed(const Duration(milliseconds: 500));
-    return {'success': true};
+    return InsuranceClaim();
   }
 
   @override
-  Future<dynamic> getClaimsByNumberByclaimnumber(String claimnumber) async {
+  Future<InsuranceClaim> getClaimsByNumberByclaimnumber(
+    String claimnumber,
+  ) async {
     await Future.delayed(const Duration(milliseconds: 500));
-    return {'id': 'mocked_id', 'status': 'success'};
+    return InsuranceClaim();
   }
 
   @override
-  Future<dynamic> claims() async {
+  Future<List<InsuranceClaim>> getInsuranceClaims({
+    String? searchTerm,
+    String? patientId,
+    String? insurancePlanId,
+    String? serviceProviderId,
+    String? status,
+    DateTime? serviceDateFrom,
+    DateTime? serviceDateTo,
+    int? pageNumber,
+    int? pageSize,
+    String? sortBy,
+    bool? sortDescending,
+  }) async {
     await Future.delayed(const Duration(milliseconds: 500));
-    return {'id': 'mocked_id', 'status': 'success'};
+    return _claims;
   }
 
   @override
-  Future<dynamic> postClaims(Map<String, dynamic> data) async {
+  Future<List<InsuranceClaim>> postClaims(InsuranceClaim data) async {
     await Future.delayed(const Duration(milliseconds: 500));
-    if (data.isNotEmpty) _data.add(data);
+    _claims.add(data);
+    return _claims;
+  }
+
+  @override
+  Future<InsurancePlan> getPlansByid(String id) async {
+    await Future.delayed(const Duration(milliseconds: 500));
+    return InsurancePlan();
+  }
+
+  @override
+  Future<InsurancePlan> putPlansByid(String id, InsurancePlan data) async {
+    await Future.delayed(const Duration(milliseconds: 500));
+    _plans.add(data);
     return data;
   }
 
   @override
-  Future<dynamic> getPlansByid(String id) async {
+  Future<InsurancePlan> deletePlansByid(String id) async {
     await Future.delayed(const Duration(milliseconds: 500));
-    return {'id': 'mocked_id', 'status': 'success'};
+    return InsurancePlan();
   }
 
   @override
-  Future<dynamic> putPlansByid(String id, Map<String, dynamic> data) async {
+  Future<InsurancePlan> getPlansByCodeBycode(String code) async {
     await Future.delayed(const Duration(milliseconds: 500));
-    if (data.isNotEmpty) _data.add(data);
+    return InsurancePlan();
+  }
+
+  @override
+  Future<List<InsurancePlan>> plans({
+    String? searchTerm,
+    String? coverageType,
+    bool? isActive,
+    String? insuranceCompanyId,
+    int? pageNumber,
+    int? pageSize,
+    String? sortBy,
+    bool? sortDescending,
+  }) async {
+    await Future.delayed(const Duration(milliseconds: 500));
+    return _plans;
+  }
+
+  @override
+  Future<List<InsurancePlan>> postPlans(InsurancePlan data) async {
+    await Future.delayed(const Duration(milliseconds: 500));
+    _plans.add(data);
+    return _plans;
+  }
+
+  @override
+  Future<InsurancePreauthorization> postPreauthorizationsByidApprove(
+    String id,
+    InsurancePreauthorization data,
+  ) async {
+    await Future.delayed(const Duration(milliseconds: 500));
+    _preauthorizations.add(data);
     return data;
   }
 
   @override
-  Future<dynamic> deletePlansByid(String id) async {
+  Future<InsurancePreauthorization> postPreauthorizationsByidReject(
+    String id,
+    InsurancePreauthorization data,
+  ) async {
     await Future.delayed(const Duration(milliseconds: 500));
-    return {'success': true};
-  }
-
-  @override
-  Future<dynamic> getPlansByCodeBycode(String code) async {
-    await Future.delayed(const Duration(milliseconds: 500));
-    return {'id': 'mocked_id', 'status': 'success'};
-  }
-
-  @override
-  Future<dynamic> plans() async {
-    await Future.delayed(const Duration(milliseconds: 500));
-    return {'id': 'mocked_id', 'status': 'success'};
-  }
-
-  @override
-  Future<dynamic> postPlans(Map<String, dynamic> data) async {
-    await Future.delayed(const Duration(milliseconds: 500));
-    if (data.isNotEmpty) _data.add(data);
+    _preauthorizations.add(data);
     return data;
   }
 
   @override
-  Future<dynamic> postPreauthorizationsByidApprove(String id, Map<String, dynamic> data) async {
+  Future<InsurancePreauthorization> getPreauthorizationsByid(String id) async {
     await Future.delayed(const Duration(milliseconds: 500));
-    if (data.isNotEmpty) _data.add(data);
+    return InsurancePreauthorization();
+  }
+
+  @override
+  Future<InsurancePreauthorization> putPreauthorizationsByid(
+    String id,
+    InsurancePreauthorization data,
+  ) async {
+    await Future.delayed(const Duration(milliseconds: 500));
+    _preauthorizations.add(data);
     return data;
   }
 
   @override
-  Future<dynamic> postPreauthorizationsByidReject(String id, Map<String, dynamic> data) async {
+  Future<InsurancePreauthorization> deletePreauthorizationsByid(
+    String id,
+  ) async {
     await Future.delayed(const Duration(milliseconds: 500));
-    if (data.isNotEmpty) _data.add(data);
-    return data;
+    return InsurancePreauthorization();
   }
 
   @override
-  Future<dynamic> getPreauthorizationsByid(String id) async {
+  Future<InsurancePreauthorization> getPreauthorizationsByNumberByauthnumber(
+    String authnumber,
+  ) async {
     await Future.delayed(const Duration(milliseconds: 500));
-    return {'id': 'mocked_id', 'status': 'success'};
+    return InsurancePreauthorization();
   }
 
   @override
-  Future<dynamic> putPreauthorizationsByid(String id, Map<String, dynamic> data) async {
+  Future<List<InsurancePreauthorization>> preauthorizations({
+    String? searchTerm,
+    String? patientId,
+    String? insurancePlanId,
+    String? approvalStatus,
+    DateTime? requestDateFrom,
+    DateTime? requestDateTo,
+    int? pageNumber,
+    int? pageSize,
+    String? sortBy,
+    bool? sortDescending,
+  }) async {
     await Future.delayed(const Duration(milliseconds: 500));
-    if (data.isNotEmpty) _data.add(data);
-    return data;
+    return _preauthorizations;
   }
 
   @override
-  Future<dynamic> deletePreauthorizationsByid(String id) async {
+  Future<List<InsurancePreauthorization>> postPreauthorizations(
+    InsurancePreauthorization data,
+  ) async {
     await Future.delayed(const Duration(milliseconds: 500));
-    return {'success': true};
+    _preauthorizations.add(data);
+    return _preauthorizations;
   }
-
-  @override
-  Future<dynamic> getPreauthorizationsByNumberByauthnumber(String authnumber) async {
-    await Future.delayed(const Duration(milliseconds: 500));
-    return {'id': 'mocked_id', 'status': 'success'};
-  }
-
-  @override
-  Future<dynamic> preauthorizations() async {
-    await Future.delayed(const Duration(milliseconds: 500));
-    return {'id': 'mocked_id', 'status': 'success'};
-  }
-
-  @override
-  Future<dynamic> postPreauthorizations(Map<String, dynamic> data) async {
-    await Future.delayed(const Duration(milliseconds: 500));
-    if (data.isNotEmpty) _data.add(data);
-    return data;
-  }
-
 }

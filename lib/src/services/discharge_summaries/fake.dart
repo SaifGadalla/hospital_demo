@@ -1,17 +1,18 @@
+import '../../models/_exports.dart';
 import 'base.dart';
 
 class FakeDischargeSummariesService implements DischargeSummariesService {
-  // final List<Map<String, dynamic>> _data = [];
+  // final List<DischargeSummary> _data = [];
 
   @override
-  Future<dynamic> getDischargeSummaryById(String id) async {
+  Future<DischargeSummary> getDischargeSummaryById(String id) async {
     await Future.delayed(const Duration(milliseconds: 500));
-    return {'id': 'mocked_id', 'status': 'success'};
+    return DischargeSummary();
   }
 
   @override
-  Future<dynamic> getDischargeSummariesAdmission(String admissionid) async {
+  Future<DischargeSummary> getDischargeSummariesAdmission(String admissionid) async {
     await Future.delayed(const Duration(milliseconds: 500));
-    return {'id': 'mocked_id', 'status': 'success'};
+    return DischargeSummary();
   }
 }

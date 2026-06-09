@@ -1,44 +1,63 @@
+import '../../models/_exports.dart';
 import 'base.dart';
 
 class FakeWardsService implements WardsService {
-  final List<Map<String, dynamic>> _data = [];
+  final List<Ward> _data = [
+    Ward(
+      departmentId: 'cardiology',
+      isActive: true,
+      nurseStationLocation: 'North Wing, Floor 2',
+      wardCode: 'W-01',
+      wardName: 'Cardiology Ward',
+      wardType: 'General',
+      totalBeds: 20,
+    ),
+  ];
 
   @override
-  Future<dynamic> getWardById(String id) async {
+  Future<Ward> getWardById(String id) async {
     await Future.delayed(const Duration(milliseconds: 500));
-    return {'id': 'mocked_id', 'status': 'success'};
+    return Ward();
   }
 
   @override
-  Future<dynamic> updateWard(String id, Map<String, dynamic> data) async {
+  Future<Ward> updateWard(String id, Ward data) async {
     await Future.delayed(const Duration(milliseconds: 500));
-    if (data.isNotEmpty) _data.add(data);
+    _data.add(data);
     return data;
   }
 
   @override
-  Future<dynamic> deleteWard(String id) async {
+  Future<Ward> deleteWard(String id) async {
     await Future.delayed(const Duration(milliseconds: 500));
-    return {'success': true};
+    return Ward();
   }
 
   @override
-  Future<dynamic> getWardsCode(String code) async {
+  Future<Ward> getWardsCode(String code) async {
     await Future.delayed(const Duration(milliseconds: 500));
-    return {'id': 'mocked_id', 'status': 'success'};
+    return Ward();
   }
 
   @override
-  Future<dynamic> getWards([Map<String, dynamic>? queryParams]) async {
+  Future<List<Ward>> getWards({
+    String? searchTerm,
+    String? wardType,
+    String? departmentId,
+    bool? isActive,
+    int? pageNumber,
+    int? pageSize,
+    String? sortBy,
+    bool? sortDescending,
+  }) async {
     await Future.delayed(const Duration(milliseconds: 500));
     return _data;
   }
 
   @override
-  Future<dynamic> createWard(Map<String, dynamic> data) async {
+  Future<Ward> createWard(Ward data) async {
     await Future.delayed(const Duration(milliseconds: 500));
-    if (data.isNotEmpty) _data.add(data);
+    _data.add(data);
     return data;
   }
-
 }

@@ -1,148 +1,327 @@
-import 'base.dart';
-import '../dio_service.dart';
+import '../../../common.dart';
 
 class RealErService implements ErService {
   final DioService _dioService;
   RealErService(this._dioService);
 
   @override
-  Future<dynamic> postAmbulanceCallsByidPickup(String id, Map<String, dynamic> data) async {
-    return await _dioService.post('/api/hospital/er/ambulance-calls/$id/pickup', data: data);
+  Future<ErAmbulanceCall> postAmbulanceCallsByidPickup(
+    String id,
+    ErAmbulanceCall data, {
+    String? pickupTime,
+  }) async {
+    final response = await _dioService.post(
+      '/api/hospital/er/ambulance-calls/$id/pickup',
+      data: data.toJson(),
+      queryParameters: {if (pickupTime != null) 'pickupTime': pickupTime},
+    );
+    return ErAmbulanceCall.fromJson(response.data);
   }
 
   @override
-  Future<dynamic> postAmbulanceCallsByidArrival(String id, Map<String, dynamic> data) async {
-    return await _dioService.post('/api/hospital/er/ambulance-calls/$id/arrival', data: data);
+  Future<ErAmbulanceCall> postAmbulanceCallsByidArrival(
+    String id,
+    ErAmbulanceCall data, {
+    String? arrivalTime,
+  }) async {
+    final response = await _dioService.post(
+      '/api/hospital/er/ambulance-calls/$id/arrival',
+      data: data.toJson(),
+      queryParameters: {if (arrivalTime != null) 'arrivalTime': arrivalTime},
+    );
+    return ErAmbulanceCall.fromJson(response.data);
   }
 
   @override
-  Future<dynamic> postAmbulanceCallsByidLinkErByerregistrationid(String id, String erregistrationid, Map<String, dynamic> data) async {
-    return await _dioService.post('/api/hospital/er/ambulance-calls/$id/link-er/$erregistrationid', data: data);
+  Future<ErAmbulanceCall> postAmbulanceCallsByidLinkErByerregistrationid(
+    String id,
+    String erRegistrationId,
+    ErAmbulanceCall data,
+  ) async {
+    final response = await _dioService.post(
+      '/api/hospital/er/ambulance-calls/$id/link-er/$erRegistrationId',
+      data: data.toJson(),
+    );
+    return ErAmbulanceCall.fromJson(response.data);
   }
 
   @override
-  Future<dynamic> getAmbulanceCallsByid(String id) async {
-    return await _dioService.get('/api/hospital/er/ambulance-calls/$id');
+  Future<ErAmbulanceCall> getAmbulanceCallsByid(String id) async {
+    final response = await _dioService.get(
+      '/api/hospital/er/ambulance-calls/$id',
+    );
+    return ErAmbulanceCall.fromJson(response.data);
   }
 
   @override
-  Future<dynamic> ambulanceCalls() async {
-    return await _dioService.get('/api/hospital/er/ambulance-calls');
+  Future<List<ErAmbulanceCall>?> ambulanceCalls() async {
+    final response = await _dioService.get('/api/hospital/er/ambulance-calls');
+    return (response.data as List<dynamic>)
+        .map((e) => ErAmbulanceCall.fromJson(e as Map<String, dynamic>))
+        .toList();
   }
 
   @override
-  Future<dynamic> postAmbulancecalls(Map<String, dynamic> data) async {
-    return await _dioService.post('/api/hospital/er/ambulance-calls', data: data);
+  Future<List<ErAmbulanceCall>> postAmbulancecalls(ErAmbulanceCall data) async {
+    final response = await _dioService.post(
+      '/api/hospital/er/ambulance-calls',
+      data: data.toJson(),
+    );
+    return (response.data as Map<String, dynamic>)['items']
+        .map<ErAmbulanceCall>((e) => ErAmbulanceCall.fromJson(e))
+        .toList();
   }
 
   @override
-  Future<dynamic> getBedsAvailable() async {
-    return await _dioService.get('/api/hospital/er/beds/available');
+  Future<List<ErBed>> getBedsAvailable() async {
+    final response = await _dioService.get('/api/hospital/er/beds/available');
+    return (response.data as List).map((e) => ErBed.fromJson(e)).toList();
   }
 
   @override
-  Future<dynamic> postBedsByidStatus(String id, Map<String, dynamic> data) async {
-    return await _dioService.post('/api/hospital/er/beds/$id/status', data: data);
+  Future<ErBed> postBedsByidStatus(
+    String id,
+    ErBed data, {
+    String? status,
+  }) async {
+    final response = await _dioService.post(
+      '/api/hospital/er/beds/$id/status',
+      data: data.toJson(),
+      queryParameters: {if (status != null) 'status': status},
+    );
+    return ErBed.fromJson(response.data);
   }
 
   @override
-  Future<dynamic> getBedsByid(String id) async {
-    return await _dioService.get('/api/hospital/er/beds/$id');
+  Future<ErBed> getBedsByid(String id) async {
+    final response = await _dioService.get('/api/hospital/er/beds/$id');
+    return ErBed.fromJson(response.data);
   }
 
   @override
-  Future<dynamic> putBedsByid(String id, Map<String, dynamic> data) async {
-    return await _dioService.put('/api/hospital/er/beds/$id', data: data);
+  Future<ErBed> putBedsByid(String id, ErBed data) async {
+    final response = await _dioService.put(
+      '/api/hospital/er/beds/$id',
+      data: data.toJson(),
+    );
+    return ErBed.fromJson(response.data);
   }
 
   @override
-  Future<dynamic> beds() async {
-    return await _dioService.get('/api/hospital/er/beds');
+  Future<List<ErBed>> beds() async {
+    final response = await _dioService.get('/api/hospital/er/beds');
+    return (response.data as List).map((e) => ErBed.fromJson(e)).toList();
   }
 
   @override
-  Future<dynamic> postBeds(Map<String, dynamic> data) async {
-    return await _dioService.post('/api/hospital/er/beds', data: data);
+  Future<List<ErBed>> postBeds(ErBed data) async {
+    final response = await _dioService.post(
+      '/api/hospital/er/beds',
+      data: data.toJson(),
+    );
+    return (response.data as List).map((e) => ErBed.fromJson(e)).toList();
   }
 
   @override
-  Future<dynamic> postRegistrationsByidDisposition(String id, Map<String, dynamic> data) async {
-    return await _dioService.post('/api/hospital/er/registrations/$id/disposition', data: data);
+  Future<ErRegistration> postRegistrationsByidDisposition(
+    String id,
+    ErRegistration data,
+  ) async {
+    final response = await _dioService.post(
+      '/api/hospital/er/registrations/$id/disposition',
+      data: data.toJson(),
+    );
+    return ErRegistration.fromJson(response.data);
   }
 
   @override
-  Future<dynamic> getRegistrationsByid(String id) async {
-    return await _dioService.get('/api/hospital/er/registrations/$id');
+  Future<ErRegistration> getRegistrationsByid(String id) async {
+    final response = await _dioService.get(
+      '/api/hospital/er/registrations/$id',
+    );
+    return ErRegistration.fromJson(response.data);
   }
 
   @override
-  Future<dynamic> putRegistrationsByid(String id, Map<String, dynamic> data) async {
-    return await _dioService.put('/api/hospital/er/registrations/$id', data: data);
+  Future<ErRegistration> putRegistrationsByid(
+    String id,
+    ErRegistration data,
+  ) async {
+    final response = await _dioService.put(
+      '/api/hospital/er/registrations/$id',
+      data: data.toJson(),
+    );
+    return ErRegistration.fromJson(response.data);
   }
 
   @override
-  Future<dynamic> deleteRegistrationsByid(String id) async {
-    return await _dioService.delete('/api/hospital/er/registrations/$id');
+  Future<ErRegistration> deleteRegistrationsByid(String id) async {
+    final response = await _dioService.delete(
+      '/api/hospital/er/registrations/$id',
+    );
+    return ErRegistration.fromJson(response.data);
   }
 
   @override
-  Future<dynamic> getRegistrationsByNumberByernumber(String ernumber) async {
-    return await _dioService.get('/api/hospital/er/registrations/by-number/$ernumber');
+  Future<ErRegistration> getRegistrationsByNumberByernumber(
+    String ernumber,
+  ) async {
+    final response = await _dioService.get(
+      '/api/hospital/er/registrations/by-number/$ernumber',
+    );
+    return ErRegistration.fromJson(response.data);
   }
 
   @override
-  Future<dynamic> postRegistrationsRegister(Map<String, dynamic> data) async {
-    return await _dioService.post('/api/hospital/er/registrations/register', data: data);
+  Future<ErRegistration> postRegistrationsRegister(ErRegistration data) async {
+    final response = await _dioService.post(
+      '/api/hospital/er/registrations/register',
+      data: data.toJson(),
+    );
+    return ErRegistration.fromJson(response.data);
   }
 
   @override
-  Future<dynamic> registrations() async {
-    return await _dioService.get('/api/hospital/er/registrations');
+  Future<List<ErRegistration>> getRegistrations({
+    String? searchTerm,
+    String? patientId,
+    String? status,
+    String? arrivalMode,
+    String? triageLevel,
+    DateTime? arrivalFrom,
+    DateTime? arrivalTo,
+    int? pageNumber,
+    int? pageSize,
+    String? sortBy,
+    bool? sortDescending,
+  }) async {
+    final response = await _dioService.get(
+      '/api/hospital/er/registrations',
+      queryParameters: {
+        if (searchTerm != null) 'searchTerm': searchTerm,
+        if (patientId != null) 'patientId': patientId,
+        if (status != null) 'status': status,
+        if (arrivalMode != null) 'arrivalMode': arrivalMode,
+        if (triageLevel != null) 'triageLevel': triageLevel,
+        if (arrivalFrom != null)
+          'arrivalFrom': formatDateTimeToUtcIso(arrivalFrom),
+        if (arrivalTo != null) 'arrivalTo': formatDateTimeToUtcIso(arrivalTo),
+        if (pageNumber != null) 'pageNumber': pageNumber,
+        if (pageSize != null) 'pageSize': pageSize,
+        if (sortBy != null) 'sortBy': sortBy,
+        if (sortDescending != null) 'sortDescending': sortDescending,
+      },
+    );
+    return (response.data as Map<String, dynamic>)['items']
+        .map<ErRegistration>((e) => ErRegistration.fromJson(e))
+        .toList();
   }
 
   @override
-  Future<dynamic> postTreatmentsByidComplete(String id, Map<String, dynamic> data) async {
-    return await _dioService.post('/api/hospital/er/treatments/$id/complete', data: data);
+  Future<ErTreatment> postTreatmentsByidComplete(
+    String id,
+    ErTreatment data,
+  ) async {
+    final response = await _dioService.post(
+      '/api/hospital/er/treatments/$id/complete',
+      data: data.toJson(),
+    );
+    return ErTreatment.fromJson(response.data);
   }
 
   @override
-  Future<dynamic> getTreatmentsByid(String id) async {
-    return await _dioService.get('/api/hospital/er/treatments/$id');
+  Future<ErTreatment> getTreatmentsByid(String id) async {
+    final response = await _dioService.get('/api/hospital/er/treatments/$id');
+    return ErTreatment.fromJson(response.data);
   }
 
   @override
-  Future<dynamic> getTreatmentsByRegistrationByregistrationid(String registrationid) async {
-    return await _dioService.get('/api/hospital/er/treatments/by-registration/$registrationid');
+  Future<ErTreatment> getTreatmentsByRegistrationByregistrationid(
+    String registrationid,
+  ) async {
+    final response = await _dioService.get(
+      '/api/hospital/er/treatments/by-registration/$registrationid',
+    );
+    return ErTreatment.fromJson(response.data);
   }
 
   @override
-  Future<dynamic> postTreatmentsStart(Map<String, dynamic> data) async {
-    return await _dioService.post('/api/hospital/er/treatments/start', data: data);
+  Future<ErTreatment> postTreatmentsStart(ErTreatment data) async {
+    final response = await _dioService.post(
+      '/api/hospital/er/treatments/start',
+      data: data.toJson(),
+    );
+    return ErTreatment.fromJson(response.data);
   }
 
   @override
-  Future<dynamic> treatments() async {
-    return await _dioService.get('/api/hospital/er/treatments');
+  Future<List<ErTreatment>> treatments() async {
+    final response = await _dioService.get('/api/hospital/er/treatments');
+    return (response.data as List).map((e) => ErTreatment.fromJson(e)).toList();
   }
 
   @override
-  Future<dynamic> getTriagesByid(String id) async {
-    return await _dioService.get('/api/hospital/er/triages/$id');
+  Future<ErTriage> getTriagesByid(String id) async {
+    final response = await _dioService.get('/api/hospital/er/triages/$id');
+    return ErTriage.fromJson(response.data);
   }
 
   @override
-  Future<dynamic> getTriagesByRegistrationByregistrationid(String registrationid) async {
-    return await _dioService.get('/api/hospital/er/triages/by-registration/$registrationid');
+  Future<ErTriage> getTriagesByRegistrationByregistrationid(
+    String registrationid,
+  ) async {
+    final response = await _dioService.get(
+      '/api/hospital/er/triages/by-registration/$registrationid',
+    );
+    return ErTriage.fromJson(response.data);
   }
 
   @override
-  Future<dynamic> triages() async {
-    return await _dioService.get('/api/hospital/er/triages');
+  Future<List<ErTriage>> triages() async {
+    final response = await _dioService.get('/api/hospital/er/triages');
+    return (response.data as List).map((e) => ErTriage.fromJson(e)).toList();
   }
 
   @override
-  Future<dynamic> postTriages(Map<String, dynamic> data) async {
-    return await _dioService.post('/api/hospital/er/triages', data: data);
+  Future<List<ErTriage>> postTriages(ErTriage data) async {
+    final response = await _dioService.post(
+      '/api/hospital/er/triages',
+      data: data.toJson(),
+    );
+    return (response.data as List).map((e) => ErTriage.fromJson(e)).toList();
   }
 
+  @override
+  Future<int> getRegistrationsTotalCount({
+    String? searchTerm,
+    String? patientId,
+    String? status,
+    String? arrivalMode,
+    String? triageLevel,
+    DateTime? arrivalFrom,
+    DateTime? arrivalTo,
+    int? pageNumber,
+    int? pageSize,
+    String? sortBy,
+    bool? sortDescending,
+  }) async {
+    final response = await _dioService.get(
+      '/api/hospital/er/registrations',
+      queryParameters: {
+        if (searchTerm != null) 'searchTerm': searchTerm,
+        if (patientId != null) 'patientId': patientId,
+        if (status != null) 'status': status,
+        if (arrivalMode != null) 'arrivalMode': arrivalMode,
+        if (triageLevel != null) 'triageLevel': triageLevel,
+        if (arrivalFrom != null)
+          'arrivalFrom': formatDateTimeToUtcIso(arrivalFrom),
+        if (arrivalTo != null) 'arrivalTo': formatDateTimeToUtcIso(arrivalTo),
+        if (pageNumber != null) 'pageNumber': pageNumber,
+        if (pageSize != null) 'pageSize': pageSize,
+        if (sortBy != null) 'sortBy': sortBy,
+        if (sortDescending != null) 'sortDescending': sortDescending,
+      },
+    );
+    return (response.data as Map<String, dynamic>)['totalCount'] as int;
+  }
 }

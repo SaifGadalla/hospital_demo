@@ -1,44 +1,58 @@
+import '../../models/_exports.dart';
 import 'base.dart';
 
 class FakeMedicalRecordsService implements MedicalRecordsService {
-  final List<Map<String, dynamic>> _data = [];
+  final List<MedicalRecord> _data = [];
 
   @override
-  Future<dynamic> getMedicalRecordById(String id) async {
+  Future<MedicalRecord> getMedicalRecordById(String id) async {
     await Future.delayed(const Duration(milliseconds: 500));
-    return {'id': 'mocked_id', 'status': 'success'};
+    return MedicalRecord();
   }
 
   @override
-  Future<dynamic> updateMedicalRecord(String id, Map<String, dynamic> data) async {
+  Future<MedicalRecord> updateMedicalRecord(
+    String id,
+    MedicalRecord data,
+  ) async {
     await Future.delayed(const Duration(milliseconds: 500));
-    if (data.isNotEmpty) _data.add(data);
+    _data.add(data);
     return data;
   }
 
   @override
-  Future<dynamic> deleteMedicalRecord(String id) async {
+  Future<void> deleteMedicalRecord(String id) async {
     await Future.delayed(const Duration(milliseconds: 500));
-    return {'success': true};
   }
 
   @override
-  Future<dynamic> getPatientBypatientid(String patientid) async {
+  Future<MedicalRecord> getPatientBypatientid(String patientid) async {
     await Future.delayed(const Duration(milliseconds: 500));
-    return {'id': 'mocked_id', 'status': 'success'};
+    return MedicalRecord();
   }
 
   @override
-  Future<dynamic> getMedicalRecords([Map<String, dynamic>? queryParams]) async {
+  Future<List<MedicalRecord>> getMedicalRecords({
+    String? searchTerm,
+    String? patientId,
+    String? doctorId,
+    String? appointmentId,
+    DateTime? visitDateFrom,
+    DateTime? visitDateTo,
+    String? diagnosisCode,
+    int? pageNumber,
+    int? pageSize,
+    String? sortBy,
+    bool? sortDescending,
+  }) async {
     await Future.delayed(const Duration(milliseconds: 500));
     return _data;
   }
 
   @override
-  Future<dynamic> createMedicalRecord(Map<String, dynamic> data) async {
+  Future<MedicalRecord> createMedicalRecord(MedicalRecord data) async {
     await Future.delayed(const Duration(milliseconds: 500));
-    if (data.isNotEmpty) _data.add(data);
+    _data.add(data);
     return data;
   }
-
 }

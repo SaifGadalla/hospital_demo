@@ -1,105 +1,140 @@
+import '../../models/_exports.dart';
 import 'base.dart';
 
 class FakeSurgeryBookingsService implements SurgeryBookingsService {
-  final List<Map<String, dynamic>> _data = [];
+  final List<SurgeryBooking> _data = [];
 
   @override
-  Future<dynamic> cancelSurgeryBooking(String id, Map<String, dynamic> data) async {
+  Future<SurgeryBooking> cancelSurgeryBooking(
+    String id,
+    SurgeryBooking data, {
+    String? reason,
+  }) async {
     await Future.delayed(const Duration(milliseconds: 500));
-    if (data.isNotEmpty) _data.add(data);
+    _data.add(data);
     return data;
   }
 
   @override
-  Future<dynamic> startSurgeryBooking(String id, Map<String, dynamic> data) async {
+  Future<SurgeryBooking> startSurgeryBooking(
+    String id,
+    SurgeryBooking data,
+  ) async {
     await Future.delayed(const Duration(milliseconds: 500));
-    if (data.isNotEmpty) _data.add(data);
+    _data.add(data);
     return data;
   }
 
   @override
-  Future<dynamic> completeSurgeryBooking(String id, Map<String, dynamic> data) async {
+  Future<SurgeryBooking> completeSurgeryBooking(
+    String id,
+    SurgeryBooking data,
+  ) async {
     await Future.delayed(const Duration(milliseconds: 500));
-    if (data.isNotEmpty) _data.add(data);
+    _data.add(data);
     return data;
   }
 
   @override
-  Future<dynamic> teamSurgeryBooking(String id) async {
+  Future<SurgeryBooking> teamSurgeryBooking(String id) async {
     await Future.delayed(const Duration(milliseconds: 500));
-    return {'id': 'mocked_id', 'status': 'success'};
+    return SurgeryBooking();
   }
 
   @override
-  Future<dynamic> safetyChecklistSurgeryBooking(String id, Map<String, dynamic> data) async {
+  Future<SurgeryBooking> safetyChecklistSurgeryBooking(
+    String id,
+    SurgeryBooking data,
+  ) async {
     await Future.delayed(const Duration(milliseconds: 500));
-    if (data.isNotEmpty) _data.add(data);
+    _data.add(data);
     return data;
   }
 
   @override
-  Future<dynamic> postSafetychecklistsurgerybooking(String id, Map<String, dynamic> data) async {
+  Future<SurgeryBooking> postSafetychecklistsurgerybooking(
+    String id,
+    SurgeryBooking data,
+  ) async {
     await Future.delayed(const Duration(milliseconds: 500));
-    if (data.isNotEmpty) _data.add(data);
+    _data.add(data);
     return data;
   }
 
   @override
-  Future<dynamic> postSafetychecklistsurgerybooking2(String id, Map<String, dynamic> data) async {
+  Future<SurgeryBooking> postSafetychecklistsurgerybooking2(
+    String id,
+    SurgeryBooking data,
+  ) async {
     await Future.delayed(const Duration(milliseconds: 500));
-    if (data.isNotEmpty) _data.add(data);
+    _data.add(data);
     return data;
   }
 
   @override
-  Future<dynamic> getSafetychecklistsurgerybooking(String id) async {
+  Future<SurgeryBooking> getSafetychecklistsurgerybooking(String id) async {
     await Future.delayed(const Duration(milliseconds: 500));
-    return {'id': 'mocked_id', 'status': 'success'};
+    return SurgeryBooking();
   }
 
   @override
-  Future<dynamic> surgeryRecordSurgeryBooking(String id) async {
+  Future<SurgeryBooking> surgeryRecordSurgeryBooking(String id) async {
     await Future.delayed(const Duration(milliseconds: 500));
-    return {'id': 'mocked_id', 'status': 'success'};
+    return SurgeryBooking();
   }
 
   @override
-  Future<dynamic> getSurgeryBookingById(String id) async {
+  Future<SurgeryBooking> getSurgeryBookingById(String id) async {
     await Future.delayed(const Duration(milliseconds: 500));
-    return {'id': 'mocked_id', 'status': 'success'};
+    return SurgeryBooking();
   }
 
   @override
-  Future<dynamic> updateSurgeryBooking(String id, Map<String, dynamic> data) async {
+  Future<SurgeryBooking> updateSurgeryBooking(
+    String id,
+    SurgeryBooking data,
+  ) async {
     await Future.delayed(const Duration(milliseconds: 500));
-    if (data.isNotEmpty) _data.add(data);
+    _data.add(data);
     return data;
   }
 
   @override
-  Future<dynamic> book(Map<String, dynamic> data) async {
+  Future<SurgeryBooking> book(SurgeryBooking data) async {
     await Future.delayed(const Duration(milliseconds: 500));
-    if (data.isNotEmpty) _data.add(data);
+    _data.add(data);
     return data;
   }
 
   @override
-  Future<dynamic> deleteTeamByteammemberid(String teammemberid) async {
+  Future<SurgeryBooking> deleteTeamByteammemberid(String teammemberid) async {
     await Future.delayed(const Duration(milliseconds: 500));
-    return {'success': true};
+    return SurgeryBooking();
   }
 
   @override
-  Future<dynamic> team(Map<String, dynamic> data) async {
+  Future<SurgeryBooking> team(SurgeryBooking data) async {
     await Future.delayed(const Duration(milliseconds: 500));
-    if (data.isNotEmpty) _data.add(data);
+    _data.add(data);
     return data;
   }
 
   @override
-  Future<dynamic> getSurgeryBookings([Map<String, dynamic>? queryParams]) async {
+  Future<List<SurgeryBooking>> getSurgeryBookings({
+    String? searchTerm,
+    String? patientId,
+    String? primarySurgeonId,
+    String? operatingRoomId,
+    String? priority,
+    String? status,
+    DateTime? scheduledFrom,
+    DateTime? scheduledTo,
+    int? pageNumber,
+    int? pageSize,
+    String? sortBy,
+    bool? sortDescending,
+  }) async {
     await Future.delayed(const Duration(milliseconds: 500));
     return _data;
   }
-
 }

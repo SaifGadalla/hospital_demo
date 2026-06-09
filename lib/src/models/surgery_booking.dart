@@ -1,176 +1,134 @@
 class SurgeryBooking {
-  final String? surgeryBookingId;
-  final String? actualStartTime;
-  final String? actualEndTime;
-  final String? preOpDiagnosis;
-  final String? postOpDiagnosis;
-  final String? proceduresPerformed;
-  final String? findings;
-  final String? complications;
-  final double? bloodLoss;
-  final String? anesthesiaRecord;
-  final String? implantsUsed;
-  final String? notes;
-  final String? completedBy;
-  final String? checklistItems;
+  final String? id;
+  final String? bookingNumber;
+  final String? patientId;
+  final String? patientName;
   final String? primarySurgeonId;
+  final String? surgicalProcedureId;
+  final String? procedureName;
   final String? operatingRoomId;
-  final String? scheduledDate;
-  final String? scheduledStartTime;
+  final String? operatingRoomNumber;
+  final DateTime? scheduledDate;
+  final DateTime? scheduledStartTime;
   final int? estimatedDuration;
   final String? priority;
+  final String? status;
   final String? anesthesiaType;
-  final String? patientId;
-  final String? surgicalProcedureId;
-  final String? memberId;
-  final String? role;
+  final String? notes;
+  final DateTime? createdAt;
 
   SurgeryBooking({
-    this.surgeryBookingId,
-    this.actualStartTime,
-    this.actualEndTime,
-    this.preOpDiagnosis,
-    this.postOpDiagnosis,
-    this.proceduresPerformed,
-    this.findings,
-    this.complications,
-    this.bloodLoss,
-    this.anesthesiaRecord,
-    this.implantsUsed,
-    this.notes,
-    this.completedBy,
-    this.checklistItems,
+    this.id,
+    this.bookingNumber,
+    this.patientId,
+    this.patientName,
     this.primarySurgeonId,
+    this.surgicalProcedureId,
+    this.procedureName,
     this.operatingRoomId,
+    this.operatingRoomNumber,
     this.scheduledDate,
     this.scheduledStartTime,
     this.estimatedDuration,
     this.priority,
+    this.status,
     this.anesthesiaType,
-    this.patientId,
-    this.surgicalProcedureId,
-    this.memberId,
-    this.role,
+    this.notes,
+    this.createdAt,
   });
 
   factory SurgeryBooking.fromJson(Map<String, dynamic> json) {
     return SurgeryBooking(
-      surgeryBookingId: json['surgeryBookingId'],
-      actualStartTime: json['actualStartTime'],
-      actualEndTime: json['actualEndTime'],
-      preOpDiagnosis: json['preOpDiagnosis'],
-      postOpDiagnosis: json['postOpDiagnosis'],
-      proceduresPerformed: json['proceduresPerformed'],
-      findings: json['findings'],
-      complications: json['complications'],
-      bloodLoss: json['bloodLoss'],
-      anesthesiaRecord: json['anesthesiaRecord'],
-      implantsUsed: json['implantsUsed'],
-      notes: json['notes'],
-      completedBy: json['completedBy'],
-      checklistItems: json['checklistItems'],
+      id: json['id'],
+      bookingNumber: json['bookingNumber'],
+      patientId: json['patientId'],
+      patientName: json['patientName'],
       primarySurgeonId: json['primarySurgeonId'],
+      surgicalProcedureId: json['surgicalProcedureId'],
+      procedureName: json['procedureName'],
       operatingRoomId: json['operatingRoomId'],
-      scheduledDate: json['scheduledDate'],
-      scheduledStartTime: json['scheduledStartTime'],
+      operatingRoomNumber: json['operatingRoomNumber'],
+      scheduledDate: json['scheduledDate'] != null
+          ? DateTime.tryParse(json['scheduledDate'] as String)
+          : null,
+      scheduledStartTime: json['scheduledStartTime'] != null
+          ? DateTime.tryParse(json['scheduledStartTime'] as String)
+          : null,
       estimatedDuration: json['estimatedDuration'],
       priority: json['priority'],
+      status: json['status'],
       anesthesiaType: json['anesthesiaType'],
-      patientId: json['patientId'],
-      surgicalProcedureId: json['surgicalProcedureId'],
-      memberId: json['memberId'],
-      role: json['role'],
+      notes: json['notes'],
+      createdAt: json['createdAt'] != null
+          ? DateTime.tryParse(json['createdAt'] as String)
+          : null,
     );
   }
 
   Map<String, dynamic> toJson() {
     return {
-      'surgeryBookingId': surgeryBookingId,
-      'actualStartTime': actualStartTime,
-      'actualEndTime': actualEndTime,
-      'preOpDiagnosis': preOpDiagnosis,
-      'postOpDiagnosis': postOpDiagnosis,
-      'proceduresPerformed': proceduresPerformed,
-      'findings': findings,
-      'complications': complications,
-      'bloodLoss': bloodLoss,
-      'anesthesiaRecord': anesthesiaRecord,
-      'implantsUsed': implantsUsed,
-      'notes': notes,
-      'completedBy': completedBy,
-      'checklistItems': checklistItems,
+      'id': id,
+      'bookingNumber': bookingNumber,
+      'patientId': patientId,
+      'patientName': patientName,
       'primarySurgeonId': primarySurgeonId,
+      'surgicalProcedureId': surgicalProcedureId,
+      'procedureName': procedureName,
       'operatingRoomId': operatingRoomId,
-      'scheduledDate': scheduledDate,
-      'scheduledStartTime': scheduledStartTime,
+      'operatingRoomNumber': operatingRoomNumber,
+      'scheduledDate': scheduledDate?.toIso8601String(),
+      'scheduledStartTime': scheduledStartTime?.toIso8601String(),
       'estimatedDuration': estimatedDuration,
       'priority': priority,
+      'status': status,
       'anesthesiaType': anesthesiaType,
-      'patientId': patientId,
-      'surgicalProcedureId': surgicalProcedureId,
-      'memberId': memberId,
-      'role': role,
+      'notes': notes,
+      'createdAt': createdAt?.toIso8601String(),
     };
   }
 
   SurgeryBooking copyWith({
-    String? surgeryBookingId,
-    String? actualStartTime,
-    String? actualEndTime,
-    String? preOpDiagnosis,
-    String? postOpDiagnosis,
-    String? proceduresPerformed,
-    String? findings,
-    String? complications,
-    double? bloodLoss,
-    String? anesthesiaRecord,
-    String? implantsUsed,
-    String? notes,
-    String? completedBy,
-    String? checklistItems,
+    String? id,
+    String? bookingNumber,
+    String? patientId,
+    String? patientName,
     String? primarySurgeonId,
+    String? surgicalProcedureId,
+    String? procedureName,
     String? operatingRoomId,
-    String? scheduledDate,
-    String? scheduledStartTime,
+    String? operatingRoomNumber,
+    DateTime? scheduledDate,
+    DateTime? scheduledStartTime,
     int? estimatedDuration,
     String? priority,
+    String? status,
     String? anesthesiaType,
-    String? patientId,
-    String? surgicalProcedureId,
-    String? memberId,
-    String? role,
+    String? notes,
+    DateTime? createdAt,
   }) {
     return SurgeryBooking(
-      surgeryBookingId: surgeryBookingId ?? this.surgeryBookingId,
-      actualStartTime: actualStartTime ?? this.actualStartTime,
-      actualEndTime: actualEndTime ?? this.actualEndTime,
-      preOpDiagnosis: preOpDiagnosis ?? this.preOpDiagnosis,
-      postOpDiagnosis: postOpDiagnosis ?? this.postOpDiagnosis,
-      proceduresPerformed: proceduresPerformed ?? this.proceduresPerformed,
-      findings: findings ?? this.findings,
-      complications: complications ?? this.complications,
-      bloodLoss: bloodLoss ?? this.bloodLoss,
-      anesthesiaRecord: anesthesiaRecord ?? this.anesthesiaRecord,
-      implantsUsed: implantsUsed ?? this.implantsUsed,
-      notes: notes ?? this.notes,
-      completedBy: completedBy ?? this.completedBy,
-      checklistItems: checklistItems ?? this.checklistItems,
+      id: id ?? this.id,
+      bookingNumber: bookingNumber ?? this.bookingNumber,
+      patientId: patientId ?? this.patientId,
+      patientName: patientName ?? this.patientName,
       primarySurgeonId: primarySurgeonId ?? this.primarySurgeonId,
+      surgicalProcedureId: surgicalProcedureId ?? this.surgicalProcedureId,
+      procedureName: procedureName ?? this.procedureName,
       operatingRoomId: operatingRoomId ?? this.operatingRoomId,
+      operatingRoomNumber: operatingRoomNumber ?? this.operatingRoomNumber,
       scheduledDate: scheduledDate ?? this.scheduledDate,
       scheduledStartTime: scheduledStartTime ?? this.scheduledStartTime,
       estimatedDuration: estimatedDuration ?? this.estimatedDuration,
       priority: priority ?? this.priority,
+      status: status ?? this.status,
       anesthesiaType: anesthesiaType ?? this.anesthesiaType,
-      patientId: patientId ?? this.patientId,
-      surgicalProcedureId: surgicalProcedureId ?? this.surgicalProcedureId,
-      memberId: memberId ?? this.memberId,
-      role: role ?? this.role,
+      notes: notes ?? this.notes,
+      createdAt: createdAt ?? this.createdAt,
     );
   }
 
   @override
   String toString() {
-    return 'SurgeryBooking(surgeryBookingId: $surgeryBookingId, actualStartTime: $actualStartTime, actualEndTime: $actualEndTime, preOpDiagnosis: $preOpDiagnosis, postOpDiagnosis: $postOpDiagnosis, proceduresPerformed: $proceduresPerformed, findings: $findings, complications: $complications, bloodLoss: $bloodLoss, anesthesiaRecord: $anesthesiaRecord, implantsUsed: $implantsUsed, notes: $notes, completedBy: $completedBy, checklistItems: $checklistItems, primarySurgeonId: $primarySurgeonId, operatingRoomId: $operatingRoomId, scheduledDate: $scheduledDate, scheduledStartTime: $scheduledStartTime, estimatedDuration: $estimatedDuration, priority: $priority, anesthesiaType: $anesthesiaType, patientId: $patientId, surgicalProcedureId: $surgicalProcedureId, memberId: $memberId, role: $role)';
+    return 'SurgeryBooking{id: $id, bookingNumber: $bookingNumber, patientId: $patientId, patientName: $patientName, primarySurgeonId: $primarySurgeonId, surgicalProcedureId: $surgicalProcedureId, procedureName: $procedureName, operatingRoomId: $operatingRoomId, operatingRoomNumber: $operatingRoomNumber, scheduledDate: $scheduledDate, scheduledStartTime: $scheduledStartTime, estimatedDuration: $estimatedDuration, priority: $priority, status: $status, anesthesiaType: $anesthesiaType, notes: $notes, createdAt: $createdAt}';
   }
 }

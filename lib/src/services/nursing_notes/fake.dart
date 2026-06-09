@@ -1,30 +1,31 @@
+import '../../models/_exports.dart';
 import 'base.dart';
 
 class FakeNursingNotesService implements NursingNotesService {
-  final List<Map<String, dynamic>> _data = [];
+  final List<NursingNote> _data = [];
 
   @override
-  Future<dynamic> getNursingNoteById(String id) async {
+  Future<NursingNote> getNursingNoteById(String id) async {
     await Future.delayed(const Duration(milliseconds: 500));
-    return {'id': 'mocked_id', 'status': 'success'};
+    return NursingNote();
   }
 
   @override
-  Future<dynamic> deleteNursingNote(String id) async {
+  Future<NursingNote> deleteNursingNote(String id) async {
     await Future.delayed(const Duration(milliseconds: 500));
-    return {'success': true};
+    return NursingNote();
   }
 
   @override
-  Future<dynamic> getNursingNotesAdmission(String admissionid) async {
+  Future<NursingNote> getNursingNotesAdmission(String admissionid) async {
     await Future.delayed(const Duration(milliseconds: 500));
-    return {'id': 'mocked_id', 'status': 'success'};
+    return NursingNote();
   }
 
   @override
-  Future<dynamic> createNursingNote(Map<String, dynamic> data) async {
+  Future<NursingNote> createNursingNote(NursingNote data) async {
     await Future.delayed(const Duration(milliseconds: 500));
-    if (data.isNotEmpty) _data.add(data);
+     _data.add(data);
     return data;
   }
 

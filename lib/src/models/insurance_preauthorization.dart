@@ -1,86 +1,148 @@
 class InsurancePreauthorization {
-  final String? approvalNumber;
-  final double? approvedAmount;
-  final String? validFrom;
-  final String? validTo;
-  final String? remarks;
-  final String? rejectionReason;
+  final String? id;
+  final String? tenantId;
+  final String? authNumber;
+  final String? patientId;
+  final String? patientName;
+  final String? insurancePlanId;
+  final String? insurancePlanName;
   final String? serviceRequested;
   final double? estimatedCost;
-  final String? patientId;
-  final String? insurancePlanId;
+  final String? requestDate;
+  final String? approvalStatus;
+  final String? approvalNumber;
+  final double? approvedAmount;
+  final DateTime? validFrom;
+  final DateTime? validTo;
+  final String? remarks;
+  final String? rejectionReason;
+  final DateTime? createdAt;
+  final DateTime? updatedAt;
 
   InsurancePreauthorization({
+    this.id,
+    this.tenantId,
+    this.authNumber,
+    this.patientId,
+    this.patientName,
+    this.insurancePlanId,
+    this.insurancePlanName,
+    this.serviceRequested,
+    this.estimatedCost,
+    this.requestDate,
+    this.approvalStatus,
     this.approvalNumber,
     this.approvedAmount,
     this.validFrom,
     this.validTo,
     this.remarks,
     this.rejectionReason,
-    this.serviceRequested,
-    this.estimatedCost,
-    this.patientId,
-    this.insurancePlanId,
+    this.createdAt,
+    this.updatedAt,
   });
 
   factory InsurancePreauthorization.fromJson(Map<String, dynamic> json) {
     return InsurancePreauthorization(
-      approvalNumber: json['approvalNumber'],
-      approvedAmount: json['approvedAmount'],
-      validFrom: json['validFrom'],
-      validTo: json['validTo'],
-      remarks: json['remarks'],
-      rejectionReason: json['rejectionReason'],
+      id: json['id'],
+      tenantId: json['tenantId'],
+      authNumber: json['authNumber'],
+      patientId: json['patientId'],
+      patientName: json['patientName'],
+      insurancePlanId: json['insurancePlanId'],
+      insurancePlanName: json['insurancePlanName'],
       serviceRequested: json['serviceRequested'],
       estimatedCost: json['estimatedCost'],
-      patientId: json['patientId'],
-      insurancePlanId: json['insurancePlanId'],
+      requestDate: json['requestDate'],
+      approvalStatus: json['approvalStatus'],
+      approvalNumber: json['approvalNumber'],
+      approvedAmount: json['approvedAmount'],
+      validFrom: json['validFrom'] != null
+          ? DateTime.tryParse(json['validFrom'] as String)
+          : null,
+      validTo: json['validTo'] != null
+          ? DateTime.tryParse(json['validTo'] as String)
+          : null,
+      remarks: json['remarks'],
+      rejectionReason: json['rejectionReason'],
+      createdAt: json['createdAt'] != null
+          ? DateTime.tryParse(json['createdAt'] as String)
+          : null,
+      updatedAt: json['updatedAt'] != null
+          ? DateTime.tryParse(json['updatedAt'] as String)
+          : null,
     );
   }
 
   Map<String, dynamic> toJson() {
     return {
+      'id': id,
+      'tenantId': tenantId,
+      'authNumber': authNumber,
+      'patientId': patientId,
+      'patientName': patientName,
+      'insurancePlanId': insurancePlanId,
+      'insurancePlanName': insurancePlanName,
+      'serviceRequested': serviceRequested,
+      'estimatedCost': estimatedCost,
+      'requestDate': requestDate,
+      'approvalStatus': approvalStatus,
       'approvalNumber': approvalNumber,
       'approvedAmount': approvedAmount,
       'validFrom': validFrom,
       'validTo': validTo,
       'remarks': remarks,
       'rejectionReason': rejectionReason,
-      'serviceRequested': serviceRequested,
-      'estimatedCost': estimatedCost,
-      'patientId': patientId,
-      'insurancePlanId': insurancePlanId,
+      'createdAt': createdAt,
+      'updatedAt': updatedAt,
     };
   }
 
   InsurancePreauthorization copyWith({
-    String? approvalNumber,
-    double? approvedAmount,
-    String? validFrom,
-    String? validTo,
-    String? remarks,
-    String? rejectionReason,
+    String? id,
+    String? tenantId,
+    String? authNumber,
+    String? patientId,
+    String? patientName,
+    String? insurancePlanId,
+    String? insurancePlanName,
     String? serviceRequested,
     double? estimatedCost,
-    String? patientId,
-    String? insurancePlanId,
+    String? requestDate,
+    String? approvalStatus,
+    String? approvalNumber,
+    double? approvedAmount,
+    DateTime? validFrom,
+    DateTime? validTo,
+    String? remarks,
+    String? rejectionReason,
+    DateTime? createdAt,
+    DateTime? updatedAt,
   }) {
     return InsurancePreauthorization(
-      approvalNumber: approvalNumber ?? this.approvalNumber,
-      approvedAmount: approvedAmount ?? this.approvedAmount,
-      validFrom: validFrom ?? this.validFrom,
-      validTo: validTo ?? this.validTo,
-      remarks: remarks ?? this.remarks,
-      rejectionReason: rejectionReason ?? this.rejectionReason,
-      serviceRequested: serviceRequested ?? this.serviceRequested,
-      estimatedCost: estimatedCost ?? this.estimatedCost,
-      patientId: patientId ?? this.patientId,
-      insurancePlanId: insurancePlanId ?? this.insurancePlanId,
+      id: id ?? this.id,
+      tenantId: tenantId ?? this.tenantId,
+      authNumber: authNumber ?? this.authNumber,
+      patientId: patientId,
+      patientName: patientName,
+      insurancePlanId: insurancePlanId,
+      insurancePlanName: insurancePlanName,
+      serviceRequested: serviceRequested,
+      estimatedCost: estimatedCost,
+      requestDate: requestDate,
+      approvalStatus: approvalStatus,
+      approvalNumber: approvalNumber,
+      approvedAmount: approvedAmount,
+      validFrom: validFrom,
+      validTo: validTo,
+      remarks: remarks,
+      rejectionReason: rejectionReason,
+      createdAt: createdAt,
+      updatedAt: updatedAt,
     );
   }
 
   @override
   String toString() {
-    return 'InsurancePreauthorization(approvalNumber: $approvalNumber, approvedAmount: $approvedAmount, validFrom: $validFrom, validTo: $validTo, remarks: $remarks, rejectionReason: $rejectionReason, serviceRequested: $serviceRequested, estimatedCost: $estimatedCost, patientId: $patientId, insurancePlanId: $insurancePlanId)';
+    return 'InsurancePreauthorization(id: $id, tenantId: $tenantId, authNumber: $authNumber, patientId: $patientId, patientName: $patientName, insurancePlanId: $insurancePlanId, insurancePlanName: $insurancePlanName, serviceRequested: $serviceRequested, estimatedCost: $estimatedCost, requestDate: $requestDate, approvalStatus: $approvalStatus, approvalNumber: $approvalNumber, approvedAmount: $approvedAmount, validFrom: $validFrom, validTo: $validTo, remarks: $remarks, rejectionReason: $rejectionReason, createdAt: $createdAt, updatedAt: $updatedAt)';
   }
 }

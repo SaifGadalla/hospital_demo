@@ -1,63 +1,76 @@
+import '../../models/_exports.dart';
 import 'base.dart';
 
 class FakePrescriptionsService implements PrescriptionsService {
-  final List<Map<String, dynamic>> _data = [];
+  final List<Prescription> _data = [];
 
   @override
-  Future<dynamic> dispensePrescription(String id, Map<String, dynamic> data) async {
+  Future<Prescription> dispensePrescription(String id, Prescription data) async {
     await Future.delayed(const Duration(milliseconds: 500));
-    if (data.isNotEmpty) _data.add(data);
+     _data.add(data);
     return data;
   }
 
   @override
-  Future<dynamic> cancelPrescription(String id, Map<String, dynamic> data) async {
+  Future<Prescription> cancelPrescription(String id, Prescription data) async {
     await Future.delayed(const Duration(milliseconds: 500));
-    if (data.isNotEmpty) _data.add(data);
+     _data.add(data);
     return data;
   }
 
   @override
-  Future<dynamic> getPrescriptionById(String id) async {
+  Future<Prescription> getPrescriptionById(String id) async {
     await Future.delayed(const Duration(milliseconds: 500));
-    return {'id': 'mocked_id', 'status': 'success'};
+    return Prescription();
   }
 
   @override
-  Future<dynamic> updatePrescription(String id, Map<String, dynamic> data) async {
+  Future<Prescription> updatePrescription(String id, Prescription data) async {
     await Future.delayed(const Duration(milliseconds: 500));
-    if (data.isNotEmpty) _data.add(data);
+     _data.add(data);
     return data;
   }
 
   @override
-  Future<dynamic> deletePrescription(String id) async {
+  Future<Prescription> deletePrescription(String id) async {
     await Future.delayed(const Duration(milliseconds: 500));
-    return {'success': true};
+    return Prescription();
   }
 
   @override
-  Future<dynamic> getPrescriptionsNumber(String prescriptionnumber) async {
+  Future<Prescription> getPrescriptionsNumber(String prescriptionnumber) async {
     await Future.delayed(const Duration(milliseconds: 500));
-    return {'id': 'mocked_id', 'status': 'success'};
+    return Prescription();
   }
 
   @override
-  Future<dynamic> getPatientBypatientid(String patientid) async {
+  Future<Prescription> getPatientBypatientid(String patientid) async {
     await Future.delayed(const Duration(milliseconds: 500));
-    return {'id': 'mocked_id', 'status': 'success'};
+    return Prescription();
   }
 
   @override
-  Future<dynamic> getPrescriptions([Map<String, dynamic>? queryParams]) async {
+  Future<List<Prescription>> getPrescriptions({
+    String? searchTerm,
+    String? patientId,
+    String? doctorId,
+    String? appointmentId,
+    String? status,
+    DateTime? prescriptionDateFrom,
+    DateTime? prescriptionDateTo,
+    int? pageNumber,
+    int? pageSize,
+    String? sortBy,
+    bool? sortDescending,
+  }) async {
     await Future.delayed(const Duration(milliseconds: 500));
     return _data;
   }
 
   @override
-  Future<dynamic> createPrescription(Map<String, dynamic> data) async {
+  Future<Prescription> createPrescription(Prescription data) async {
     await Future.delayed(const Duration(milliseconds: 500));
-    if (data.isNotEmpty) _data.add(data);
+     _data.add(data);
     return data;
   }
 

@@ -1,8 +1,13 @@
 class Patient {
+  final String? id;
+  final String? tenantId;
+  final String? mrn;
   final String? firstName;
   final String? lastName;
   final String? middleName;
-  final String? dateOfBirth;
+  final String? fullName;
+  final DateTime? dateOfBirth;
+  final int? age;
   final String? gender;
   final String? nationalId;
   final String? passportNumber;
@@ -19,18 +24,25 @@ class Patient {
   final String? photoUrl;
   final String? emergencyContactName;
   final String? emergencyContactPhone;
-  final String? emergencyContactRelation;
+  final String? emergencyContactRelationship;
   final String? primaryInsuranceId;
   final String? insurancePolicyNumber;
   final String? insuranceMemberNumber;
   final bool? isVIP;
   final bool? isActive;
+  final DateTime? createdAt;
+  final DateTime? updatedAt;
 
   Patient({
+    this.id,
+    this.tenantId,
+    this.mrn,
     this.firstName,
     this.lastName,
     this.middleName,
+    this.fullName,
     this.dateOfBirth,
+    this.age,
     this.gender,
     this.nationalId,
     this.passportNumber,
@@ -47,51 +59,71 @@ class Patient {
     this.photoUrl,
     this.emergencyContactName,
     this.emergencyContactPhone,
-    this.emergencyContactRelation,
+    this.emergencyContactRelationship,
     this.primaryInsuranceId,
     this.insurancePolicyNumber,
     this.insuranceMemberNumber,
     this.isVIP,
     this.isActive,
+    this.createdAt,
+    this.updatedAt,
   });
 
   factory Patient.fromJson(Map<String, dynamic> json) {
     return Patient(
-      firstName: json['firstName'],
-      lastName: json['lastName'],
-      middleName: json['middleName'],
-      dateOfBirth: json['dateOfBirth'],
-      gender: json['gender'],
-      nationalId: json['nationalId'],
-      passportNumber: json['passportNumber'],
-      email: json['email'],
-      phone: json['phone'],
-      mobile: json['mobile'],
-      address: json['address'],
-      city: json['city'],
-      state: json['state'],
-      country: json['country'],
-      bloodType: json['bloodType'],
-      maritalStatus: json['maritalStatus'],
-      nationality: json['nationality'],
-      photoUrl: json['photoUrl'],
-      emergencyContactName: json['emergencyContactName'],
-      emergencyContactPhone: json['emergencyContactPhone'],
-      emergencyContactRelation: json['emergencyContactRelation'],
-      primaryInsuranceId: json['primaryInsuranceId'],
-      insurancePolicyNumber: json['insurancePolicyNumber'],
-      insuranceMemberNumber: json['insuranceMemberNumber'],
-      isVIP: json['isVIP'],
-      isActive: json['isActive'],
+      id: json['id'] as String?,
+      tenantId: json['tenantId'] as String?,
+      mrn: json['mrn'] as String?,
+      firstName: json['firstName'] as String?,
+      lastName: json['lastName'] as String?,
+      middleName: json['middleName'] as String?,
+      fullName: json['fullName'] as String?,
+      dateOfBirth: json['dateOfBirth'] != null
+          ? DateTime.parse(json['dateOfBirth'])
+          : null,
+      age: json['age'] as int?,
+      gender: json['gender'] as String?,
+      nationalId: json['nationalId'] as String?,
+      passportNumber: json['passportNumber'] as String?,
+      email: json['email'] as String?,
+      phone: json['phone'] as String?,
+      mobile: json['mobile'] as String?,
+      address: json['address'] as String?,
+      city: json['city'] as String?,
+      state: json['state'] as String?,
+      country: json['country'] as String?,
+      bloodType: json['bloodType'] as String?,
+      maritalStatus: json['maritalStatus'] as String?,
+      nationality: json['nationality'] as String?,
+      photoUrl: json['photoUrl'] as String?,
+      emergencyContactName: json['emergencyContactName'] as String?,
+      emergencyContactPhone: json['emergencyContactPhone'] as String?,
+      emergencyContactRelationship: json['emergencyContactRelation'] as String?,
+      primaryInsuranceId: json['primaryInsuranceId'] as String?,
+      insurancePolicyNumber: json['insurancePolicyNumber'] as String?,
+      insuranceMemberNumber: json['insuranceMemberNumber'] as String?,
+      isVIP: json['isVIP'] as bool?,
+      isActive: json['isActive'] as bool?,
+      createdAt: json['createdAt'] != null
+          ? DateTime.parse(json['createdAt'])
+          : null,
+      updatedAt: json['updatedAt'] != null
+          ? DateTime.parse(json['updatedAt'])
+          : null,
     );
   }
 
   Map<String, dynamic> toJson() {
     return {
+      'id': id,
+      'tenantId': tenantId,
+      'mrn': mrn,
       'firstName': firstName,
       'lastName': lastName,
       'middleName': middleName,
-      'dateOfBirth': dateOfBirth,
+      'fullName': fullName,
+      'dateOfBirth': dateOfBirth?.toIso8601String(),
+      'age': age,
       'gender': gender,
       'nationalId': nationalId,
       'passportNumber': passportNumber,
@@ -108,20 +140,27 @@ class Patient {
       'photoUrl': photoUrl,
       'emergencyContactName': emergencyContactName,
       'emergencyContactPhone': emergencyContactPhone,
-      'emergencyContactRelation': emergencyContactRelation,
+      'emergencyContactRelation': emergencyContactRelationship,
       'primaryInsuranceId': primaryInsuranceId,
       'insurancePolicyNumber': insurancePolicyNumber,
       'insuranceMemberNumber': insuranceMemberNumber,
       'isVIP': isVIP,
       'isActive': isActive,
+      'createdAt': createdAt?.toIso8601String(),
+      'updatedAt': updatedAt?.toIso8601String(),
     };
   }
 
   Patient copyWith({
+    String? id,
+    String? tenantId,
+    String? mrn,
     String? firstName,
     String? lastName,
     String? middleName,
-    String? dateOfBirth,
+    String? fullName,
+    DateTime? dateOfBirth,
+    int? age,
     String? gender,
     String? nationalId,
     String? passportNumber,
@@ -138,18 +177,25 @@ class Patient {
     String? photoUrl,
     String? emergencyContactName,
     String? emergencyContactPhone,
-    String? emergencyContactRelation,
+    String? emergencyContactRelationship,
     String? primaryInsuranceId,
     String? insurancePolicyNumber,
     String? insuranceMemberNumber,
     bool? isVIP,
     bool? isActive,
+    DateTime? createdAt,
+    DateTime? updatedAt,
   }) {
     return Patient(
+      id: id ?? this.id,
+      tenantId: tenantId ?? this.tenantId,
+      mrn: mrn ?? this.mrn,
       firstName: firstName ?? this.firstName,
       lastName: lastName ?? this.lastName,
       middleName: middleName ?? this.middleName,
+      fullName: fullName ?? this.fullName,
       dateOfBirth: dateOfBirth ?? this.dateOfBirth,
+      age: age ?? this.age,
       gender: gender ?? this.gender,
       nationalId: nationalId ?? this.nationalId,
       passportNumber: passportNumber ?? this.passportNumber,
@@ -165,18 +211,24 @@ class Patient {
       nationality: nationality ?? this.nationality,
       photoUrl: photoUrl ?? this.photoUrl,
       emergencyContactName: emergencyContactName ?? this.emergencyContactName,
-      emergencyContactPhone: emergencyContactPhone ?? this.emergencyContactPhone,
-      emergencyContactRelation: emergencyContactRelation ?? this.emergencyContactRelation,
+      emergencyContactPhone:
+          emergencyContactPhone ?? this.emergencyContactPhone,
+      emergencyContactRelationship:
+          emergencyContactRelationship ?? this.emergencyContactRelationship,
       primaryInsuranceId: primaryInsuranceId ?? this.primaryInsuranceId,
-      insurancePolicyNumber: insurancePolicyNumber ?? this.insurancePolicyNumber,
-      insuranceMemberNumber: insuranceMemberNumber ?? this.insuranceMemberNumber,
+      insurancePolicyNumber:
+          insurancePolicyNumber ?? this.insurancePolicyNumber,
+      insuranceMemberNumber:
+          insuranceMemberNumber ?? this.insuranceMemberNumber,
       isVIP: isVIP ?? this.isVIP,
       isActive: isActive ?? this.isActive,
+      createdAt: createdAt ?? this.createdAt,
+      updatedAt: updatedAt ?? this.updatedAt,
     );
   }
 
   @override
   String toString() {
-    return 'Patient(firstName: $firstName, lastName: $lastName, middleName: $middleName, dateOfBirth: $dateOfBirth, gender: $gender, nationalId: $nationalId, passportNumber: $passportNumber, email: $email, phone: $phone, mobile: $mobile, address: $address, city: $city, state: $state, country: $country, bloodType: $bloodType, maritalStatus: $maritalStatus, nationality: $nationality, photoUrl: $photoUrl, emergencyContactName: $emergencyContactName, emergencyContactPhone: $emergencyContactPhone, emergencyContactRelation: $emergencyContactRelation, primaryInsuranceId: $primaryInsuranceId, insurancePolicyNumber: $insurancePolicyNumber, insuranceMemberNumber: $insuranceMemberNumber, isVIP: $isVIP, isActive: $isActive)';
+    return 'Patient{id: $id, tenantId: $tenantId, mrn: $mrn, firstName: $firstName, lastName: $lastName, middleName: $middleName, fullName: $fullName, dateOfBirth: $dateOfBirth, age: $age, gender: $gender, nationalId: $nationalId, passportNumber: $passportNumber, email: $email, phone: $phone, mobile: $mobile, address: $address, city: $city, state: $state, country: $country, bloodType: $bloodType, maritalStatus: $maritalStatus, nationality: $nationality, photoUrl: $photoUrl, emergencyContactName: $emergencyContactName, emergencyContactPhone: $emergencyContactPhone, emergencyContactRelation: $emergencyContactRelationship, primaryInsuranceId: $primaryInsuranceId, insurancePolicyNumber: $insurancePolicyNumber, insuranceMemberNumber: $insuranceMemberNumber, isVIP: $isVIP, isActive: $isActive, createdAt: $createdAt, updatedAt: $updatedAt}';
   }
 }

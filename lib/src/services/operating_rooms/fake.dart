@@ -1,44 +1,52 @@
+import '../../models/_exports.dart';
 import 'base.dart';
 
 class FakeOperatingRoomsService implements OperatingRoomsService {
-  final List<Map<String, dynamic>> _data = [];
+  final List<OperatingRoom> _data = [];
 
   @override
-  Future<dynamic> statusOperatingRoom(String id, Map<String, dynamic> data) async {
+  Future<OperatingRoom> statusOperatingRoom(String id, OperatingRoom data, {
+    String? status,
+  }) async {
     await Future.delayed(const Duration(milliseconds: 500));
-    if (data.isNotEmpty) _data.add(data);
+     _data.add(data);
     return data;
   }
 
   @override
-  Future<dynamic> getOperatingRoomById(String id) async {
+  Future<OperatingRoom> getOperatingRoomById(String id) async {
     await Future.delayed(const Duration(milliseconds: 500));
-    return {'id': 'mocked_id', 'status': 'success'};
+    return OperatingRoom();
   }
 
   @override
-  Future<dynamic> updateOperatingRoom(String id, Map<String, dynamic> data) async {
+  Future<OperatingRoom> updateOperatingRoom(String id, OperatingRoom data) async {
     await Future.delayed(const Duration(milliseconds: 500));
-    if (data.isNotEmpty) _data.add(data);
+     _data.add(data);
     return data;
   }
 
   @override
-  Future<dynamic> deleteOperatingRoom(String id) async {
+  Future<OperatingRoom> deleteOperatingRoom(String id) async {
     await Future.delayed(const Duration(milliseconds: 500));
-    return {'success': true};
+    return OperatingRoom();
   }
 
   @override
-  Future<dynamic> getOperatingRooms([Map<String, dynamic>? queryParams]) async {
+  Future<List<OperatingRoom>> getOperatingRooms({
+    int? pageNumber,
+    int? pageSize,
+    String? sortBy,
+    bool? sortDescending,
+  }) async {
     await Future.delayed(const Duration(milliseconds: 500));
     return _data;
   }
 
   @override
-  Future<dynamic> createOperatingRoom(Map<String, dynamic> data) async {
+  Future<OperatingRoom> createOperatingRoom(OperatingRoom data) async {
     await Future.delayed(const Duration(milliseconds: 500));
-    if (data.isNotEmpty) _data.add(data);
+     _data.add(data);
     return data;
   }
 

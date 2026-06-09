@@ -1,70 +1,84 @@
+import '../../models/_exports.dart';
 import 'base.dart';
 
 class FakeLabOrdersService implements LabOrdersService {
-  final List<Map<String, dynamic>> _data = [];
+  final List<LabOrder> _data = [];
 
   @override
-  Future<dynamic> statusLabOrder(String id, Map<String, dynamic> data) async {
+  Future<LabOrder> statusLabOrder(String id, LabOrder data) async {
     await Future.delayed(const Duration(milliseconds: 500));
-    if (data.isNotEmpty) _data.add(data);
+     _data.add(data);
     return data;
   }
 
   @override
-  Future<dynamic> collectSampleLabOrder(String id, Map<String, dynamic> data) async {
+  Future<LabOrder> collectSampleLabOrder(String id, LabOrder data) async {
     await Future.delayed(const Duration(milliseconds: 500));
-    if (data.isNotEmpty) _data.add(data);
+     _data.add(data);
     return data;
   }
 
   @override
-  Future<dynamic> approveResultsLabOrder(String id, Map<String, dynamic> data) async {
+  Future<LabOrder> approveResultsLabOrder(String id, LabOrder data) async {
     await Future.delayed(const Duration(milliseconds: 500));
-    if (data.isNotEmpty) _data.add(data);
+     _data.add(data);
     return data;
   }
 
   @override
-  Future<dynamic> getLabOrderById(String id) async {
+  Future<LabOrder> getLabOrderById(String id) async {
     await Future.delayed(const Duration(milliseconds: 500));
-    return {'id': 'mocked_id', 'status': 'success'};
+    return LabOrder();
   }
 
   @override
-  Future<dynamic> updateLabOrder(String id, Map<String, dynamic> data) async {
+  Future<LabOrder> updateLabOrder(String id, LabOrder data) async {
     await Future.delayed(const Duration(milliseconds: 500));
-    if (data.isNotEmpty) _data.add(data);
+     _data.add(data);
     return data;
   }
 
   @override
-  Future<dynamic> deleteLabOrder(String id) async {
+  Future<LabOrder> deleteLabOrder(String id) async {
     await Future.delayed(const Duration(milliseconds: 500));
-    return {'success': true};
+    return LabOrder();
   }
 
   @override
-  Future<dynamic> getLabOrdersNumber(String ordernumber) async {
+  Future<LabOrder> getLabOrdersNumber(String ordernumber) async {
     await Future.delayed(const Duration(milliseconds: 500));
-    return {'id': 'mocked_id', 'status': 'success'};
+    return LabOrder();
   }
 
   @override
-  Future<dynamic> getPatientBypatientid(String patientid) async {
+  Future<LabOrder> getPatientBypatientid(String patientid) async {
     await Future.delayed(const Duration(milliseconds: 500));
-    return {'id': 'mocked_id', 'status': 'success'};
+    return LabOrder();
   }
 
   @override
-  Future<dynamic> getLabOrders([Map<String, dynamic>? queryParams]) async {
+  Future<List<LabOrder>> getLabOrders({
+    String? searchTerm,
+    String? patientId,
+    String? doctorId,
+    String? appointmentId,
+    String? priority,
+    String? status,
+    DateTime? orderDateFrom,
+    DateTime? orderDateTo,
+    int? pageNumber,
+    int? pageSize,
+    String? sortBy,
+    bool? sortDescending,
+  }) async {
     await Future.delayed(const Duration(milliseconds: 500));
     return _data;
   }
 
   @override
-  Future<dynamic> createLabOrder(Map<String, dynamic> data) async {
+  Future<LabOrder> createLabOrder(LabOrder data) async {
     await Future.delayed(const Duration(milliseconds: 500));
-    if (data.isNotEmpty) _data.add(data);
+     _data.add(data);
     return data;
   }
 

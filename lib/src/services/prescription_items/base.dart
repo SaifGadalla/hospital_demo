@@ -1,9 +1,15 @@
+import '../../models/_exports.dart';
 abstract class PrescriptionItemsService {
-  Future<dynamic> dispensePrescriptionItem(String id, Map<String, dynamic> data);
-  Future<dynamic> getPrescriptionItemById(String id);
-  Future<dynamic> updatePrescriptionItem(String id, Map<String, dynamic> data);
-  Future<dynamic> deletePrescriptionItem(String id);
-  Future<dynamic> getPrescriptionByprescriptionid(String prescriptionid);
-  Future<dynamic> getPrescriptionItems([Map<String, dynamic>? queryParams]);
-  Future<dynamic> createPrescriptionItem(Map<String, dynamic> data);
+  Future<PrescriptionItem> dispensePrescriptionItem(String id, PrescriptionItem data);
+  Future<PrescriptionItem> getPrescriptionItemById(String id);
+  Future<PrescriptionItem> updatePrescriptionItem(String id, PrescriptionItem data);
+  Future<PrescriptionItem> deletePrescriptionItem(String id);
+  Future<PrescriptionItem> getPrescriptionByprescriptionid(String prescriptionid);
+  Future<List<PrescriptionItem>> getPrescriptionItems({
+    int? pageNumber,
+    int? pageSize,
+    String? sortBy,
+    bool? sortDescending,
+  });
+  Future<PrescriptionItem> createPrescriptionItem(PrescriptionItem data);
 }

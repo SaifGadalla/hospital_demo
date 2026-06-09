@@ -1,44 +1,63 @@
+import '../../models/_exports.dart';
 import 'base.dart';
 
 class FakeRoomsService implements RoomsService {
-  final List<Map<String, dynamic>> _data = [];
+  final List<Room> _data = [
+    Room(
+      wardId: 'W-01',
+      roomNumber: '100',
+      roomType: 'General',
+      capacity: 2,
+      isActive: true,
+      dailyRate: 200.0,
+      roomCode: 'R-100',
+    ),
+  ];
 
   @override
-  Future<dynamic> getRoomById(String id) async {
+  Future<Room> getRoomById(String id) async {
     await Future.delayed(const Duration(milliseconds: 500));
-    return {'id': 'mocked_id', 'status': 'success'};
+    return Room();
   }
 
   @override
-  Future<dynamic> updateRoom(String id, Map<String, dynamic> data) async {
+  Future<Room> updateRoom(String id, Room data) async {
     await Future.delayed(const Duration(milliseconds: 500));
-    if (data.isNotEmpty) _data.add(data);
+    _data.add(data);
     return data;
   }
 
   @override
-  Future<dynamic> deleteRoom(String id) async {
+  Future<Room> deleteRoom(String id) async {
     await Future.delayed(const Duration(milliseconds: 500));
-    return {'success': true};
+    return Room();
   }
 
   @override
-  Future<dynamic> getRoomsWard(String wardid) async {
+  Future<Room> getRoomsWard(String wardid) async {
     await Future.delayed(const Duration(milliseconds: 500));
-    return {'id': 'mocked_id', 'status': 'success'};
+    return Room();
   }
 
   @override
-  Future<dynamic> getRooms([Map<String, dynamic>? queryParams]) async {
+  Future<List<Room>> getRooms({
+    String? searchTerm,
+    String? wardId,
+    String? roomType,
+    bool? isActive,
+    int? pageNumber,
+    int? pageSize,
+    String? sortBy,
+    bool? sortDescending,
+  }) async {
     await Future.delayed(const Duration(milliseconds: 500));
     return _data;
   }
 
   @override
-  Future<dynamic> createRoom(Map<String, dynamic> data) async {
+  Future<Room> createRoom(Room data) async {
     await Future.delayed(const Duration(milliseconds: 500));
-    if (data.isNotEmpty) _data.add(data);
+    _data.add(data);
     return data;
   }
-
 }

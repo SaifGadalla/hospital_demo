@@ -1,187 +1,262 @@
+import '../../models/_exports.dart';
 import 'base.dart';
 
 class FakeErService implements ErService {
-  final List<Map<String, dynamic>> _data = [];
+  final List<ErAmbulanceCall> _ambulanceCalls = [];
+  final List<ErBed> _beds = [];
+  final List<ErRegistration> _registrations = [
+    ErRegistration(
+      patientId: '123456789',
+      arrivalTime: DateTime.now(),
+      chiefComplaint: 'Severe chest pain',
+      status: 'Active',
+      arrivalMode: 'ambulance',
+      notes:
+          'Patient is in critical condition and requires immediate attention.',
+    ),
+  ];
+  final List<ErTreatment> _treatments = [];
+  final List<ErTriage> _triages = [];
 
   @override
-  Future<dynamic> postAmbulanceCallsByidPickup(String id, Map<String, dynamic> data) async {
+  Future<ErAmbulanceCall> postAmbulanceCallsByidPickup(
+    String id,
+    ErAmbulanceCall data, {
+    String? pickupTime,
+  }) async {
     await Future.delayed(const Duration(milliseconds: 500));
-    if (data.isNotEmpty) _data.add(data);
+    _ambulanceCalls.add(data);
     return data;
   }
 
   @override
-  Future<dynamic> postAmbulanceCallsByidArrival(String id, Map<String, dynamic> data) async {
+  Future<ErAmbulanceCall> postAmbulanceCallsByidArrival(
+    String id,
+    ErAmbulanceCall data, {
+    String? arrivalTime,
+  }) async {
     await Future.delayed(const Duration(milliseconds: 500));
-    if (data.isNotEmpty) _data.add(data);
+    _ambulanceCalls.add(data);
     return data;
   }
 
   @override
-  Future<dynamic> postAmbulanceCallsByidLinkErByerregistrationid(String id, String erregistrationid, Map<String, dynamic> data) async {
+  Future<ErAmbulanceCall> postAmbulanceCallsByidLinkErByerregistrationid(
+    String id,
+    String erRegistrationId,
+    ErAmbulanceCall data,
+  ) async {
     await Future.delayed(const Duration(milliseconds: 500));
-    if (data.isNotEmpty) _data.add(data);
+    _ambulanceCalls.add(data);
     return data;
   }
 
   @override
-  Future<dynamic> getAmbulanceCallsByid(String id) async {
+  Future<ErAmbulanceCall> getAmbulanceCallsByid(String id) async {
     await Future.delayed(const Duration(milliseconds: 500));
-    return {'id': 'mocked_id', 'status': 'success'};
+    return ErAmbulanceCall();
   }
 
   @override
-  Future<dynamic> ambulanceCalls() async {
+  Future<List<ErAmbulanceCall>> ambulanceCalls() async {
     await Future.delayed(const Duration(milliseconds: 500));
-    return {'id': 'mocked_id', 'status': 'success'};
+    return _ambulanceCalls;
   }
 
   @override
-  Future<dynamic> postAmbulancecalls(Map<String, dynamic> data) async {
+  Future<List<ErAmbulanceCall>> postAmbulancecalls(ErAmbulanceCall data) async {
     await Future.delayed(const Duration(milliseconds: 500));
-    if (data.isNotEmpty) _data.add(data);
+    _ambulanceCalls.add(data);
+    return _ambulanceCalls;
+  }
+
+  @override
+  Future<List<ErBed>> getBedsAvailable() async {
+    await Future.delayed(const Duration(milliseconds: 500));
+    return _beds.where((bed) => bed.status == 'available').toList();
+  }
+
+  @override
+  Future<ErBed> postBedsByidStatus(
+    String id,
+    ErBed data, {
+    String? status,
+  }) async {
+    await Future.delayed(const Duration(milliseconds: 500));
+    _beds.add(data);
     return data;
   }
 
   @override
-  Future<dynamic> getBedsAvailable() async {
+  Future<ErBed> getBedsByid(String id) async {
     await Future.delayed(const Duration(milliseconds: 500));
-    return {'id': 'mocked_id', 'status': 'success'};
+    return ErBed();
   }
 
   @override
-  Future<dynamic> postBedsByidStatus(String id, Map<String, dynamic> data) async {
+  Future<ErBed> putBedsByid(String id, ErBed data) async {
     await Future.delayed(const Duration(milliseconds: 500));
-    if (data.isNotEmpty) _data.add(data);
+    _beds.add(data);
     return data;
   }
 
   @override
-  Future<dynamic> getBedsByid(String id) async {
+  Future<List<ErBed>> beds() async {
     await Future.delayed(const Duration(milliseconds: 500));
-    return {'id': 'mocked_id', 'status': 'success'};
+    return _beds;
   }
 
   @override
-  Future<dynamic> putBedsByid(String id, Map<String, dynamic> data) async {
+  Future<List<ErBed>> postBeds(ErBed data) async {
     await Future.delayed(const Duration(milliseconds: 500));
-    if (data.isNotEmpty) _data.add(data);
+    _beds.add(data);
+    return _beds;
+  }
+
+  @override
+  Future<ErRegistration> postRegistrationsByidDisposition(
+    String id,
+    ErRegistration data,
+  ) async {
+    await Future.delayed(const Duration(milliseconds: 500));
+    _registrations.add(data);
     return data;
   }
 
   @override
-  Future<dynamic> beds() async {
+  Future<ErRegistration> getRegistrationsByid(String id) async {
     await Future.delayed(const Duration(milliseconds: 500));
-    return {'id': 'mocked_id', 'status': 'success'};
+    return ErRegistration();
   }
 
   @override
-  Future<dynamic> postBeds(Map<String, dynamic> data) async {
+  Future<ErRegistration> putRegistrationsByid(
+    String id,
+    ErRegistration data,
+  ) async {
     await Future.delayed(const Duration(milliseconds: 500));
-    if (data.isNotEmpty) _data.add(data);
+    _registrations.add(data);
     return data;
   }
 
   @override
-  Future<dynamic> postRegistrationsByidDisposition(String id, Map<String, dynamic> data) async {
+  Future<ErRegistration> deleteRegistrationsByid(String id) async {
     await Future.delayed(const Duration(milliseconds: 500));
-    if (data.isNotEmpty) _data.add(data);
+    return ErRegistration();
+  }
+
+  @override
+  Future<ErRegistration> getRegistrationsByNumberByernumber(
+    String ernumber,
+  ) async {
+    await Future.delayed(const Duration(milliseconds: 500));
+    return ErRegistration();
+  }
+
+  @override
+  Future<ErRegistration> postRegistrationsRegister(ErRegistration data) async {
+    await Future.delayed(const Duration(milliseconds: 500));
+    _registrations.add(data);
     return data;
   }
 
   @override
-  Future<dynamic> getRegistrationsByid(String id) async {
+  Future<List<ErRegistration>> getRegistrations({
+    String? searchTerm,
+    String? patientId,
+    String? status,
+    String? arrivalMode,
+    String? triageLevel,
+    DateTime? arrivalFrom,
+    DateTime? arrivalTo,
+    int? pageNumber,
+    int? pageSize,
+    String? sortBy,
+    bool? sortDescending,
+  }) async {
     await Future.delayed(const Duration(milliseconds: 500));
-    return {'id': 'mocked_id', 'status': 'success'};
+    return _registrations;
   }
 
   @override
-  Future<dynamic> putRegistrationsByid(String id, Map<String, dynamic> data) async {
+  Future<ErTreatment> postTreatmentsByidComplete(
+    String id,
+    ErTreatment data,
+  ) async {
     await Future.delayed(const Duration(milliseconds: 500));
-    if (data.isNotEmpty) _data.add(data);
+    _treatments.add(data);
     return data;
   }
 
   @override
-  Future<dynamic> deleteRegistrationsByid(String id) async {
+  Future<ErTreatment> getTreatmentsByid(String id) async {
     await Future.delayed(const Duration(milliseconds: 500));
-    return {'success': true};
+    return ErTreatment();
   }
 
   @override
-  Future<dynamic> getRegistrationsByNumberByernumber(String ernumber) async {
+  Future<ErTreatment> getTreatmentsByRegistrationByregistrationid(
+    String registrationid,
+  ) async {
     await Future.delayed(const Duration(milliseconds: 500));
-    return {'id': 'mocked_id', 'status': 'success'};
+    return ErTreatment();
   }
 
   @override
-  Future<dynamic> postRegistrationsRegister(Map<String, dynamic> data) async {
+  Future<ErTreatment> postTreatmentsStart(ErTreatment data) async {
     await Future.delayed(const Duration(milliseconds: 500));
-    if (data.isNotEmpty) _data.add(data);
+    _treatments.add(data);
     return data;
   }
 
   @override
-  Future<dynamic> registrations() async {
+  Future<List<ErTreatment>> treatments() async {
     await Future.delayed(const Duration(milliseconds: 500));
-    return {'id': 'mocked_id', 'status': 'success'};
+    return _treatments;
   }
 
   @override
-  Future<dynamic> postTreatmentsByidComplete(String id, Map<String, dynamic> data) async {
+  Future<ErTriage> getTriagesByid(String id) async {
     await Future.delayed(const Duration(milliseconds: 500));
-    if (data.isNotEmpty) _data.add(data);
-    return data;
+    return ErTriage();
   }
 
   @override
-  Future<dynamic> getTreatmentsByid(String id) async {
+  Future<ErTriage> getTriagesByRegistrationByregistrationid(
+    String registrationid,
+  ) async {
     await Future.delayed(const Duration(milliseconds: 500));
-    return {'id': 'mocked_id', 'status': 'success'};
+    return ErTriage();
   }
 
   @override
-  Future<dynamic> getTreatmentsByRegistrationByregistrationid(String registrationid) async {
+  Future<List<ErTriage>> triages() async {
     await Future.delayed(const Duration(milliseconds: 500));
-    return {'id': 'mocked_id', 'status': 'success'};
+    return _triages;
   }
 
   @override
-  Future<dynamic> postTreatmentsStart(Map<String, dynamic> data) async {
+  Future<List<ErTriage>> postTriages(ErTriage data) async {
     await Future.delayed(const Duration(milliseconds: 500));
-    if (data.isNotEmpty) _data.add(data);
-    return data;
+    _triages.add(data);
+    return _triages;
   }
 
   @override
-  Future<dynamic> treatments() async {
+  Future<int> getRegistrationsTotalCount({
+    String? searchTerm,
+    String? patientId,
+    String? status,
+    String? arrivalMode,
+    String? triageLevel,
+    DateTime? arrivalFrom,
+    DateTime? arrivalTo,
+    int? pageNumber,
+    int? pageSize,
+    String? sortBy,
+    bool? sortDescending,
+  }) async {
     await Future.delayed(const Duration(milliseconds: 500));
-    return {'id': 'mocked_id', 'status': 'success'};
+    return _registrations.length;
   }
-
-  @override
-  Future<dynamic> getTriagesByid(String id) async {
-    await Future.delayed(const Duration(milliseconds: 500));
-    return {'id': 'mocked_id', 'status': 'success'};
-  }
-
-  @override
-  Future<dynamic> getTriagesByRegistrationByregistrationid(String registrationid) async {
-    await Future.delayed(const Duration(milliseconds: 500));
-    return {'id': 'mocked_id', 'status': 'success'};
-  }
-
-  @override
-  Future<dynamic> triages() async {
-    await Future.delayed(const Duration(milliseconds: 500));
-    return {'id': 'mocked_id', 'status': 'success'};
-  }
-
-  @override
-  Future<dynamic> postTriages(Map<String, dynamic> data) async {
-    await Future.delayed(const Duration(milliseconds: 500));
-    if (data.isNotEmpty) _data.add(data);
-    return data;
-  }
-
 }

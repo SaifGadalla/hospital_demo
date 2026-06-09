@@ -1,12 +1,12 @@
 class MedicationAdministration {
-  final String? actualTime;
+  final DateTime? actualTime;
   final String? notes;
   final String? reason;
   final String? admissionId;
   final String? patientId;
   final String? prescriptionItemId;
   final String? administeredById;
-  final String? scheduledTime;
+  final DateTime? scheduledTime;
   final String? dose;
   final String? route;
 
@@ -25,14 +25,14 @@ class MedicationAdministration {
 
   factory MedicationAdministration.fromJson(Map<String, dynamic> json) {
     return MedicationAdministration(
-      actualTime: json['actualTime'],
+      actualTime: json['actualTime'] != null ? DateTime.tryParse(json['actualTime'] as String) : null,
       notes: json['notes'],
       reason: json['reason'],
       admissionId: json['admissionId'],
       patientId: json['patientId'],
       prescriptionItemId: json['prescriptionItemId'],
       administeredById: json['administeredById'],
-      scheduledTime: json['scheduledTime'],
+      scheduledTime: json['scheduledTime'] != null ? DateTime.tryParse(json['scheduledTime'] as String) : null,
       dose: json['dose'],
       route: json['route'],
     );
@@ -40,28 +40,28 @@ class MedicationAdministration {
 
   Map<String, dynamic> toJson() {
     return {
-      'actualTime': actualTime,
+      'actualTime': actualTime?.toIso8601String(),
       'notes': notes,
       'reason': reason,
       'admissionId': admissionId,
       'patientId': patientId,
       'prescriptionItemId': prescriptionItemId,
       'administeredById': administeredById,
-      'scheduledTime': scheduledTime,
+      'scheduledTime': scheduledTime?.toIso8601String(),
       'dose': dose,
       'route': route,
     };
   }
 
   MedicationAdministration copyWith({
-    String? actualTime,
+    DateTime? actualTime,
     String? notes,
     String? reason,
     String? admissionId,
     String? patientId,
     String? prescriptionItemId,
     String? administeredById,
-    String? scheduledTime,
+    DateTime? scheduledTime,
     String? dose,
     String? route,
   }) {

@@ -1,5 +1,5 @@
-import 'package:hospital_demo/common.dart';
-import 'package:hospital_demo/src/pages/shell/widgets/drawer.dart';
+import '../../../common.dart';
+import 'widgets/drawer.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 
 class AppShell extends ConsumerWidget {
@@ -9,7 +9,12 @@ class AppShell extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final isTablet = getValueForScreenType(context: context, mobile: true, tablet: true, desktop: false);
+    final isTablet = getValueForScreenType(
+      context: context,
+      mobile: true,
+      tablet: true,
+      desktop: false,
+    );
     return Scaffold(
       body: Row(
         children: [

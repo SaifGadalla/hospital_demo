@@ -1,8 +1,14 @@
+import '../../models/_exports.dart';
 abstract class SurgicalProceduresService {
-  Future<dynamic> getSurgicalProcedureById(String id);
-  Future<dynamic> updateSurgicalProcedure(String id, Map<String, dynamic> data);
-  Future<dynamic> deleteSurgicalProcedure(String id);
-  Future<dynamic> getSurgicalProceduresCode(String code);
-  Future<dynamic> getSurgicalProcedures([Map<String, dynamic>? queryParams]);
-  Future<dynamic> createSurgicalProcedure(Map<String, dynamic> data);
+  Future<SurgicalProcedure> getSurgicalProcedureById(String id);
+  Future<SurgicalProcedure> updateSurgicalProcedure(String id, SurgicalProcedure data);
+  Future<SurgicalProcedure> deleteSurgicalProcedure(String id);
+  Future<SurgicalProcedure> getSurgicalProceduresCode(String code);
+  Future<List<SurgicalProcedure>> getSurgicalProcedures({
+    int? pageNumber,
+    int? pageSize,
+    String? sortBy,
+    bool? sortDescending,
+  });
+  Future<SurgicalProcedure> createSurgicalProcedure(SurgicalProcedure data);
 }

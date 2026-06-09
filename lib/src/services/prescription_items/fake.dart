@@ -1,50 +1,56 @@
+import '../../models/_exports.dart';
 import 'base.dart';
 
 class FakePrescriptionItemsService implements PrescriptionItemsService {
-  final List<Map<String, dynamic>> _data = [];
+  final List<PrescriptionItem> _data = [];
 
   @override
-  Future<dynamic> dispensePrescriptionItem(String id, Map<String, dynamic> data) async {
+  Future<PrescriptionItem> dispensePrescriptionItem(String id, PrescriptionItem data) async {
     await Future.delayed(const Duration(milliseconds: 500));
-    if (data.isNotEmpty) _data.add(data);
+     _data.add(data);
     return data;
   }
 
   @override
-  Future<dynamic> getPrescriptionItemById(String id) async {
+  Future<PrescriptionItem> getPrescriptionItemById(String id) async {
     await Future.delayed(const Duration(milliseconds: 500));
-    return {'id': 'mocked_id', 'status': 'success'};
+    return PrescriptionItem();
   }
 
   @override
-  Future<dynamic> updatePrescriptionItem(String id, Map<String, dynamic> data) async {
+  Future<PrescriptionItem> updatePrescriptionItem(String id, PrescriptionItem data) async {
     await Future.delayed(const Duration(milliseconds: 500));
-    if (data.isNotEmpty) _data.add(data);
+     _data.add(data);
     return data;
   }
 
   @override
-  Future<dynamic> deletePrescriptionItem(String id) async {
+  Future<PrescriptionItem> deletePrescriptionItem(String id) async {
     await Future.delayed(const Duration(milliseconds: 500));
-    return {'success': true};
+    return PrescriptionItem();
   }
 
   @override
-  Future<dynamic> getPrescriptionByprescriptionid(String prescriptionid) async {
+  Future<PrescriptionItem> getPrescriptionByprescriptionid(String prescriptionid) async {
     await Future.delayed(const Duration(milliseconds: 500));
-    return {'id': 'mocked_id', 'status': 'success'};
+    return PrescriptionItem();
   }
 
   @override
-  Future<dynamic> getPrescriptionItems([Map<String, dynamic>? queryParams]) async {
+  Future<List<PrescriptionItem>> getPrescriptionItems({
+    int? pageNumber,
+    int? pageSize,
+    String? sortBy,
+    bool? sortDescending,
+  }) async {
     await Future.delayed(const Duration(milliseconds: 500));
     return _data;
   }
 
   @override
-  Future<dynamic> createPrescriptionItem(Map<String, dynamic> data) async {
+  Future<PrescriptionItem> createPrescriptionItem(PrescriptionItem data) async {
     await Future.delayed(const Duration(milliseconds: 500));
-    if (data.isNotEmpty) _data.add(data);
+     _data.add(data);
     return data;
   }
 

@@ -1,6 +1,7 @@
+import '../../models/_exports.dart';
 abstract class NursingNotesService {
-  Future<dynamic> getNursingNoteById(String id);
-  Future<dynamic> deleteNursingNote(String id);
-  Future<dynamic> getNursingNotesAdmission(String admissionid);
-  Future<dynamic> createNursingNote(Map<String, dynamic> data);
+  Future<NursingNote> getNursingNoteById(String id);
+  Future<NursingNote> deleteNursingNote(String id);
+  Future<NursingNote> getNursingNotesAdmission(String admissionid);
+  Future<NursingNote> createNursingNote(NursingNote data);
 }

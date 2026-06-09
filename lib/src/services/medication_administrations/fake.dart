@@ -1,38 +1,39 @@
+import '../../models/_exports.dart';
 import 'base.dart';
 
 class FakeMedicationAdministrationsService implements MedicationAdministrationsService {
-  final List<Map<String, dynamic>> _data = [];
+  final List<MedicationAdministration> _data = [];
 
   @override
-  Future<dynamic> administeredMedicationAdministration(String id, Map<String, dynamic> data) async {
+  Future<MedicationAdministration> administeredMedicationAdministration(String id, MedicationAdministration data) async {
     await Future.delayed(const Duration(milliseconds: 500));
-    if (data.isNotEmpty) _data.add(data);
+     _data.add(data);
     return data;
   }
 
   @override
-  Future<dynamic> missedMedicationAdministration(String id, Map<String, dynamic> data) async {
+  Future<MedicationAdministration> missedMedicationAdministration(String id, MedicationAdministration data) async {
     await Future.delayed(const Duration(milliseconds: 500));
-    if (data.isNotEmpty) _data.add(data);
+     _data.add(data);
     return data;
   }
 
   @override
-  Future<dynamic> getMedicationAdministrationById(String id) async {
+  Future<MedicationAdministration> getMedicationAdministrationById(String id) async {
     await Future.delayed(const Duration(milliseconds: 500));
-    return {'id': 'mocked_id', 'status': 'success'};
+    return MedicationAdministration();
   }
 
   @override
-  Future<dynamic> getMedicationAdministrationsAdmission(String admissionid) async {
+  Future<MedicationAdministration> getMedicationAdministrationsAdmission(String admissionid) async {
     await Future.delayed(const Duration(milliseconds: 500));
-    return {'id': 'mocked_id', 'status': 'success'};
+    return MedicationAdministration();
   }
 
   @override
-  Future<dynamic> schedule(Map<String, dynamic> data) async {
+  Future<MedicationAdministration> schedule(MedicationAdministration data) async {
     await Future.delayed(const Duration(milliseconds: 500));
-    if (data.isNotEmpty) _data.add(data);
+     _data.add(data);
     return data;
   }
 

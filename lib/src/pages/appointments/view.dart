@@ -1,89 +1,135 @@
-import '../../../common.dart';
+import 'package:hospital_demo/src/pages/appointments/add_edit_appointment_dialog/dialog.dart';
+import 'package:intl/intl.dart';
 
-class AppointmentsPage extends StatelessWidget {
+import '../../../common.dart';
+import 'controller.dart';
+
+class AppointmentsPage extends ConsumerStatefulWidget {
   const AppointmentsPage({super.key});
 
   @override
+  ConsumerState<AppointmentsPage> createState() => _AppointmentsPageState();
+}
+
+class _AppointmentsPageState extends ConsumerState<AppointmentsPage>
+    with SearchMixin {
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      ref.read(appointmentsControllerProvider.notifier).loadAppointments();
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: AppPage(
-        title: 'Appointments',
-        description: 'Schedule, check-in, and complete patient visits.',
-        mainButtonTitle: 'Schedule',
-        mainButtonOnTap: () {},
-        secondarybuttons: [
-          TextButton(onPressed: () {}, child: Text('Board')),
-          TextButton(onPressed: () {}, child: Text('List')),
-        ],
-        hasSearch: true,
-        secondarySearchHeaderWidgets: [
-          DropdownButton<String>(
-            items: [
-              DropdownMenuItem(value: 'All types', child: Text('All types')),
-              DropdownMenuItem(
-                value: 'Consultations',
-                child: Text('Consultations'),
+    final state = ref.watch(appointmentsControllerProvider);
+    final controller = ref.read(appointmentsControllerProvider.notifier);
+    return AppPage(
+      searchFormGroup: searchFormGroup,
+      title: 'Appointments',
+      description: 'Schedule, check-in, and complete patient visits.',
+      mainButtonTitle: 'Schedule',
+      mainButtonOnTap: () async {
+        final result = await AddEditAppointmentDialog.show(context);
+        if (result == true) {
+          controller.loadAppointments();
+        }
+      },
+      secondarybuttons: [
+        TextButton(onPressed: () {}, child: const Text('Board')),
+        TextButton(onPressed: () {}, child: const Text('List')),
+      ],
+      hasSearch: true,
+      onSearchFieldChanged: (control) {
+        controller.getAppointments(searchTerm: control.value);
+      },
+      secondarySearchHeaderWidgets: [
+        ReactiveForm(
+          formGroup: controller.formGroup,
+          child: Wrap(
+            spacing: 12,
+            runSpacing: 12,
+            children: [
+              AppDropDownButton(
+                formControlName: 'type',
+                items: const [
+                  DropdownMenuItem(value: null, child: Text('All types')),
+                  DropdownMenuItem(
+                    value: 'Consultation',
+                    child: Text('Consultation'),
+                  ),
+                  DropdownMenuItem(
+                    value: 'Follow-up',
+                    child: Text('Follow-up'),
+                  ),
+                  DropdownMenuItem(
+                    value: 'Procedure',
+                    child: Text('Procedure'),
+                  ),
+                ],
+                value: controller.formGroup.control('type').value,
+                onChanged: (value) {
+                  controller.getAppointments();
+                },
+                hint: 'All types',
               ),
-              DropdownMenuItem(value: 'Follow-ups', child: Text('Follow-ups')),
-              DropdownMenuItem(value: 'Procedures', child: Text('Procedures')),
+              AppDatePicker(
+                formControlName: 'date',
+                onDateChanged: (value) {
+                  controller.getAppointments();
+                },
+              ),
+              TextButton(
+                onPressed: () {
+                  controller.formGroup.reset();
+                  searchFormGroup.reset();
+                  controller.getAppointments();
+                },
+                child: const Text('Clear'),
+              ),
             ],
-            onChanged: (value) {},
-            hint: Text('Filter'),
-            value: 'All types',
           ),
-          TextButton(
-            onPressed: () async {
-              await showDatePicker(
-                context: context,
-                firstDate: DateTime(1999),
-                lastDate: DateTime(2040),
-              );
-            },
-            //TODO: Show selected date instead of placeholder and add the ability to type the date in the text field
-            child: Row(
-              spacing: 8,
-              children: [
-                Text('mm/dd/yyyy'),
-                Icon(Icons.calendar_today, size: 16),
-              ],
-            ),
-          ),
-        ],
-        // TODO:  add Board View
-        table: DataTable(
-          headingRowColor: WidgetStateProperty.all(Colors.grey[200]),
-          columns: [
-            DataColumn(label: Text('Appt #')),
-            DataColumn(label: Text('Date / time')),
-            DataColumn(label: Text('Patient')),
-            DataColumn(label: Text('Type')),
-            DataColumn(label: Text('Doctor')),
-            DataColumn(label: Text('Status')),
-          ],
-          rows: [
-            DataRow(
-              cells: [
-                DataCell(Text('12345')),
-                DataCell(Text('10/12/2024, 9:00 AM')),
-                DataCell(Text('John Doe')),
-                DataCell(Text('Consultation')),
-                DataCell(Text('Dr. Smith')),
-                DataCell(Text('Scheduled')),
-              ],
-            ),
-            DataRow(
-              cells: [
-                DataCell(Text('12346')),
-                DataCell(Text('10/12/2024, 10:00 AM')),
-                DataCell(Text('Jane Doe')),
-                DataCell(Text('Follow-up')),
-                DataCell(Text('Dr. Smith')),
-                DataCell(Text('Checked-in')),
-              ],
-            ),
-          ],
         ),
-      ),
+      ],
+      table: state.isLoading
+          ? const Center(
+              child: Padding(
+                padding: EdgeInsets.all(24.0),
+                child: CircularProgressIndicator(),
+              ),
+            )
+          : DataTable(
+              headingRowColor: WidgetStateProperty.all(ColorManager.surfaceElevated),
+              columns: const [
+                DataColumn(label: Text('Appt #')),
+                DataColumn(label: Text('Date / time')),
+                DataColumn(label: Text('Patient')),
+                DataColumn(label: Text('Type')),
+                DataColumn(label: Text('Doctor')),
+                DataColumn(label: Text('Status')),
+              ],
+              rows: state.appointments.map((appt) {
+                return DataRow(
+                  cells: [
+                    DataCell(Text(appt.appointmentNumber ?? '')),
+                    DataCell(
+                      Text(
+                        appt.appointmentDate != null
+                            ? DateFormat(
+                                'MM/dd/yyyy, h:mm a',
+                              ).format(appt.appointmentDate!)
+                            : '',
+                      ),
+                    ),
+                    DataCell(Text(appt.patientName ?? '')),
+                    DataCell(Text(appt.appointmentType ?? '')),
+                    DataCell(Text(appt.doctorId ?? '')),
+                    DataCell(Text(appt.status ?? '')),
+                  ],
+                );
+              }).toList(),
+            ),
     );
   }
 }

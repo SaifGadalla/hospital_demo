@@ -1,7 +1,8 @@
+import '../../models/_exports.dart';
 abstract class MedicationAdministrationsService {
-  Future<dynamic> administeredMedicationAdministration(String id, Map<String, dynamic> data);
-  Future<dynamic> missedMedicationAdministration(String id, Map<String, dynamic> data);
-  Future<dynamic> getMedicationAdministrationById(String id);
-  Future<dynamic> getMedicationAdministrationsAdmission(String admissionid);
-  Future<dynamic> schedule(Map<String, dynamic> data);
+  Future<MedicationAdministration> administeredMedicationAdministration(String id, MedicationAdministration data);
+  Future<MedicationAdministration> missedMedicationAdministration(String id, MedicationAdministration data);
+  Future<MedicationAdministration> getMedicationAdministrationById(String id);
+  Future<MedicationAdministration> getMedicationAdministrationsAdmission(String admissionid);
+  Future<MedicationAdministration> schedule(MedicationAdministration data);
 }

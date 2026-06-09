@@ -1,17 +1,43 @@
+import '../../models/_exports.dart';
+
 abstract class SurgeryBookingsService {
-  Future<dynamic> cancelSurgeryBooking(String id, Map<String, dynamic> data);
-  Future<dynamic> startSurgeryBooking(String id, Map<String, dynamic> data);
-  Future<dynamic> completeSurgeryBooking(String id, Map<String, dynamic> data);
-  Future<dynamic> teamSurgeryBooking(String id);
-  Future<dynamic> safetyChecklistSurgeryBooking(String id, Map<String, dynamic> data);
-  Future<dynamic> postSafetychecklistsurgerybooking(String id, Map<String, dynamic> data);
-  Future<dynamic> postSafetychecklistsurgerybooking2(String id, Map<String, dynamic> data);
-  Future<dynamic> getSafetychecklistsurgerybooking(String id);
-  Future<dynamic> surgeryRecordSurgeryBooking(String id);
-  Future<dynamic> getSurgeryBookingById(String id);
-  Future<dynamic> updateSurgeryBooking(String id, Map<String, dynamic> data);
-  Future<dynamic> book(Map<String, dynamic> data);
-  Future<dynamic> deleteTeamByteammemberid(String teammemberid);
-  Future<dynamic> team(Map<String, dynamic> data);
-  Future<dynamic> getSurgeryBookings([Map<String, dynamic>? queryParams]);
+  Future<SurgeryBooking> cancelSurgeryBooking(String id, SurgeryBooking data, {
+    String? reason,
+  });
+  Future<SurgeryBooking> startSurgeryBooking(String id, SurgeryBooking data);
+  Future<SurgeryBooking> completeSurgeryBooking(String id, SurgeryBooking data);
+  Future<SurgeryBooking> teamSurgeryBooking(String id);
+  Future<SurgeryBooking> safetyChecklistSurgeryBooking(
+    String id,
+    SurgeryBooking data,
+  );
+  Future<SurgeryBooking> postSafetychecklistsurgerybooking(
+    String id,
+    SurgeryBooking data,
+  );
+  Future<SurgeryBooking> postSafetychecklistsurgerybooking2(
+    String id,
+    SurgeryBooking data,
+  );
+  Future<SurgeryBooking> getSafetychecklistsurgerybooking(String id);
+  Future<SurgeryBooking> surgeryRecordSurgeryBooking(String id);
+  Future<SurgeryBooking> getSurgeryBookingById(String id);
+  Future<SurgeryBooking> updateSurgeryBooking(String id, SurgeryBooking data);
+  Future<SurgeryBooking> book(SurgeryBooking data);
+  Future<SurgeryBooking> deleteTeamByteammemberid(String teammemberid);
+  Future<SurgeryBooking> team(SurgeryBooking data);
+  Future<List<SurgeryBooking>> getSurgeryBookings({
+    String? searchTerm,
+    String? patientId,
+    String? primarySurgeonId,
+    String? operatingRoomId,
+    String? priority,
+    String? status,
+    DateTime? scheduledFrom,
+    DateTime? scheduledTo,
+    int? pageNumber,
+    int? pageSize,
+    String? sortBy,
+    bool? sortDescending,
+  });
 }

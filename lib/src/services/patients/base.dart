@@ -1,11 +1,36 @@
+import '../../models/_exports.dart';
+
 abstract class PatientsService {
-  Future<dynamic> getPatientById(String id);
-  Future<dynamic> updatePatient(String id, Map<String, dynamic> data);
-  Future<dynamic> deletePatient(String id);
-  Future<dynamic> getPatientsMrn(String mrn);
-  Future<dynamic> getCheckMrnBymrn(String mrn);
-  Future<dynamic> getCheckEmailByemail(String email);
-  Future<dynamic> getCheckNationalidBynationalid(String nationalid);
-  Future<dynamic> getPatients([Map<String, dynamic>? queryParams]);
-  Future<dynamic> createPatient(Map<String, dynamic> data);
+  Future<Patient> getPatientById(String id);
+  Future<Patient> updatePatient(String id, Patient data);
+  Future<Patient> deletePatient(String id);
+  Future<Patient> getPatientsMrn(String mrn);
+  Future<Patient> getCheckMrnBymrn(String mrn, {
+    String? excludeId,
+  });
+  Future<Patient> getCheckEmailByemail(String email, {
+    String? excludeId,
+  });
+  Future<Patient> getCheckNationalidBynationalid(String nationalid, {
+    String? excludeId,
+  });
+  Future<List<Patient>> getPatients({
+    String? searchTerm,
+    String? gender,
+    String? bloodType,
+    bool? isVIP,
+    bool? isActive,
+    String? city,
+    String? country,
+    DateTime? dateOfBirthFrom,
+    DateTime? dateOfBirthTo,
+    int? ageFrom,
+    int? ageTo,
+    int? pageNumber,
+    int? pageSize,
+    String? sortBy,
+    bool? sortDescending,
+  });
+  Future<Patient> createPatient(Patient data);
+  Future<int> getPatientsTotalCount();
 }

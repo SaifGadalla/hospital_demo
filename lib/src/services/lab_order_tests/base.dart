@@ -1,10 +1,16 @@
+import '../../models/_exports.dart';
 abstract class LabOrderTestsService {
-  Future<dynamic> resultLabOrderTest(String id, Map<String, dynamic> data);
-  Future<dynamic> markAbnormalLabOrderTest(String id, Map<String, dynamic> data);
-  Future<dynamic> getLabOrderTestById(String id);
-  Future<dynamic> updateLabOrderTest(String id, Map<String, dynamic> data);
-  Future<dynamic> deleteLabOrderTest(String id);
-  Future<dynamic> getLabOrderBylaborderid(String laborderid);
-  Future<dynamic> getLabOrderTests([Map<String, dynamic>? queryParams]);
-  Future<dynamic> createLabOrderTest(Map<String, dynamic> data);
+  Future<LabOrderTest> resultLabOrderTest(String id, LabOrderTest data);
+  Future<LabOrderTest> markAbnormalLabOrderTest(String id, LabOrderTest data);
+  Future<LabOrderTest> getLabOrderTestById(String id);
+  Future<LabOrderTest> updateLabOrderTest(String id, LabOrderTest data);
+  Future<LabOrderTest> deleteLabOrderTest(String id);
+  Future<LabOrderTest> getLabOrderBylaborderid(String laborderid);
+  Future<List<LabOrderTest>> getLabOrderTests({
+    int? pageNumber,
+    int? pageSize,
+    String? sortBy,
+    bool? sortDescending,
+  });
+  Future<LabOrderTest> createLabOrderTest(LabOrderTest data);
 }

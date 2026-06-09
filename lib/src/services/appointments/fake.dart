@@ -1,83 +1,201 @@
-import 'base.dart';
+import 'package:hospital_demo/common.dart';
 
 class FakeAppointmentsService implements AppointmentsService {
-  final List<Map<String, dynamic>> _data = [];
+  final List<Appointment> _data = [
+    Appointment(
+      id: "1",
+      tenantId: "1",
+      appointmentNumber: "1",
+      patientId: "1",
+      patientName: "Patient 1",
+      patientMRN: "MRN 1",
+      doctorId: "1",
+      departmentId: "1",
+      appointmentDate: DateTime.now(),
+      startTime: DateTime.now(),
+      durationMinutes: 30,
+      endTime: "endTime 1",
+      appointmentType: "Routine Checkup",
+      status: "Scheduled",
+      chiefComplaint: "Chest pain",
+      notes: "Notes 1",
+      checkInTime: DateTime.now(),
+      checkOutTime: DateTime.now(),
+      requiresFollowUp: true,
+      followUpDate: DateTime.now(),
+      createdAt: DateTime.now(),
+      updatedAt: DateTime.now(),
+    ),
+    Appointment(
+      id: "2",
+      tenantId: "2",
+      appointmentNumber: "2",
+      patientId: "2",
+      patientName: "Patient 2",
+      patientMRN: "MRN 2",
+      doctorId: "2",
+      departmentId: "2",
+      appointmentDate: DateTime.now(),
+      startTime: DateTime.now(),
+      durationMinutes: 30,
+      endTime: "endTime 2",
+      appointmentType: "Routine Checkup",
+      status: "Scheduled",
+      chiefComplaint: "Chest pain",
+      notes: "Notes 2",
+      checkInTime: DateTime.now(),
+      checkOutTime: DateTime.now(),
+      requiresFollowUp: true,
+      followUpDate: DateTime.now(),
+      createdAt: DateTime.now(),
+      updatedAt: DateTime.now(),
+    ),
+    Appointment(
+      id: "3",
+      tenantId: "3",
+      appointmentNumber: "3",
+      patientId: "3",
+      patientName: "Patient 3",
+      patientMRN: "MRN 3",
+      doctorId: "3",
+      departmentId: "3",
+      appointmentDate: DateTime.now(),
+      startTime: DateTime.now(),
+      durationMinutes: 30,
+      endTime: "endTime 3",
+      appointmentType: "Routine Checkup",
+      status: "Scheduled",
+      chiefComplaint: "Chest pain",
+      notes: "Notes 3",
+      checkInTime: DateTime.now(),
+      checkOutTime: DateTime.now(),
+      requiresFollowUp: true,
+      followUpDate: DateTime.now(),
+      createdAt: DateTime.now(),
+      updatedAt: DateTime.now(),
+    ),
+  ];
 
   @override
-  Future<dynamic> checkInAppointment(String id, Map<String, dynamic> data) async {
+  Future<Appointment> checkInAppointment(String id, Appointment data) async {
     await Future.delayed(const Duration(milliseconds: 500));
-    if (data.isNotEmpty) _data.add(data);
+    _data.add(data);
     return data;
   }
 
   @override
-  Future<dynamic> checkOutAppointment(String id, Map<String, dynamic> data) async {
+  Future<Appointment> checkOutAppointment(String id, Appointment data) async {
     await Future.delayed(const Duration(milliseconds: 500));
-    if (data.isNotEmpty) _data.add(data);
+    _data.add(data);
     return data;
   }
 
   @override
-  Future<dynamic> cancelAppointment(String id, Map<String, dynamic> data) async {
+  Future<Appointment> cancelAppointment(String id, Appointment data) async {
     await Future.delayed(const Duration(milliseconds: 500));
-    if (data.isNotEmpty) _data.add(data);
+    _data.add(data);
     return data;
   }
 
   @override
-  Future<dynamic> getAppointmentById(String id) async {
+  Future<Appointment> getAppointmentById(String id) async {
     await Future.delayed(const Duration(milliseconds: 500));
-    return {'id': 'mocked_id', 'status': 'success'};
+    return _data.firstWhere((element) => element.id == id);
   }
 
   @override
-  Future<dynamic> updateAppointment(String id, Map<String, dynamic> data) async {
+  Future<Appointment> updateAppointment(String id, Appointment data) async {
     await Future.delayed(const Duration(milliseconds: 500));
-    if (data.isNotEmpty) _data.add(data);
+    final index = _data.indexWhere((e) => e.id == id);
+    if (index != -1) {
+      _data[index] = data;
+    }
     return data;
   }
 
   @override
-  Future<dynamic> deleteAppointment(String id) async {
+  Future<void> deleteAppointment(String id) async {
     await Future.delayed(const Duration(milliseconds: 500));
-    return {'success': true};
+    _data.removeWhere((e) => e.id == id);
   }
 
   @override
-  Future<dynamic> getAppointmentsNumber(String appointmentnumber) async {
+  Future<Appointment> getAppointmentByNumber(String appointmentnumber) async {
     await Future.delayed(const Duration(milliseconds: 500));
-    return {'id': 'mocked_id', 'status': 'success'};
+    return _data.firstWhere((e) => e.appointmentNumber == appointmentnumber);
   }
 
   @override
-  Future<dynamic> getAppointmentsPatient(String patientid) async {
+  Future<Appointment> getAppointmentByPatientId(String patientid) async {
     await Future.delayed(const Duration(milliseconds: 500));
-    return {'id': 'mocked_id', 'status': 'success'};
+    return _data.firstWhere((e) => e.patientId == patientid);
   }
 
   @override
-  Future<dynamic> getAppointmentsDoctor(String doctorid) async {
+  Future<Appointment> getAppointmentByDoctorId(
+    String doctorid, {
+    DateTime? date,
+  }) async {
     await Future.delayed(const Duration(milliseconds: 500));
-    return {'id': 'mocked_id', 'status': 'success'};
+    return _data.firstWhere((e) => e.doctorId == doctorid);
   }
 
   @override
-  Future<dynamic> checkAvailability() async {
+  Future<Appointment> checkAvailability({
+    String? doctorId,
+    DateTime? appointmentDate,
+    TimeOfDay? startTime,
+    int? durationMinutes,
+    String? excludeAppointmentId,
+  }) async {
     await Future.delayed(const Duration(milliseconds: 500));
-    return {'id': 'mocked_id', 'status': 'success'};
+    return Appointment();
   }
 
   @override
-  Future<dynamic> getAppointments([Map<String, dynamic>? queryParams]) async {
+  Future<List<Appointment>> getAppointments({
+    String? searchTerm,
+    String? patientId,
+    String? doctorId,
+    String? departmentId,
+    String? appointmentType,
+    String? status,
+    DateTime? appointmentDateFrom,
+    DateTime? appointmentDateTo,
+    bool? requiresFollowUp,
+    int? pageNumber,
+    int? pageSize,
+    String? sortBy,
+    bool? sortDescending,
+  }) async {
     await Future.delayed(const Duration(milliseconds: 500));
     return _data;
   }
 
   @override
-  Future<dynamic> createAppointment(Map<String, dynamic> data) async {
+  Future<Appointment> createAppointment(Appointment data) async {
     await Future.delayed(const Duration(milliseconds: 500));
-    if (data.isNotEmpty) _data.add(data);
+    _data.add(data);
     return data;
   }
 
+  @override
+  Future<int> getAppointmentsTotalCount({
+    String? searchTerm,
+    String? patientId,
+    String? doctorId,
+    String? departmentId,
+    String? appointmentType,
+    String? status,
+    DateTime? appointmentDateFrom,
+    DateTime? appointmentDateTo,
+    bool? requiresFollowUp,
+    int? pageNumber,
+    int? pageSize,
+    String? sortBy,
+    bool? sortDescending,
+  }) async {
+    await Future.delayed(const Duration(milliseconds: 500));
+    return _data.length;
+  }
 }

@@ -1,3 +1,4 @@
+import '../../models/_exports.dart';
 import 'base.dart';
 import '../dio_service.dart';
 
@@ -6,43 +7,84 @@ class RealLabOrderTestsService implements LabOrderTestsService {
   RealLabOrderTestsService(this._dioService);
 
   @override
-  Future<dynamic> resultLabOrderTest(String id, Map<String, dynamic> data) async {
-    return await _dioService.post('/api/hospital/lab-order-tests/$id/result', data: data);
+  Future<LabOrderTest> resultLabOrderTest(String id, LabOrderTest data) async {
+    final response = await _dioService.post(
+      '/api/hospital/lab-order-tests/$id/result',
+      data: data.toJson(),
+    );
+    return LabOrderTest.fromJson(response.data);
   }
 
   @override
-  Future<dynamic> markAbnormalLabOrderTest(String id, Map<String, dynamic> data) async {
-    return await _dioService.post('/api/hospital/lab-order-tests/$id/mark-abnormal', data: data);
+  Future<LabOrderTest> markAbnormalLabOrderTest(
+    String id,
+    LabOrderTest data,
+  ) async {
+    final response = await _dioService.post(
+      '/api/hospital/lab-order-tests/$id/mark-abnormal',
+      data: data.toJson(),
+    );
+    return LabOrderTest.fromJson(response.data);
   }
 
   @override
-  Future<dynamic> getLabOrderTestById(String id) async {
-    return await _dioService.get('/api/hospital/lab-order-tests/$id');
+  Future<LabOrderTest> getLabOrderTestById(String id) async {
+    final response = await _dioService.get('/api/hospital/lab-order-tests/$id');
+    return LabOrderTest.fromJson(response.data);
   }
 
   @override
-  Future<dynamic> updateLabOrderTest(String id, Map<String, dynamic> data) async {
-    return await _dioService.put('/api/hospital/lab-order-tests/$id', data: data);
+  Future<LabOrderTest> updateLabOrderTest(String id, LabOrderTest data) async {
+    final response = await _dioService.put(
+      '/api/hospital/lab-order-tests/$id',
+      data: data.toJson(),
+    );
+    return LabOrderTest.fromJson(response.data);
   }
 
   @override
-  Future<dynamic> deleteLabOrderTest(String id) async {
-    return await _dioService.delete('/api/hospital/lab-order-tests/$id');
+  Future<LabOrderTest> deleteLabOrderTest(String id) async {
+    final response = await _dioService.delete(
+      '/api/hospital/lab-order-tests/$id',
+    );
+    return LabOrderTest.fromJson(response.data);
   }
 
   @override
-  Future<dynamic> getLabOrderBylaborderid(String laborderid) async {
-    return await _dioService.get('/api/hospital/lab-order-tests/lab-order/$laborderid');
+  Future<LabOrderTest> getLabOrderBylaborderid(String laborderid) async {
+    final response = await _dioService.get(
+      '/api/hospital/lab-order-tests/lab-order/$laborderid',
+    );
+    return LabOrderTest.fromJson(response.data);
   }
 
   @override
-  Future<dynamic> getLabOrderTests([Map<String, dynamic>? queryParams]) async {
-    return await _dioService.get('/api/hospital/lab-order-tests', queryParameters: queryParams);
+  Future<List<LabOrderTest>> getLabOrderTests({
+    int? pageNumber,
+    int? pageSize,
+    String? sortBy,
+    bool? sortDescending,
+  }) async {
+    final response = await _dioService.get(
+      '/api/hospital/lab-order-tests',
+      queryParameters: {
+        if (pageNumber != null) 'pageNumber': pageNumber,
+        if (pageSize != null) 'pageSize': pageSize,
+        if (sortBy != null) 'sortBy': sortBy,
+        if (sortDescending != null) 'sortDescending': sortDescending,
+      },
+    );
+    return (response.data as List)
+        .map((e) => LabOrderTest.fromJson(e))
+        .toList();
   }
 
   @override
-  Future<dynamic> createLabOrderTest(Map<String, dynamic> data) async {
-    return await _dioService.post('/api/hospital/lab-order-tests', data: data);
+  Future<LabOrderTest> createLabOrderTest(LabOrderTest data) async {
+    final response = await _dioService.post(
+      '/api/hospital/lab-order-tests',
+      data: data.toJson(),
+    );
+    return LabOrderTest.fromJson(response.data);
   }
-
 }

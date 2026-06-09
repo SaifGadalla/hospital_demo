@@ -1,8 +1,18 @@
+import '../../models/_exports.dart';
 abstract class RoomsService {
-  Future<dynamic> getRoomById(String id);
-  Future<dynamic> updateRoom(String id, Map<String, dynamic> data);
-  Future<dynamic> deleteRoom(String id);
-  Future<dynamic> getRoomsWard(String wardid);
-  Future<dynamic> getRooms([Map<String, dynamic>? queryParams]);
-  Future<dynamic> createRoom(Map<String, dynamic> data);
+  Future<Room> getRoomById(String id);
+  Future<Room> updateRoom(String id, Room data);
+  Future<Room> deleteRoom(String id);
+  Future<Room> getRoomsWard(String wardid);
+  Future<List<Room>> getRooms({
+    String? searchTerm,
+    String? wardId,
+    String? roomType,
+    bool? isActive,
+    int? pageNumber,
+    int? pageSize,
+    String? sortBy,
+    bool? sortDescending,
+  });
+  Future<Room> createRoom(Room data);
 }

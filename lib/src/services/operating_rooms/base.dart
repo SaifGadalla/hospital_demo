@@ -1,8 +1,16 @@
+import '../../models/_exports.dart';
 abstract class OperatingRoomsService {
-  Future<dynamic> statusOperatingRoom(String id, Map<String, dynamic> data);
-  Future<dynamic> getOperatingRoomById(String id);
-  Future<dynamic> updateOperatingRoom(String id, Map<String, dynamic> data);
-  Future<dynamic> deleteOperatingRoom(String id);
-  Future<dynamic> getOperatingRooms([Map<String, dynamic>? queryParams]);
-  Future<dynamic> createOperatingRoom(Map<String, dynamic> data);
+  Future<OperatingRoom> statusOperatingRoom(String id, OperatingRoom data, {
+    String? status,
+  });
+  Future<OperatingRoom> getOperatingRoomById(String id);
+  Future<OperatingRoom> updateOperatingRoom(String id, OperatingRoom data);
+  Future<OperatingRoom> deleteOperatingRoom(String id);
+  Future<List<OperatingRoom>> getOperatingRooms({
+    int? pageNumber,
+    int? pageSize,
+    String? sortBy,
+    bool? sortDescending,
+  });
+  Future<OperatingRoom> createOperatingRoom(OperatingRoom data);
 }

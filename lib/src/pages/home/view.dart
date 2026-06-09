@@ -1,4 +1,4 @@
-import 'package:hospital_demo/common.dart';
+import '../../../common.dart';
 
 class HomePage extends ConsumerWidget {
   const HomePage({super.key});

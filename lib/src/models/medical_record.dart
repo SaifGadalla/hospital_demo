@@ -1,8 +1,10 @@
 class MedicalRecord {
+  final String? id;
+  final String? tenantId;
   final String? patientId;
   final String? appointmentId;
   final String? doctorId;
-  final String? visitDate;
+  final DateTime? visitDate;
   final double? bloodPressureSystolic;
   final double? bloodPressureDiastolic;
   final double? temperature;
@@ -21,8 +23,12 @@ class MedicalRecord {
   final String? allergies;
   final String? currentMedications;
   final String? clinicalNotes;
+  final DateTime? createdAt;
+  final DateTime? updatedAt;
 
   MedicalRecord({
+    this.id,
+    this.tenantId,
     this.patientId,
     this.appointmentId,
     this.doctorId,
@@ -45,41 +51,57 @@ class MedicalRecord {
     this.allergies,
     this.currentMedications,
     this.clinicalNotes,
+    this.createdAt,
+    this.updatedAt,
   });
 
   factory MedicalRecord.fromJson(Map<String, dynamic> json) {
     return MedicalRecord(
-      patientId: json['patientId'],
-      appointmentId: json['appointmentId'],
-      doctorId: json['doctorId'],
-      visitDate: json['visitDate'],
-      bloodPressureSystolic: json['bloodPressureSystolic'],
-      bloodPressureDiastolic: json['bloodPressureDiastolic'],
-      temperature: json['temperature'],
-      heartRate: json['heartRate'],
-      respiratoryRate: json['respiratoryRate'],
-      weight: json['weight'],
-      height: json['height'],
-      bmi: json['bmi'],
-      oxygenSaturation: json['oxygenSaturation'],
-      subjective: json['subjective'],
-      objective: json['objective'],
-      assessment: json['assessment'],
-      plan: json['plan'],
-      diagnosisCode: json['diagnosisCode'],
-      diagnosisDescription: json['diagnosisDescription'],
-      allergies: json['allergies'],
-      currentMedications: json['currentMedications'],
-      clinicalNotes: json['clinicalNotes'],
+      id: json['id'] as String?,
+      tenantId: json['tenantId'] as String?,
+      patientId: json['patientId'] as String?,
+      appointmentId: json['appointmentId'] as String?,
+      doctorId: json['doctorId'] as String?,
+      visitDate: json['visitDate'] != null
+          ? DateTime.parse(json['visitDate'])
+          : null,
+      bloodPressureSystolic: (json['bloodPressureSystolic'] as num?)
+          ?.toDouble(),
+      bloodPressureDiastolic: (json['bloodPressureDiastolic'] as num?)
+          ?.toDouble(),
+      temperature: (json['temperature'] as num?)?.toDouble(),
+      heartRate: json['heartRate'] as int?,
+      respiratoryRate: json['respiratoryRate'] as int?,
+      weight: (json['weight'] as num?)?.toDouble(),
+      height: (json['height'] as num?)?.toDouble(),
+      bmi: (json['bmi'] as num?)?.toDouble(),
+      oxygenSaturation: json['oxygenSaturation'] as int?,
+      subjective: json['subjective'] as String?,
+      objective: json['objective'] as String?,
+      assessment: json['assessment'] as String?,
+      plan: json['plan'] as String?,
+      diagnosisCode: json['diagnosisCode'] as String?,
+      diagnosisDescription: json['diagnosisDescription'] as String?,
+      allergies: json['allergies'] as String?,
+      currentMedications: json['currentMedications'] as String?,
+      clinicalNotes: json['clinicalNotes'] as String?,
+      createdAt: json['createdAt'] != null
+          ? DateTime.parse(json['createdAt'])
+          : null,
+      updatedAt: json['updatedAt'] != null
+          ? DateTime.parse(json['updatedAt'])
+          : null,
     );
   }
 
   Map<String, dynamic> toJson() {
     return {
+      'id': id,
+      'tenantId': tenantId,
       'patientId': patientId,
       'appointmentId': appointmentId,
       'doctorId': doctorId,
-      'visitDate': visitDate,
+      'visitDate': visitDate?.toIso8601String(),
       'bloodPressureSystolic': bloodPressureSystolic,
       'bloodPressureDiastolic': bloodPressureDiastolic,
       'temperature': temperature,
@@ -98,14 +120,18 @@ class MedicalRecord {
       'allergies': allergies,
       'currentMedications': currentMedications,
       'clinicalNotes': clinicalNotes,
+      'createdAt': createdAt?.toIso8601String(),
+      'updatedAt': updatedAt?.toIso8601String(),
     };
   }
 
   MedicalRecord copyWith({
+    String? id,
+    String? tenantId,
     String? patientId,
     String? appointmentId,
     String? doctorId,
-    String? visitDate,
+    DateTime? visitDate,
     double? bloodPressureSystolic,
     double? bloodPressureDiastolic,
     double? temperature,
@@ -124,14 +150,20 @@ class MedicalRecord {
     String? allergies,
     String? currentMedications,
     String? clinicalNotes,
+    DateTime? createdAt,
+    DateTime? updatedAt,
   }) {
     return MedicalRecord(
+      id: id ?? this.id,
+      tenantId: tenantId ?? this.tenantId,
       patientId: patientId ?? this.patientId,
       appointmentId: appointmentId ?? this.appointmentId,
       doctorId: doctorId ?? this.doctorId,
       visitDate: visitDate ?? this.visitDate,
-      bloodPressureSystolic: bloodPressureSystolic ?? this.bloodPressureSystolic,
-      bloodPressureDiastolic: bloodPressureDiastolic ?? this.bloodPressureDiastolic,
+      bloodPressureSystolic:
+          bloodPressureSystolic ?? this.bloodPressureSystolic,
+      bloodPressureDiastolic:
+          bloodPressureDiastolic ?? this.bloodPressureDiastolic,
       temperature: temperature ?? this.temperature,
       heartRate: heartRate ?? this.heartRate,
       respiratoryRate: respiratoryRate ?? this.respiratoryRate,
@@ -148,11 +180,13 @@ class MedicalRecord {
       allergies: allergies ?? this.allergies,
       currentMedications: currentMedications ?? this.currentMedications,
       clinicalNotes: clinicalNotes ?? this.clinicalNotes,
+      createdAt: createdAt ?? this.createdAt,
+      updatedAt: updatedAt ?? this.updatedAt,
     );
   }
 
   @override
   String toString() {
-    return 'MedicalRecord(patientId: $patientId, appointmentId: $appointmentId, doctorId: $doctorId, visitDate: $visitDate, bloodPressureSystolic: $bloodPressureSystolic, bloodPressureDiastolic: $bloodPressureDiastolic, temperature: $temperature, heartRate: $heartRate, respiratoryRate: $respiratoryRate, weight: $weight, height: $height, bmi: $bmi, oxygenSaturation: $oxygenSaturation, subjective: $subjective, objective: $objective, assessment: $assessment, plan: $plan, diagnosisCode: $diagnosisCode, diagnosisDescription: $diagnosisDescription, allergies: $allergies, currentMedications: $currentMedications, clinicalNotes: $clinicalNotes)';
+    return 'MedicalRecord(id: $id, tenantId: $tenantId, patientId: $patientId, appointmentId: $appointmentId, doctorId: $doctorId, visitDate: $visitDate, bloodPressureSystolic: $bloodPressureSystolic, bloodPressureDiastolic: $bloodPressureDiastolic, temperature: $temperature, heartRate: $heartRate, respiratoryRate: $respiratoryRate, weight: $weight, height: $height, bmi: $bmi, oxygenSaturation: $oxygenSaturation, subjective: $subjective, objective: $objective, assessment: $assessment, plan: $plan, diagnosisCode: $diagnosisCode, diagnosisDescription: $diagnosisDescription, allergies: $allergies, currentMedications: $currentMedications, clinicalNotes: $clinicalNotes, createdAt: $createdAt, updatedAt: $updatedAt)';
   }
 }
