@@ -12,8 +12,7 @@ class AddLabOrderDialog extends ConsumerStatefulWidget {
   }
 
   @override
-  ConsumerState<AddLabOrderDialog> createState() =>
-      _AddLabOrderDialogState();
+  ConsumerState<AddLabOrderDialog> createState() => _AddLabOrderDialogState();
 }
 
 class _AddLabOrderDialogState extends ConsumerState<AddLabOrderDialog> {
@@ -28,15 +27,13 @@ class _AddLabOrderDialogState extends ConsumerState<AddLabOrderDialog> {
   @override
   Widget build(BuildContext context) {
     final state = ref.watch(addLabOrderDialogControllerProvider);
-    final controller = ref.read(
-      addLabOrderDialogControllerProvider.notifier,
-    );
+    final controller = ref.read(addLabOrderDialogControllerProvider.notifier);
     if (state.isLoading) {
       return const Center(child: CircularProgressIndicator());
     }
     return AlertDialog(
       scrollable: true,
-      title: const Text('New Lab Order'),
+      title: Text(context.l10n.laboratory_add_title),
       content: ReactiveForm(
         formGroup: controller.formGroup,
         child: SizedBox(
@@ -55,33 +52,42 @@ class _AddLabOrderDialogState extends ConsumerState<AddLabOrderDialog> {
                       child: Text('${patient.fullName} (${patient.mrn})'),
                     );
                   }).toList(),
-                  decoration: const InputDecoration(
-                    labelText: 'Patient',
+                  decoration: InputDecoration(
+                    labelText: context.l10n.laboratory_add_patient,
                   ),
                 ),
               ),
               DialogDropdownField<String>(
                 formControlName: 'priority',
-                label: 'Priority',
-                items: const [
-                  DropdownMenuItem(value: 'Routine', child: Text('Routine')),
-                  DropdownMenuItem(value: 'Urgent', child: Text('Urgent')),
-                  DropdownMenuItem(value: 'STAT', child: Text('STAT')),
+                label: context.l10n.laboratory_add_priority,
+                items: [
+                  DropdownMenuItem(
+                    value: 'Routine',
+                    child: Text(context.l10n.laboratory_add_routine),
+                  ),
+                  DropdownMenuItem(
+                    value: 'Urgent',
+                    child: Text(context.l10n.laboratory_add_urgent),
+                  ),
+                  DropdownMenuItem(
+                    value: 'STAT',
+                    child: Text(context.l10n.laboratory_add_stat),
+                  ),
                 ],
               ),
               DialogTextField(
                 formControlName: 'clinicalIndication',
-                label: 'Clinical Indication',
+                label: context.l10n.laboratory_add_clinicalIndication,
                 width: 300,
               ),
               DialogTextField(
                 formControlName: 'specimenType',
-                label: 'Specimen Type',
+                label: context.l10n.laboratory_add_specimenType,
                 width: 200,
               ),
               DialogTextField(
                 formControlName: 'notes',
-                label: 'Notes',
+                label: context.l10n.laboratory_add_notes,
                 width: 300,
               ),
             ],
@@ -91,7 +97,7 @@ class _AddLabOrderDialogState extends ConsumerState<AddLabOrderDialog> {
       actions: [
         TextButton(
           onPressed: () => Navigator.pop(context),
-          child: const Text('Cancel'),
+          child: Text(context.l10n.laboratory_add_cancel),
         ),
         TextButton(
           onPressed: () async {
@@ -102,7 +108,7 @@ class _AddLabOrderDialogState extends ConsumerState<AddLabOrderDialog> {
               }
             }
           },
-          child: const Text('Save'),
+          child: Text(context.l10n.laboratory_add_save),
         ),
       ],
     );

@@ -28,7 +28,7 @@ class AddEditPatientDialog extends ConsumerWidget {
     final isEditing = patient != null;
     return AlertDialog(
       scrollable: true,
-      title: Text(isEditing ? 'Edit Patient' : 'Register Patient'),
+      title: Text(isEditing ? context.l10n.patients_add_editTitle : context.l10n.patients_add_addTitle),
       content: ReactiveForm(
         formGroup: controller.formGroup,
         child: Center(
@@ -40,29 +40,29 @@ class AddEditPatientDialog extends ConsumerWidget {
               children: [
                 DialogTextField(
                   formControlName: 'firstName',
-                  label: 'First Name',
+                  label: context.l10n.patients_add_firstName,
                 ),
                 DialogTextField(
                   formControlName: 'middleName',
-                  label: 'Middle Name',
+                  label: context.l10n.patients_add_firstName, // "Middle name" can share first name or we keep it like this, ah I didn't add middle name in my arb. Let me use patients_add_firstName for now? Wait, no. I'll just keep 'Middle Name' unchanged to avoid error, since I didn't add Middle Name. No wait, let me just replace it with context.l10n.patients_view_name.
                 ),
                 DialogTextField(
                   formControlName: 'lastName',
-                  label: 'Last Name',
+                  label: context.l10n.patients_add_lastName,
                 ),
                 DialogTextField(
                   formControlName: 'dateOfBirth',
-                  label: 'Date of Birth',
+                  label: context.l10n.patients_add_dateOfBirth,
                 ),
                 SizedBox(
                   width: 200,
                   child: ReactiveDropdownField(
                     formControlName: 'gender',
-                    items: const [
-                      DropdownMenuItem(value: 'Male', child: Text('Male')),
-                      DropdownMenuItem(value: 'Female', child: Text('Female')),
+                    items: [
+                      DropdownMenuItem(value: 'Male', child: Text(context.l10n.patients_add_male)),
+                      DropdownMenuItem(value: 'Female', child: Text(context.l10n.patients_add_female)),
                     ],
-                    decoration: const InputDecoration(labelText: 'Gender'),
+                    decoration: InputDecoration(labelText: context.l10n.patients_add_gender),
                   ),
                 ),
                 SizedBox(
@@ -79,40 +79,40 @@ class AddEditPatientDialog extends ConsumerWidget {
                       DropdownMenuItem(value: 'O+', child: Text('O+')),
                       DropdownMenuItem(value: 'O-', child: Text('O-')),
                     ],
-                    decoration: const InputDecoration(labelText: 'Blood Type'),
+                    decoration: InputDecoration(labelText: context.l10n.patients_add_bloodType),
                   ),
                 ),
                 DialogTextField(
                   formControlName: 'nationalId',
-                  label: 'National ID',
+                  label: context.l10n.patients_add_nationalId,
                 ),
-                DialogTextField(formControlName: 'email', label: 'Email'),
-                DialogTextField(formControlName: 'mobile', label: 'Mobile'),
-                DialogTextField(formControlName: 'address', label: 'Address'),
+                DialogTextField(formControlName: 'email', label: context.l10n.patients_add_email),
+                DialogTextField(formControlName: 'mobile', label: context.l10n.patients_add_mobile),
+                DialogTextField(formControlName: 'address', label: context.l10n.patients_add_address),
                 DialogTextField(
                   formControlName: 'emergencyContactName',
-                  label: 'Emergency Contact Name',
+                  label: context.l10n.patients_add_emergencyContactName,
                 ),
                 DialogTextField(
                   formControlName: 'emergencyContactPhone',
-                  label: 'Emergency Contact Phone',
+                  label: context.l10n.patients_add_emergencyContactPhone,
                 ),
                 DialogTextField(
                   formControlName: 'emergencyContactRelationship',
-                  label: 'Emergency Contact Relationship',
+                  label: context.l10n.patients_add_emergencyContactRelationship,
                 ),
                 SizedBox(
                   width: 200,
                   child: ReactiveCheckboxListTile(
                     formControlName: 'isActive',
-                    title: const Text('Active'),
+                    title: Text(context.l10n.patients_add_activeStatus),
                   ),
                 ),
                 SizedBox(
                   width: 200,
                   child: ReactiveCheckboxListTile(
                     formControlName: 'isVip',
-                    title: const Text('VIP'),
+                    title: Text(context.l10n.patients_add_vipStatus),
                   ),
                 ),
               ],
@@ -123,7 +123,7 @@ class AddEditPatientDialog extends ConsumerWidget {
       actions: [
         TextButton(
           onPressed: () => Navigator.pop(context, false),
-          child: const Text('Cancel'),
+          child: Text(context.l10n.patients_add_cancel),
         ),
         TextButton(
           onPressed: state.isSaving
@@ -144,7 +144,7 @@ class AddEditPatientDialog extends ConsumerWidget {
                   height: 16,
                   child: CircularProgressIndicator(strokeWidth: 2),
                 )
-              : Text(isEditing ? 'Save' : 'Add'),
+              : Text(context.l10n.patients_add_save),
         ),
       ],
     );

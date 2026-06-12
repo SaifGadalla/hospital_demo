@@ -39,7 +39,7 @@ class _AddMedicalRecordDialogState
 
     return AlertDialog(
       scrollable: true,
-      title: const Text('Add Medical Record'),
+      title: Text(context.l10n.medical_records_add_title),
       content: ReactiveForm(
         formGroup: controller.formGroup,
         child: SizedBox(
@@ -49,7 +49,7 @@ class _AddMedicalRecordDialogState
             runSpacing: 10,
             children: [
               SizedBox(
-                width: double.infinity,
+                width: 200,
                 child: ReactiveDropdownField<Patient>(
                   formControlName: 'patient',
                   items: controller.patients.map((patient) {
@@ -58,54 +58,36 @@ class _AddMedicalRecordDialogState
                       child: Text('${patient.fullName} (${patient.mrn})'),
                     );
                   }).toList(),
-                  decoration: const InputDecoration(labelText: 'Patient'),
+                  decoration: InputDecoration(labelText: context.l10n.medical_records_add_patient),
                 ),
               ),
               AppDatePicker(formControlName: 'visitDate'),
               DialogTextField(
                 formControlName: 'diagnosisCode',
-                label: 'Diagnosis Code',
-                width: double.infinity,
+                label: context.l10n.medical_records_add_diagnosisCode,
               ),
               DialogTextField(
                 formControlName: 'diagnosisDescription',
-                label: 'Diagnosis Description',
-                width: double.infinity,
+                label: context.l10n.medical_records_add_diagnosisDescription,
               ),
               DialogTextField(
                 formControlName: 'subjective',
-                label: 'Subjective',
-                width: double.infinity,
+                label: context.l10n.medical_records_add_subjective,
               ),
-              DialogTextField(
-                formControlName: 'objective',
-                label: 'Objective',
-                width: double.infinity,
-              ),
+              DialogTextField(formControlName: 'objective', label: context.l10n.medical_records_add_objective),
               DialogTextField(
                 formControlName: 'assessment',
-                label: 'Assessment',
-                width: double.infinity,
+                label: context.l10n.medical_records_add_assessment,
               ),
-              DialogTextField(
-                formControlName: 'plan',
-                label: 'Plan',
-                width: double.infinity,
-              ),
-              DialogTextField(
-                formControlName: 'allergies',
-                label: 'Allergies',
-                width: double.infinity,
-              ),
+              DialogTextField(formControlName: 'plan', label: context.l10n.medical_records_add_plan),
+              DialogTextField(formControlName: 'allergies', label: context.l10n.medical_records_add_allergies),
               DialogTextField(
                 formControlName: 'currentMedications',
-                label: 'Current Medications',
-                width: double.infinity,
+                label: context.l10n.medical_records_add_currentMedications,
               ),
               DialogTextField(
                 formControlName: 'clinicalNotes',
-                label: 'Clinical Notes',
-                width: double.infinity,
+                label: context.l10n.medical_records_add_clinicalNotes,
               ),
             ],
           ),
@@ -114,7 +96,7 @@ class _AddMedicalRecordDialogState
       actions: [
         TextButton(
           onPressed: () => Navigator.pop(context, false),
-          child: const Text('Cancel'),
+          child: Text(context.l10n.medical_records_add_cancel),
         ),
         TextButton(
           onPressed: state.isSaving
@@ -133,7 +115,7 @@ class _AddMedicalRecordDialogState
                   height: 16,
                   child: CircularProgressIndicator(strokeWidth: 2),
                 )
-              : const Text('Save'),
+              : Text(context.l10n.medical_records_add_save),
         ),
       ],
     );

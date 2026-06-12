@@ -16,8 +16,7 @@ class AddPrescriptionDialog extends ConsumerStatefulWidget {
       _AddPrescriptionDialogState();
 }
 
-class _AddPrescriptionDialogState
-    extends ConsumerState<AddPrescriptionDialog> {
+class _AddPrescriptionDialogState extends ConsumerState<AddPrescriptionDialog> {
   @override
   void initState() {
     super.initState();
@@ -37,7 +36,7 @@ class _AddPrescriptionDialogState
     }
     return AlertDialog(
       scrollable: true,
-      title: const Text('New Prescription'),
+      title: Text(context.l10n.pharmacy_add_title),
       content: ReactiveForm(
         formGroup: controller.formGroup,
         child: SizedBox(
@@ -56,20 +55,20 @@ class _AddPrescriptionDialogState
                       child: Text('${patient.fullName} (${patient.mrn})'),
                     );
                   }).toList(),
-                  decoration: const InputDecoration(
-                    labelText: 'Patient',
+                  decoration: InputDecoration(
+                    labelText: context.l10n.pharmacy_add_patient,
                   ),
                 ),
               ),
               AppDatePicker(formControlName: 'prescriptionDate'),
               DialogTextField(
                 formControlName: 'diagnosis',
-                label: 'Diagnosis',
+                label: context.l10n.pharmacy_add_diagnosis,
                 width: 300,
               ),
               DialogTextField(
                 formControlName: 'notes',
-                label: 'Notes',
+                label: context.l10n.pharmacy_add_notes,
                 width: 300,
               ),
             ],
@@ -79,7 +78,7 @@ class _AddPrescriptionDialogState
       actions: [
         TextButton(
           onPressed: () => Navigator.pop(context),
-          child: const Text('Cancel'),
+          child: Text(context.l10n.pharmacy_add_cancel),
         ),
         TextButton(
           onPressed: () async {
@@ -90,7 +89,7 @@ class _AddPrescriptionDialogState
               }
             }
           },
-          child: const Text('Save'),
+          child: Text(context.l10n.pharmacy_add_save),
         ),
       ],
     );

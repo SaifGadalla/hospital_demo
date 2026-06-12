@@ -29,21 +29,21 @@ class _PharmacyPageState extends ConsumerState<PharmacyPage> with SearchMixin {
       onSearchFieldChanged: (control) async {
         await controller.getPrescriptions(searchTerm: control.value);
       },
-      title: 'Pharmacy',
-      description: 'Prescriptions, dispensing, and medication tracking.',
-      mainButtonTitle: 'New Prescription',
+      title: context.l10n.pharmacy_view_title,
+      description: context.l10n.pharmacy_view_description,
+      mainButtonTitle: context.l10n.pharmacy_view_newPrescription,
       mainButtonOnTap: () async {
         await AddPrescriptionDialog.show(context);
         controller.loadPrescriptions();
       },
       numberCards: [
         NumberCard(
-          title: 'Total Rx',
+          title: context.l10n.pharmacy_view_totalRx,
           value: state.prescriptions.length.toString(),
           icon: Icons.medication,
         ),
         NumberCard(
-          title: 'Pending',
+          title: context.l10n.pharmacy_view_pending,
           value: state.prescriptions
               .where((p) => p.status?.toLowerCase() == 'pending')
               .length
@@ -51,7 +51,7 @@ class _PharmacyPageState extends ConsumerState<PharmacyPage> with SearchMixin {
           icon: Icons.pending,
         ),
         NumberCard(
-          title: 'Dispensed',
+          title: context.l10n.pharmacy_view_dispensed,
           value: state.prescriptions
               .where((p) => p.status?.toLowerCase() == 'dispensed')
               .length
@@ -59,7 +59,7 @@ class _PharmacyPageState extends ConsumerState<PharmacyPage> with SearchMixin {
           icon: Icons.check_circle,
         ),
         NumberCard(
-          title: 'Line items',
+          title: context.l10n.pharmacy_view_lineItems,
           value: state.prescriptions
               .fold<int>(0, (sum, p) => sum + (p.items?.length ?? 0))
               .toString(),
@@ -72,16 +72,16 @@ class _PharmacyPageState extends ConsumerState<PharmacyPage> with SearchMixin {
           formGroup: controller.formGroup,
           child: AppDropDownButton(
             formControlName: 'status',
-            items: const [
-              DropdownMenuItem(value: null, child: Text('All Statuses')),
-              DropdownMenuItem(value: 'Cancelled', child: Text('Cancelled')),
-              DropdownMenuItem(value: 'Dispensed', child: Text('Dispensed')),
-              DropdownMenuItem(value: 'Pending', child: Text('Pending')),
+            items: [
+              DropdownMenuItem(value: null, child: Text(context.l10n.pharmacy_view_allStatuses)),
+              DropdownMenuItem(value: 'Cancelled', child: Text(context.l10n.pharmacy_view_cancelled)),
+              DropdownMenuItem(value: 'Dispensed', child: Text(context.l10n.pharmacy_view_dispensed)),
+              DropdownMenuItem(value: 'Pending', child: Text(context.l10n.pharmacy_view_pending)),
             ],
             onChanged: (_) async {
               await controller.getPrescriptions();
             },
-            hint: 'Filter by status',
+            hint: context.l10n.pharmacy_view_filterByStatus,
             value: null,
           ),
         ),
@@ -94,14 +94,14 @@ class _PharmacyPageState extends ConsumerState<PharmacyPage> with SearchMixin {
               ),
             )
           : DataTable(
-              columns: const [
-                DataColumn(label: Text('Rx #')),
-                DataColumn(label: Text('Date')),
-                DataColumn(label: Text('Patient')),
-                DataColumn(label: Text('Diagnosis')),
-                DataColumn(label: Text('Items')),
-                DataColumn(label: Text('Status')),
-                DataColumn(label: Text('Actions')),
+              columns: [
+                DataColumn(label: Text(context.l10n.pharmacy_view_columnRx)),
+                DataColumn(label: Text(context.l10n.pharmacy_view_columnDate)),
+                DataColumn(label: Text(context.l10n.pharmacy_view_columnPatient)),
+                DataColumn(label: Text(context.l10n.pharmacy_view_columnDiagnosis)),
+                DataColumn(label: Text(context.l10n.pharmacy_view_columnItems)),
+                DataColumn(label: Text(context.l10n.pharmacy_view_columnStatus)),
+                DataColumn(label: Text(context.l10n.pharmacy_view_columnActions)),
               ],
               rows: state.prescriptions.map((prescription) {
                 final itemsSummary =
@@ -110,7 +110,7 @@ class _PharmacyPageState extends ConsumerState<PharmacyPage> with SearchMixin {
                           (e) => '${e.medicationName ?? ''} ${e.dosage ?? ''}',
                         )
                         .join(', ') ??
-                    'No items';
+                    context.l10n.pharmacy_view_noItems;
                 return DataRow(
                   cells: [
                     DataCell(Text(prescription.prescriptionNumber ?? '')),
@@ -135,7 +135,7 @@ class _PharmacyPageState extends ConsumerState<PharmacyPage> with SearchMixin {
                           if (prescription.status?.toLowerCase() == 'pending')
                             IconButton(
                               icon: const Icon(Icons.check_circle_outline),
-                              tooltip: 'Dispense',
+                              tooltip: context.l10n.pharmacy_view_dispenseAction,
                               onPressed: () {
                                 _showDispenseConfirmation(
                                   context,
@@ -146,7 +146,7 @@ class _PharmacyPageState extends ConsumerState<PharmacyPage> with SearchMixin {
                             ),
                           IconButton(
                             icon: const Icon(Icons.cancel),
-                            tooltip: 'Cancel',
+                            tooltip: context.l10n.pharmacy_view_cancelAction,
                             onPressed: prescription.status?.toLowerCase() == 'cancelled'
                                 ? null
                                 : () {
@@ -175,14 +175,14 @@ class _PharmacyPageState extends ConsumerState<PharmacyPage> with SearchMixin {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title: const Text('Cancel Prescription'),
+        title: Text(context.l10n.pharmacy_view_cancelTitle),
         content: Text(
-          'Are you sure you want to cancel prescription ${prescription.prescriptionNumber ?? ''}?',
+          context.l10n.pharmacy_view_cancelMsg(prescription.prescriptionNumber ?? ''),
         ),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context),
-            child: const Text('No'),
+            child: Text(context.l10n.pharmacy_view_no),
           ),
           TextButton(
             onPressed: () async {
@@ -191,7 +191,7 @@ class _PharmacyPageState extends ConsumerState<PharmacyPage> with SearchMixin {
                 await controller.cancelPrescription(prescription.id!);
               }
             },
-            child: const Text('Yes, Cancel'),
+            child: Text(context.l10n.pharmacy_view_yesCancel),
           ),
         ],
       ),
@@ -206,14 +206,14 @@ class _PharmacyPageState extends ConsumerState<PharmacyPage> with SearchMixin {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title: const Text('Dispense Prescription'),
+        title: Text(context.l10n.pharmacy_view_dispenseTitle),
         content: Text(
-          'Mark prescription ${prescription.prescriptionNumber ?? ''} as dispensed?',
+          context.l10n.pharmacy_view_dispenseMsg(prescription.prescriptionNumber ?? ''),
         ),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context),
-            child: const Text('Cancel'),
+            child: Text(context.l10n.pharmacy_view_cancelAction),
           ),
           TextButton(
             onPressed: () async {
@@ -222,7 +222,7 @@ class _PharmacyPageState extends ConsumerState<PharmacyPage> with SearchMixin {
                 await controller.dispensePrescription(prescription.id!);
               }
             },
-            child: const Text('Dispense'),
+            child: Text(context.l10n.pharmacy_view_dispenseAction),
           ),
         ],
       ),

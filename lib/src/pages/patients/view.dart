@@ -33,10 +33,9 @@ class _PatientsPageState extends ConsumerState<PatientsPage> with SearchMixin {
       onSearchFieldChanged: (control) async {
         await controller.getPatients(searchTerm: control.value);
       },
-      title: 'Patients',
-      description:
-          'Registered patient master data — MRN, demographics, insurance, contact.',
-      mainButtonTitle: 'Add Patient',
+      title: context.l10n.patients_view_title,
+      description: context.l10n.patients_view_description,
+      mainButtonTitle: context.l10n.patients_view_addPatient,
       mainButtonOnTap: () async {
         final result = await AddEditPatientDialog.show(context);
         if (result == true) {
@@ -48,37 +47,39 @@ class _PatientsPageState extends ConsumerState<PatientsPage> with SearchMixin {
         ReactiveForm(
           formGroup: controller.formGroup,
           child: AppDropDownButton(
-            items: const [
-              DropdownMenuItem(value: null, child: Text('All genders')),
-              DropdownMenuItem(value: 'male', child: Text('Male')),
-              DropdownMenuItem(value: 'female', child: Text('Female')),
+            items: [
+              DropdownMenuItem(value: null, child: Text(context.l10n.patients_view_allGenders)),
+              DropdownMenuItem(value: 'male', child: Text(context.l10n.patients_view_male)),
+              DropdownMenuItem(value: 'female', child: Text(context.l10n.patients_view_female)),
             ],
             formControlName: 'gender',
             onChanged: (_) => controller.getPatients(),
-            hint: 'Gender',
+            hint: context.l10n.patients_view_genderHint,
           ),
         ),
       ],
       table: DataTable(
-        headingRowColor: WidgetStateProperty.all(ColorManager.surfaceElevated),
+        headingRowColor: WidgetStateProperty.all(
+          context.colors.surfaceElevated,
+        ),
         dataRowMaxHeight: 60,
         dataRowMinHeight: 40,
         columnSpacing: 0,
-        columns: const [
-          DataColumn(columnWidth: FixedColumnWidth(150), label: Text('MRN')),
+        columns: [
+          DataColumn(columnWidth: const FixedColumnWidth(150), label: Text(context.l10n.patients_view_columnMrn)),
           DataColumn(
-            columnWidth: FixedColumnWidth(260),
-            label: Text('Patient'),
+            columnWidth: const FixedColumnWidth(260),
+            label: Text(context.l10n.patients_view_columnPatient),
           ),
           DataColumn(
-            columnWidth: FixedColumnWidth(120),
-            label: Text('DOB / Age'),
+            columnWidth: const FixedColumnWidth(120),
+            label: Text(context.l10n.patients_view_columnDobAge),
           ),
-          DataColumn(label: Text('Gender')),
-          DataColumn(label: Text('Phone')),
-          DataColumn(label: Text('Blood')),
-          DataColumn(label: Text('Status')),
-          DataColumn(label: Text('Actions')),
+          DataColumn(label: Text(context.l10n.patients_view_columnGender)),
+          DataColumn(label: Text(context.l10n.patients_view_columnPhone)),
+          DataColumn(label: Text(context.l10n.patients_view_columnBlood)),
+          DataColumn(label: Text(context.l10n.patients_view_columnStatus)),
+          DataColumn(label: Text(context.l10n.patients_view_columnActions)),
         ],
         rows: [
           ...state.patients.map((patient) {
@@ -96,19 +97,19 @@ class _PatientsPageState extends ConsumerState<PatientsPage> with SearchMixin {
                           children: [
                             CircleAvatar(
                               radius: 12,
-                              backgroundColor: ColorManager.success,
+                              backgroundColor: context.colors.success,
                               child: Center(
                                 child: Text(
                                   patient.fullName![0].toUpperCase(),
                                   style: TextStyleManager.caption.copyWith(
-                                    color: ColorManager.textInverse,
+                                    color: context.colors.textInverse,
                                     fontWeight: FontWeight.bold,
                                   ),
                                 ),
                               ),
                             ),
                             Text(patient.fullName ?? ''),
-                            Text(patient.isVIP ?? false ? 'VIP' : ''),
+                            Text(patient.isVIP ?? false ? context.l10n.patients_view_vip : ''),
                           ],
                         ),
                         Text(patient.email ?? ''),
@@ -125,7 +126,7 @@ class _PatientsPageState extends ConsumerState<PatientsPage> with SearchMixin {
                 DataCell(Text(patient.mobile ?? '')),
                 DataCell(Text(patient.bloodType ?? '')),
                 DataCell(
-                  Text(patient.isActive ?? false ? 'Active' : 'Inactive'),
+                  Text(patient.isActive ?? false ? context.l10n.patients_view_active : context.l10n.patients_view_inactive),
                 ),
                 DataCell(
                   Row(
@@ -135,7 +136,7 @@ class _PatientsPageState extends ConsumerState<PatientsPage> with SearchMixin {
                         onPressed: () {
                           _showPatientDetailsDialog(context, patient);
                         },
-                        child: Text('View'),
+                        child: Text(context.l10n.patients_view_viewAction),
                       ),
                       OutlinedButton(
                         onPressed: () async {
@@ -148,9 +149,9 @@ class _PatientsPageState extends ConsumerState<PatientsPage> with SearchMixin {
                           }
                         },
                         style: OutlinedButton.styleFrom(
-                          side: const BorderSide(color: ColorManager.border),
+                          side: BorderSide(color: context.colors.border),
                         ),
-                        child: Text('Edit'),
+                        child: Text(context.l10n.patients_view_editAction),
                       ),
                     ],
                   ),
@@ -168,48 +169,45 @@ class _PatientsPageState extends ConsumerState<PatientsPage> with SearchMixin {
       context: context,
       builder: (context) => AlertDialog(
         scrollable: true,
-        title: Text(patient.fullName ?? 'Patient Details'),
+        title: Text(patient.fullName ?? context.l10n.patients_view_patientDetails),
         content: SizedBox(
           width: 500,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisSize: MainAxisSize.min,
             children: [
-              _detailRow('MRN', patient.mrn),
-              _detailRow('Name', patient.fullName),
+              _detailRow(context.l10n.patients_view_columnMrn, patient.mrn),
+              _detailRow(context.l10n.patients_view_name, patient.fullName),
               _detailRow(
-                'Date of Birth',
+                context.l10n.patients_view_dob,
                 patient.dateOfBirth != null
                     ? DateFormat('MMM dd, yyyy').format(patient.dateOfBirth!)
                     : null,
               ),
-              _detailRow('Age', patient.age?.toString()),
-              _detailRow('Gender', patient.gender),
-              _detailRow('Blood Type', patient.bloodType),
-              _detailRow('National ID', patient.nationalId),
-              _detailRow('Email', patient.email),
-              _detailRow('Mobile', patient.mobile),
-              _detailRow('Address', patient.address),
+              _detailRow(context.l10n.patients_view_age, patient.age?.toString()),
+              _detailRow(context.l10n.patients_view_columnGender, patient.gender),
+              _detailRow(context.l10n.patients_view_bloodType, patient.bloodType),
+              _detailRow(context.l10n.patients_view_nationalId, patient.nationalId),
+              _detailRow(context.l10n.patients_view_email, patient.email),
+              _detailRow(context.l10n.patients_view_mobile, patient.mobile),
+              _detailRow(context.l10n.patients_view_address, patient.address),
               const Divider(),
-              _detailRow('Emergency Contact', patient.emergencyContactName),
-              _detailRow('Emergency Phone', patient.emergencyContactPhone),
-              _detailRow(
-                'Relationship',
-                patient.emergencyContactRelationship,
-              ),
+              _detailRow(context.l10n.patients_view_emergencyContact, patient.emergencyContactName),
+              _detailRow(context.l10n.patients_view_emergencyPhone, patient.emergencyContactPhone),
+              _detailRow(context.l10n.patients_view_relationship, patient.emergencyContactRelationship),
               const Divider(),
               _detailRow(
-                'Status',
-                patient.isActive ?? false ? 'Active' : 'Inactive',
+                context.l10n.patients_view_columnStatus,
+                patient.isActive ?? false ? context.l10n.patients_view_active : context.l10n.patients_view_inactive,
               ),
-              _detailRow('VIP', patient.isVIP ?? false ? 'Yes' : 'No'),
+              _detailRow(context.l10n.patients_view_vip, patient.isVIP ?? false ? context.l10n.patients_view_yes : context.l10n.patients_view_no),
             ],
           ),
         ),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context),
-            child: const Text('Close'),
+            child: Text(context.l10n.patients_view_close),
           ),
         ],
       ),
@@ -224,16 +222,10 @@ class _PatientsPageState extends ConsumerState<PatientsPage> with SearchMixin {
         children: [
           SizedBox(
             width: 160,
-            child: Text(
-              label,
-              style: TextStyleManager.label,
-            ),
+            child: Text(label, style: TextStyleManager.label),
           ),
           Expanded(
-            child: Text(
-              value ?? 'N/A',
-              style: TextStyleManager.bodyMedium,
-            ),
+            child: Text(value ?? 'N/A', style: TextStyleManager.bodyMedium),
           ),
         ],
       ),

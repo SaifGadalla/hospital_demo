@@ -22,9 +22,7 @@ class _AddSurgeryBookingDialogState
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      ref
-          .read(addSurgeryBookingDialogControllerProvider.notifier)
-          .loadData();
+      ref.read(addSurgeryBookingDialogControllerProvider.notifier).loadData();
     });
   }
 
@@ -39,7 +37,7 @@ class _AddSurgeryBookingDialogState
     }
     return AlertDialog(
       scrollable: true,
-      title: const Text('Book Surgery'),
+      title: Text(context.l10n.operating_room_add_title),
       content: ReactiveForm(
         formGroup: controller.formGroup,
         child: SizedBox(
@@ -58,8 +56,8 @@ class _AddSurgeryBookingDialogState
                       child: Text('${patient.fullName} (${patient.mrn})'),
                     );
                   }).toList(),
-                  decoration: const InputDecoration(
-                    labelText: 'Patient',
+                  decoration: InputDecoration(
+                    labelText: context.l10n.operating_room_add_patient,
                   ),
                 ),
               ),
@@ -73,8 +71,8 @@ class _AddSurgeryBookingDialogState
                       child: Text(proc.procedureName ?? ''),
                     );
                   }).toList(),
-                  decoration: const InputDecoration(
-                    labelText: 'Procedure',
+                  decoration: InputDecoration(
+                    labelText: context.l10n.operating_room_add_procedure,
                   ),
                 ),
               ),
@@ -85,11 +83,13 @@ class _AddSurgeryBookingDialogState
                   items: controller.operatingRooms.map((room) {
                     return DropdownMenuItem(
                       value: room,
-                      child: Text('${room.roomNumber} (${room.roomType ?? ""})'),
+                      child: Text(
+                        '${room.roomNumber} (${room.roomType ?? ""})',
+                      ),
                     );
                   }).toList(),
-                  decoration: const InputDecoration(
-                    labelText: 'Operating Room',
+                  decoration: InputDecoration(
+                    labelText: context.l10n.operating_room_add_operatingRoom,
                   ),
                 ),
               ),
@@ -97,35 +97,56 @@ class _AddSurgeryBookingDialogState
               AppTimePicker(formControlName: 'scheduledTime'),
               DialogTextField(
                 formControlName: 'estimatedDuration',
-                label: 'Duration (min)',
+                label: context.l10n.operating_room_add_duration,
                 width: 150,
               ),
               DialogDropdownField<String>(
                 formControlName: 'priority',
-                label: 'Priority',
-                items: const [
-                  DropdownMenuItem(value: 'Routine', child: Text('Routine')),
-                  DropdownMenuItem(value: 'Urgent', child: Text('Urgent')),
+                label: context.l10n.operating_room_add_priority,
+                items: [
+                  DropdownMenuItem(
+                    value: 'Routine',
+                    child: Text(context.l10n.operating_room_add_routine),
+                  ),
+                  DropdownMenuItem(
+                    value: 'Urgent',
+                    child: Text(context.l10n.operating_room_add_urgent),
+                  ),
                   DropdownMenuItem(
                     value: 'Emergency',
-                    child: Text('Emergency'),
+                    child: Text(context.l10n.operating_room_add_emergency),
                   ),
                 ],
               ),
               DialogDropdownField<String>(
                 formControlName: 'anesthesiaType',
-                label: 'Anesthesia Type',
-                items: const [
-                  DropdownMenuItem(value: 'General', child: Text('General')),
-                  DropdownMenuItem(value: 'Local', child: Text('Local')),
-                  DropdownMenuItem(value: 'Regional', child: Text('Regional')),
-                  DropdownMenuItem(value: 'Spinal', child: Text('Spinal')),
-                  DropdownMenuItem(value: 'Sedation', child: Text('Sedation')),
+                label: context.l10n.operating_room_add_anesthesiaType,
+                items: [
+                  DropdownMenuItem(
+                    value: 'General',
+                    child: Text(context.l10n.operating_room_add_general),
+                  ),
+                  DropdownMenuItem(
+                    value: 'Local',
+                    child: Text(context.l10n.operating_room_add_local),
+                  ),
+                  DropdownMenuItem(
+                    value: 'Regional',
+                    child: Text(context.l10n.operating_room_add_regional),
+                  ),
+                  DropdownMenuItem(
+                    value: 'Spinal',
+                    child: Text(context.l10n.operating_room_add_spinal),
+                  ),
+                  DropdownMenuItem(
+                    value: 'Sedation',
+                    child: Text(context.l10n.operating_room_add_sedation),
+                  ),
                 ],
               ),
               DialogTextField(
                 formControlName: 'notes',
-                label: 'Notes',
+                label: context.l10n.operating_room_add_notes,
                 width: 300,
               ),
             ],
@@ -135,7 +156,7 @@ class _AddSurgeryBookingDialogState
       actions: [
         TextButton(
           onPressed: () => Navigator.pop(context),
-          child: const Text('Cancel'),
+          child: Text(context.l10n.operating_room_add_cancel),
         ),
         TextButton(
           onPressed: () async {
@@ -146,7 +167,7 @@ class _AddSurgeryBookingDialogState
               }
             }
           },
-          child: const Text('Save'),
+          child: Text(context.l10n.operating_room_add_save),
         ),
       ],
     );

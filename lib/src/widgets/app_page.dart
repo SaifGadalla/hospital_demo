@@ -46,7 +46,7 @@ class AppPage extends StatelessWidget {
     );
 
     return Scaffold(
-      backgroundColor: ColorManager.background,
+      backgroundColor: context.colors.background,
       body: SingleChildScrollView(
         padding: EdgeInsets.all(horizontalPadding),
         child: Column(
@@ -56,9 +56,10 @@ class AppPage extends StatelessWidget {
           children: [
             _buildHeader(context),
             if (numberCards != null) _buildNumberCards(context),
-            if (hasSearch && searchFormGroup != null) _buildSearchHeader(context),
+            if (hasSearch && searchFormGroup != null)
+              _buildSearchHeader(context),
             if (customBody != null) customBody!,
-            if (table != null) _buildTableContainer(),
+            if (table != null) _buildTableContainer(context),
           ],
         ),
       ),
@@ -70,40 +71,44 @@ class AppPage extends StatelessWidget {
       mobile: (BuildContext context) => Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          _buildTitleAndDescription(),
+          _buildTitleAndDescription(context),
           const SizedBox(height: 16),
           _buildActionButtons(),
         ],
       ),
-      tablet: (BuildContext context) => _buildDesktopHeader(),
-      desktop: (BuildContext context) => _buildDesktopHeader(),
+      tablet: (BuildContext context) => _buildDesktopHeader(context),
+      desktop: (BuildContext context) => _buildDesktopHeader(context),
     );
   }
 
-  Widget _buildDesktopHeader() {
+  Widget _buildDesktopHeader(BuildContext context) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        Expanded(child: _buildTitleAndDescription()),
+        Expanded(child: _buildTitleAndDescription(context)),
         const SizedBox(width: 16),
         _buildActionButtons(),
       ],
     );
   }
 
-  Widget _buildTitleAndDescription() {
+  Widget _buildTitleAndDescription(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
           title,
-          style: TextStyleManager.h2.copyWith(color: ColorManager.textPrimary),
+          style: TextStyleManager.h2.copyWith(
+            color: context.colors.textPrimary,
+          ),
         ),
         const SizedBox(height: 4),
         Text(
           description,
-          style: TextStyleManager.bodyMedium.copyWith(color: ColorManager.textSecondary),
+          style: TextStyleManager.bodyMedium.copyWith(
+            color: context.colors.textSecondary,
+          ),
         ),
       ],
     );
@@ -144,9 +149,9 @@ class AppPage extends StatelessWidget {
   Widget _buildSearchHeader(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        color: ColorManager.surface,
-        borderRadius: BorderRadius.circular(12),
-        border: Border.all(color: ColorManager.border),
+        color: context.colors.surface,
+        borderRadius: BorderRadius.circular(20),
+        border: Border.all(color: context.colors.border),
         boxShadow: [
           BoxShadow(
             color: Colors.black.withValues(alpha: 0.02),
@@ -197,23 +202,22 @@ class AppPage extends StatelessWidget {
         ),
         const SizedBox(width: 16),
         if (secondarySearchHeaderWidgets != null)
-          ...secondarySearchHeaderWidgets!.map((w) => Padding(
-                padding: const EdgeInsets.only(right: 16),
-                child: w,
-              )),
+          ...secondarySearchHeaderWidgets!.map(
+            (w) => Padding(padding: const EdgeInsets.only(right: 16), child: w),
+          ),
         const Spacer(),
         trailingWidget ?? const SizedBox(),
       ],
     );
   }
 
-  Widget _buildTableContainer() {
+  Widget _buildTableContainer(BuildContext context) {
     return Container(
       width: double.infinity,
       decoration: BoxDecoration(
-        color: ColorManager.surface,
-        borderRadius: BorderRadius.circular(12),
-        border: Border.all(color: ColorManager.border),
+        color: context.colors.surface,
+        borderRadius: BorderRadius.circular(20),
+        border: Border.all(color: context.colors.border),
         boxShadow: [
           BoxShadow(
             color: Colors.black.withValues(alpha: 0.02),
@@ -229,10 +233,7 @@ class AppPage extends StatelessWidget {
           if (tableHeader != null) ...[
             Padding(
               padding: const EdgeInsets.all(20.0),
-              child: Text(
-                tableHeader!,
-                style: TextStyleManager.h4,
-              ),
+              child: Text(tableHeader!, style: TextStyleManager.h4),
             ),
             const Divider(height: 1),
           ],

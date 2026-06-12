@@ -29,21 +29,21 @@ class _InsurancePageState extends ConsumerState<InsurancePage> {
     final controller = ref.read(insuranceControllerProvider.notifier);
 
     return AppPage(
-      title: 'Insurance & Claims',
-      description: 'Plans, claims pipeline, pre-authorizations.',
-      mainButtonTitle: 'New Claim',
+      title: context.l10n.insurance_view_title,
+      description: context.l10n.insurance_view_description,
+      mainButtonTitle: context.l10n.insurance_view_newClaim,
       mainButtonOnTap: () async {
         await AddClaimDialog.show(context);
         controller.loadInsuranceData();
       },
       numberCards: [
         NumberCard(
-          title: 'Total Claims',
+          title: context.l10n.insurance_view_totalClaims,
           value: state.insuranceClaims.length.toString(),
           icon: Icons.description,
         ),
         NumberCard(
-          title: 'Approved/Paid',
+          title: context.l10n.insurance_view_approvedPaid,
           value: state.insuranceClaims
               .where(
                 (c) =>
@@ -55,7 +55,7 @@ class _InsurancePageState extends ConsumerState<InsurancePage> {
           icon: Icons.check_circle,
         ),
         NumberCard(
-          title: 'Rejected',
+          title: context.l10n.insurance_view_rejected,
           value: state.insuranceClaims
               .where((c) => c.status?.toLowerCase() == 'rejected')
               .length
@@ -63,7 +63,7 @@ class _InsurancePageState extends ConsumerState<InsurancePage> {
           icon: Icons.cancel,
         ),
         NumberCard(
-          title: 'Total Claimed',
+          title: context.l10n.insurance_view_totalClaimed,
           value:
               '\$${state.insuranceClaims.fold<double>(0.0, (sum, c) => sum + (c.claimedAmount ?? 0.0)).toInt()}',
           icon: Icons.attach_money,
@@ -79,11 +79,11 @@ class _InsurancePageState extends ConsumerState<InsurancePage> {
               });
             },
             child: Text(
-              'Claims',
+              context.l10n.insurance_view_claimsTab,
               style: TextStyleManager.buttonText.copyWith(
                 color: _selectedTab == InsuranceTab.claims
-                    ? ColorManager.primary
-                    : ColorManager.textSecondary,
+                    ? context.colors.primary
+                    : context.colors.textSecondary,
               ),
             ),
           ),
@@ -94,11 +94,11 @@ class _InsurancePageState extends ConsumerState<InsurancePage> {
               });
             },
             child: Text(
-              'Pre-auths',
+              context.l10n.insurance_view_preAuthsTab,
               style: TextStyleManager.buttonText.copyWith(
                 color: _selectedTab == InsuranceTab.preAuths
-                    ? ColorManager.primary
-                    : ColorManager.textSecondary,
+                    ? context.colors.primary
+                    : context.colors.textSecondary,
               ),
             ),
           ),
@@ -109,11 +109,11 @@ class _InsurancePageState extends ConsumerState<InsurancePage> {
               });
             },
             child: Text(
-              'Plans',
+              context.l10n.insurance_view_plansTab,
               style: TextStyleManager.buttonText.copyWith(
                 color: _selectedTab == InsuranceTab.plans
-                    ? ColorManager.primary
-                    : ColorManager.textSecondary,
+                    ? context.colors.primary
+                    : context.colors.textSecondary,
               ),
             ),
           ),
@@ -129,22 +129,28 @@ class _InsurancePageState extends ConsumerState<InsurancePage> {
           : _selectedTab == InsuranceTab.claims
           ? _buildClaimsTable(state.insuranceClaims, controller)
           : _selectedTab == InsuranceTab.preAuths
-          ? _buildPreAuthorizationsTable(state.insurancePreauthorizations, controller)
+          ? _buildPreAuthorizationsTable(
+              state.insurancePreauthorizations,
+              controller,
+            )
           : _buildInsurancePlansTable(state.insurancePlans),
     );
   }
 
-  DataTable _buildClaimsTable(List<InsuranceClaim> claims, InsuranceController controller) {
+  DataTable _buildClaimsTable(
+    List<InsuranceClaim> claims,
+    InsuranceController controller,
+  ) {
     return DataTable(
-      columns: const [
-        DataColumn(label: Text('Claim #')),
-        DataColumn(label: Text('Service Date')),
-        DataColumn(label: Text('Patient')),
-        DataColumn(label: Text('Plan')),
-        DataColumn(label: Text('Total')),
-        DataColumn(label: Text('Paid')),
-        DataColumn(label: Text('Status')),
-        DataColumn(label: Text('Actions')),
+      columns: [
+        DataColumn(label: Text(context.l10n.insurance_view_columnClaim)),
+        DataColumn(label: Text(context.l10n.insurance_view_columnServiceDate)),
+        DataColumn(label: Text(context.l10n.insurance_view_columnPatient)),
+        DataColumn(label: Text(context.l10n.insurance_view_columnPlan)),
+        DataColumn(label: Text(context.l10n.insurance_view_columnTotal)),
+        DataColumn(label: Text(context.l10n.insurance_view_columnPaid)),
+        DataColumn(label: Text(context.l10n.insurance_view_columnStatus)),
+        DataColumn(label: Text(context.l10n.insurance_view_columnActions)),
       ],
       rows: claims.map((claim) {
         return DataRow(
@@ -169,13 +175,13 @@ class _InsurancePageState extends ConsumerState<InsurancePage> {
                     onPressed: () {
                       _showClaimDetails(context, claim);
                     },
-                    child: const Text('View'),
+                    child: Text(context.l10n.insurance_view_viewAction),
                   ),
                   TextButton(
                     onPressed: () {
                       _showResubmitConfirmation(context, claim, controller);
                     },
-                    child: const Text('Resubmit'),
+                    child: Text(context.l10n.insurance_view_resubmitAction),
                   ),
                 ],
               ),
@@ -191,14 +197,16 @@ class _InsurancePageState extends ConsumerState<InsurancePage> {
     InsuranceController controller,
   ) {
     return DataTable(
-      columns: const [
-        DataColumn(label: Text('Auth #')),
-        DataColumn(label: Text('Patient')),
-        DataColumn(label: Text('Service')),
-        DataColumn(label: Text('Estimated Cost')),
-        DataColumn(label: Text('Status')),
-        DataColumn(label: Text('Validity')),
-        DataColumn(label: Text('Actions')),
+      columns: [
+        DataColumn(label: Text(context.l10n.insurance_view_columnAuth)),
+        DataColumn(label: Text(context.l10n.insurance_view_columnPatient)),
+        DataColumn(label: Text(context.l10n.insurance_view_columnService)),
+        DataColumn(
+          label: Text(context.l10n.insurance_view_columnEstimatedCost),
+        ),
+        DataColumn(label: Text(context.l10n.insurance_view_columnStatus)),
+        DataColumn(label: Text(context.l10n.insurance_view_columnValidity)),
+        DataColumn(label: Text(context.l10n.insurance_view_columnActions)),
       ],
       rows: preauths.map((auth) {
         return DataRow(
@@ -222,13 +230,13 @@ class _InsurancePageState extends ConsumerState<InsurancePage> {
                     onPressed: () {
                       _showPreAuthDetails(context, auth);
                     },
-                    child: const Text('View'),
+                    child: Text(context.l10n.insurance_view_viewAction),
                   ),
                   TextButton(
                     onPressed: () {
                       _showCancelPreAuthConfirmation(context, auth, controller);
                     },
-                    child: const Text('Cancel'),
+                    child: Text(context.l10n.insurance_view_cancelAction),
                   ),
                 ],
               ),
@@ -241,15 +249,15 @@ class _InsurancePageState extends ConsumerState<InsurancePage> {
 
   DataTable _buildInsurancePlansTable(List<InsurancePlan> plans) {
     return DataTable(
-      columns: const [
-        DataColumn(label: Text('Code')),
-        DataColumn(label: Text('Plan')),
-        DataColumn(label: Text('Coverage')),
-        DataColumn(label: Text('Co-pay')),
-        DataColumn(label: Text('Deductible')),
-        DataColumn(label: Text('Annual limit')),
-        DataColumn(label: Text('Pre-auth')),
-        DataColumn(label: Text('Status')),
+      columns: [
+        DataColumn(label: Text(context.l10n.insurance_view_columnCode)),
+        DataColumn(label: Text(context.l10n.insurance_view_columnPlan)),
+        DataColumn(label: Text(context.l10n.insurance_view_columnCoverage)),
+        DataColumn(label: Text(context.l10n.insurance_view_columnCoPay)),
+        DataColumn(label: Text(context.l10n.insurance_view_columnDeductible)),
+        DataColumn(label: Text(context.l10n.insurance_view_columnAnnualLimit)),
+        DataColumn(label: Text(context.l10n.insurance_view_columnPreAuth)),
+        DataColumn(label: Text(context.l10n.insurance_view_columnStatus)),
       ],
       rows: plans.map((plan) {
         return DataRow(
@@ -260,8 +268,20 @@ class _InsurancePageState extends ConsumerState<InsurancePage> {
             DataCell(Text('\$${plan.coPayAmount ?? 0.0}')),
             DataCell(Text('\$${plan.deductibleAmount ?? 0.0}')),
             DataCell(Text('\$${plan.annualLimit ?? 0.0}')),
-            DataCell(Text(plan.preAuthRequired ?? false ? 'Required' : 'No')),
-            DataCell(Text(plan.isActive ?? false ? 'Active' : 'Inactive')),
+            DataCell(
+              Text(
+                plan.preAuthRequired ?? false
+                    ? context.l10n.insurance_view_required
+                    : context.l10n.insurance_view_no,
+              ),
+            ),
+            DataCell(
+              Text(
+                plan.isActive ?? false
+                    ? context.l10n.insurance_view_active
+                    : context.l10n.insurance_view_inactive,
+              ),
+            ),
           ],
         );
       }).toList(),
@@ -273,79 +293,128 @@ class _InsurancePageState extends ConsumerState<InsurancePage> {
       context: context,
       builder: (context) => AlertDialog(
         scrollable: true,
-        title: Text('Claim ${claim.claimNumber ?? ''}'),
+        title: Text(
+          context.l10n.insurance_view_claimTitle(claim.claimNumber ?? ''),
+        ),
         content: SizedBox(
           width: 500,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisSize: MainAxisSize.min,
             children: [
-              _detailRow('Claim #', claim.claimNumber),
-              _detailRow('Patient', claim.patientName),
-              _detailRow('Plan', claim.insurancePlanName),
               _detailRow(
-                'Service Date',
+                context.l10n.insurance_view_columnClaim,
+                claim.claimNumber,
+              ),
+              _detailRow(
+                context.l10n.insurance_view_columnPatient,
+                claim.patientName,
+              ),
+              _detailRow(
+                context.l10n.insurance_view_columnPlan,
+                claim.insurancePlanName,
+              ),
+              _detailRow(
+                context.l10n.insurance_view_columnServiceDate,
                 claim.serviceDate != null
                     ? DateFormat('yyyy-MM-dd').format(claim.serviceDate!)
                     : null,
               ),
-              _detailRow('Total Amount', '\$${claim.totalAmount ?? 0.0}'),
-              _detailRow('Claimed Amount', '\$${claim.claimedAmount ?? 0.0}'),
-              _detailRow('Paid Amount', '\$${claim.paidAmount ?? 0.0}'),
-              _detailRow('Status', claim.status),
-              _detailRow('Diagnosis Codes', claim.diagnosisCodes),
-              _detailRow('Procedure Codes', claim.procedureCodes),
-              _detailRow('Notes', claim.notes),
+              _detailRow(
+                context.l10n.insurance_view_totalAmount,
+                '\$${claim.totalAmount ?? 0.0}',
+              ),
+              _detailRow(
+                context.l10n.insurance_view_claimedAmount,
+                '\$${claim.claimedAmount ?? 0.0}',
+              ),
+              _detailRow(
+                context.l10n.insurance_view_paidAmount,
+                '\$${claim.paidAmount ?? 0.0}',
+              ),
+              _detailRow(
+                context.l10n.insurance_view_columnStatus,
+                claim.status,
+              ),
+              _detailRow(
+                context.l10n.insurance_view_diagnosisCodes,
+                claim.diagnosisCodes,
+              ),
+              _detailRow(
+                context.l10n.insurance_view_procedureCodes,
+                claim.procedureCodes,
+              ),
+              _detailRow(context.l10n.insurance_view_notes, claim.notes),
             ],
           ),
         ),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context),
-            child: const Text('Close'),
+            child: Text(context.l10n.insurance_view_close),
           ),
         ],
       ),
     );
   }
 
-  void _showPreAuthDetails(BuildContext context, InsurancePreauthorization auth) {
+  void _showPreAuthDetails(
+    BuildContext context,
+    InsurancePreauthorization auth,
+  ) {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
         scrollable: true,
-        title: Text('Pre-Authorization ${auth.authNumber ?? ''}'),
+        title: Text(
+          context.l10n.insurance_view_preAuthTitle(auth.authNumber ?? ''),
+        ),
         content: SizedBox(
           width: 500,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisSize: MainAxisSize.min,
             children: [
-              _detailRow('Auth #', auth.authNumber),
-              _detailRow('Patient', auth.patientName),
-              _detailRow('Service Requested', auth.serviceRequested),
-              _detailRow('Estimated Cost', '\$${auth.estimatedCost ?? 0.0}'),
-              _detailRow('Status', auth.approvalStatus),
               _detailRow(
-                'Valid From',
+                context.l10n.insurance_view_columnAuth,
+                auth.authNumber,
+              ),
+              _detailRow(
+                context.l10n.insurance_view_columnPatient,
+                auth.patientName,
+              ),
+              _detailRow(
+                context.l10n.insurance_view_serviceRequested,
+                auth.serviceRequested,
+              ),
+              _detailRow(
+                context.l10n.insurance_view_columnEstimatedCost,
+                '\$${auth.estimatedCost ?? 0.0}',
+              ),
+              _detailRow(
+                context.l10n.insurance_view_columnStatus,
+                auth.approvalStatus,
+              ),
+              _detailRow(
+                context.l10n.insurance_view_validFrom,
                 auth.validFrom != null
                     ? DateFormat('yyyy-MM-dd').format(auth.validFrom!)
                     : null,
               ),
               _detailRow(
-                'Valid To',
+                context.l10n.insurance_view_validTo,
                 auth.validTo != null
                     ? DateFormat('yyyy-MM-dd').format(auth.validTo!)
                     : null,
               ),
-              _detailRow('Notes', auth.remarks),
+              _detailRow(context.l10n.insurance_view_notes, auth.remarks),
             ],
           ),
         ),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context),
-            child: const Text('Close'),
+            child: Text(context.l10n.insurance_view_close),
           ),
         ],
       ),
@@ -360,14 +429,14 @@ class _InsurancePageState extends ConsumerState<InsurancePage> {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title: const Text('Resubmit Claim'),
+        title: Text(context.l10n.insurance_view_resubmitTitle),
         content: Text(
-          'Are you sure you want to resubmit claim ${claim.claimNumber ?? ''}?',
+          context.l10n.insurance_view_resubmitMsg(claim.claimNumber ?? ''),
         ),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context),
-            child: const Text('Cancel'),
+            child: Text(context.l10n.insurance_view_cancelAction),
           ),
           TextButton(
             onPressed: () async {
@@ -376,7 +445,7 @@ class _InsurancePageState extends ConsumerState<InsurancePage> {
                 await controller.resubmitClaim(claim.id!);
               }
             },
-            child: const Text('Resubmit'),
+            child: Text(context.l10n.insurance_view_resubmitAction),
           ),
         ],
       ),
@@ -391,14 +460,14 @@ class _InsurancePageState extends ConsumerState<InsurancePage> {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title: const Text('Cancel Pre-Authorization'),
+        title: Text(context.l10n.insurance_view_cancelPreAuthTitle),
         content: Text(
-          'Are you sure you want to cancel pre-authorization ${auth.authNumber ?? ''}?',
+          context.l10n.insurance_view_cancelPreAuthMsg(auth.authNumber ?? ''),
         ),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context),
-            child: const Text('No'),
+            child: Text(context.l10n.insurance_view_no),
           ),
           TextButton(
             onPressed: () async {
@@ -407,7 +476,7 @@ class _InsurancePageState extends ConsumerState<InsurancePage> {
                 await controller.rejectPreAuth(auth.id!);
               }
             },
-            child: const Text('Yes, Cancel'),
+            child: Text(context.l10n.insurance_view_yesCancel),
           ),
         ],
       ),

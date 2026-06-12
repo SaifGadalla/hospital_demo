@@ -12,8 +12,7 @@ class AddAdmissionDialog extends ConsumerStatefulWidget {
   }
 
   @override
-  ConsumerState<AddAdmissionDialog> createState() =>
-      _AddAdmissionDialogState();
+  ConsumerState<AddAdmissionDialog> createState() => _AddAdmissionDialogState();
 }
 
 class _AddAdmissionDialogState extends ConsumerState<AddAdmissionDialog> {
@@ -28,15 +27,13 @@ class _AddAdmissionDialogState extends ConsumerState<AddAdmissionDialog> {
   @override
   Widget build(BuildContext context) {
     final state = ref.watch(addAdmissionDialogControllerProvider);
-    final controller = ref.read(
-      addAdmissionDialogControllerProvider.notifier,
-    );
+    final controller = ref.read(addAdmissionDialogControllerProvider.notifier);
     if (state.isLoading) {
       return const Center(child: CircularProgressIndicator());
     }
     return AlertDialog(
       scrollable: true,
-      title: const Text('Admit Patient'),
+      title: Text(context.l10n.inpatient_add_title),
       content: ReactiveForm(
         formGroup: controller.formGroup,
         child: SizedBox(
@@ -55,32 +52,32 @@ class _AddAdmissionDialogState extends ConsumerState<AddAdmissionDialog> {
                       child: Text('${patient.fullName} (${patient.mrn})'),
                     );
                   }).toList(),
-                  decoration: const InputDecoration(
-                    labelText: 'Patient',
+                  decoration: InputDecoration(
+                    labelText: context.l10n.inpatient_add_patient,
                   ),
                 ),
               ),
               DialogDropdownField<String>(
                 formControlName: 'admissionType',
-                label: 'Admission Type',
-                items: const [
+                label: context.l10n.inpatient_add_admissionType,
+                items: [
                   DropdownMenuItem(
                     value: 'Emergency',
-                    child: Text('Emergency'),
+                    child: Text(context.l10n.inpatient_add_emergency),
                   ),
                   DropdownMenuItem(
                     value: 'Elective',
-                    child: Text('Elective'),
+                    child: Text(context.l10n.inpatient_add_elective),
                   ),
                   DropdownMenuItem(
                     value: 'Transfer',
-                    child: Text('Transfer'),
+                    child: Text(context.l10n.inpatient_add_transfer),
                   ),
                 ],
               ),
               DialogTextField(
                 formControlName: 'admissionDiagnosis',
-                label: 'Admission Diagnosis',
+                label: context.l10n.inpatient_add_admissionDiagnosis,
                 width: 300,
               ),
               SizedBox(
@@ -93,7 +90,9 @@ class _AddAdmissionDialogState extends ConsumerState<AddAdmissionDialog> {
                       child: Text(ward.wardName ?? ''),
                     );
                   }).toList(),
-                  decoration: const InputDecoration(labelText: 'Ward'),
+                  decoration: InputDecoration(
+                    labelText: context.l10n.inpatient_add_ward,
+                  ),
                   onChanged: (_) {
                     controller.formGroup.control('bed').reset();
                   },
@@ -103,8 +102,9 @@ class _AddAdmissionDialogState extends ConsumerState<AddAdmissionDialog> {
                 formControlName: 'ward',
                 builder: (context, control, child) {
                   final selectedWard = control.value;
-                  final availableBeds =
-                      controller.getBedsForWard(selectedWard?.id);
+                  final availableBeds = controller.getBedsForWard(
+                    selectedWard?.id,
+                  );
                   return SizedBox(
                     width: 200,
                     child: ReactiveDropdownField<Bed>(
@@ -117,7 +117,9 @@ class _AddAdmissionDialogState extends ConsumerState<AddAdmissionDialog> {
                           ),
                         );
                       }).toList(),
-                      decoration: const InputDecoration(labelText: 'Bed'),
+                      decoration: InputDecoration(
+                        labelText: context.l10n.inpatient_add_bed,
+                      ),
                     ),
                   );
                 },
@@ -125,7 +127,7 @@ class _AddAdmissionDialogState extends ConsumerState<AddAdmissionDialog> {
               AppDatePicker(formControlName: 'admissionDate'),
               DialogTextField(
                 formControlName: 'notes',
-                label: 'Notes',
+                label: context.l10n.inpatient_add_notes,
                 width: 300,
               ),
             ],
@@ -135,7 +137,7 @@ class _AddAdmissionDialogState extends ConsumerState<AddAdmissionDialog> {
       actions: [
         TextButton(
           onPressed: () => Navigator.pop(context),
-          child: const Text('Cancel'),
+          child: Text(context.l10n.inpatient_add_cancel),
         ),
         TextButton(
           onPressed: () async {
@@ -146,7 +148,7 @@ class _AddAdmissionDialogState extends ConsumerState<AddAdmissionDialog> {
               }
             }
           },
-          child: const Text('Save'),
+          child: Text(context.l10n.inpatient_add_save),
         ),
       ],
     );

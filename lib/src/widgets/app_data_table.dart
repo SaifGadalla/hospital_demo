@@ -58,8 +58,8 @@ class AppDataTable extends StatelessWidget {
           children: [
             TableRow(
               decoration: BoxDecoration(
-                color: headingRowColor ?? ColorManager.surfaceElevated,
-                border: const Border(bottom: BorderSide(color: ColorManager.border)),
+                color: headingRowColor ?? context.colors.surfaceElevated,
+                border: Border(bottom: BorderSide(color: context.colors.border)),
               ),
               children: columns
                   .map(
@@ -85,10 +85,10 @@ class AppDataTable extends StatelessWidget {
             itemBuilder: (context, index) {
               final row = rows[index];
               return Container(
-                decoration: const BoxDecoration(
-                  color: ColorManager.surface,
+                decoration: BoxDecoration(
+                  color: context.colors.surface,
                   border: Border(
-                    bottom: BorderSide(color: ColorManager.divider),
+                    bottom: BorderSide(color: context.colors.divider),
                   ),
                 ),
                 child: Row(

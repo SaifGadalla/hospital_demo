@@ -1,3 +1,598 @@
 {
-    "@@locale": "ar"
+  "@@locale": "ar",
+  "utils_status_notTriaged": "غير مفروز",
+  "utils_triage_esiLevel": "ESI {triageLevel}",
+  "@utils_triage_esiLevel": {
+    "placeholders": {
+      "triageLevel": {
+        "type": "String"
+      }
+    }
+  },
+  "utils_status_inTreatment": "في العلاج",
+  "utils_status_waiting": "قيد الانتظار",
+  "utils_status_cancelled": "ملغى",
+  "utils_status_completed": "مكتمل",
+  "utils_status_closed": "مغلق",
+  "utils_status_unknown": "غير معروف",
+  "appointments_view_title": "المواعيد",
+  "appointments_view_description": "جدولة وتسجيل وصول وإكمال زيارات المرضى.",
+  "appointments_view_schedule": "جدولة",
+  "appointments_view_board": "لوحة",
+  "appointments_view_list": "قائمة",
+  "appointments_view_allTypes": "جميع الأنواع",
+  "appointments_view_consultation": "استشارة",
+  "appointments_view_followUp": "متابعة",
+  "appointments_view_procedure": "إجراء",
+  "appointments_view_clear": "مسح",
+  "appointments_view_apptNumber": "رقم الموعد",
+  "appointments_view_dateTime": "التاريخ / الوقت",
+  "appointments_view_patient": "المريض",
+  "appointments_view_type": "النوع",
+  "appointments_view_doctor": "الطبيب",
+  "appointments_view_status": "الحالة",
+  "appointments_add_title": "إضافة موعد",
+  "appointments_add_patient": "المريض",
+  "appointments_add_type": "نوع الموعد",
+  "appointments_add_consultation": "استشارة",
+  "appointments_add_followUp": "متابعة",
+  "appointments_add_procedure": "إجراء",
+  "appointments_add_notes": "ملاحظات",
+  "appointments_add_cancel": "إلغاء",
+  "appointments_add_save": "حفظ",
+  "dashboard_view_title": "لوحة القيادة",
+  "dashboard_view_description": "نظرة عامة حية عبر دورة حياة المريض، والطوارئ، والمرضى الداخليين، وغرفة العمليات.",
+  "dashboard_view_newAppointment": "موعد جديد",
+  "dashboard_view_viewPatients": "عرض المرضى",
+  "dashboard_view_totalPatients": "إجمالي المرضى",
+  "dashboard_view_todayAppointments": "مواعيد اليوم",
+  "dashboard_view_totalAppointmentsOnFile": "{totalAppointments} في الملف",
+  "@dashboard_view_totalAppointmentsOnFile": {
+    "placeholders": {
+      "totalAppointments": {
+        "type": "String"
+      }
+    }
+  },
+  "dashboard_view_erActive": "طوارئ نشطة",
+  "dashboard_view_totalErToday": "{totalERToday} إجمالي اليوم",
+  "@dashboard_view_totalErToday": {
+    "placeholders": {
+      "totalERToday": {
+        "type": "String"
+      }
+    }
+  },
+  "dashboard_view_bedsFree": "أسرة شاغرة",
+  "dashboard_view_acrossAllWards": "عبر جميع الأجنحة",
+  "dashboard_view_todaysAppointmentsCard": "مواعيد اليوم",
+  "dashboard_view_viewAll": "عرض الكل",
+  "dashboard_view_columnTime": "الوقت",
+  "dashboard_view_columnPatient": "المريض",
+  "dashboard_view_columnType": "النوع",
+  "dashboard_view_columnStatus": "الحالة",
+  "dashboard_view_activeErCard": "مرضى الطوارئ النشطين",
+  "dashboard_view_openEr": "فتح الطوارئ",
+  "dashboard_view_columnCall": "رقم المكالمة",
+  "dashboard_view_columnTriage": "الفرز",
+  "dashboard_view_bedOccupancyCard": "إشغال الأسرة",
+  "dashboard_view_manageIpd": "إدارة المرضى الداخليين",
+  "dashboard_view_insuranceClaimsCard": "مطالبات التأمين",
+  "dashboard_view_manageClaims": "إدارة المطالبات",
+  "emergency_view_title": "الطوارئ",
+  "emergency_view_description": "لوحة فرز حية للمرضى ومستويات الطوارئ.",
+  "emergency_view_registerArrival": "تسجيل وصول",
+  "emergency_view_ambulanceToast": "تسجيل مكالمات سيارة الإسعاف قريبا",
+  "emergency_view_ambulanceCall": "مكالمة إسعاف",
+  "emergency_view_activeCalls": "مكالمات نشطة",
+  "emergency_view_todayTotal": "إجمالي اليوم",
+  "emergency_view_notTriaged": "غير مفروز",
+  "emergency_view_level1Resus": "المستوى-1 (إنعاش)",
+  "emergency_view_recentAmbulanceCalls": "مكالمات إسعاف حديثة",
+  "emergency_view_columnCallNum": "رقم المكالمة",
+  "emergency_view_columnTime": "الوقت",
+  "emergency_view_columnPatient": "المريض",
+  "emergency_view_columnPickup": "موقع الالتقاط",
+  "emergency_view_columnIncident": "الحادث",
+  "emergency_view_columnStatus": "الحالة",
+  "emergency_view_columnActions": "إجراءات",
+  "emergency_view_statusEnRoute": "في الطريق",
+  "emergency_view_viewAction": "عرض",
+  "emergency_view_updateStatusAction": "تحديث الحالة",
+  "emergency_view_callTitle": "مكالمة إسعاف AC-{number}",
+  "@emergency_view_callTitle": {
+    "placeholders": {
+      "number": {
+        "type": "int"
+      }
+    }
+  },
+  "emergency_view_callTime": "وقت المكالمة",
+  "emergency_view_incidentType": "نوع الحادث",
+  "emergency_view_notes": "ملاحظات",
+  "emergency_view_close": "إغلاق",
+  "emergency_view_updateStatusTitle": "تحديث حالة مكالمة الإسعاف",
+  "emergency_view_patientNameDisplay": "المريض: {patientName}",
+  "@emergency_view_patientNameDisplay": {
+    "placeholders": {
+      "patientName": {
+        "type": "String"
+      }
+    }
+  },
+  "emergency_view_statusDispatched": "مرسل",
+  "emergency_view_statusOnScene": "في الموقع",
+  "emergency_view_statusTransporting": "نقل",
+  "emergency_view_statusArrived": "وصل إلى المستشفى",
+  "emergency_view_statusCompleted": "مكتمل",
+  "emergency_view_statusUpdatedToast": "تم تحديث الحالة إلى: {status}",
+  "@emergency_view_statusUpdatedToast": {
+    "placeholders": {
+      "status": {
+        "type": "String"
+      }
+    }
+  },
+  "emergency_view_cancel": "إلغاء",
+  "emergency_add_title": "تسجيل وصول للطوارئ",
+  "emergency_add_patient": "المريض",
+  "emergency_add_arrivalMode": "طريقة الوصول",
+  "emergency_add_walkIn": "مشياً",
+  "emergency_add_ambulance": "إسعاف",
+  "emergency_add_helicopter": "طائرة هليكوبتر",
+  "emergency_add_police": "شرطة",
+  "emergency_add_chiefComplaint": "الشكوى الرئيسية",
+  "emergency_add_triageLevel": "مستوى الفرز",
+  "emergency_add_level1": "1 - إنعاش",
+  "emergency_add_level2": "2 - طارئ",
+  "emergency_add_level3": "3 - عاجل",
+  "emergency_add_level4": "4 - أقل استعجالاً",
+  "emergency_add_level5": "5 - غير عاجل",
+  "emergency_add_notes": "ملاحظات",
+  "emergency_add_cancel": "إلغاء",
+  "emergency_add_save": "حفظ",
+  "inpatient_view_title": "المرضى الداخليين",
+  "inpatient_view_description": "الأجنحة، الأسرة، الدخول، النقل، والخروج.",
+  "inpatient_view_admit": "دخول",
+  "inpatient_view_activeAdmissions": "الدخول النشط",
+  "inpatient_view_bedsOccupied": "الأسرة المشغولة",
+  "inpatient_view_bedsAvailable": "الأسرة المتاحة",
+  "inpatient_view_occupancyRate": "معدل الإشغال",
+  "inpatient_view_wardBedMap": "خريطة أسرة الأجنحة",
+  "inpatient_view_available": "متاح",
+  "inpatient_view_occupied": "مشغول",
+  "inpatient_view_cleaning": "تنظيف",
+  "inpatient_view_blocked": "محظور",
+  "inpatient_view_wardFilterToast": "تصفية الأجنحة قريبا",
+  "inpatient_view_filterByWard": "تصفية حسب الجناح",
+  "inpatient_view_dateFilterToast": "تصفية التاريخ قريبا",
+  "inpatient_view_filterByDate": "تصفية حسب التاريخ",
+  "inpatient_view_columnAdmission": "رقم الدخول",
+  "inpatient_view_columnPatient": "المريض",
+  "inpatient_view_columnBed": "السرير",
+  "inpatient_view_columnDiagnosis": "التشخيص",
+  "inpatient_view_columnDateAdmitted": "تاريخ الدخول",
+  "inpatient_view_columnStatus": "الحالة",
+  "inpatient_view_columnActions": "إجراءات",
+  "inpatient_view_transferAction": "نقل",
+  "inpatient_view_dischargeAction": "خروج",
+  "inpatient_view_confirmDischargeTitle": "تأكيد الخروج",
+  "inpatient_view_confirmDischargeMsg": "هل أنت متأكد أنك تريد إخراج {patientName}؟",
+  "@inpatient_view_confirmDischargeMsg": {
+    "placeholders": {
+      "patientName": {
+        "type": "String"
+      }
+    }
+  },
+  "inpatient_view_cancel": "إلغاء",
+  "inpatient_view_transferTitle": "نقل المريض",
+  "inpatient_view_transferMsg": "نقل {patientName} إلى سرير جديد.",
+  "@inpatient_view_transferMsg": {
+    "placeholders": {
+      "patientName": {
+        "type": "String"
+      }
+    }
+  },
+  "inpatient_view_reasonForTransfer": "سبب النقل",
+  "inpatient_add_title": "دخول مريض",
+  "inpatient_add_patient": "المريض",
+  "inpatient_add_admissionType": "نوع الدخول",
+  "inpatient_add_emergency": "طوارئ",
+  "inpatient_add_elective": "اختياري",
+  "inpatient_add_transfer": "نقل",
+  "inpatient_add_admissionDiagnosis": "تشخيص الدخول",
+  "inpatient_add_ward": "الجناح",
+  "inpatient_add_bed": "السرير",
+  "inpatient_add_notes": "ملاحظات",
+  "inpatient_add_cancel": "إلغاء",
+  "inpatient_add_save": "حفظ",
+  "insurance_view_title": "التأمين والمطالبات",
+  "insurance_view_description": "الخطط، مسار المطالبات، الموافقات المسبقة.",
+  "insurance_view_newClaim": "مطالبة جديدة",
+  "insurance_view_totalClaims": "إجمالي المطالبات",
+  "insurance_view_approvedPaid": "معتمد/مدفوع",
+  "insurance_view_rejected": "مرفوض",
+  "insurance_view_totalClaimed": "إجمالي المطالب به",
+  "insurance_view_claimsTab": "المطالبات",
+  "insurance_view_preAuthsTab": "موافقات مسبقة",
+  "insurance_view_plansTab": "الخطط",
+  "insurance_view_columnClaim": "رقم المطالبة",
+  "insurance_view_columnServiceDate": "تاريخ الخدمة",
+  "insurance_view_columnPatient": "المريض",
+  "insurance_view_columnPlan": "الخطة",
+  "insurance_view_columnTotal": "الإجمالي",
+  "insurance_view_columnPaid": "المدفوع",
+  "insurance_view_columnStatus": "الحالة",
+  "insurance_view_columnActions": "إجراءات",
+  "insurance_view_viewAction": "عرض",
+  "insurance_view_resubmitAction": "إعادة إرسال",
+  "insurance_view_columnAuth": "رقم التفويض",
+  "insurance_view_columnService": "الخدمة",
+  "insurance_view_columnEstimatedCost": "التكلفة التقديرية",
+  "insurance_view_columnValidity": "الصلاحية",
+  "insurance_view_cancelAction": "إلغاء",
+  "insurance_view_columnCode": "الرمز",
+  "insurance_view_columnCoverage": "التغطية",
+  "insurance_view_columnCoPay": "الدفع المشترك",
+  "insurance_view_columnDeductible": "الخصم",
+  "insurance_view_columnAnnualLimit": "الحد السنوي",
+  "insurance_view_columnPreAuth": "موافقة مسبقة",
+  "insurance_view_required": "مطلوب",
+  "insurance_view_no": "لا",
+  "insurance_view_active": "نشط",
+  "insurance_view_inactive": "غير نشط",
+  "insurance_view_claimTitle": "مطالبة {claimNumber}",
+  "@insurance_view_claimTitle": {
+    "placeholders": {
+      "claimNumber": {
+        "type": "int"
+      }
+    }
+  },
+  "insurance_view_totalAmount": "إجمالي المبلغ",
+  "insurance_view_claimedAmount": "المبلغ المطالب به",
+  "insurance_view_paidAmount": "المبلغ المدفوع",
+  "insurance_view_diagnosisCodes": "رموز التشخيص",
+  "insurance_view_procedureCodes": "رموز الإجراءات",
+  "insurance_view_notes": "ملاحظات",
+  "insurance_view_close": "إغلاق",
+  "insurance_view_preAuthTitle": "موافقة مسبقة {authNumber}",
+  "@insurance_view_preAuthTitle": {
+    "placeholders": {
+      "authNumber": {
+        "type": "int"
+      }
+    }
+  },
+  "insurance_view_serviceRequested": "الخدمة المطلوبة",
+  "insurance_view_validFrom": "صالح من",
+  "insurance_view_validTo": "صالح إلى",
+  "insurance_view_resubmitTitle": "إعادة إرسال المطالبة",
+  "insurance_view_resubmitMsg": "هل أنت متأكد أنك تريد إعادة إرسال المطالبة {claimNumber}؟",
+  "@insurance_view_resubmitMsg": {
+    "placeholders": {
+      "claimNumber": {
+        "type": "int"
+      }
+    }
+  },
+  "insurance_view_cancelPreAuthTitle": "إلغاء الموافقة المسبقة",
+  "insurance_view_cancelPreAuthMsg": "هل أنت متأكد أنك تريد إلغاء الموافقة المسبقة {authNumber}؟",
+  "@insurance_view_cancelPreAuthMsg": {
+    "placeholders": {
+      "authNumber": {
+        "type": "int"
+      }
+    }
+  },
+  "insurance_view_yesCancel": "نعم، إلغاء",
+  "insurance_add_title": "مطالبة تأمين جديدة",
+  "insurance_add_patient": "المريض",
+  "insurance_add_insurancePlan": "خطة التأمين",
+  "insurance_add_diagnosisCodes": "رموز التشخيص",
+  "insurance_add_procedureCodes": "رموز الإجراءات",
+  "insurance_add_totalAmount": "إجمالي المبلغ",
+  "insurance_add_claimedAmount": "المبلغ المطالب به",
+  "insurance_add_notes": "ملاحظات",
+  "insurance_add_cancel": "إلغاء",
+  "insurance_add_save": "حفظ",
+  "laboratory_view_title": "المختبر",
+  "laboratory_view_description": "طلبات الاختبار، جمع العينات، النتائج، والموافقات.",
+  "laboratory_view_newOrder": "طلب جديد",
+  "laboratory_view_totalOrders": "إجمالي الطلبات",
+  "laboratory_view_pending": "قيد الانتظار",
+  "laboratory_view_inProgress": "قيد التنفيذ",
+  "laboratory_view_statPriority": "أولوية STAT",
+  "laboratory_view_allStatuses": "جميع الحالات",
+  "laboratory_view_sampleCollected": "تم جمع العينة",
+  "laboratory_view_completed": "مكتمل",
+  "laboratory_view_approved": "معتمد",
+  "laboratory_view_cancelled": "ملغى",
+  "laboratory_view_filterByStatus": "تصفية حسب الحالة",
+  "laboratory_view_allPriorities": "جميع الأولويات",
+  "laboratory_view_routine": "روتيني",
+  "laboratory_view_urgent": "عاجل",
+  "laboratory_view_stat": "حرج STAT",
+  "laboratory_view_filterByPriority": "تصفية حسب الأولوية",
+  "laboratory_view_clear": "مسح",
+  "laboratory_view_columnOrder": "رقم الطلب",
+  "laboratory_view_columnDate": "التاريخ",
+  "laboratory_view_columnPatient": "المريض",
+  "laboratory_view_columnTests": "التحاليل",
+  "laboratory_view_columnPriority": "الأولوية",
+  "laboratory_view_columnStatus": "الحالة",
+  "laboratory_view_columnActions": "إجراءات",
+  "laboratory_view_viewDetails": "عرض التفاصيل",
+  "laboratory_view_cancelOrderTooltip": "إلغاء الطلب",
+  "laboratory_view_orderDetailsTitle": "طلب مختبر {orderNumber}",
+  "@laboratory_view_orderDetailsTitle": {
+    "placeholders": {
+      "orderNumber": {
+        "type": "int"
+      }
+    }
+  },
+  "laboratory_view_patientId": "رقم المريض",
+  "laboratory_view_doctorId": "رقم الطبيب",
+  "laboratory_view_clinicalIndication": "الدلالة السريرية",
+  "laboratory_view_specimenType": "نوع العينة",
+  "laboratory_view_orderDate": "تاريخ الطلب",
+  "laboratory_view_testsTitle": "التحاليل",
+  "laboratory_view_close": "إغلاق",
+  "laboratory_view_cancelTitle": "إلغاء طلب المختبر",
+  "laboratory_view_cancelMsg": "هل أنت متأكد أنك تريد إلغاء الطلب {orderNumber}؟",
+  "@laboratory_view_cancelMsg": {
+    "placeholders": {
+      "orderNumber": {
+        "type": "int"
+      }
+    }
+  },
+  "laboratory_view_no": "لا",
+  "laboratory_view_yesCancel": "نعم، إلغاء",
+  "laboratory_add_title": "طلب مختبر جديد",
+  "laboratory_add_patient": "المريض",
+  "laboratory_add_priority": "الأولوية",
+  "laboratory_add_routine": "روتيني",
+  "laboratory_add_urgent": "عاجل",
+  "laboratory_add_stat": "حرج STAT",
+  "laboratory_add_clinicalIndication": "الدلالة السريرية",
+  "laboratory_add_specimenType": "نوع العينة",
+  "laboratory_add_notes": "ملاحظات",
+  "laboratory_add_cancel": "إلغاء",
+  "laboratory_add_save": "حفظ",
+  "medical_records_view_title": "السجلات الطبية",
+  "medical_records_view_description": "عرض وإدارة السجلات الطبية للمرضى.",
+  "medical_records_view_newRecord": "سجل جديد",
+  "medical_records_view_records": "السجلات",
+  "medical_records_view_recordId": "رقم السجل: {id}",
+  "@medical_records_view_recordId": {
+    "placeholders": {
+      "id": {
+        "type": "String"
+      }
+    }
+  },
+  "medical_records_view_noDate": "لا يوجد تاريخ",
+  "medical_records_view_selectRecord": "حدد سجلاً طبياً لعرض التفاصيل",
+  "medical_records_view_recordDetails": "تفاصيل السجل",
+  "medical_records_view_delete": "حذف",
+  "medical_records_view_patientId": "رقم المريض",
+  "medical_records_view_doctorId": "رقم الطبيب",
+  "medical_records_view_diagnosisCode": "رمز التشخيص",
+  "medical_records_view_diagnosisDescription": "وصف التشخيص",
+  "medical_records_view_subjective": "الشكوى",
+  "medical_records_view_objective": "الفحص",
+  "medical_records_view_assessment": "التقييم",
+  "medical_records_view_plan": "الخطة",
+  "medical_records_view_allergies": "الحساسية",
+  "medical_records_view_currentMedications": "الأدوية الحالية",
+  "medical_records_view_clinicalNotes": "ملاحظات سريرية",
+  "medical_records_view_deleteTitle": "حذف السجل الطبي",
+  "medical_records_view_deleteMsg": "هل أنت متأكد أنك تريد حذف هذا السجل الطبي؟",
+  "medical_records_view_cancel": "إلغاء",
+  "medical_records_add_title": "إضافة سجل طبي",
+  "medical_records_add_patient": "المريض",
+  "medical_records_add_diagnosisCode": "رمز التشخيص",
+  "medical_records_add_diagnosisDescription": "وصف التشخيص",
+  "medical_records_add_subjective": "الشكوى",
+  "medical_records_add_objective": "الفحص",
+  "medical_records_add_assessment": "التقييم",
+  "medical_records_add_plan": "الخطة",
+  "medical_records_add_allergies": "الحساسية",
+  "medical_records_add_currentMedications": "الأدوية الحالية",
+  "medical_records_add_clinicalNotes": "ملاحظات سريرية",
+  "medical_records_add_cancel": "إلغاء",
+  "medical_records_add_save": "حفظ",
+  "operating_room_view_title": "غرفة العمليات",
+  "operating_room_view_description": "جدول الجراحة، الفرق، قوائم السلامة.",
+  "operating_room_view_bookSurgery": "حجز جراحة",
+  "operating_room_view_totalBookings": "إجمالي الحجوزات",
+  "operating_room_view_scheduled": "مجدول",
+  "operating_room_view_inProgress": "قيد التنفيذ",
+  "operating_room_view_completed": "مكتمل",
+  "operating_room_view_columnDate": "التاريخ",
+  "operating_room_view_columnTime": "الوقت",
+  "operating_room_view_columnPatient": "المريض",
+  "operating_room_view_columnProcedure": "الإجراء",
+  "operating_room_view_columnRoom": "الغرفة",
+  "operating_room_view_columnPriority": "الأولوية",
+  "operating_room_view_columnStatus": "الحالة",
+  "operating_room_view_columnActions": "إجراءات",
+  "operating_room_view_viewAction": "عرض",
+  "operating_room_view_cancelAction": "إلغاء",
+  "operating_room_view_bookingTitle": "حجز جراحة - {procedure}",
+  "@operating_room_view_bookingTitle": {
+    "placeholders": {
+      "procedure": {
+        "type": "String"
+      }
+    }
+  },
+  "operating_room_view_duration": "المدة",
+  "operating_room_view_durationMin": "{minutes} دقائق",
+  "@operating_room_view_durationMin": {
+    "placeholders": {
+      "minutes": {
+        "type": "int"
+      }
+    }
+  },
+  "operating_room_view_anesthesia": "التخدير",
+  "operating_room_view_notes": "ملاحظات",
+  "operating_room_view_close": "إغلاق",
+  "operating_room_view_cancelTitle": "إلغاء الجراحة",
+  "operating_room_view_cancelMsg": "إلغاء الجراحة للمريض {patient}؟",
+  "@operating_room_view_cancelMsg": {
+    "placeholders": {
+      "patient": {
+        "type": "String"
+      }
+    }
+  },
+  "operating_room_view_reasonForCancel": "سبب الإلغاء",
+  "operating_room_view_no": "لا",
+  "operating_room_view_yesCancel": "نعم، إلغاء",
+  "operating_room_add_title": "حجز جراحة",
+  "operating_room_add_patient": "المريض",
+  "operating_room_add_procedure": "الإجراء",
+  "operating_room_add_operatingRoom": "غرفة العمليات",
+  "operating_room_add_duration": "المدة (دقائق)",
+  "operating_room_add_priority": "الأولوية",
+  "operating_room_add_routine": "روتينية",
+  "operating_room_add_urgent": "عاجلة",
+  "operating_room_add_emergency": "طوارئ",
+  "operating_room_add_anesthesiaType": "نوع التخدير",
+  "operating_room_add_general": "عام",
+  "operating_room_add_local": "موضعي",
+  "operating_room_add_regional": "ناحي",
+  "operating_room_add_spinal": "نصفي",
+  "operating_room_add_sedation": "تهدئة",
+  "operating_room_add_notes": "ملاحظات",
+  "operating_room_add_cancel": "إلغاء",
+  "operating_room_add_save": "حفظ",
+  "patients_view_title": "المرضى",
+  "patients_view_description": "بيانات المرضى المسجلين - الرقم الطبي، الديموغرافيا، التأمين، التواصل.",
+  "patients_view_addPatient": "إضافة مريض",
+  "patients_view_allGenders": "جميع الأجناس",
+  "patients_view_male": "ذكر",
+  "patients_view_female": "أنثى",
+  "patients_view_genderHint": "الجنس",
+  "patients_view_columnMrn": "الرقم الطبي",
+  "patients_view_columnPatient": "المريض",
+  "patients_view_columnDobAge": "تاريخ الميلاد / العمر",
+  "patients_view_columnGender": "الجنس",
+  "patients_view_columnPhone": "الهاتف",
+  "patients_view_columnBlood": "فصيلة الدم",
+  "patients_view_columnStatus": "الحالة",
+  "patients_view_columnActions": "إجراءات",
+  "patients_view_active": "نشط",
+  "patients_view_inactive": "غير نشط",
+  "patients_view_viewAction": "عرض",
+  "patients_view_editAction": "تعديل",
+  "patients_view_patientDetails": "تفاصيل المريض",
+  "patients_view_name": "الاسم",
+  "patients_view_dob": "تاريخ الميلاد",
+  "patients_view_age": "العمر",
+  "patients_view_bloodType": "فصيلة الدم",
+  "patients_view_nationalId": "الهوية الوطنية",
+  "patients_view_email": "البريد الإلكتروني",
+  "patients_view_mobile": "الجوال",
+  "patients_view_address": "العنوان",
+  "patients_view_emergencyContact": "جهة اتصال الطوارئ",
+  "patients_view_emergencyPhone": "هاتف الطوارئ",
+  "patients_view_relationship": "صلة القرابة",
+  "patients_view_vip": "كبار الشخصيات",
+  "patients_view_yes": "نعم",
+  "patients_view_no": "لا",
+  "patients_view_close": "إغلاق",
+  "patients_add_addTitle": "إضافة مريض",
+  "patients_add_editTitle": "تعديل بيانات المريض",
+  "patients_add_mrn": "الرقم الطبي",
+  "patients_add_firstName": "الاسم الأول",
+  "patients_add_lastName": "اسم العائلة",
+  "patients_add_email": "البريد الإلكتروني",
+  "patients_add_mobile": "الجوال",
+  "patients_add_dateOfBirth": "تاريخ الميلاد",
+  "patients_add_gender": "الجنس",
+  "patients_add_male": "ذكر",
+  "patients_add_female": "أنثى",
+  "patients_add_bloodType": "فصيلة الدم",
+  "patients_add_address": "العنوان",
+  "patients_add_nationalId": "الهوية الوطنية",
+  "patients_add_emergencyContactName": "اسم جهة اتصال الطوارئ",
+  "patients_add_emergencyContactPhone": "هاتف جهة اتصال الطوارئ",
+  "patients_add_emergencyContactRelationship": "صلة القرابة",
+  "patients_add_vipStatus": "حالة كبار الشخصيات",
+  "patients_add_activeStatus": "الحالة (نشط)",
+  "patients_add_cancel": "إلغاء",
+  "patients_add_save": "حفظ",
+  "pharmacy_view_title": "الصيدلية",
+  "pharmacy_view_description": "الوصفات الطبية، الصرف، وتتبع الأدوية.",
+  "pharmacy_view_newPrescription": "وصفة طبية جديدة",
+  "pharmacy_view_totalRx": "إجمالي الوصفات",
+  "pharmacy_view_pending": "قيد الانتظار",
+  "pharmacy_view_dispensed": "تم الصرف",
+  "pharmacy_view_lineItems": "الأصناف",
+  "pharmacy_view_allStatuses": "جميع الحالات",
+  "pharmacy_view_cancelled": "ملغاة",
+  "pharmacy_view_filterByStatus": "تصفية حسب الحالة",
+  "pharmacy_view_columnRx": "رقم الوصفة",
+  "pharmacy_view_columnDate": "التاريخ",
+  "pharmacy_view_columnPatient": "المريض",
+  "pharmacy_view_columnDiagnosis": "التشخيص",
+  "pharmacy_view_columnItems": "العناصر",
+  "pharmacy_view_columnStatus": "الحالة",
+  "pharmacy_view_columnActions": "إجراءات",
+  "pharmacy_view_noItems": "لا توجد عناصر",
+  "pharmacy_view_dispenseAction": "صرف",
+  "pharmacy_view_cancelAction": "إلغاء",
+  "pharmacy_view_cancelTitle": "إلغاء الوصفة الطبية",
+  "pharmacy_view_cancelMsg": "هل أنت متأكد أنك تريد إلغاء الوصفة الطبية {rxNumber}؟",
+  "@pharmacy_view_cancelMsg": {
+    "placeholders": {
+      "rxNumber": {
+        "type": "int"
+      }
+    }
+  },
+  "pharmacy_view_yesCancel": "نعم، إلغاء",
+  "pharmacy_view_dispenseTitle": "صرف الوصفة الطبية",
+  "pharmacy_view_dispenseMsg": "هل تريد صرف الوصفة الطبية {rxNumber}؟",
+  "@pharmacy_view_dispenseMsg": {
+    "placeholders": {
+      "rxNumber": {
+        "type": "int"
+      }
+    }
+  },
+  "pharmacy_view_no": "لا",
+  "pharmacy_view_yesDispense": "نعم، صرف",
+  "pharmacy_add_title": "وصفة طبية جديدة",
+  "pharmacy_add_patient": "المريض",
+  "pharmacy_add_diagnosis": "التشخيص",
+  "pharmacy_add_medicationItems": "عناصر الأدوية",
+  "pharmacy_add_addItem": "إضافة دواء",
+  "pharmacy_add_medicationName": "اسم الدواء",
+  "pharmacy_add_dosage": "الجرعة",
+  "pharmacy_add_frequency": "التكرار",
+  "pharmacy_add_durationDays": "المدة (أيام)",
+  "pharmacy_add_instructions": "التعليمات",
+  "pharmacy_add_notes": "ملاحظات",
+  "pharmacy_add_cancel": "إلغاء",
+  "pharmacy_add_save": "حفظ",
+  "drawer_overview": "نظرة عامة",
+  "drawer_dashboard": "لوحة القيادة",
+  "drawer_patients": "المرضى",
+  "drawer_appointments": "المواعيد",
+  "drawer_medicalRecords": "السجلات الطبية",
+  "drawer_pharmacy": "الصيدلية",
+  "drawer_laboratory": "المختبر",
+  "drawer_inpatient": "التنويم (IPD)",
+  "drawer_emergency": "الطوارئ",
+  "drawer_operatingRoom": "غرفة العمليات",
+  "drawer_insurance": "التأمين",
+  "drawer_logout": "تسجيل الخروج"
 }

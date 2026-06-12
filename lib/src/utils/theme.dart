@@ -1,95 +1,169 @@
 import '../../common.dart';
 
-ThemeData lightTheme = ThemeData(
-  brightness: Brightness.light,
-  colorScheme: ColorScheme.fromSeed(
-    seedColor: ColorManager.primary,
-    primary: ColorManager.primary,
-    secondary: ColorManager.secondary,
-    surface: ColorManager.surface,
-    error: ColorManager.error,
-  ),
-  scaffoldBackgroundColor: ColorManager.background,
-  appBarTheme: AppBarTheme(
-    backgroundColor: ColorManager.primary,
-    foregroundColor: ColorManager.textInverse,
-    elevation: 0,
-  ),
-  textTheme: TextTheme(
-    displayLarge: TextStyleManager.h1,
-    displayMedium: TextStyleManager.h2,
-    displaySmall: TextStyleManager.h3,
-    headlineMedium: TextStyleManager.h4,
-    bodyLarge: TextStyleManager.bodyLarge,
-    bodyMedium: TextStyleManager.bodyMedium,
-    bodySmall: TextStyleManager.bodySmall,
-    labelLarge: TextStyleManager.buttonText,
-  ),
-  inputDecorationTheme: InputDecorationTheme(
-    filled: true,
-    fillColor: ColorManager.surface,
-    border: OutlineInputBorder(
-      borderRadius: BorderRadius.circular(12),
-      borderSide: const BorderSide(color: ColorManager.border),
+ThemeData _buildTheme(Brightness brightness, AppColors colors) {
+  final isLight = brightness == Brightness.light;
+
+  return ThemeData(
+    brightness: brightness,
+    colorScheme: ColorScheme.fromSeed(
+      brightness: brightness,
+      seedColor: colors.primary,
+      primary: colors.primary,
+      secondary: colors.secondary,
+      surface: colors.surface,
+      error: colors.error,
+      onPrimary: colors.textInverse,
+      onSecondary: colors.textInverse,
+      onSurface: colors.textPrimary,
+      onError: colors.textInverse,
     ),
-    enabledBorder: OutlineInputBorder(
-      borderRadius: BorderRadius.circular(12),
-      borderSide: const BorderSide(color: ColorManager.border),
+    scaffoldBackgroundColor: colors.background,
+    extensions: [colors],
+    appBarTheme: AppBarTheme(
+      backgroundColor: colors.surface,
+      foregroundColor: colors.textPrimary,
+      elevation: 0,
+      centerTitle: false,
+      iconTheme: IconThemeData(color: colors.textPrimary),
     ),
-    focusedBorder: OutlineInputBorder(
-      borderRadius: BorderRadius.circular(12),
-      borderSide: const BorderSide(color: ColorManager.primary, width: 2),
-    ),
-  ),
-  searchBarTheme: SearchBarThemeData(
-    backgroundColor: WidgetStateProperty.all(ColorManager.surfaceElevated),
-    elevation: WidgetStateProperty.all(0),
-    shadowColor: WidgetStateProperty.all(Colors.transparent),
-    side: WidgetStateProperty.all(const BorderSide(color: ColorManager.border)),
-    shape: WidgetStateProperty.all(
-      RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-    ),
-  ),
-  dropdownMenuTheme: DropdownMenuThemeData(
-    menuStyle: MenuStyle(
-      backgroundColor: WidgetStateProperty.all(ColorManager.surface),
-      side: WidgetStateProperty.all(const BorderSide(color: ColorManager.border)),
-      shape: WidgetStateProperty.all(
-        RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+    dialogTheme: DialogThemeData(
+      backgroundColor: colors.surface,
+      elevation: 8,
+      shadowColor: Colors.black.withValues(alpha: 0.1),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(24)),
+      titleTextStyle: TextStyleManager.h3.copyWith(color: colors.textPrimary),
+      contentTextStyle: TextStyleManager.bodyMedium.copyWith(
+        color: colors.textSecondary,
       ),
     ),
-  ),
-  buttonTheme: ButtonThemeData(
-    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-  ),
-  elevatedButtonTheme: ElevatedButtonThemeData(
-    style: ElevatedButton.styleFrom(
-      backgroundColor: ColorManager.primary,
-      foregroundColor: ColorManager.textInverse,
-      textStyle: TextStyleManager.buttonText,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+    textTheme: TextTheme(
+      displayLarge: TextStyleManager.h1.copyWith(color: colors.textPrimary),
+      displayMedium: TextStyleManager.h2.copyWith(color: colors.textPrimary),
+      displaySmall: TextStyleManager.h3.copyWith(color: colors.textPrimary),
+      headlineMedium: TextStyleManager.h4.copyWith(color: colors.textPrimary),
+      bodyLarge: TextStyleManager.bodyLarge.copyWith(color: colors.textPrimary),
+      bodyMedium: TextStyleManager.bodyMedium.copyWith(
+        color: colors.textPrimary,
+      ),
+      bodySmall: TextStyleManager.bodySmall.copyWith(
+        color: colors.textSecondary,
+      ),
+      labelLarge: TextStyleManager.buttonText.copyWith(
+        color: colors.textInverse,
+      ),
+    ),
+    inputDecorationTheme: InputDecorationTheme(
+      filled: true,
+      fillColor: isLight ? colors.surface : colors.surfaceElevated,
+      contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+      border: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(16),
+        borderSide: BorderSide(color: colors.border),
+      ),
+      enabledBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(16),
+        borderSide: BorderSide(color: colors.border),
+      ),
+      focusedBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(16),
+        borderSide: BorderSide(color: colors.primary, width: 2),
+      ),
+      errorBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(16),
+        borderSide: BorderSide(color: colors.error),
+      ),
+      focusedErrorBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(16),
+        borderSide: BorderSide(color: colors.error, width: 2),
+      ),
+      labelStyle: TextStyleManager.bodyMedium.copyWith(
+        color: colors.textSecondary,
+      ),
+      hintStyle: TextStyleManager.bodyMedium.copyWith(
+        color: colors.textSecondary,
+      ),
+    ),
+    searchBarTheme: SearchBarThemeData(
+      backgroundColor: WidgetStateProperty.all(colors.surfaceElevated),
+      elevation: WidgetStateProperty.all(0),
+      shadowColor: WidgetStateProperty.all(Colors.transparent),
+      side: WidgetStateProperty.all(BorderSide(color: colors.border)),
+      shape: WidgetStateProperty.all(
+        RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+      ),
+      textStyle: WidgetStateProperty.all(
+        TextStyleManager.bodyMedium.copyWith(color: colors.textPrimary),
+      ),
+      hintStyle: WidgetStateProperty.all(
+        TextStyleManager.bodyMedium.copyWith(color: colors.textSecondary),
+      ),
+    ),
+    dropdownMenuTheme: DropdownMenuThemeData(
+      menuStyle: MenuStyle(
+        backgroundColor: WidgetStateProperty.all(colors.surface),
+        side: WidgetStateProperty.all(BorderSide(color: colors.border)),
+        shape: WidgetStateProperty.all(
+          RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+        ),
+      ),
+      textStyle: TextStyleManager.bodyMedium.copyWith(
+        color: colors.textPrimary,
+      ),
+    ),
+    buttonTheme: ButtonThemeData(
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+    ),
+    elevatedButtonTheme: ElevatedButtonThemeData(
+      style: ElevatedButton.styleFrom(
+        backgroundColor: colors.primary,
+        foregroundColor: colors.textInverse,
+        textStyle: TextStyleManager.buttonText,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+        elevation: 0,
+        padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
+      ),
+    ),
+    textButtonTheme: TextButtonThemeData(
+      style: TextButton.styleFrom(
+        foregroundColor: colors.primary,
+        textStyle: TextStyleManager.buttonText.copyWith(color: colors.primary),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+      ),
+    ),
+    outlinedButtonTheme: OutlinedButtonThemeData(
+      style: OutlinedButton.styleFrom(
+        foregroundColor: colors.textPrimary,
+        side: BorderSide(color: colors.border),
+        textStyle: TextStyleManager.buttonText.copyWith(
+          color: colors.textPrimary,
+        ),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+        padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
+      ),
+    ),
+    dividerTheme: DividerThemeData(
+      color: colors.divider,
+      thickness: 1,
+      space: 1,
+    ),
+    cardTheme: CardThemeData(
+      color: colors.surface,
       elevation: 0,
-      padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(20),
+        side: BorderSide(color: colors.border),
+      ),
+      margin: EdgeInsets.zero,
     ),
-  ),
-  textButtonTheme: TextButtonThemeData(
-    style: TextButton.styleFrom(
-      foregroundColor: ColorManager.primary,
-      textStyle: TextStyleManager.buttonText.copyWith(color: ColorManager.primary),
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+    bottomSheetTheme: BottomSheetThemeData(
+      backgroundColor: colors.surface,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
+      ),
     ),
-  ),
-  outlinedButtonTheme: OutlinedButtonThemeData(
-    style: OutlinedButton.styleFrom(
-      foregroundColor: ColorManager.primary,
-      side: const BorderSide(color: ColorManager.border),
-      textStyle: TextStyleManager.buttonText.copyWith(color: ColorManager.primary),
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-    ),
-  ),
-  dividerTheme: const DividerThemeData(
-    color: ColorManager.divider,
-    thickness: 1,
-    space: 1,
-  ),
-);
+  );
+}
+
+ThemeData lightTheme = _buildTheme(Brightness.light, AppColors.light);
+ThemeData darkTheme = _buildTheme(Brightness.dark, AppColors.dark);

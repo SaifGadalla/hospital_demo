@@ -10,7 +10,9 @@ class HomePage extends ConsumerWidget {
       description:
           'A unified platform for hospital operations, finance, HR, supply chain, and more.',
       mainButtonTitle: 'Get Started',
-      mainButtonOnTap: () {},
+      mainButtonOnTap: () {
+        context.goNamed(AppRoutes.dashboard);
+      },
       customBody: Column(
         children: [
           const SizedBox(height: 20),

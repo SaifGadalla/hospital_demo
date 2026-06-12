@@ -37,10 +37,9 @@ class _DashboardPageState extends ConsumerState<DashboardPage>
     }
     return AppPage(
       searchFormGroup: searchFormGroup,
-      title: 'Dashboard',
-      description:
-          'Live overview across the patient lifecycle, ER, IPD, OR, and revenue cycle.',
-      mainButtonTitle: 'New Appointment',
+      title: context.l10n.dashboard_view_title,
+      description: context.l10n.dashboard_view_description,
+      mainButtonTitle: context.l10n.dashboard_view_newAppointment,
       mainButtonOnTap: () {
         context.goNamed(AppRoutes.appointments);
       },
@@ -49,180 +48,188 @@ class _DashboardPageState extends ConsumerState<DashboardPage>
           onPressed: () {
             context.goNamed(AppRoutes.patients);
           },
-          child: Text('View Patients'),
+          child: Text(context.l10n.dashboard_view_viewPatients),
         ),
       ],
       numberCards: [
         NumberCard(
-          title: 'Total Patients',
+          title: context.l10n.dashboard_view_totalPatients,
           icon: Icons.people,
           value: state.totalPatients.toString(),
-          footer: '',
         ),
         NumberCard(
-          title: 'Today appointments',
+          title: context.l10n.dashboard_view_todayAppointments,
           icon: Icons.calendar_today,
           value: state.todayAppointments?.length.toString() ?? '0',
-          footer: '${state.totalAppointments} on file',
+          subtitle: context.l10n.dashboard_view_totalAppointmentsOnFile(state.totalAppointments.toString()),
         ),
         NumberCard(
-          title: 'ER active',
+          title: context.l10n.dashboard_view_erActive,
           icon: Icons.bed,
           value: state.activeER?.length.toString() ?? '0',
-          footer: '${state.totalERToday} total today',
+          subtitle: context.l10n.dashboard_view_totalErToday(state.totalERToday.toString()),
         ),
         NumberCard(
-          title: 'Beds free',
+          title: context.l10n.dashboard_view_bedsFree,
           icon: Icons.healing,
           value: '${state.freeBeds} / ${state.totalBeds}',
-          footer: 'Across all wards',
+          subtitle: context.l10n.dashboard_view_acrossAllWards,
         ),
       ],
-      customBody: GridView.count(
-        crossAxisCount: getValueForScreenType<int>(
-          context: context,
-          mobile: 1,
-          tablet: 2,
-          desktop: 2,
-        ),
-        mainAxisSpacing: 20,
-        crossAxisSpacing: 20,
-        mainAxisExtent: 350,
-        shrinkWrap: true,
-        physics: const NeverScrollableScrollPhysics(),
-        children: [
-          StatisticsCard(
-            title: 'Today\'s appointments',
-            buttonText: 'View All',
-            buttonOnPressed: () {},
-            content: AppDataTable(
-              columns: const [
-                AppColumn(width: 70, label: 'Time'),
-                AppColumn(label: 'Patient'),
-                AppColumn(width: 120, label: 'Type'),
-                AppColumn(label: 'Status'),
-              ],
-              rows: state.todayAppointments != null
-                  ? state.todayAppointments!
-                        .map(
-                          (e) => DataRow(
-                            cells: [
-                              DataCell(
-                                Text(
-                                  DateFormat(
-                                    'HH:mm',
-                                  ).format(e.appointmentDate!),
-                                ),
-                              ),
-                              DataCell(Text(e.patientName ?? '')),
-                              DataCell(Text(e.appointmentType ?? '')),
-                              DataCell(Text(e.status ?? '')),
-                            ],
-                          ),
-                        )
-                        .toList()
-                  : [],
-            ),
+      customBody: ScrollConfiguration(
+        behavior: ScrollConfiguration.of(context).copyWith(scrollbars: false),
+        child: GridView.count(
+          crossAxisCount: getValueForScreenType<int>(
+            context: context,
+            mobile: 1,
+            tablet: 2,
+            desktop: 2,
           ),
-          StatisticsCard(
-            title: 'Active ER patients',
-            buttonText: 'Open ER',
-            buttonOnPressed: () {},
-            content: AppDataTable(
-              columns: const [
-                AppColumn(width: 155, label: 'Call #'),
-                AppColumn(label: 'Patient'),
-                AppColumn(width: 90, label: 'Triage'),
-                AppColumn(label: 'Status'),
-              ],
-              rows: state.activeER != null
-                  ? state.activeER!
-                        .map(
-                          (e) => DataRow(
-                            cells: [
-                              DataCell(Text(e.erNumber ?? '')),
-                              DataCell(Text(e.patientName ?? '')),
-                              DataCell(triageLevelWidget(e.triageLevel ?? 0)),
-                              DataCell(statusWidget(e.status ?? '')),
-                            ],
-                          ),
-                        )
-                        .toList()
-                  : [],
-            ),
-          ),
-          if (state.wards != null && state.wards!.isNotEmpty)
+          mainAxisSpacing: 20,
+          crossAxisSpacing: 20,
+          mainAxisExtent: 350,
+          shrinkWrap: true,
+          physics: const NeverScrollableScrollPhysics(),
+          children: [
             StatisticsCard(
-              title: 'Bed occupancy',
-              buttonText: 'Manage IPD',
-              buttonOnPressed: () {},
-              content: ListView(
-                padding: EdgeInsets.all(16),
-                shrinkWrap: true,
-                physics: NeverScrollableScrollPhysics(),
-                children: [
-                  ...state.wards!.map((ward) {
-                    return Column(
-                      crossAxisAlignment: .start,
-                      mainAxisAlignment: .start,
-                      mainAxisSize: .min,
-                      spacing: 10,
-                      children: [
-                        Row(
-                          mainAxisAlignment: .spaceBetween,
-                          children: [
-                            Text(ward.wardName ?? ''),
-                            Text(
-                              '${getOccupiedBeds(controller.beds, ward.id ?? '')} / ${ward.totalBeds}',
-                            ),
-                          ],
-                        ),
-                        LinearProgressIndicator(
-                          value:
-                              (getOccupiedBeds(
-                                controller.beds,
-                                ward.id ?? '',
-                              )) /
-                              (ward.totalBeds ?? 1),
-                          color: ColorManager.success,
-                          backgroundColor: ColorManager.successBackground,
-                          borderRadius: BorderRadius.circular(8),
-                          minHeight: 8,
-                        ),
-                        SizedBox(height: 8),
-                      ],
-                    );
-                  }),
+              title: Text(context.l10n.dashboard_view_todaysAppointmentsCard),
+              action: TextButton(
+                onPressed: () {},
+                child: Text(context.l10n.dashboard_view_viewAll),
+              ),
+              content: AppDataTable(
+                columns: [
+                  AppColumn(width: 70, label: context.l10n.dashboard_view_columnTime),
+                  AppColumn(label: context.l10n.dashboard_view_columnPatient),
+                  AppColumn(width: 120, label: context.l10n.dashboard_view_columnType),
+                  AppColumn(label: context.l10n.dashboard_view_columnStatus),
                 ],
+                rows: state.todayAppointments != null
+                    ? state.todayAppointments!
+                          .map(
+                            (e) => DataRow(
+                              cells: [
+                                DataCell(
+                                  Text(
+                                    DateFormat(
+                                      'HH:mm',
+                                    ).format(e.appointmentDate!),
+                                  ),
+                                ),
+                                DataCell(Text(e.patientName ?? '')),
+                                DataCell(Text(e.appointmentType ?? '')),
+                                DataCell(Text(e.status ?? '')),
+                              ],
+                            ),
+                          )
+                          .toList()
+                    : [],
               ),
             ),
-          if (state.insuranceClaims != null &&
-              state.insuranceClaims!.isNotEmpty)
             StatisticsCard(
-              title: 'Insurance claims pipeline',
-              buttonText: 'Manage claims',
-              buttonOnPressed: () {},
-              content: ListView(
-                padding: EdgeInsets.all(16),
-                shrinkWrap: true,
-                physics: NeverScrollableScrollPhysics(),
-                children: [
-                  ...state.insuranceClaims!.map((e) {
+              title: Text(context.l10n.dashboard_view_activeErCard),
+              action: TextButton(
+                onPressed: () {},
+                child: Text(context.l10n.dashboard_view_openEr),
+              ),
+              content: AppDataTable(
+                columns: const [
+                  AppColumn(width: 155, label: 'Call #'),
+                  AppColumn(label: 'Patient'),
+                  AppColumn(width: 90, label: 'Triage'),
+                  AppColumn(label: 'Status'),
+                ],
+                rows: state.activeER != null
+                    ? state.activeER!
+                          .map(
+                            (e) => DataRow(
+                              cells: [
+                                DataCell(Text(e.erNumber ?? '')),
+                                DataCell(Text(e.patientName ?? '')),
+                                DataCell(triageLevelWidget(e.triageLevel ?? 0)),
+                                DataCell(statusWidget(e.status ?? '')),
+                              ],
+                            ),
+                          )
+                          .toList()
+                    : [],
+              ),
+            ),
+            if (state.wards != null && state.wards!.isNotEmpty)
+              StatisticsCard(
+                title: Text(context.l10n.dashboard_view_bedOccupancyCard),
+                action: TextButton(
+                  onPressed: () {},
+                  child: Text(context.l10n.dashboard_view_manageIpd),
+                ),
+                content: ListView(
+                  padding: EdgeInsets.all(16),
+                  shrinkWrap: true,
+                  physics: NeverScrollableScrollPhysics(),
+                  children: [
+                    ...state.wards!.map((ward) {
+                      return Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(ward.wardName ?? ''),
+                              Text(
+                                '${getOccupiedBeds(controller.beds, ward.id ?? '')} / ${ward.totalBeds}',
+                              ),
+                            ],
+                          ),
+                          LinearProgressIndicator(
+                            value:
+                                (getOccupiedBeds(
+                                  controller.beds,
+                                  ward.id ?? '',
+                                )) /
+                                (ward.totalBeds ?? 1),
+                            color: context.colors.success,
+                            backgroundColor: context.colors.successBackground,
+                            borderRadius: BorderRadius.circular(8),
+                            minHeight: 8,
+                          ),
+                          SizedBox(height: 8),
+                        ],
+                      );
+                    }),
+                  ],
+                ),
+              ),
+            if (state.insuranceClaims != null &&
+                state.insuranceClaims!.isNotEmpty)
+              StatisticsCard(
+                title: Text(context.l10n.dashboard_view_insuranceClaimsCard),
+                action: TextButton(
+                  onPressed: () {},
+                  child: Text(context.l10n.dashboard_view_manageClaims),
+                ),
+                content: ListView.builder(
+                  itemCount: state.insuranceClaims?.length,
+                  padding: EdgeInsets.all(16),
+                  shrinkWrap: true,
+                  physics: NeverScrollableScrollPhysics(),
+                  itemBuilder: (context, index) {
+                    final e = state.insuranceClaims![index];
                     final claimed = e.claimedAmount ?? 0;
                     final total = e.totalAmount ?? 0;
                     final value = claimed / total;
                     return Column(
                       children: [
                         Row(
-                          mainAxisSize: .min,
-                          spacing: 10,
+                          mainAxisSize: MainAxisSize.min,
                           children: [
                             Expanded(child: Text(e.status ?? '')),
                             Expanded(
                               child: LinearProgressIndicator(
                                 value: value,
-                                color: ColorManager.primary,
-                                backgroundColor: ColorManager.primaryLight
+                                color: context.colors.primary,
+                                backgroundColor: context.colors.primaryLight
                                     .withValues(alpha: 0.1),
                                 borderRadius: BorderRadius.circular(8),
                                 minHeight: 4,
@@ -234,11 +241,11 @@ class _DashboardPageState extends ConsumerState<DashboardPage>
                         SizedBox(height: 10),
                       ],
                     );
-                  }),
-                ],
+                  },
+                ),
               ),
-            ),
-        ],
+          ],
+        ),
       ),
     );
   }
@@ -248,14 +255,14 @@ class NumberCard extends ConsumerWidget {
   final String title;
   final IconData icon;
   final String value;
-  final String? footer;
+  final String? subtitle;
 
   const NumberCard({
     super.key,
     required this.title,
     required this.icon,
     required this.value,
-    this.footer,
+    this.subtitle,
   });
 
   @override
@@ -270,8 +277,8 @@ class NumberCard extends ConsumerWidget {
       padding: const EdgeInsets.all(24),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(16),
-        border: Border.all(color: ColorManager.border),
-        color: ColorManager.surface,
+        border: Border.all(color: context.colors.border),
+        color: context.colors.surface,
         boxShadow: [
           BoxShadow(
             color: Colors.black.withValues(alpha: 0.02),
@@ -284,7 +291,6 @@ class NumberCard extends ConsumerWidget {
         mainAxisSize: MainAxisSize.min,
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
-        spacing: 16,
         children: [
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -293,24 +299,25 @@ class NumberCard extends ConsumerWidget {
                 child: Text(
                   title,
                   style: TextStyleManager.bodyMedium.copyWith(
-                    color: ColorManager.textSecondary,
+                    color: context.colors.textSecondary,
                   ),
                 ),
               ),
               Container(
                 padding: const EdgeInsets.all(8),
                 decoration: BoxDecoration(
-                  color: ColorManager.primaryLight.withValues(alpha: 0.1),
+                  color: context.colors.primaryLight.withValues(alpha: 0.1),
                   borderRadius: BorderRadius.circular(12),
                 ),
                 child: Center(
-                  child: Icon(icon, color: ColorManager.primary, size: 20),
+                  child: Icon(icon, color: context.colors.primary, size: 20),
                 ),
               ),
             ],
           ),
+          SizedBox(height: 16),
           Text(value, style: TextStyleManager.h2),
-          if (footer != null) Text(footer!, style: TextStyleManager.caption),
+          if (subtitle != null) Text(subtitle!, style: TextStyleManager.caption),
         ],
       ),
     );
@@ -318,53 +325,55 @@ class NumberCard extends ConsumerWidget {
 }
 
 class StatisticsCard extends ConsumerWidget {
-  final String title;
-  final String buttonText;
-  final VoidCallback buttonOnPressed;
+  final Widget title;
+  final Widget action;
   final Widget content;
 
   const StatisticsCard({
     super.key,
     required this.title,
-    required this.buttonText,
-    required this.buttonOnPressed,
+    required this.action,
     required this.content,
   });
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return Container(
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(16),
-        border: Border.all(color: ColorManager.border),
-        color: ColorManager.surface,
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withValues(alpha: 0.02),
-            blurRadius: 8,
-            offset: const Offset(0, 2),
-          ),
-        ],
-      ),
-      child: Column(
-        mainAxisSize: MainAxisSize.max,
-        mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Padding(
-            padding: const EdgeInsets.all(16),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(title),
-                TextButton(onPressed: buttonOnPressed, child: Text(buttonText)),
-              ],
+    return ScrollConfiguration(
+      behavior: ScrollConfiguration.of(context).copyWith(scrollbars: true),
+      child: Container(
+        clipBehavior: Clip.antiAlias,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(16),
+          border: Border.all(color: context.colors.border),
+          color: context.colors.surface,
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withValues(alpha: 0.02),
+              blurRadius: 8,
+              offset: const Offset(0, 2),
             ),
-          ),
-          Expanded(
-            child: SizedBox(width: double.infinity, child: content),
-          ),
-        ],
+          ],
+        ),
+        child: Column(
+          mainAxisSize: MainAxisSize.max,
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Padding(
+              padding: const EdgeInsets.all(16),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  title,
+                  action,
+                ],
+              ),
+            ),
+            Expanded(
+              child: SizedBox(width: double.infinity, child: content),
+            ),
+          ],
+        ),
       ),
     );
   }

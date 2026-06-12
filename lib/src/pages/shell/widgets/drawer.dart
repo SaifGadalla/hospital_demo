@@ -11,13 +11,13 @@ class AppDrawer extends ConsumerWidget {
     return Drawer(
       width: 300,
       elevation: 0,
-      backgroundColor: ColorManager.primaryDark,
+      backgroundColor: context.colors.primaryDark,
       child: Container(
         decoration: BoxDecoration(
-          color: ColorManager.primaryDark,
+          color: context.colors.primaryDark,
           border: Border(
             right: BorderSide(
-              color: ColorManager.textInverse.withValues(alpha: 0.06),
+              color: context.colors.textInverse.withValues(alpha: 0.06),
               width: 1,
             ),
           ),
@@ -33,26 +33,28 @@ class AppDrawer extends ConsumerWidget {
                   Container(
                     padding: const EdgeInsets.all(10),
                     decoration: BoxDecoration(
-                      gradient: const LinearGradient(
+                      gradient: LinearGradient(
                         colors: [
-                          ColorManager.secondaryLight,
-                          ColorManager.primaryLight,
+                          context.colors.secondaryLight,
+                          context.colors.primaryLight,
                         ],
                         begin: Alignment.topLeft,
                         end: Alignment.bottomRight,
                       ),
-                      borderRadius: BorderRadius.circular(12),
+                      borderRadius: BorderRadius.circular(16),
                       boxShadow: [
                         BoxShadow(
-                          color: ColorManager.secondaryLight.withValues(alpha: 0.25),
+                          color: context.colors.secondaryLight.withValues(
+                            alpha: 0.25,
+                          ),
                           blurRadius: 12,
                           offset: const Offset(0, 4),
                         ),
                       ],
                     ),
-                    child: const Icon(
+                    child: Icon(
                       Icons.local_hospital_rounded,
-                      color: ColorManager.textInverse,
+                      color: context.colors.textInverse,
                       size: 24,
                     ),
                   ),
@@ -64,14 +66,16 @@ class AppDrawer extends ConsumerWidget {
                         Text(
                           'CarePulse',
                           style: TextStyleManager.h3.copyWith(
-                            color: ColorManager.textInverse,
+                            color: context.colors.textInverse,
                             letterSpacing: 0.5,
                           ),
                         ),
                         Text(
                           'Hospital Systems',
                           style: TextStyleManager.caption.copyWith(
-                            color: ColorManager.textInverse.withValues(alpha: 0.6),
+                            color: context.colors.textInverse.withValues(
+                              alpha: 0.6,
+                            ),
                           ),
                         ),
                       ],
@@ -84,7 +88,7 @@ class AppDrawer extends ConsumerWidget {
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20),
               child: Divider(
-                color: ColorManager.textInverse.withValues(alpha: 0.08),
+                color: context.colors.textInverse.withValues(alpha: 0.08),
                 height: 1,
               ),
             ),
@@ -97,7 +101,7 @@ class AppDrawer extends ConsumerWidget {
                 children: [
                   _buildNavItem(
                     context: context,
-                    title: 'Overview',
+                    title: context.l10n.drawer_overview,
                     icon: Icons.home_rounded,
                     routePath: '/',
                     isSelected: currentPath == '/',
@@ -105,7 +109,7 @@ class AppDrawer extends ConsumerWidget {
                   const SizedBox(height: 8),
                   _buildNavItem(
                     context: context,
-                    title: 'Dashboard',
+                    title: context.l10n.drawer_dashboard,
                     icon: Icons.dashboard_rounded,
                     routePath: '/dashboard',
                     isSelected: currentPath == '/dashboard',
@@ -113,7 +117,7 @@ class AppDrawer extends ConsumerWidget {
                   const SizedBox(height: 8),
                   _buildNavItem(
                     context: context,
-                    title: 'Patients',
+                    title: context.l10n.drawer_patients,
                     icon: Icons.people_alt_rounded,
                     routePath: '/patients',
                     isSelected: currentPath == '/patients',
@@ -121,7 +125,7 @@ class AppDrawer extends ConsumerWidget {
                   const SizedBox(height: 8),
                   _buildNavItem(
                     context: context,
-                    title: 'Appointments',
+                    title: context.l10n.drawer_appointments,
                     icon: Icons.calendar_today_rounded,
                     routePath: '/appointments',
                     isSelected: currentPath == '/appointments',
@@ -129,7 +133,7 @@ class AppDrawer extends ConsumerWidget {
                   const SizedBox(height: 8),
                   _buildNavItem(
                     context: context,
-                    title: 'Medical Records',
+                    title: context.l10n.drawer_medicalRecords,
                     icon: Icons.folder_shared_rounded,
                     routePath: '/medical-records',
                     isSelected: currentPath == '/medical-records',
@@ -137,7 +141,7 @@ class AppDrawer extends ConsumerWidget {
                   const SizedBox(height: 8),
                   _buildNavItem(
                     context: context,
-                    title: 'Pharmacy',
+                    title: context.l10n.drawer_pharmacy,
                     icon: Icons.local_pharmacy_rounded,
                     routePath: '/pharmacy',
                     isSelected: currentPath == '/pharmacy',
@@ -145,7 +149,7 @@ class AppDrawer extends ConsumerWidget {
                   const SizedBox(height: 8),
                   _buildNavItem(
                     context: context,
-                    title: 'Laboratory',
+                    title: context.l10n.drawer_laboratory,
                     icon: Icons.science_rounded,
                     routePath: '/laboratory',
                     isSelected: currentPath == '/laboratory',
@@ -153,7 +157,7 @@ class AppDrawer extends ConsumerWidget {
                   const SizedBox(height: 8),
                   _buildNavItem(
                     context: context,
-                    title: 'Inpatient (IPD)',
+                    title: context.l10n.drawer_inpatient,
                     icon: Icons.hotel_rounded,
                     routePath: '/inpatient',
                     isSelected: currentPath == '/inpatient',
@@ -161,7 +165,7 @@ class AppDrawer extends ConsumerWidget {
                   const SizedBox(height: 8),
                   _buildNavItem(
                     context: context,
-                    title: 'Emergency',
+                    title: context.l10n.drawer_emergency,
                     icon: Icons.emergency_rounded,
                     routePath: '/emergency',
                     isSelected: currentPath == '/emergency',
@@ -169,7 +173,7 @@ class AppDrawer extends ConsumerWidget {
                   const SizedBox(height: 8),
                   _buildNavItem(
                     context: context,
-                    title: 'Operating Room',
+                    title: context.l10n.drawer_operatingRoom,
                     icon: Icons.meeting_room_rounded,
                     routePath: '/operating-room',
                     isSelected: currentPath == '/operating-room',
@@ -177,7 +181,7 @@ class AppDrawer extends ConsumerWidget {
                   const SizedBox(height: 8),
                   _buildNavItem(
                     context: context,
-                    title: 'Insurance',
+                    title: context.l10n.drawer_insurance,
                     icon: Icons.health_and_safety_rounded,
                     routePath: '/insurance',
                     isSelected: currentPath == '/insurance',
@@ -187,7 +191,10 @@ class AppDrawer extends ConsumerWidget {
             ),
 
             // User / Profile Info Footer
-            Divider(color: ColorManager.textInverse.withValues(alpha: 0.08), height: 1),
+            Divider(
+              color: context.colors.textInverse.withValues(alpha: 0.08),
+              height: 1,
+            ),
             Container(
               padding: const EdgeInsets.all(20),
               color: Colors.black.withValues(alpha: 0.15),
@@ -198,15 +205,17 @@ class AppDrawer extends ConsumerWidget {
                     height: 40,
                     decoration: BoxDecoration(
                       shape: BoxShape.circle,
-                      gradient: const LinearGradient(
+                      gradient: LinearGradient(
                         colors: [
-                          ColorManager.primaryLight,
-                          ColorManager.secondary,
+                          context.colors.primaryLight,
+                          context.colors.secondary,
                         ],
                       ),
                       boxShadow: [
                         BoxShadow(
-                          color: ColorManager.primaryLight.withValues(alpha: 0.2),
+                          color: context.colors.primaryLight.withValues(
+                            alpha: 0.2,
+                          ),
                           blurRadius: 8,
                           offset: const Offset(0, 2),
                         ),
@@ -216,7 +225,7 @@ class AppDrawer extends ConsumerWidget {
                       child: Text(
                         'SJ',
                         style: TextStyleManager.bodyMedium.copyWith(
-                          color: ColorManager.textInverse,
+                          color: context.colors.textInverse,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
@@ -230,7 +239,7 @@ class AppDrawer extends ConsumerWidget {
                         Text(
                           'Dr. S. Jenkins',
                           style: TextStyleManager.bodyMedium.copyWith(
-                            color: ColorManager.textInverse,
+                            color: context.colors.textInverse,
                             fontWeight: FontWeight.bold,
                           ),
                           overflow: TextOverflow.ellipsis,
@@ -238,23 +247,29 @@ class AppDrawer extends ConsumerWidget {
                         Text(
                           'Chief Administrator',
                           style: TextStyleManager.caption.copyWith(
-                            color: ColorManager.textInverse.withValues(alpha: 0.6),
+                            color: context.colors.textInverse.withValues(
+                              alpha: 0.6,
+                            ),
                           ),
                           overflow: TextOverflow.ellipsis,
                         ),
                       ],
                     ),
                   ),
+                  ThemeToggleButton(
+                    color: context.colors.textInverse.withValues(alpha: 0.6),
+                    size: 18,
+                  ),
                   IconButton(
                     icon: Icon(
                       Icons.logout_rounded,
-                      color: ColorManager.textInverse.withValues(alpha: 0.6),
+                      color: context.colors.textInverse.withValues(alpha: 0.6),
                       size: 18,
                     ),
                     onPressed: () {
                       context.go('/auth');
                     },
-                    tooltip: 'Logout',
+                    tooltip: context.l10n.drawer_logout,
                   ),
                 ],
               ),
@@ -272,11 +287,11 @@ class AppDrawer extends ConsumerWidget {
     required String routePath,
     required bool isSelected,
   }) {
-    final activeColor = ColorManager.secondaryLight;
+    final activeColor = context.colors.secondaryLight;
 
     return Container(
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(12),
+        borderRadius: BorderRadius.circular(16),
         color: isSelected
             ? activeColor.withValues(alpha: 0.08)
             : Colors.transparent,
@@ -288,21 +303,21 @@ class AppDrawer extends ConsumerWidget {
             context.go(routePath);
           },
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(12),
+            borderRadius: BorderRadius.circular(16),
           ),
           leading: Icon(
             icon,
             color: isSelected
                 ? activeColor
-                : ColorManager.textInverse.withValues(alpha: 0.55),
+                : context.colors.textInverse.withValues(alpha: 0.55),
             size: 20,
           ),
           title: Text(
             title,
             style: TextStyleManager.bodyMedium.copyWith(
               color: isSelected
-                  ? ColorManager.textInverse
-                  : ColorManager.textInverse.withValues(alpha: 0.7),
+                  ? context.colors.textInverse
+                  : context.colors.textInverse.withValues(alpha: 0.7),
               fontWeight: isSelected ? FontWeight.w600 : FontWeight.w400,
             ),
           ),

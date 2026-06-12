@@ -25,40 +25,46 @@ class _InpatientPageState extends ConsumerState<InpatientPage> {
     final controller = ref.read(inpatientControllerProvider.notifier);
 
     return AppPage(
-      title: 'Inpatient (IPD)',
-      description: 'Wards, beds, admissions, transfers, and discharges.',
-      mainButtonTitle: 'Admit',
+      title: context.l10n.inpatient_view_title,
+      description: context.l10n.inpatient_view_description,
+      mainButtonTitle: context.l10n.inpatient_view_admit,
       mainButtonOnTap: () async {
         await AddAdmissionDialog.show(context);
         controller.loadAdmissions();
       },
       numberCards: [
         NumberCard(
-          title: 'Active admissions',
-          value: state.admissions.where((a) => a.status?.toLowerCase() == 'admitted').length.toString(),
+          title: context.l10n.inpatient_view_activeAdmissions,
+          value: state.admissions
+              .where((a) => a.status?.toLowerCase() == 'admitted')
+              .length
+              .toString(),
           icon: Icons.bed,
         ),
         NumberCard(
-          title: 'Beds occupied',
-          value: state.admissions.where((a) => a.status?.toLowerCase() == 'admitted').length.toString(),
+          title: context.l10n.inpatient_view_bedsOccupied,
+          value: state.admissions
+              .where((a) => a.status?.toLowerCase() == 'admitted')
+              .length
+              .toString(),
           icon: Icons.hotel,
         ),
         NumberCard(
-          title: 'Beds available',
+          title: context.l10n.inpatient_view_bedsAvailable,
           value: '3', // static or derived if we had bedsService
           icon: Icons.local_hotel,
         ),
         NumberCard(
-          title: 'Occupancy rate',
+          title: context.l10n.inpatient_view_occupancyRate,
           value: '80%',
           icon: Icons.percent,
         ),
       ],
-      tableHeader: 'Active Admissions',
+      tableHeader: context.l10n.inpatient_view_activeAdmissions,
       customBody: Container(
         decoration: BoxDecoration(
-          color: ColorManager.surface,
-          border: Border.all(color: ColorManager.border),
+          color: context.colors.surface,
+          border: Border.all(color: context.colors.border),
           borderRadius: BorderRadius.circular(12),
         ),
         child: Padding(
@@ -69,14 +75,14 @@ class _InpatientPageState extends ConsumerState<InpatientPage> {
                 spacing: 8,
                 children: [
                   Text(
-                    'Ward bed map',
+                    context.l10n.inpatient_view_wardBedMap,
                     style: TextStyleManager.h4,
                   ),
                   Spacer(),
-                  Text('Available'),
-                  Text('Occupied'),
-                  Text('Cleaning'),
-                  Text('Blocked'),
+                  Text(context.l10n.inpatient_view_available),
+                  Text(context.l10n.inpatient_view_occupied),
+                  Text(context.l10n.inpatient_view_cleaning),
+                  Text(context.l10n.inpatient_view_blocked),
                 ],
               ),
               const Divider(),
@@ -84,16 +90,20 @@ class _InpatientPageState extends ConsumerState<InpatientPage> {
                 children: [
                   ElevatedButton(
                     onPressed: () {
-                      AppToast.show('Ward filter coming soon');
+                      AppToast.show(
+                        context.l10n.inpatient_view_wardFilterToast,
+                      );
                     },
-                    child: const Text('Filter by Ward'),
+                    child: Text(context.l10n.inpatient_view_filterByWard),
                   ),
                   const SizedBox(width: 10),
                   ElevatedButton(
                     onPressed: () {
-                      AppToast.show('Date filter coming soon');
+                      AppToast.show(
+                        context.l10n.inpatient_view_dateFilterToast,
+                      );
                     },
-                    child: const Text('Filter by Date'),
+                    child: Text(context.l10n.inpatient_view_filterByDate),
                   ),
                 ],
               ),
@@ -103,17 +113,36 @@ class _InpatientPageState extends ConsumerState<InpatientPage> {
         ),
       ),
       table: state.isLoading
-          ? const Center(child: Padding(padding: EdgeInsets.all(24.0), child: CircularProgressIndicator()))
+          ? const Center(
+              child: Padding(
+                padding: EdgeInsets.all(24.0),
+                child: CircularProgressIndicator(),
+              ),
+            )
           : DataTable(
-              headingRowColor: WidgetStateProperty.all(ColorManager.surfaceElevated),
-              columns: const [
-                DataColumn(label: Text('Admission #')),
-                DataColumn(label: Text('Patient')),
-                DataColumn(label: Text('Bed')),
-                DataColumn(label: Text('Diagnosis')),
-                DataColumn(label: Text('Date Admitted')),
-                DataColumn(label: Text('Status')),
-                DataColumn(label: Text('Actions')),
+              headingRowColor: WidgetStateProperty.all(
+                context.colors.surfaceElevated,
+              ),
+              columns: [
+                DataColumn(
+                  label: Text(context.l10n.inpatient_view_columnAdmission),
+                ),
+                DataColumn(
+                  label: Text(context.l10n.inpatient_view_columnPatient),
+                ),
+                DataColumn(label: Text(context.l10n.inpatient_view_columnBed)),
+                DataColumn(
+                  label: Text(context.l10n.inpatient_view_columnDiagnosis),
+                ),
+                DataColumn(
+                  label: Text(context.l10n.inpatient_view_columnDateAdmitted),
+                ),
+                DataColumn(
+                  label: Text(context.l10n.inpatient_view_columnStatus),
+                ),
+                DataColumn(
+                  label: Text(context.l10n.inpatient_view_columnActions),
+                ),
               ],
               rows: state.admissions.map((adm) {
                 return DataRow(
@@ -122,25 +151,36 @@ class _InpatientPageState extends ConsumerState<InpatientPage> {
                     DataCell(Text(adm.patientName ?? '')),
                     DataCell(Text(adm.bedNumber ?? '')),
                     DataCell(Text(adm.admissionDiagnosis ?? '')),
-                    DataCell(Text(adm.admissionDate != null
-                        ? DateFormat('yyyy-MM-dd').format(adm.admissionDate!)
-                        : '')),
+                    DataCell(
+                      Text(
+                        adm.admissionDate != null
+                            ? DateFormat(
+                                'yyyy-MM-dd',
+                              ).format(adm.admissionDate!)
+                            : '',
+                      ),
+                    ),
                     DataCell(Text(adm.status ?? '')),
                     DataCell(
                       Row(
                         children: [
                           IconButton(
                             icon: const Icon(Icons.transfer_within_a_station),
-                            tooltip: 'Transfer',
+                            tooltip: context.l10n.inpatient_view_transferAction,
                             onPressed: () {
                               _showTransferDialog(context, adm, controller);
                             },
                           ),
                           IconButton(
                             icon: const Icon(Icons.local_hospital),
-                            tooltip: 'Discharge',
+                            tooltip:
+                                context.l10n.inpatient_view_dischargeAction,
                             onPressed: () {
-                              _showDischargeConfirmation(context, adm, controller);
+                              _showDischargeConfirmation(
+                                context,
+                                adm,
+                                controller,
+                              );
                             },
                           ),
                         ],
@@ -161,14 +201,16 @@ class _InpatientPageState extends ConsumerState<InpatientPage> {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title: const Text('Confirm Discharge'),
+        title: Text(context.l10n.inpatient_view_confirmDischargeTitle),
         content: Text(
-          'Are you sure you want to discharge ${adm.patientName ?? 'this patient'}?',
+          context.l10n.inpatient_view_confirmDischargeMsg(
+            adm.patientName ?? 'this patient',
+          ),
         ),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context),
-            child: const Text('Cancel'),
+            child: Text(context.l10n.inpatient_view_cancel),
           ),
           TextButton(
             onPressed: () async {
@@ -177,7 +219,7 @@ class _InpatientPageState extends ConsumerState<InpatientPage> {
                 await controller.dischargeAdmission(adm.id!);
               }
             },
-            child: const Text('Discharge'),
+            child: Text(context.l10n.inpatient_view_dischargeAction),
           ),
         ],
       ),
@@ -193,19 +235,23 @@ class _InpatientPageState extends ConsumerState<InpatientPage> {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title: const Text('Transfer Patient'),
+        title: Text(context.l10n.inpatient_view_transferTitle),
         content: SizedBox(
           width: 400,
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              Text('Transfer ${adm.patientName ?? 'patient'} to a new bed.'),
+              Text(
+                context.l10n.inpatient_view_transferMsg(
+                  adm.patientName ?? 'patient',
+                ),
+              ),
               const SizedBox(height: 16),
               TextField(
                 controller: reasonController,
-                decoration: const InputDecoration(
-                  labelText: 'Reason for transfer',
-                  border: OutlineInputBorder(),
+                decoration: InputDecoration(
+                  labelText: context.l10n.inpatient_view_reasonForTransfer,
+                  border: const OutlineInputBorder(),
                 ),
                 maxLines: 2,
               ),
@@ -215,7 +261,7 @@ class _InpatientPageState extends ConsumerState<InpatientPage> {
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context),
-            child: const Text('Cancel'),
+            child: Text(context.l10n.inpatient_view_cancel),
           ),
           TextButton(
             onPressed: () async {
@@ -227,7 +273,7 @@ class _InpatientPageState extends ConsumerState<InpatientPage> {
                 );
               }
             },
-            child: const Text('Transfer'),
+            child: Text(context.l10n.inpatient_view_transferAction),
           ),
         ],
       ),

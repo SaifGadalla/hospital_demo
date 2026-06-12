@@ -31,21 +31,21 @@ class _LaboratoryPageState extends ConsumerState<LaboratoryPage>
       onSearchFieldChanged: (control) async {
         await controller.getLabOrders(searchTerm: control.value);
       },
-      title: 'Laboratory',
-      description: 'Test orders, sample collection, results, and approval.',
-      mainButtonTitle: 'New Order',
+      title: context.l10n.laboratory_view_title,
+      description: context.l10n.laboratory_view_description,
+      mainButtonTitle: context.l10n.laboratory_view_newOrder,
       mainButtonOnTap: () async {
         await AddLabOrderDialog.show(context);
         controller.loadLabOrders();
       },
       numberCards: [
         NumberCard(
-          title: 'Total Orders',
+          title: context.l10n.laboratory_view_totalOrders,
           value: state.labOrders.length.toString(),
           icon: Icons.science,
         ),
         NumberCard(
-          title: 'Pending',
+          title: context.l10n.laboratory_view_pending,
           value: state.labOrders
               .where((o) => o.status?.toLowerCase() == 'pending')
               .length
@@ -53,7 +53,7 @@ class _LaboratoryPageState extends ConsumerState<LaboratoryPage>
           icon: Icons.pending,
         ),
         NumberCard(
-          title: 'In Progress',
+          title: context.l10n.laboratory_view_inProgress,
           value: state.labOrders
               .where(
                 (o) =>
@@ -65,7 +65,7 @@ class _LaboratoryPageState extends ConsumerState<LaboratoryPage>
           icon: Icons.autorenew,
         ),
         NumberCard(
-          title: 'STAT priority',
+          title: context.l10n.laboratory_view_statPriority,
           value: state.labOrders
               .where((o) => o.priority?.toLowerCase() == 'stat')
               .length
@@ -83,31 +83,61 @@ class _LaboratoryPageState extends ConsumerState<LaboratoryPage>
             children: [
               AppDropDownButton(
                 formControlName: 'status',
-                items: const [
-                  DropdownMenuItem(value: null, child: Text('All statuses')),
-                  DropdownMenuItem(value: 'pending', child: Text('Pending')),
+                items: [
+                  DropdownMenuItem(
+                    value: null,
+                    child: Text(context.l10n.laboratory_view_allStatuses),
+                  ),
+                  DropdownMenuItem(
+                    value: 'pending',
+                    child: Text(context.l10n.laboratory_view_pending),
+                  ),
                   DropdownMenuItem(
                     value: 'sample_collected',
-                    child: Text('Sample collected'),
+                    child: Text(context.l10n.laboratory_view_sampleCollected),
                   ),
-                  DropdownMenuItem(value: 'in_progress', child: Text('In progress')),
-                  DropdownMenuItem(value: 'completed', child: Text('Completed')),
-                  DropdownMenuItem(value: 'approved', child: Text('Approved')),
-                  DropdownMenuItem(value: 'cancelled', child: Text('Cancelled')),
+                  DropdownMenuItem(
+                    value: 'in_progress',
+                    child: Text(context.l10n.laboratory_view_inProgress),
+                  ),
+                  DropdownMenuItem(
+                    value: 'completed',
+                    child: Text(context.l10n.laboratory_view_completed),
+                  ),
+                  DropdownMenuItem(
+                    value: 'approved',
+                    child: Text(context.l10n.laboratory_view_approved),
+                  ),
+                  DropdownMenuItem(
+                    value: 'cancelled',
+                    child: Text(context.l10n.laboratory_view_cancelled),
+                  ),
                 ],
                 onChanged: (_) => controller.getLabOrders(),
-                hint: 'Filter by Status',
+                hint: context.l10n.laboratory_view_filterByStatus,
               ),
               AppDropDownButton(
                 formControlName: 'priority',
-                items: const [
-                  DropdownMenuItem(value: null, child: Text('All priorities')),
-                  DropdownMenuItem(value: 'routine', child: Text('Routine')),
-                  DropdownMenuItem(value: 'urgent', child: Text('Urgent')),
-                  DropdownMenuItem(value: 'stat', child: Text('STAT')),
+                items: [
+                  DropdownMenuItem(
+                    value: null,
+                    child: Text(context.l10n.laboratory_view_allPriorities),
+                  ),
+                  DropdownMenuItem(
+                    value: 'routine',
+                    child: Text(context.l10n.laboratory_view_routine),
+                  ),
+                  DropdownMenuItem(
+                    value: 'urgent',
+                    child: Text(context.l10n.laboratory_view_urgent),
+                  ),
+                  DropdownMenuItem(
+                    value: 'stat',
+                    child: Text(context.l10n.laboratory_view_stat),
+                  ),
                 ],
                 onChanged: (_) => controller.getLabOrders(),
-                hint: 'Filter by Priority',
+                hint: context.l10n.laboratory_view_filterByPriority,
               ),
               TextButton(
                 onPressed: () {
@@ -115,7 +145,7 @@ class _LaboratoryPageState extends ConsumerState<LaboratoryPage>
                   searchFormGroup.reset();
                   controller.getLabOrders();
                 },
-                child: const Text('Clear'),
+                child: Text(context.l10n.laboratory_view_clear),
               ),
             ],
           ),
@@ -129,15 +159,31 @@ class _LaboratoryPageState extends ConsumerState<LaboratoryPage>
               ),
             )
           : DataTable(
-              headingRowColor: WidgetStateProperty.all(ColorManager.surfaceElevated),
-              columns: const [
-                DataColumn(label: Text('Order #')),
-                DataColumn(label: Text('Date')),
-                DataColumn(label: Text('Patient')),
-                DataColumn(label: Text('Tests')),
-                DataColumn(label: Text('Priority')),
-                DataColumn(label: Text('Status')),
-                DataColumn(label: Text('Actions')),
+              headingRowColor: WidgetStateProperty.all(
+                context.colors.surfaceElevated,
+              ),
+              columns: [
+                DataColumn(
+                  label: Text(context.l10n.laboratory_view_columnOrder),
+                ),
+                DataColumn(
+                  label: Text(context.l10n.laboratory_view_columnDate),
+                ),
+                DataColumn(
+                  label: Text(context.l10n.laboratory_view_columnPatient),
+                ),
+                DataColumn(
+                  label: Text(context.l10n.laboratory_view_columnTests),
+                ),
+                DataColumn(
+                  label: Text(context.l10n.laboratory_view_columnPriority),
+                ),
+                DataColumn(
+                  label: Text(context.l10n.laboratory_view_columnStatus),
+                ),
+                DataColumn(
+                  label: Text(context.l10n.laboratory_view_columnActions),
+                ),
               ],
               rows: state.labOrders.map((order) {
                 final testsSummary =
@@ -164,16 +210,21 @@ class _LaboratoryPageState extends ConsumerState<LaboratoryPage>
                         children: [
                           IconButton(
                             icon: const Icon(Icons.visibility),
-                            tooltip: 'View details',
+                            tooltip: context.l10n.laboratory_view_viewDetails,
                             onPressed: () {
                               _showLabOrderDetails(context, order);
                             },
                           ),
                           IconButton(
                             icon: const Icon(Icons.cancel),
-                            tooltip: 'Cancel order',
+                            tooltip:
+                                context.l10n.laboratory_view_cancelOrderTooltip,
                             onPressed: () {
-                              _showCancelConfirmation(context, order, controller);
+                              _showCancelConfirmation(
+                                context,
+                                order,
+                                controller,
+                              );
                             },
                           ),
                         ],
@@ -191,29 +242,54 @@ class _LaboratoryPageState extends ConsumerState<LaboratoryPage>
       context: context,
       builder: (context) => AlertDialog(
         scrollable: true,
-        title: Text('Lab Order ${order.orderNumber ?? ''}'),
+        title: Text(
+          context.l10n.laboratory_view_orderDetailsTitle(
+            order.orderNumber ?? '',
+          ),
+        ),
         content: SizedBox(
           width: 500,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisSize: MainAxisSize.min,
             children: [
-              _detailRow('Order #', order.orderNumber),
-              _detailRow('Patient ID', order.patientId),
-              _detailRow('Doctor ID', order.doctorId),
-              _detailRow('Priority', order.priority),
-              _detailRow('Status', order.status),
-              _detailRow('Clinical Indication', order.clinicalIndication),
-              _detailRow('Specimen Type', order.specimenType),
               _detailRow(
-                'Order Date',
+                context.l10n.laboratory_view_columnOrder,
+                order.orderNumber,
+              ),
+              _detailRow(
+                context.l10n.laboratory_view_patientId,
+                order.patientId,
+              ),
+              _detailRow(context.l10n.laboratory_view_doctorId, order.doctorId),
+              _detailRow(
+                context.l10n.laboratory_view_columnPriority,
+                order.priority,
+              ),
+              _detailRow(
+                context.l10n.laboratory_view_columnStatus,
+                order.status,
+              ),
+              _detailRow(
+                context.l10n.laboratory_view_clinicalIndication,
+                order.clinicalIndication,
+              ),
+              _detailRow(
+                context.l10n.laboratory_view_specimenType,
+                order.specimenType,
+              ),
+              _detailRow(
+                context.l10n.laboratory_view_orderDate,
                 order.orderDate != null
                     ? DateFormat('yyyy-MM-dd HH:mm').format(order.orderDate!)
                     : null,
               ),
               if (order.tests != null && order.tests!.isNotEmpty) ...[
                 const Divider(),
-                Text('Tests', style: TextStyleManager.h4),
+                Text(
+                  context.l10n.laboratory_view_testsTitle,
+                  style: TextStyleManager.h4,
+                ),
                 const SizedBox(height: 8),
                 ...order.tests!.map(
                   (t) => Padding(
@@ -228,7 +304,7 @@ class _LaboratoryPageState extends ConsumerState<LaboratoryPage>
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context),
-            child: const Text('Close'),
+            child: Text(context.l10n.laboratory_view_close),
           ),
         ],
       ),
@@ -243,14 +319,14 @@ class _LaboratoryPageState extends ConsumerState<LaboratoryPage>
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title: const Text('Cancel Lab Order'),
+        title: Text(context.l10n.laboratory_view_cancelTitle),
         content: Text(
-          'Are you sure you want to cancel order ${order.orderNumber ?? ''}?',
+          context.l10n.laboratory_view_cancelMsg(order.orderNumber ?? ''),
         ),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context),
-            child: const Text('No'),
+            child: Text(context.l10n.laboratory_view_no),
           ),
           TextButton(
             onPressed: () async {
@@ -259,7 +335,7 @@ class _LaboratoryPageState extends ConsumerState<LaboratoryPage>
                 await controller.deleteLabOrder(order.id!);
               }
             },
-            child: const Text('Yes, Cancel'),
+            child: Text(context.l10n.laboratory_view_yesCancel),
           ),
         ],
       ),

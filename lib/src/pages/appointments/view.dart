@@ -27,9 +27,9 @@ class _AppointmentsPageState extends ConsumerState<AppointmentsPage>
     final controller = ref.read(appointmentsControllerProvider.notifier);
     return AppPage(
       searchFormGroup: searchFormGroup,
-      title: 'Appointments',
-      description: 'Schedule, check-in, and complete patient visits.',
-      mainButtonTitle: 'Schedule',
+      title: context.l10n.appointments_view_title,
+      description: context.l10n.appointments_view_description,
+      mainButtonTitle: context.l10n.appointments_view_schedule,
       mainButtonOnTap: () async {
         final result = await AddEditAppointmentDialog.show(context);
         if (result == true) {
@@ -37,8 +37,8 @@ class _AppointmentsPageState extends ConsumerState<AppointmentsPage>
         }
       },
       secondarybuttons: [
-        TextButton(onPressed: () {}, child: const Text('Board')),
-        TextButton(onPressed: () {}, child: const Text('List')),
+        TextButton(onPressed: () {}, child: Text(context.l10n.appointments_view_board)),
+        TextButton(onPressed: () {}, child: Text(context.l10n.appointments_view_list)),
       ],
       hasSearch: true,
       onSearchFieldChanged: (control) {
@@ -53,26 +53,26 @@ class _AppointmentsPageState extends ConsumerState<AppointmentsPage>
             children: [
               AppDropDownButton(
                 formControlName: 'type',
-                items: const [
-                  DropdownMenuItem(value: null, child: Text('All types')),
+                items: [
+                  DropdownMenuItem(value: null, child: Text(context.l10n.appointments_view_allTypes)),
                   DropdownMenuItem(
                     value: 'Consultation',
-                    child: Text('Consultation'),
+                    child: Text(context.l10n.appointments_view_consultation),
                   ),
                   DropdownMenuItem(
                     value: 'Follow-up',
-                    child: Text('Follow-up'),
+                    child: Text(context.l10n.appointments_view_followUp),
                   ),
                   DropdownMenuItem(
                     value: 'Procedure',
-                    child: Text('Procedure'),
+                    child: Text(context.l10n.appointments_view_procedure),
                   ),
                 ],
                 value: controller.formGroup.control('type').value,
                 onChanged: (value) {
                   controller.getAppointments();
                 },
-                hint: 'All types',
+                hint: context.l10n.appointments_view_allTypes,
               ),
               AppDatePicker(
                 formControlName: 'date',
@@ -86,7 +86,7 @@ class _AppointmentsPageState extends ConsumerState<AppointmentsPage>
                   searchFormGroup.reset();
                   controller.getAppointments();
                 },
-                child: const Text('Clear'),
+                child: Text(context.l10n.appointments_view_clear),
               ),
             ],
           ),
@@ -100,14 +100,14 @@ class _AppointmentsPageState extends ConsumerState<AppointmentsPage>
               ),
             )
           : DataTable(
-              headingRowColor: WidgetStateProperty.all(ColorManager.surfaceElevated),
-              columns: const [
-                DataColumn(label: Text('Appt #')),
-                DataColumn(label: Text('Date / time')),
-                DataColumn(label: Text('Patient')),
-                DataColumn(label: Text('Type')),
-                DataColumn(label: Text('Doctor')),
-                DataColumn(label: Text('Status')),
+              headingRowColor: WidgetStateProperty.all(context.colors.surfaceElevated),
+              columns: [
+                DataColumn(label: Text(context.l10n.appointments_view_apptNumber)),
+                DataColumn(label: Text(context.l10n.appointments_view_dateTime)),
+                DataColumn(label: Text(context.l10n.appointments_view_patient)),
+                DataColumn(label: Text(context.l10n.appointments_view_type)),
+                DataColumn(label: Text(context.l10n.appointments_view_doctor)),
+                DataColumn(label: Text(context.l10n.appointments_view_status)),
               ],
               rows: state.appointments.map((appt) {
                 return DataRow(

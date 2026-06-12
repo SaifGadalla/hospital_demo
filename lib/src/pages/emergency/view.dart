@@ -25,16 +25,15 @@ class _EmergencyPageState extends ConsumerState<EmergencyPage> {
     final controller = ref.read(emergencyControllerProvider.notifier);
 
     return AppPage(
-      title: 'Emergency',
-      description:
-          'Live triage board with ESI levels, treatment, and disposition.',
-      mainButtonTitle: 'Register arrival',
+      title: context.l10n.emergency_view_title,
+      description: context.l10n.emergency_view_description,
+      mainButtonTitle: context.l10n.emergency_view_registerArrival,
       secondarybuttons: [
         TextButton(
           onPressed: () {
-            AppToast.show('Ambulance call logging coming soon');
+            AppToast.show(context.l10n.emergency_view_ambulanceToast);
           },
-          child: const Text('Ambulance call'),
+          child: Text(context.l10n.emergency_view_ambulanceCall),
         ),
       ],
       mainButtonOnTap: () async {
@@ -43,31 +42,56 @@ class _EmergencyPageState extends ConsumerState<EmergencyPage> {
       },
       numberCards: [
         NumberCard(
-          title: 'Active calls',
+          title: context.l10n.emergency_view_activeCalls,
           value: state.ambulanceCalls.length.toString(),
           icon: Icons.local_hospital,
         ),
-        NumberCard(title: 'Today total', value: '10', icon: Icons.today),
-        NumberCard(title: 'Not triaged', value: '30', icon: Icons.warning),
         NumberCard(
-          title: 'Level-1 (RESUS)',
+          title: context.l10n.emergency_view_todayTotal,
+          value: '10',
+          icon: Icons.today,
+        ),
+        NumberCard(
+          title: context.l10n.emergency_view_notTriaged,
+          value: '30',
+          icon: Icons.warning,
+        ),
+        NumberCard(
+          title: context.l10n.emergency_view_level1Resus,
           value: '10',
           icon: Icons.warning_amber_outlined,
         ),
       ],
       hasSearch: false,
-      tableHeader: 'Recent ambulance calls',
+      tableHeader: context.l10n.emergency_view_recentAmbulanceCalls,
       table: state.isLoading
-          ? const Center(child: Padding(padding: EdgeInsets.all(24.0), child: CircularProgressIndicator()))
+          ? const Center(
+              child: Padding(
+                padding: EdgeInsets.all(24.0),
+                child: CircularProgressIndicator(),
+              ),
+            )
           : DataTable(
-              columns: const [
-                DataColumn(label: Text('Call #')),
-                DataColumn(label: Text('Time')),
-                DataColumn(label: Text('Patient')),
-                DataColumn(label: Text('Pickup Location')),
-                DataColumn(label: Text('Incident')),
-                DataColumn(label: Text('Status')),
-                DataColumn(label: Text('Actions')),
+              columns: [
+                DataColumn(
+                  label: Text(context.l10n.emergency_view_columnCallNum),
+                ),
+                DataColumn(label: Text(context.l10n.emergency_view_columnTime)),
+                DataColumn(
+                  label: Text(context.l10n.emergency_view_columnPatient),
+                ),
+                DataColumn(
+                  label: Text(context.l10n.emergency_view_columnPickup),
+                ),
+                DataColumn(
+                  label: Text(context.l10n.emergency_view_columnIncident),
+                ),
+                DataColumn(
+                  label: Text(context.l10n.emergency_view_columnStatus),
+                ),
+                DataColumn(
+                  label: Text(context.l10n.emergency_view_columnActions),
+                ),
               ],
               rows: state.ambulanceCalls.asMap().entries.map((entry) {
                 final index = entry.key;
@@ -75,13 +99,21 @@ class _EmergencyPageState extends ConsumerState<EmergencyPage> {
                 return DataRow(
                   cells: [
                     DataCell(Text('AC-${10000 + index}')),
-                    DataCell(Text(call.callTime != null
-                        ? DateFormat('h:mm a').format(call.callTime!)
-                        : '')),
+                    DataCell(
+                      Text(
+                        call.callTime != null
+                            ? DateFormat('h:mm a').format(call.callTime!)
+                            : '',
+                      ),
+                    ),
                     DataCell(Text(call.patientName ?? '')),
                     DataCell(Text(call.pickupLocation ?? '')),
                     DataCell(Text(call.incidentType ?? '')),
-                    DataCell(Text(call.notes ?? 'En route')),
+                    DataCell(
+                      Text(
+                        call.notes ?? context.l10n.emergency_view_statusEnRoute,
+                      ),
+                    ),
                     DataCell(
                       Row(
                         children: [
@@ -89,13 +121,19 @@ class _EmergencyPageState extends ConsumerState<EmergencyPage> {
                             onPressed: () {
                               _showCallDetails(context, call, index);
                             },
-                            child: const Text('View'),
+                            child: Text(context.l10n.emergency_view_viewAction),
                           ),
                           TextButton(
                             onPressed: () {
-                              _showUpdateStatusDialog(context, call, controller);
+                              _showUpdateStatusDialog(
+                                context,
+                                call,
+                                controller,
+                              );
                             },
-                            child: const Text('Update Status'),
+                            child: Text(
+                              context.l10n.emergency_view_updateStatusAction,
+                            ),
                           ),
                         ],
                       ),
@@ -112,30 +150,39 @@ class _EmergencyPageState extends ConsumerState<EmergencyPage> {
       context: context,
       builder: (context) => AlertDialog(
         scrollable: true,
-        title: Text('Ambulance Call AC-${10000 + index}'),
+        title: Text(context.l10n.emergency_view_callTitle(10000 + index)),
         content: SizedBox(
           width: 400,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisSize: MainAxisSize.min,
             children: [
-              _detailRow('Patient', call.patientName),
               _detailRow(
-                'Call Time',
+                context.l10n.emergency_view_columnPatient,
+                call.patientName,
+              ),
+              _detailRow(
+                context.l10n.emergency_view_callTime,
                 call.callTime != null
                     ? DateFormat('h:mm a, MMM dd').format(call.callTime!)
                     : null,
               ),
-              _detailRow('Pickup Location', call.pickupLocation),
-              _detailRow('Incident Type', call.incidentType),
-              _detailRow('Notes', call.notes),
+              _detailRow(
+                context.l10n.emergency_view_columnPickup,
+                call.pickupLocation,
+              ),
+              _detailRow(
+                context.l10n.emergency_view_incidentType,
+                call.incidentType,
+              ),
+              _detailRow(context.l10n.emergency_view_notes, call.notes),
             ],
           ),
         ),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context),
-            child: const Text('Close'),
+            child: Text(context.l10n.emergency_view_close),
           ),
         ],
       ),
@@ -150,27 +197,33 @@ class _EmergencyPageState extends ConsumerState<EmergencyPage> {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title: const Text('Update Ambulance Call Status'),
+        title: Text(context.l10n.emergency_view_updateStatusTitle),
         content: SizedBox(
           width: 300,
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              Text('Patient: ${call.patientName ?? 'Unknown'}'),
+              Text(
+                context.l10n.emergency_view_patientNameDisplay(
+                  call.patientName ?? 'Unknown',
+                ),
+              ),
               const SizedBox(height: 16),
               ...[
-                'Dispatched',
-                'En route',
-                'On scene',
-                'Transporting',
-                'Arrived at hospital',
-                'Completed',
+                context.l10n.emergency_view_statusDispatched,
+                context.l10n.emergency_view_statusEnRoute,
+                context.l10n.emergency_view_statusOnScene,
+                context.l10n.emergency_view_statusTransporting,
+                context.l10n.emergency_view_statusArrived,
+                context.l10n.emergency_view_statusCompleted,
               ].map(
                 (status) => ListTile(
                   title: Text(status),
                   onTap: () {
                     Navigator.pop(context);
-                    AppToast.show('Status updated to: $status');
+                    AppToast.show(
+                      context.l10n.emergency_view_statusUpdatedToast(status),
+                    );
                     controller.loadAmbulanceCalls();
                   },
                 ),
@@ -181,7 +234,7 @@ class _EmergencyPageState extends ConsumerState<EmergencyPage> {
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context),
-            child: const Text('Cancel'),
+            child: Text(context.l10n.emergency_view_cancel),
           ),
         ],
       ),

@@ -1,3 +1,597 @@
 {
-    "@@locale": "en"
+  "@@locale": "en",
+  "utils_status_notTriaged": "Not Triaged",
+  "utils_triage_esiLevel": "ESI {triageLevel}",
+  "@utils_triage_esiLevel": {
+    "placeholders": {
+      "triageLevel": {
+        "type": "String"
+      }
+    }
+  },
+  "utils_status_inTreatment": "In treatment",
+  "utils_status_waiting": "Waiting",
+  "utils_status_cancelled": "Cancelled",
+  "utils_status_completed": "Completed",
+  "utils_status_closed": "Closed",
+  "utils_status_unknown": "Unknown",
+  "appointments_view_title": "Appointments",
+  "appointments_view_description": "Schedule, check-in, and complete patient visits.",
+  "appointments_view_schedule": "Schedule",
+  "appointments_view_board": "Board",
+  "appointments_view_list": "List",
+  "appointments_view_allTypes": "All types",
+  "appointments_view_consultation": "Consultation",
+  "appointments_view_followUp": "Follow-up",
+  "appointments_view_procedure": "Procedure",
+  "appointments_view_clear": "Clear",
+  "appointments_view_apptNumber": "Appt #",
+  "appointments_view_dateTime": "Date / time",
+  "appointments_view_patient": "Patient",
+  "appointments_view_type": "Type",
+  "appointments_view_doctor": "Doctor",
+  "appointments_view_status": "Status",
+  "appointments_add_title": "Add Appointment",
+  "appointments_add_patient": "Patient",
+  "appointments_add_type": "Appointment Type",
+  "appointments_add_consultation": "Consultation",
+  "appointments_add_followUp": "Follow-up",
+  "appointments_add_procedure": "Procedure",
+  "appointments_add_notes": "Notes",
+  "appointments_add_cancel": "Cancel",
+  "appointments_add_save": "Save",
+  "dashboard_view_title": "Dashboard",
+  "dashboard_view_description": "Live overview across the patient lifecycle, ER, IPD, OR, and revenue cycle.",
+  "dashboard_view_newAppointment": "New Appointment",
+  "dashboard_view_viewPatients": "View Patients",
+  "dashboard_view_totalPatients": "Total Patients",
+  "dashboard_view_todayAppointments": "Today appointments",
+  "dashboard_view_totalAppointmentsOnFile": "{totalAppointments} on file",
+  "@dashboard_view_totalAppointmentsOnFile": {
+    "placeholders": {
+      "totalAppointments": {
+        "type": "String"
+      }
+    }
+  },
+  "dashboard_view_erActive": "ER active",
+  "dashboard_view_totalErToday": "{totalERToday} total today",
+  "@dashboard_view_totalErToday": {
+    "placeholders": {
+      "totalERToday": {
+        "type": "String"
+      }
+    }
+  },
+  "dashboard_view_bedsFree": "Beds free",
+  "dashboard_view_acrossAllWards": "Across all wards",
+  "dashboard_view_todaysAppointmentsCard": "Today's appointments",
+  "dashboard_view_viewAll": "View All",
+  "dashboard_view_columnTime": "Time",
+  "dashboard_view_columnPatient": "Patient",
+  "dashboard_view_columnType": "Type",
+  "dashboard_view_columnStatus": "Status",
+  "dashboard_view_activeErCard": "Active ER patients",
+  "dashboard_view_openEr": "Open ER",
+  "dashboard_view_columnCall": "Call #",
+  "dashboard_view_columnTriage": "Triage",
+  "dashboard_view_bedOccupancyCard": "Bed occupancy",
+  "dashboard_view_manageIpd": "Manage IPD",
+  "dashboard_view_insuranceClaimsCard": "Insurance claims pipeline",
+  "dashboard_view_manageClaims": "Manage claims",
+  "emergency_view_title": "Emergency",
+  "emergency_view_description": "Live triage board with ESI levels, treatment, and disposition.",
+  "emergency_view_registerArrival": "Register arrival",
+  "emergency_view_ambulanceToast": "Ambulance call logging coming soon",
+  "emergency_view_ambulanceCall": "Ambulance call",
+  "emergency_view_activeCalls": "Active calls",
+  "emergency_view_todayTotal": "Today total",
+  "emergency_view_notTriaged": "Not triaged",
+  "emergency_view_level1Resus": "Level-1 (RESUS)",
+  "emergency_view_recentAmbulanceCalls": "Recent ambulance calls",
+  "emergency_view_columnCallNum": "Call #",
+  "emergency_view_columnTime": "Time",
+  "emergency_view_columnPatient": "Patient",
+  "emergency_view_columnPickup": "Pickup Location",
+  "emergency_view_columnIncident": "Incident",
+  "emergency_view_columnStatus": "Status",
+  "emergency_view_columnActions": "Actions",
+  "emergency_view_statusEnRoute": "En route",
+  "emergency_view_viewAction": "View",
+  "emergency_view_updateStatusAction": "Update Status",
+  "emergency_view_callTitle": "Ambulance Call AC-{number}",
+  "@emergency_view_callTitle": {
+    "placeholders": {
+      "number": {
+        "type": "int"
+      }
+    }
+  },
+  "emergency_view_callTime": "Call Time",
+  "emergency_view_incidentType": "Incident Type",
+  "emergency_view_notes": "Notes",
+  "emergency_view_close": "Close",
+  "emergency_view_updateStatusTitle": "Update Ambulance Call Status",
+  "emergency_view_patientNameDisplay": "Patient: {patientName}",
+  "@emergency_view_patientNameDisplay": {
+    "placeholders": {
+      "patientName": {
+        "type": "String"
+      }
+    }
+  },
+  "emergency_view_statusDispatched": "Dispatched",
+  "emergency_view_statusOnScene": "On scene",
+  "emergency_view_statusTransporting": "Transporting",
+  "emergency_view_statusArrived": "Arrived at hospital",
+  "emergency_view_statusCompleted": "Completed",
+  "emergency_view_statusUpdatedToast": "Status updated to: {status}",
+  "@emergency_view_statusUpdatedToast": {
+    "placeholders": {
+      "status": {
+        "type": "String"
+      }
+    }
+  },
+  "emergency_view_cancel": "Cancel",
+  "emergency_add_title": "Register ER Arrival",
+  "emergency_add_patient": "Patient",
+  "emergency_add_arrivalMode": "Arrival Mode",
+  "emergency_add_walkIn": "Walk-in",
+  "emergency_add_ambulance": "Ambulance",
+  "emergency_add_helicopter": "Helicopter",
+  "emergency_add_police": "Police",
+  "emergency_add_chiefComplaint": "Chief Complaint",
+  "emergency_add_triageLevel": "Triage Level",
+  "emergency_add_level1": "1 - Resuscitation",
+  "emergency_add_level2": "2 - Emergent",
+  "emergency_add_level3": "3 - Urgent",
+  "emergency_add_level4": "4 - Less Urgent",
+  "emergency_add_level5": "5 - Non-Urgent",
+  "emergency_add_notes": "Notes",
+  "emergency_add_cancel": "Cancel",
+  "emergency_add_save": "Save",
+  "inpatient_view_title": "Inpatient (IPD)",
+  "inpatient_view_description": "Wards, beds, admissions, transfers, and discharges.",
+  "inpatient_view_admit": "Admit",
+  "inpatient_view_activeAdmissions": "Active admissions",
+  "inpatient_view_bedsOccupied": "Beds occupied",
+  "inpatient_view_bedsAvailable": "Beds available",
+  "inpatient_view_occupancyRate": "Occupancy rate",
+  "inpatient_view_wardBedMap": "Ward bed map",
+  "inpatient_view_available": "Available",
+  "inpatient_view_occupied": "Occupied",
+  "inpatient_view_cleaning": "Cleaning",
+  "inpatient_view_blocked": "Blocked",
+  "inpatient_view_wardFilterToast": "Ward filter coming soon",
+  "inpatient_view_filterByWard": "Filter by Ward",
+  "inpatient_view_dateFilterToast": "Date filter coming soon",
+  "inpatient_view_filterByDate": "Filter by Date",
+  "inpatient_view_columnAdmission": "Admission #",
+  "inpatient_view_columnPatient": "Patient",
+  "inpatient_view_columnBed": "Bed",
+  "inpatient_view_columnDiagnosis": "Diagnosis",
+  "inpatient_view_columnDateAdmitted": "Date Admitted",
+  "inpatient_view_columnStatus": "Status",
+  "inpatient_view_columnActions": "Actions",
+  "inpatient_view_transferAction": "Transfer",
+  "inpatient_view_dischargeAction": "Discharge",
+  "inpatient_view_confirmDischargeTitle": "Confirm Discharge",
+  "inpatient_view_confirmDischargeMsg": "Are you sure you want to discharge {patientName}?",
+  "@inpatient_view_confirmDischargeMsg": {
+    "placeholders": {
+      "patientName": {
+        "type": "String"
+      }
+    }
+  },
+  "inpatient_view_cancel": "Cancel",
+  "inpatient_view_transferTitle": "Transfer Patient",
+  "inpatient_view_transferMsg": "Transfer {patientName} to a new bed.",
+  "@inpatient_view_transferMsg": {
+    "placeholders": {
+      "patientName": {
+        "type": "String"
+      }
+    }
+  },
+  "inpatient_view_reasonForTransfer": "Reason for transfer",
+  "inpatient_add_title": "Admit Patient",
+  "inpatient_add_patient": "Patient",
+  "inpatient_add_admissionType": "Admission Type",
+  "inpatient_add_emergency": "Emergency",
+  "inpatient_add_elective": "Elective",
+  "inpatient_add_transfer": "Transfer",
+  "inpatient_add_admissionDiagnosis": "Admission Diagnosis",
+  "inpatient_add_ward": "Ward",
+  "inpatient_add_bed": "Bed",
+  "inpatient_add_notes": "Notes",
+  "inpatient_add_cancel": "Cancel",
+  "inpatient_add_save": "Save",
+  "insurance_view_title": "Insurance & Claims",
+  "insurance_view_description": "Plans, claims pipeline, pre-authorizations.",
+  "insurance_view_newClaim": "New Claim",
+  "insurance_view_totalClaims": "Total Claims",
+  "insurance_view_approvedPaid": "Approved/Paid",
+  "insurance_view_rejected": "Rejected",
+  "insurance_view_totalClaimed": "Total Claimed",
+  "insurance_view_claimsTab": "Claims",
+  "insurance_view_preAuthsTab": "Pre-auths",
+  "insurance_view_plansTab": "Plans",
+  "insurance_view_columnClaim": "Claim #",
+  "insurance_view_columnServiceDate": "Service Date",
+  "insurance_view_columnPatient": "Patient",
+  "insurance_view_columnPlan": "Plan",
+  "insurance_view_columnTotal": "Total",
+  "insurance_view_columnPaid": "Paid",
+  "insurance_view_columnStatus": "Status",
+  "insurance_view_columnActions": "Actions",
+  "insurance_view_viewAction": "View",
+  "insurance_view_resubmitAction": "Resubmit",
+  "insurance_view_columnAuth": "Auth #",
+  "insurance_view_columnService": "Service",
+  "insurance_view_columnEstimatedCost": "Estimated Cost",
+  "insurance_view_columnValidity": "Validity",
+  "insurance_view_cancelAction": "Cancel",
+  "insurance_view_columnCode": "Code",
+  "insurance_view_columnCoverage": "Coverage",
+  "insurance_view_columnCoPay": "Co-pay",
+  "insurance_view_columnDeductible": "Deductible",
+  "insurance_view_columnAnnualLimit": "Annual limit",
+  "insurance_view_columnPreAuth": "Pre-auth",
+  "insurance_view_required": "Required",
+  "insurance_view_no": "No",
+  "insurance_view_active": "Active",
+  "insurance_view_inactive": "Inactive",
+  "insurance_view_claimTitle": "Claim {claimNumber}",
+  "@insurance_view_claimTitle": {
+    "placeholders": {
+      "claimNumber": {
+        "type": "String"
+      }
+    }
+  },
+  "insurance_view_totalAmount": "Total Amount",
+  "insurance_view_claimedAmount": "Claimed Amount",
+  "insurance_view_paidAmount": "Paid Amount",
+  "insurance_view_diagnosisCodes": "Diagnosis Codes",
+  "insurance_view_procedureCodes": "Procedure Codes",
+  "insurance_view_notes": "Notes",
+  "insurance_view_close": "Close",
+  "insurance_view_preAuthTitle": "Pre-Authorization {authNumber}",
+  "@insurance_view_preAuthTitle": {
+    "placeholders": {
+      "authNumber": {
+        "type": "String"
+      }
+    }
+  },
+  "insurance_view_serviceRequested": "Service Requested",
+  "insurance_view_validFrom": "Valid From",
+  "insurance_view_validTo": "Valid To",
+  "insurance_view_resubmitTitle": "Resubmit Claim",
+  "insurance_view_resubmitMsg": "Are you sure you want to resubmit claim {claimNumber}?",
+  "@insurance_view_resubmitMsg": {
+    "placeholders": {
+      "claimNumber": {
+        "type": "String"
+      }
+    }
+  },
+  "insurance_view_cancelPreAuthTitle": "Cancel Pre-Authorization",
+  "insurance_view_cancelPreAuthMsg": "Are you sure you want to cancel pre-authorization {authNumber}?",
+  "@insurance_view_cancelPreAuthMsg": {
+    "placeholders": {
+      "authNumber": {
+        "type": "String"
+      }
+    }
+  },
+  "insurance_view_yesCancel": "Yes, Cancel",
+  "insurance_add_title": "New Insurance Claim",
+  "insurance_add_patient": "Patient",
+  "insurance_add_insurancePlan": "Insurance Plan",
+  "insurance_add_diagnosisCodes": "Diagnosis Codes",
+  "insurance_add_procedureCodes": "Procedure Codes",
+  "insurance_add_totalAmount": "Total Amount",
+  "insurance_add_claimedAmount": "Claimed Amount",
+  "insurance_add_notes": "Notes",
+  "insurance_add_cancel": "Cancel",
+  "insurance_add_save": "Save",
+  "laboratory_view_title": "Laboratory",
+  "laboratory_view_description": "Test orders, sample collection, results, and approval.",
+  "laboratory_view_newOrder": "New Order",
+  "laboratory_view_totalOrders": "Total Orders",
+  "laboratory_view_pending": "Pending",
+  "laboratory_view_inProgress": "In Progress",
+  "laboratory_view_statPriority": "STAT priority",
+  "laboratory_view_allStatuses": "All statuses",
+  "laboratory_view_sampleCollected": "Sample collected",
+  "laboratory_view_completed": "Completed",
+  "laboratory_view_approved": "Approved",
+  "laboratory_view_cancelled": "Cancelled",
+  "laboratory_view_filterByStatus": "Filter by Status",
+  "laboratory_view_allPriorities": "All priorities",
+  "laboratory_view_routine": "Routine",
+  "laboratory_view_urgent": "Urgent",
+  "laboratory_view_stat": "STAT",
+  "laboratory_view_filterByPriority": "Filter by Priority",
+  "laboratory_view_clear": "Clear",
+  "laboratory_view_columnOrder": "Order #",
+  "laboratory_view_columnDate": "Date",
+  "laboratory_view_columnPatient": "Patient",
+  "laboratory_view_columnTests": "Tests",
+  "laboratory_view_columnPriority": "Priority",
+  "laboratory_view_columnStatus": "Status",
+  "laboratory_view_columnActions": "Actions",
+  "laboratory_view_viewDetails": "View details",
+  "laboratory_view_cancelOrderTooltip": "Cancel order",
+  "laboratory_view_orderDetailsTitle": "Lab Order {orderNumber}",
+  "@laboratory_view_orderDetailsTitle": {
+    "placeholders": {
+      "orderNumber": {
+        "type": "String"
+      }
+    }
+  },
+  "laboratory_view_patientId": "Patient ID",
+  "laboratory_view_doctorId": "Doctor ID",
+  "laboratory_view_clinicalIndication": "Clinical Indication",
+  "laboratory_view_specimenType": "Specimen Type",
+  "laboratory_view_orderDate": "Order Date",
+  "laboratory_view_testsTitle": "Tests",
+  "laboratory_view_close": "Close",
+  "laboratory_view_cancelTitle": "Cancel Lab Order",
+  "laboratory_view_cancelMsg": "Are you sure you want to cancel order {orderNumber}?",
+  "@laboratory_view_cancelMsg": {
+    "placeholders": {
+      "orderNumber": {
+        "type": "String"
+      }
+    }
+  },
+  "laboratory_view_no": "No",
+  "laboratory_view_yesCancel": "Yes, Cancel",
+  "laboratory_add_title": "New Lab Order",
+  "laboratory_add_patient": "Patient",
+  "laboratory_add_priority": "Priority",
+  "laboratory_add_routine": "Routine",
+  "laboratory_add_urgent": "Urgent",
+  "laboratory_add_stat": "STAT",
+  "laboratory_add_clinicalIndication": "Clinical Indication",
+  "laboratory_add_specimenType": "Specimen Type",
+  "laboratory_add_notes": "Notes",
+  "laboratory_add_cancel": "Cancel",
+  "laboratory_add_save": "Save",
+  "medical_records_view_title": "Medical Records",
+  "medical_records_view_description": "View and manage patient medical records.",
+  "medical_records_view_newRecord": "New Record",
+  "medical_records_view_records": "Records",
+  "medical_records_view_recordId": "Record ID: {id}",
+  "@medical_records_view_recordId": {
+    "placeholders": {
+      "id": {
+        "type": "String"
+      }
+    }
+  },
+  "medical_records_view_noDate": "No Date",
+  "medical_records_view_selectRecord": "Select a medical record to view details",
+  "medical_records_view_recordDetails": "Record details",
+  "medical_records_view_delete": "Delete",
+  "medical_records_view_patientId": "Patient ID",
+  "medical_records_view_doctorId": "Doctor ID",
+  "medical_records_view_diagnosisCode": "Diagnosis Code",
+  "medical_records_view_diagnosisDescription": "Diagnosis Description",
+  "medical_records_view_subjective": "Subjective",
+  "medical_records_view_objective": "Objective",
+  "medical_records_view_assessment": "Assessment",
+  "medical_records_view_plan": "Plan",
+  "medical_records_view_allergies": "Allergies",
+  "medical_records_view_currentMedications": "Current Medications",
+  "medical_records_view_clinicalNotes": "Clinical Notes",
+  "medical_records_view_deleteTitle": "Delete Medical Record",
+  "medical_records_view_deleteMsg": "Are you sure you want to delete this medical record?",
+  "medical_records_view_cancel": "Cancel",
+  "medical_records_add_title": "Add Medical Record",
+  "medical_records_add_patient": "Patient",
+  "medical_records_add_diagnosisCode": "Diagnosis Code",
+  "medical_records_add_diagnosisDescription": "Diagnosis Description",
+  "medical_records_add_subjective": "Subjective",
+  "medical_records_add_objective": "Objective",
+  "medical_records_add_assessment": "Assessment",
+  "medical_records_add_plan": "Plan",
+  "medical_records_add_allergies": "Allergies",
+  "medical_records_add_currentMedications": "Current Medications",
+  "medical_records_add_clinicalNotes": "Clinical Notes",
+  "medical_records_add_cancel": "Cancel",
+  "medical_records_add_save": "Save",
+  "operating_room_view_title": "Operating Room",
+  "operating_room_view_description": "Surgery schedule, teams, safety checklists.",
+  "operating_room_view_bookSurgery": "Book Surgery",
+  "operating_room_view_totalBookings": "Total Bookings",
+  "operating_room_view_scheduled": "Scheduled",
+  "operating_room_view_inProgress": "In Progress",
+  "operating_room_view_completed": "Completed",
+  "operating_room_view_columnDate": "Date",
+  "operating_room_view_columnTime": "Time",
+  "operating_room_view_columnPatient": "Patient",
+  "operating_room_view_columnProcedure": "Procedure",
+  "operating_room_view_columnRoom": "Room",
+  "operating_room_view_columnPriority": "Priority",
+  "operating_room_view_columnStatus": "Status",
+  "operating_room_view_columnActions": "Actions",
+  "operating_room_view_viewAction": "View",
+  "operating_room_view_cancelAction": "Cancel",
+  "operating_room_view_bookingTitle": "Surgery Booking - {procedure}",
+  "@operating_room_view_bookingTitle": {
+    "placeholders": {
+      "procedure": {
+        "type": "String"
+      }
+    }
+  },
+  "operating_room_view_duration": "Duration",
+  "operating_room_view_durationMin": "{minutes} minutes",
+  "@operating_room_view_durationMin": {
+    "placeholders": {
+      "minutes": {
+        "type": "int"
+      }
+    }
+  },
+  "operating_room_view_anesthesia": "Anesthesia",
+  "operating_room_view_notes": "Notes",
+  "operating_room_view_close": "Close",
+  "operating_room_view_cancelTitle": "Cancel Surgery",
+  "operating_room_view_cancelMsg": "Cancel surgery for {patient}?",
+  "@operating_room_view_cancelMsg": {
+    "placeholders": {
+      "patient": {
+        "type": "String"
+      }
+    }
+  },
+  "operating_room_view_reasonForCancel": "Reason for cancellation",
+  "operating_room_view_no": "No",
+  "operating_room_view_yesCancel": "Yes, Cancel",
+  "operating_room_add_title": "Book Surgery",
+  "operating_room_add_patient": "Patient",
+  "operating_room_add_procedure": "Procedure",
+  "operating_room_add_operatingRoom": "Operating Room",
+  "operating_room_add_duration": "Duration (min)",
+  "operating_room_add_priority": "Priority",
+  "operating_room_add_routine": "Routine",
+  "operating_room_add_urgent": "Urgent",
+  "operating_room_add_emergency": "Emergency",
+  "operating_room_add_anesthesiaType": "Anesthesia Type",
+  "operating_room_add_general": "General",
+  "operating_room_add_local": "Local",
+  "operating_room_add_regional": "Regional",
+  "operating_room_add_spinal": "Spinal",
+  "operating_room_add_sedation": "Sedation",
+  "operating_room_add_notes": "Notes",
+  "operating_room_add_cancel": "Cancel",
+  "operating_room_add_save": "Save",
+  "patients_view_title": "Patients",
+  "patients_view_description": "Registered patient master data — MRN, demographics, insurance, contact.",
+  "patients_view_addPatient": "Add Patient",
+  "patients_view_allGenders": "All genders",
+  "patients_view_male": "Male",
+  "patients_view_female": "Female",
+  "patients_view_genderHint": "Gender",
+  "patients_view_columnMrn": "MRN",
+  "patients_view_columnPatient": "Patient",
+  "patients_view_columnDobAge": "DOB / Age",
+  "patients_view_columnGender": "Gender",
+  "patients_view_columnPhone": "Phone",
+  "patients_view_columnBlood": "Blood",
+  "patients_view_columnStatus": "Status",
+  "patients_view_columnActions": "Actions",
+  "patients_view_active": "Active",
+  "patients_view_inactive": "Inactive",
+  "patients_view_viewAction": "View",
+  "patients_view_editAction": "Edit",
+  "patients_view_patientDetails": "Patient Details",
+  "patients_view_name": "Name",
+  "patients_view_dob": "Date of Birth",
+  "patients_view_age": "Age",
+  "patients_view_bloodType": "Blood Type",
+  "patients_view_nationalId": "National ID",
+  "patients_view_email": "Email",
+  "patients_view_mobile": "Mobile",
+  "patients_view_address": "Address",
+  "patients_view_emergencyContact": "Emergency Contact",
+  "patients_view_emergencyPhone": "Emergency Phone",
+  "patients_view_relationship": "Relationship",
+  "patients_view_vip": "VIP",
+  "patients_view_yes": "Yes",
+  "patients_view_no": "No",
+  "patients_view_close": "Close",
+  "patients_add_addTitle": "Add Patient",
+  "patients_add_editTitle": "Edit Patient",
+  "patients_add_mrn": "MRN",
+  "patients_add_firstName": "First Name",
+  "patients_add_lastName": "Last Name",
+  "patients_add_email": "Email",
+  "patients_add_mobile": "Mobile",
+  "patients_add_dateOfBirth": "Date of Birth",
+  "patients_add_gender": "Gender",
+  "patients_add_male": "Male",
+  "patients_add_female": "Female",
+  "patients_add_bloodType": "Blood Type",
+  "patients_add_address": "Address",
+  "patients_add_nationalId": "National ID",
+  "patients_add_emergencyContactName": "Emergency Contact Name",
+  "patients_add_emergencyContactPhone": "Emergency Contact Phone",
+  "patients_add_emergencyContactRelationship": "Relationship",
+  "patients_add_vipStatus": "VIP Status",
+  "patients_add_activeStatus": "Active Status",
+  "patients_add_cancel": "Cancel",
+  "patients_add_save": "Save",
+  "pharmacy_view_title": "Pharmacy",
+  "pharmacy_view_description": "Prescriptions, dispensing, and medication tracking.",
+  "pharmacy_view_newPrescription": "New Prescription",
+  "pharmacy_view_totalRx": "Total Rx",
+  "pharmacy_view_pending": "Pending",
+  "pharmacy_view_dispensed": "Dispensed",
+  "pharmacy_view_lineItems": "Line items",
+  "pharmacy_view_allStatuses": "All Statuses",
+  "pharmacy_view_cancelled": "Cancelled",
+  "pharmacy_view_filterByStatus": "Filter by status",
+  "pharmacy_view_columnRx": "Rx #",
+  "pharmacy_view_columnDate": "Date",
+  "pharmacy_view_columnPatient": "Patient",
+  "pharmacy_view_columnDiagnosis": "Diagnosis",
+  "pharmacy_view_columnItems": "Items",
+  "pharmacy_view_columnStatus": "Status",
+  "pharmacy_view_columnActions": "Actions",
+  "pharmacy_view_noItems": "No items",
+  "pharmacy_view_dispenseAction": "Dispense",
+  "pharmacy_view_cancelAction": "Cancel",
+  "pharmacy_view_cancelTitle": "Cancel Prescription",
+  "pharmacy_view_cancelMsg": "Are you sure you want to cancel prescription {rxNumber}?",
+  "@pharmacy_view_cancelMsg": {
+    "placeholders": {
+      "rxNumber": {
+        "type": "String"
+      }
+    }
+  },
+  "pharmacy_view_no": "No",
+  "pharmacy_view_yesCancel": "Yes, Cancel",
+  "pharmacy_view_dispenseTitle": "Dispense Prescription",
+  "pharmacy_view_dispenseMsg": "Mark prescription {rxNumber} as dispensed?",
+  "@pharmacy_view_dispenseMsg": {
+    "placeholders": {
+      "rxNumber": {
+        "type": "String"
+      }
+    }
+  },
+  "pharmacy_add_title": "New Prescription",
+  "pharmacy_add_patient": "Patient",
+  "pharmacy_add_diagnosis": "Diagnosis",
+  "pharmacy_add_medicationItems": "Medication Items",
+  "pharmacy_add_addItem": "Add Item",
+  "pharmacy_add_medicationName": "Medication Name",
+  "pharmacy_add_dosage": "Dosage",
+  "pharmacy_add_frequency": "Frequency",
+  "pharmacy_add_durationDays": "Duration (Days)",
+  "pharmacy_add_instructions": "Instructions",
+  "pharmacy_add_notes": "Notes",
+  "pharmacy_add_cancel": "Cancel",
+  "pharmacy_add_save": "Save",
+  "drawer_overview": "Overview",
+  "drawer_dashboard": "Dashboard",
+  "drawer_patients": "Patients",
+  "drawer_appointments": "Appointments",
+  "drawer_medicalRecords": "Medical Records",
+  "drawer_pharmacy": "Pharmacy",
+  "drawer_laboratory": "Laboratory",
+  "drawer_inpatient": "Inpatient (IPD)",
+  "drawer_emergency": "Emergency",
+  "drawer_operatingRoom": "Operating Room",
+  "drawer_insurance": "Insurance",
+  "drawer_logout": "Logout"
 }

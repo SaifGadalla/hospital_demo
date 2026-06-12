@@ -27,15 +27,13 @@ class _AddClaimDialogState extends ConsumerState<AddClaimDialog> {
   @override
   Widget build(BuildContext context) {
     final state = ref.watch(addClaimDialogControllerProvider);
-    final controller = ref.read(
-      addClaimDialogControllerProvider.notifier,
-    );
+    final controller = ref.read(addClaimDialogControllerProvider.notifier);
     if (state.isLoading) {
       return const Center(child: CircularProgressIndicator());
     }
     return AlertDialog(
       scrollable: true,
-      title: const Text('New Insurance Claim'),
+      title: Text(context.l10n.insurance_add_title),
       content: ReactiveForm(
         formGroup: controller.formGroup,
         child: SizedBox(
@@ -54,8 +52,8 @@ class _AddClaimDialogState extends ConsumerState<AddClaimDialog> {
                       child: Text('${patient.fullName} (${patient.mrn})'),
                     );
                   }).toList(),
-                  decoration: const InputDecoration(
-                    labelText: 'Patient',
+                  decoration: InputDecoration(
+                    labelText: context.l10n.insurance_add_patient,
                   ),
                 ),
               ),
@@ -66,40 +64,38 @@ class _AddClaimDialogState extends ConsumerState<AddClaimDialog> {
                   items: controller.insurancePlans.map((plan) {
                     return DropdownMenuItem(
                       value: plan,
-                      child: Text(
-                        '${plan.planName} (${plan.planCode})',
-                      ),
+                      child: Text('${plan.planName} (${plan.planCode})'),
                     );
                   }).toList(),
-                  decoration: const InputDecoration(
-                    labelText: 'Insurance Plan',
+                  decoration: InputDecoration(
+                    labelText: context.l10n.insurance_add_insurancePlan,
                   ),
                 ),
               ),
               AppDatePicker(formControlName: 'serviceDate'),
               DialogTextField(
                 formControlName: 'diagnosisCodes',
-                label: 'Diagnosis Codes',
+                label: context.l10n.insurance_add_diagnosisCodes,
                 width: 200,
               ),
               DialogTextField(
                 formControlName: 'procedureCodes',
-                label: 'Procedure Codes',
+                label: context.l10n.insurance_add_procedureCodes,
                 width: 200,
               ),
               DialogTextField(
                 formControlName: 'totalAmount',
-                label: 'Total Amount',
+                label: context.l10n.insurance_add_totalAmount,
                 width: 200,
               ),
               DialogTextField(
                 formControlName: 'claimedAmount',
-                label: 'Claimed Amount',
+                label: context.l10n.insurance_add_claimedAmount,
                 width: 200,
               ),
               DialogTextField(
                 formControlName: 'notes',
-                label: 'Notes',
+                label: context.l10n.insurance_add_notes,
                 width: 300,
               ),
             ],
@@ -109,7 +105,7 @@ class _AddClaimDialogState extends ConsumerState<AddClaimDialog> {
       actions: [
         TextButton(
           onPressed: () => Navigator.pop(context),
-          child: const Text('Cancel'),
+          child: Text(context.l10n.insurance_add_cancel),
         ),
         TextButton(
           onPressed: () async {
@@ -120,7 +116,7 @@ class _AddClaimDialogState extends ConsumerState<AddClaimDialog> {
               }
             }
           },
-          child: const Text('Save'),
+          child: Text(context.l10n.insurance_add_save),
         ),
       ],
     );

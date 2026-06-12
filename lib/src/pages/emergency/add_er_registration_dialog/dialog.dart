@@ -22,9 +22,7 @@ class _AddErRegistrationDialogState
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      ref
-          .read(addErRegistrationDialogControllerProvider.notifier)
-          .loadData();
+      ref.read(addErRegistrationDialogControllerProvider.notifier).loadData();
     });
   }
 
@@ -39,7 +37,7 @@ class _AddErRegistrationDialogState
     }
     return AlertDialog(
       scrollable: true,
-      title: const Text('Register ER Arrival'),
+      title: Text(context.l10n.emergency_add_title),
       content: ReactiveForm(
         formGroup: controller.formGroup,
         child: SizedBox(
@@ -58,46 +56,67 @@ class _AddErRegistrationDialogState
                       child: Text('${patient.fullName} (${patient.mrn})'),
                     );
                   }).toList(),
-                  decoration: const InputDecoration(
-                    labelText: 'Patient',
+                  decoration: InputDecoration(
+                    labelText: context.l10n.emergency_add_patient,
                   ),
                 ),
               ),
               DialogDropdownField<String>(
                 formControlName: 'arrivalMode',
-                label: 'Arrival Mode',
-                items: const [
-                  DropdownMenuItem(value: 'Walk-in', child: Text('Walk-in')),
+                label: context.l10n.emergency_add_arrivalMode,
+                items: [
+                  DropdownMenuItem(
+                    value: 'Walk-in',
+                    child: Text(context.l10n.emergency_add_walkIn),
+                  ),
                   DropdownMenuItem(
                     value: 'Ambulance',
-                    child: Text('Ambulance'),
+                    child: Text(context.l10n.emergency_add_ambulance),
                   ),
                   DropdownMenuItem(
                     value: 'Helicopter',
-                    child: Text('Helicopter'),
+                    child: Text(context.l10n.emergency_add_helicopter),
                   ),
-                  DropdownMenuItem(value: 'Police', child: Text('Police')),
+                  DropdownMenuItem(
+                    value: 'Police',
+                    child: Text(context.l10n.emergency_add_police),
+                  ),
                 ],
               ),
               DialogTextField(
                 formControlName: 'chiefComplaint',
-                label: 'Chief Complaint',
+                label: context.l10n.emergency_add_chiefComplaint,
                 width: 300,
               ),
               DialogDropdownField<int>(
                 formControlName: 'triageLevel',
-                label: 'Triage Level',
-                items: const [
-                  DropdownMenuItem(value: 1, child: Text('1 - Resuscitation')),
-                  DropdownMenuItem(value: 2, child: Text('2 - Emergent')),
-                  DropdownMenuItem(value: 3, child: Text('3 - Urgent')),
-                  DropdownMenuItem(value: 4, child: Text('4 - Less Urgent')),
-                  DropdownMenuItem(value: 5, child: Text('5 - Non-Urgent')),
+                label: context.l10n.emergency_add_triageLevel,
+                items: [
+                  DropdownMenuItem(
+                    value: 1,
+                    child: Text(context.l10n.emergency_add_level1),
+                  ),
+                  DropdownMenuItem(
+                    value: 2,
+                    child: Text(context.l10n.emergency_add_level2),
+                  ),
+                  DropdownMenuItem(
+                    value: 3,
+                    child: Text(context.l10n.emergency_add_level3),
+                  ),
+                  DropdownMenuItem(
+                    value: 4,
+                    child: Text(context.l10n.emergency_add_level4),
+                  ),
+                  DropdownMenuItem(
+                    value: 5,
+                    child: Text(context.l10n.emergency_add_level5),
+                  ),
                 ],
               ),
               DialogTextField(
                 formControlName: 'notes',
-                label: 'Notes',
+                label: context.l10n.emergency_add_notes,
                 width: 300,
               ),
             ],
@@ -107,7 +126,7 @@ class _AddErRegistrationDialogState
       actions: [
         TextButton(
           onPressed: () => Navigator.pop(context),
-          child: const Text('Cancel'),
+          child: Text(context.l10n.emergency_add_cancel),
         ),
         TextButton(
           onPressed: () async {
@@ -118,7 +137,7 @@ class _AddErRegistrationDialogState
               }
             }
           },
-          child: const Text('Save'),
+          child: Text(context.l10n.emergency_add_save),
         ),
       ],
     );

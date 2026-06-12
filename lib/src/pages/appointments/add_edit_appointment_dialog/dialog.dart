@@ -37,7 +37,7 @@ class _AddEditAppointmentDialogState
     }
     return AlertDialog(
       scrollable: true,
-      title: const Text('Add Appointment'),
+      title: Text(context.l10n.appointments_add_title),
       content: ReactiveForm(
         formGroup: controller.formGroup,
         child: Column(
@@ -50,32 +50,32 @@ class _AddEditAppointmentDialogState
                   child: Text('${patient.fullName} (${patient.mrn})'),
                 );
               }).toList(),
-              decoration: const InputDecoration(labelText: 'Patient'),
+              decoration: InputDecoration(labelText: context.l10n.appointments_add_patient),
               onChanged: (value) {},
             ),
             AppDatePicker(formControlName: 'date'),
             AppTimePicker(formControlName: 'time'),
             DialogDropdownField<String>(
               formControlName: 'type',
-              label: 'Appointment Type',
-              items: const [
+              label: context.l10n.appointments_add_type,
+              items: [
                 DropdownMenuItem(
                   value: 'Consultation',
-                  child: Text('Consultation'),
+                  child: Text(context.l10n.appointments_add_consultation),
                 ),
                 DropdownMenuItem(
                   value: 'Follow-up',
-                  child: Text('Follow-up'),
+                  child: Text(context.l10n.appointments_add_followUp),
                 ),
                 DropdownMenuItem(
                   value: 'Procedure',
-                  child: Text('Procedure'),
+                  child: Text(context.l10n.appointments_add_procedure),
                 ),
               ],
             ),
             DialogTextField(
               formControlName: 'note',
-              label: 'Notes',
+              label: context.l10n.appointments_add_notes,
             ),
           ],
         ),
@@ -83,7 +83,7 @@ class _AddEditAppointmentDialogState
       actions: [
         TextButton(
           onPressed: () => Navigator.pop(context, false),
-          child: const Text('Cancel'),
+          child: Text(context.l10n.appointments_add_cancel),
         ),
         TextButton(
           onPressed: state.isSaving
@@ -102,7 +102,7 @@ class _AddEditAppointmentDialogState
                   height: 16,
                   child: CircularProgressIndicator(strokeWidth: 2),
                 )
-              : const Text('Save'),
+              : Text(context.l10n.appointments_add_save),
         ),
       ],
     );

@@ -25,21 +25,21 @@ class _OperatingRoomPageState extends ConsumerState<OperatingRoomPage> {
     final controller = ref.read(operatingRoomControllerProvider.notifier);
 
     return AppPage(
-      title: 'Operating Room',
-      description: 'Surgery schedule, teams, safety checklists.',
-      mainButtonTitle: 'Book Surgery',
+      title: context.l10n.operating_room_view_title,
+      description: context.l10n.operating_room_view_description,
+      mainButtonTitle: context.l10n.operating_room_view_bookSurgery,
       mainButtonOnTap: () async {
         await AddSurgeryBookingDialog.show(context);
         controller.loadSurgeryBookings();
       },
       numberCards: [
         NumberCard(
-          title: 'Total Bookings',
+          title: context.l10n.operating_room_view_totalBookings,
           value: state.surgeryBookings.length.toString(),
           icon: Icons.event,
         ),
         NumberCard(
-          title: 'Scheduled',
+          title: context.l10n.operating_room_view_scheduled,
           value: state.surgeryBookings
               .where((s) => s.status?.toLowerCase() == 'scheduled')
               .length
@@ -47,17 +47,19 @@ class _OperatingRoomPageState extends ConsumerState<OperatingRoomPage> {
           icon: Icons.schedule,
         ),
         NumberCard(
-          title: 'In Progress',
+          title: context.l10n.operating_room_view_inProgress,
           value: state.surgeryBookings
-              .where((s) =>
-                  s.status?.toLowerCase() == 'inprogress' ||
-                  s.status?.toLowerCase() == 'in_progress')
+              .where(
+                (s) =>
+                    s.status?.toLowerCase() == 'inprogress' ||
+                    s.status?.toLowerCase() == 'in_progress',
+              )
               .length
               .toString(),
           icon: Icons.autorenew,
         ),
         NumberCard(
-          title: 'Completed',
+          title: context.l10n.operating_room_view_completed,
           value: state.surgeryBookings
               .where((s) => s.status?.toLowerCase() == 'completed')
               .length
@@ -74,16 +76,34 @@ class _OperatingRoomPageState extends ConsumerState<OperatingRoomPage> {
               ),
             )
           : DataTable(
-              headingRowColor: WidgetStateProperty.all(ColorManager.surfaceElevated),
-              columns: const [
-                DataColumn(label: Text('Date')),
-                DataColumn(label: Text('Time')),
-                DataColumn(label: Text('Patient')),
-                DataColumn(label: Text('Procedure')),
-                DataColumn(label: Text('Room')),
-                DataColumn(label: Text('Priority')),
-                DataColumn(label: Text('Status')),
-                DataColumn(label: Text('Actions')),
+              headingRowColor: WidgetStateProperty.all(
+                context.colors.surfaceElevated,
+              ),
+              columns: [
+                DataColumn(
+                  label: Text(context.l10n.operating_room_view_columnDate),
+                ),
+                DataColumn(
+                  label: Text(context.l10n.operating_room_view_columnTime),
+                ),
+                DataColumn(
+                  label: Text(context.l10n.operating_room_view_columnPatient),
+                ),
+                DataColumn(
+                  label: Text(context.l10n.operating_room_view_columnProcedure),
+                ),
+                DataColumn(
+                  label: Text(context.l10n.operating_room_view_columnRoom),
+                ),
+                DataColumn(
+                  label: Text(context.l10n.operating_room_view_columnPriority),
+                ),
+                DataColumn(
+                  label: Text(context.l10n.operating_room_view_columnStatus),
+                ),
+                DataColumn(
+                  label: Text(context.l10n.operating_room_view_columnActions),
+                ),
               ],
               rows: state.surgeryBookings.map((booking) {
                 return DataRow(
@@ -91,14 +111,18 @@ class _OperatingRoomPageState extends ConsumerState<OperatingRoomPage> {
                     DataCell(
                       Text(
                         booking.scheduledDate != null
-                            ? DateFormat('yyyy-MM-dd').format(booking.scheduledDate!)
+                            ? DateFormat(
+                                'yyyy-MM-dd',
+                              ).format(booking.scheduledDate!)
                             : '',
                       ),
                     ),
                     DataCell(
                       Text(
                         booking.scheduledStartTime != null
-                            ? DateFormat('h:mm a').format(booking.scheduledStartTime!)
+                            ? DateFormat(
+                                'h:mm a',
+                              ).format(booking.scheduledStartTime!)
                             : '',
                       ),
                     ),
@@ -114,13 +138,17 @@ class _OperatingRoomPageState extends ConsumerState<OperatingRoomPage> {
                             onPressed: () {
                               _showBookingDetails(context, booking);
                             },
-                            child: const Text('View'),
+                            child: Text(
+                              context.l10n.operating_room_view_viewAction,
+                            ),
                           ),
                           TextButton(
                             onPressed: () {
                               _showCancelDialog(context, booking, controller);
                             },
-                            child: const Text('Cancel'),
+                            child: Text(
+                              context.l10n.operating_room_view_cancelAction,
+                            ),
                           ),
                         ],
                       ),
@@ -137,43 +165,67 @@ class _OperatingRoomPageState extends ConsumerState<OperatingRoomPage> {
       context: context,
       builder: (context) => AlertDialog(
         scrollable: true,
-        title: Text('Surgery Booking - ${booking.procedureName ?? ''}'),
+        title: Text(
+          context.l10n.operating_room_view_bookingTitle(
+            booking.procedureName ?? '',
+          ),
+        ),
         content: SizedBox(
           width: 500,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisSize: MainAxisSize.min,
             children: [
-              _detailRow('Patient', booking.patientName),
-              _detailRow('Procedure', booking.procedureName),
-              _detailRow('Room', booking.operatingRoomNumber),
               _detailRow(
-                'Date',
+                context.l10n.operating_room_view_columnPatient,
+                booking.patientName,
+              ),
+              _detailRow(
+                context.l10n.operating_room_view_columnProcedure,
+                booking.procedureName,
+              ),
+              _detailRow(
+                context.l10n.operating_room_view_columnRoom,
+                booking.operatingRoomNumber,
+              ),
+              _detailRow(
+                context.l10n.operating_room_view_columnDate,
                 booking.scheduledDate != null
                     ? DateFormat('yyyy-MM-dd').format(booking.scheduledDate!)
                     : null,
               ),
               _detailRow(
-                'Time',
+                context.l10n.operating_room_view_columnTime,
                 booking.scheduledStartTime != null
                     ? DateFormat('h:mm a').format(booking.scheduledStartTime!)
                     : null,
               ),
               _detailRow(
-                'Duration',
-                '${booking.estimatedDuration ?? 0} minutes',
+                context.l10n.operating_room_view_duration,
+                context.l10n.operating_room_view_durationMin(
+                  booking.estimatedDuration ?? 0,
+                ),
               ),
-              _detailRow('Priority', booking.priority),
-              _detailRow('Anesthesia', booking.anesthesiaType),
-              _detailRow('Status', booking.status),
-              _detailRow('Notes', booking.notes),
+              _detailRow(
+                context.l10n.operating_room_view_columnPriority,
+                booking.priority,
+              ),
+              _detailRow(
+                context.l10n.operating_room_view_anesthesia,
+                booking.anesthesiaType,
+              ),
+              _detailRow(
+                context.l10n.operating_room_view_columnStatus,
+                booking.status,
+              ),
+              _detailRow(context.l10n.operating_room_view_notes, booking.notes),
             ],
           ),
         ),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context),
-            child: const Text('Close'),
+            child: Text(context.l10n.operating_room_view_close),
           ),
         ],
       ),
@@ -189,21 +241,23 @@ class _OperatingRoomPageState extends ConsumerState<OperatingRoomPage> {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title: const Text('Cancel Surgery'),
+        title: Text(context.l10n.operating_room_view_cancelTitle),
         content: SizedBox(
           width: 400,
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
               Text(
-                'Cancel surgery for ${booking.patientName ?? 'patient'}?',
+                context.l10n.operating_room_view_cancelMsg(
+                  booking.patientName ?? 'patient',
+                ),
               ),
               const SizedBox(height: 16),
               TextField(
                 controller: reasonController,
-                decoration: const InputDecoration(
-                  labelText: 'Reason for cancellation',
-                  border: OutlineInputBorder(),
+                decoration: InputDecoration(
+                  labelText: context.l10n.operating_room_view_reasonForCancel,
+                  border: const OutlineInputBorder(),
                 ),
                 maxLines: 2,
               ),
@@ -213,7 +267,7 @@ class _OperatingRoomPageState extends ConsumerState<OperatingRoomPage> {
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context),
-            child: const Text('No'),
+            child: Text(context.l10n.operating_room_view_no),
           ),
           TextButton(
             onPressed: () async {
@@ -225,7 +279,7 @@ class _OperatingRoomPageState extends ConsumerState<OperatingRoomPage> {
                 );
               }
             },
-            child: const Text('Yes, Cancel'),
+            child: Text(context.l10n.operating_room_view_yesCancel),
           ),
         ],
       ),
