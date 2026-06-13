@@ -168,7 +168,7 @@ class AppPage extends StatelessWidget {
             AppSearchBar(
               formGroup: searchFormGroup!,
               width: double.infinity,
-              hintText: 'Search patients',
+              hintText: context.l10n.app_page_searchPatients,
               onSearchFieldChanged: onSearchFieldChanged,
             ),
             if (secondarySearchHeaderWidgets != null) ...[
@@ -185,19 +185,19 @@ class AppPage extends StatelessWidget {
             ],
           ],
         ),
-        tablet: (context) => _buildDesktopSearchRow(),
-        desktop: (context) => _buildDesktopSearchRow(),
+        tablet: (context) => _buildDesktopSearchRow(context),
+        desktop: (context) => _buildDesktopSearchRow(context),
       ),
     );
   }
 
-  Widget _buildDesktopSearchRow() {
+  Widget _buildDesktopSearchRow(BuildContext context) {
     return Row(
       children: [
         AppSearchBar(
           formGroup: searchFormGroup!,
           width: 300,
-          hintText: 'Search patients',
+          hintText: context.l10n.app_page_searchPatients,
           onSearchFieldChanged: onSearchFieldChanged,
         ),
         const SizedBox(width: 16),

@@ -5,6 +5,7 @@ export 'package:go_router/go_router.dart';
 export 'package:logging/logging.dart';
 export 'package:reactive_forms/reactive_forms.dart';
 export 'package:url_strategy/url_strategy.dart';
+export 'package:flutter_localizations/flutter_localizations.dart';
 
 export '../../generated/l10n.dart';
 

@@ -18,7 +18,14 @@ class MainApp extends ConsumerWidget {
         theme: lightTheme,
         darkTheme: darkTheme,
         routerConfig: ref.watch(routerProvider),
-        localizationsDelegates: [],
+        localizationsDelegates: [
+          S.delegate,
+          GlobalMaterialLocalizations.delegate,
+          GlobalWidgetsLocalizations.delegate,
+          GlobalCupertinoLocalizations.delegate,
+        ],
+        supportedLocales: const [Locale('en'), Locale('ar')],
+        locale: ref.watch(langProvider),
         builder: (context, child) {
           return child ?? const SizedBox.shrink();
         },

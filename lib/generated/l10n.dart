@@ -4498,6 +4498,131 @@ class S {
   String get drawer_logout {
     return Intl.message('Logout', name: 'drawer_logout', desc: '', args: []);
   }
+
+  /// `Language`
+  String get drawer_language {
+    return Intl.message(
+      'Language',
+      name: 'drawer_language',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Search patients`
+  String get app_page_searchPatients {
+    return Intl.message(
+      'Search patients',
+      name: 'app_page_searchPatients',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Switch to Light Mode`
+  String get theme_switchToLight {
+    return Intl.message(
+      'Switch to Light Mode',
+      name: 'theme_switchToLight',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Switch to Dark Mode`
+  String get theme_switchToDark {
+    return Intl.message(
+      'Switch to Dark Mode',
+      name: 'theme_switchToDark',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Welcome to CarePulse`
+  String get home_welcomeTitle {
+    return Intl.message(
+      'Welcome to CarePulse',
+      name: 'home_welcomeTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `A unified platform for hospital operations, finance, HR, supply chain, and more.`
+  String get home_description {
+    return Intl.message(
+      'A unified platform for hospital operations, finance, HR, supply chain, and more.',
+      name: 'home_description',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Get Started`
+  String get home_getStarted {
+    return Intl.message(
+      'Get Started',
+      name: 'home_getStarted',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Streamline your hospital management with CarePulse.`
+  String get home_streamlineMessage {
+    return Intl.message(
+      'Streamline your hospital management with CarePulse.',
+      name: 'home_streamlineMessage',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `CarePulse`
+  String get drawer_brandName {
+    return Intl.message(
+      'CarePulse',
+      name: 'drawer_brandName',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Hospital Systems`
+  String get drawer_brandSubtitle {
+    return Intl.message(
+      'Hospital Systems',
+      name: 'drawer_brandSubtitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `SJ`
+  String get drawer_userInitials {
+    return Intl.message('SJ', name: 'drawer_userInitials', desc: '', args: []);
+  }
+
+  /// `Dr. S. Jenkins`
+  String get drawer_userName {
+    return Intl.message(
+      'Dr. S. Jenkins',
+      name: 'drawer_userName',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Chief Administrator`
+  String get drawer_userRole {
+    return Intl.message(
+      'Chief Administrator',
+      name: 'drawer_userRole',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

@@ -594,5 +594,18 @@
   "drawer_emergency": "الطوارئ",
   "drawer_operatingRoom": "غرفة العمليات",
   "drawer_insurance": "التأمين",
-  "drawer_logout": "تسجيل الخروج"
+  "drawer_logout": "تسجيل الخروج",
+  "drawer_language": "اللغة",
+  "app_page_searchPatients": "ابحث عن المرضى",
+  "theme_switchToLight": "التبديل إلى الوضع الفاتح",
+  "theme_switchToDark": "التبديل إلى الوضع الداكن",
+  "home_welcomeTitle": "مرحباً بك في CarePulse",
+  "home_description": "منصة موحدة لعمليات المستشفى، الشؤون المالية، الموارد البشرية، سلسلة التوريد، وأكثر من ذلك.",
+  "home_getStarted": "ابدأ الآن",
+  "home_streamlineMessage": "قم بتبسيط إدارة المستشفى الخاص بك مع CarePulse.",
+  "drawer_brandName": "CarePulse",
+  "drawer_brandSubtitle": "أنظمة المستشفيات",
+  "drawer_userInitials": "SJ",
+  "drawer_userName": "د. س. جنكينز",
+  "drawer_userRole": "المدير العام"
 }

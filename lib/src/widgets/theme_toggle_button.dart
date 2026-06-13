@@ -28,7 +28,7 @@ class ThemeToggleButton extends ConsumerWidget {
               isDark ? ThemeMode.light : ThemeMode.dark,
             );
       },
-      tooltip: isDark ? 'Switch to Light Mode' : 'Switch to Dark Mode',
+      tooltip: isDark ? context.l10n.theme_switchToLight : context.l10n.theme_switchToDark,
     );
   }
 }

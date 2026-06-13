@@ -593,5 +593,18 @@
   "drawer_emergency": "Emergency",
   "drawer_operatingRoom": "Operating Room",
   "drawer_insurance": "Insurance",
-  "drawer_logout": "Logout"
+  "drawer_logout": "Logout",
+  "drawer_language": "Language",
+  "app_page_searchPatients": "Search patients",
+  "theme_switchToLight": "Switch to Light Mode",
+  "theme_switchToDark": "Switch to Dark Mode",
+  "home_welcomeTitle": "Welcome to CarePulse",
+  "home_description": "A unified platform for hospital operations, finance, HR, supply chain, and more.",
+  "home_getStarted": "Get Started",
+  "home_streamlineMessage": "Streamline your hospital management with CarePulse.",
+  "drawer_brandName": "CarePulse",
+  "drawer_brandSubtitle": "Hospital Systems",
+  "drawer_userInitials": "SJ",
+  "drawer_userName": "Dr. S. Jenkins",
+  "drawer_userRole": "Chief Administrator"
 }

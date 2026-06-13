@@ -67,6 +67,9 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
+    "app_page_searchPatients": MessageLookupByLibrary.simpleMessage(
+      "ابحث عن المرضى",
+    ),
     "appointments_add_cancel": MessageLookupByLibrary.simpleMessage("إلغاء"),
     "appointments_add_consultation": MessageLookupByLibrary.simpleMessage(
       "استشارة",
@@ -175,11 +178,16 @@ class MessageLookup extends MessageLookupByLibrary {
       "عرض المرضى",
     ),
     "drawer_appointments": MessageLookupByLibrary.simpleMessage("المواعيد"),
+    "drawer_brandName": MessageLookupByLibrary.simpleMessage("CarePulse"),
+    "drawer_brandSubtitle": MessageLookupByLibrary.simpleMessage(
+      "أنظمة المستشفيات",
+    ),
     "drawer_dashboard": MessageLookupByLibrary.simpleMessage("لوحة القيادة"),
     "drawer_emergency": MessageLookupByLibrary.simpleMessage("الطوارئ"),
     "drawer_inpatient": MessageLookupByLibrary.simpleMessage("التنويم (IPD)"),
     "drawer_insurance": MessageLookupByLibrary.simpleMessage("التأمين"),
     "drawer_laboratory": MessageLookupByLibrary.simpleMessage("المختبر"),
+    "drawer_language": MessageLookupByLibrary.simpleMessage("اللغة"),
     "drawer_logout": MessageLookupByLibrary.simpleMessage("تسجيل الخروج"),
     "drawer_medicalRecords": MessageLookupByLibrary.simpleMessage(
       "السجلات الطبية",
@@ -190,6 +198,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "drawer_overview": MessageLookupByLibrary.simpleMessage("نظرة عامة"),
     "drawer_patients": MessageLookupByLibrary.simpleMessage("المرضى"),
     "drawer_pharmacy": MessageLookupByLibrary.simpleMessage("الصيدلية"),
+    "drawer_userInitials": MessageLookupByLibrary.simpleMessage("SJ"),
+    "drawer_userName": MessageLookupByLibrary.simpleMessage("د. س. جنكينز"),
+    "drawer_userRole": MessageLookupByLibrary.simpleMessage("المدير العام"),
     "emergency_add_ambulance": MessageLookupByLibrary.simpleMessage("إسعاف"),
     "emergency_add_arrivalMode": MessageLookupByLibrary.simpleMessage(
       "طريقة الوصول",
@@ -305,6 +316,16 @@ class MessageLookup extends MessageLookupByLibrary {
       "تحديث حالة مكالمة الإسعاف",
     ),
     "emergency_view_viewAction": MessageLookupByLibrary.simpleMessage("عرض"),
+    "home_description": MessageLookupByLibrary.simpleMessage(
+      "منصة موحدة لعمليات المستشفى، الشؤون المالية، الموارد البشرية، سلسلة التوريد، وأكثر من ذلك.",
+    ),
+    "home_getStarted": MessageLookupByLibrary.simpleMessage("ابدأ الآن"),
+    "home_streamlineMessage": MessageLookupByLibrary.simpleMessage(
+      "قم بتبسيط إدارة المستشفى الخاص بك مع CarePulse.",
+    ),
+    "home_welcomeTitle": MessageLookupByLibrary.simpleMessage(
+      "مرحباً بك في CarePulse",
+    ),
     "inpatient_add_admissionDiagnosis": MessageLookupByLibrary.simpleMessage(
       "تشخيص الدخول",
     ),
@@ -1047,6 +1068,12 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "pharmacy_view_yesCancel": MessageLookupByLibrary.simpleMessage(
       "نعم، إلغاء",
+    ),
+    "theme_switchToDark": MessageLookupByLibrary.simpleMessage(
+      "التبديل إلى الوضع الداكن",
+    ),
+    "theme_switchToLight": MessageLookupByLibrary.simpleMessage(
+      "التبديل إلى الوضع الفاتح",
     ),
     "utils_status_cancelled": MessageLookupByLibrary.simpleMessage("ملغى"),
     "utils_status_closed": MessageLookupByLibrary.simpleMessage("مغلق"),

@@ -6,10 +6,9 @@ class HomePage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return AppPage(
-      title: 'Welcome to CarePulse',
-      description:
-          'A unified platform for hospital operations, finance, HR, supply chain, and more.',
-      mainButtonTitle: 'Get Started',
+      title: context.l10n.home_welcomeTitle,
+      description: context.l10n.home_description,
+      mainButtonTitle: context.l10n.home_getStarted,
       mainButtonOnTap: () {
         context.goNamed(AppRoutes.dashboard);
       },
@@ -17,7 +16,7 @@ class HomePage extends ConsumerWidget {
         children: [
           const SizedBox(height: 20),
           Text(
-            'Streamline your hospital management with CarePulse.',
+            context.l10n.home_streamlineMessage,
             style: Theme.of(context).textTheme.headlineSmall,
             textAlign: TextAlign.center,
           ),

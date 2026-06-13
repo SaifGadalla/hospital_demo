@@ -5,7 +5,6 @@ class AppDrawer extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    // Retrieve the active route path to highlight the current page
     final String currentPath = GoRouterState.of(context).uri.path;
 
     return Drawer(
@@ -64,14 +63,14 @@ class AppDrawer extends ConsumerWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          'CarePulse',
+                          context.l10n.drawer_brandName,
                           style: TextStyleManager.h3.copyWith(
                             color: context.colors.textInverse,
                             letterSpacing: 0.5,
                           ),
                         ),
                         Text(
-                          'Hospital Systems',
+                          context.l10n.drawer_brandSubtitle,
                           style: TextStyleManager.caption.copyWith(
                             color: context.colors.textInverse.withValues(
                               alpha: 0.6,
@@ -223,7 +222,7 @@ class AppDrawer extends ConsumerWidget {
                     ),
                     child: Center(
                       child: Text(
-                        'SJ',
+                        context.l10n.drawer_userInitials,
                         style: TextStyleManager.bodyMedium.copyWith(
                           color: context.colors.textInverse,
                           fontWeight: FontWeight.bold,
@@ -237,7 +236,7 @@ class AppDrawer extends ConsumerWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          'Dr. S. Jenkins',
+                          context.l10n.drawer_userName,
                           style: TextStyleManager.bodyMedium.copyWith(
                             color: context.colors.textInverse,
                             fontWeight: FontWeight.bold,
@@ -245,7 +244,7 @@ class AppDrawer extends ConsumerWidget {
                           overflow: TextOverflow.ellipsis,
                         ),
                         Text(
-                          'Chief Administrator',
+                          context.l10n.drawer_userRole,
                           style: TextStyleManager.caption.copyWith(
                             color: context.colors.textInverse.withValues(
                               alpha: 0.6,
@@ -260,16 +259,9 @@ class AppDrawer extends ConsumerWidget {
                     color: context.colors.textInverse.withValues(alpha: 0.6),
                     size: 18,
                   ),
-                  IconButton(
-                    icon: Icon(
-                      Icons.logout_rounded,
-                      color: context.colors.textInverse.withValues(alpha: 0.6),
-                      size: 18,
-                    ),
-                    onPressed: () {
-                      context.go('/auth');
-                    },
-                    tooltip: context.l10n.drawer_logout,
+                  LangToggleButton(
+                    color: context.colors.textInverse.withValues(alpha: 0.6),
+                    size: 18,
                   ),
                 ],
               ),
@@ -325,6 +317,27 @@ class AppDrawer extends ConsumerWidget {
           contentPadding: const EdgeInsets.symmetric(horizontal: 16),
         ),
       ),
+    );
+  }
+}
+
+class LangToggleButton extends ConsumerWidget {
+  const LangToggleButton({super.key, required this.size, required this.color});
+  final double size;
+  final Color color;
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final langState = ref.watch(langProvider);
+
+    return IconButton(
+      onPressed: () {
+        ref.read(langProvider.notifier).state = Locale(
+          langState.languageCode == 'en' ? 'ar' : 'en',
+        );
+      },
+      icon: Icon(Icons.language_rounded, color: color, size: size),
+      tooltip: context.l10n.drawer_language,
     );
   }
 }

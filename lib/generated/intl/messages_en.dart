@@ -67,6 +67,9 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
+    "app_page_searchPatients": MessageLookupByLibrary.simpleMessage(
+      "Search patients",
+    ),
     "appointments_add_cancel": MessageLookupByLibrary.simpleMessage("Cancel"),
     "appointments_add_consultation": MessageLookupByLibrary.simpleMessage(
       "Consultation",
@@ -181,11 +184,16 @@ class MessageLookup extends MessageLookupByLibrary {
       "View Patients",
     ),
     "drawer_appointments": MessageLookupByLibrary.simpleMessage("Appointments"),
+    "drawer_brandName": MessageLookupByLibrary.simpleMessage("CarePulse"),
+    "drawer_brandSubtitle": MessageLookupByLibrary.simpleMessage(
+      "Hospital Systems",
+    ),
     "drawer_dashboard": MessageLookupByLibrary.simpleMessage("Dashboard"),
     "drawer_emergency": MessageLookupByLibrary.simpleMessage("Emergency"),
     "drawer_inpatient": MessageLookupByLibrary.simpleMessage("Inpatient (IPD)"),
     "drawer_insurance": MessageLookupByLibrary.simpleMessage("Insurance"),
     "drawer_laboratory": MessageLookupByLibrary.simpleMessage("Laboratory"),
+    "drawer_language": MessageLookupByLibrary.simpleMessage("Language"),
     "drawer_logout": MessageLookupByLibrary.simpleMessage("Logout"),
     "drawer_medicalRecords": MessageLookupByLibrary.simpleMessage(
       "Medical Records",
@@ -196,6 +204,11 @@ class MessageLookup extends MessageLookupByLibrary {
     "drawer_overview": MessageLookupByLibrary.simpleMessage("Overview"),
     "drawer_patients": MessageLookupByLibrary.simpleMessage("Patients"),
     "drawer_pharmacy": MessageLookupByLibrary.simpleMessage("Pharmacy"),
+    "drawer_userInitials": MessageLookupByLibrary.simpleMessage("SJ"),
+    "drawer_userName": MessageLookupByLibrary.simpleMessage("Dr. S. Jenkins"),
+    "drawer_userRole": MessageLookupByLibrary.simpleMessage(
+      "Chief Administrator",
+    ),
     "emergency_add_ambulance": MessageLookupByLibrary.simpleMessage(
       "Ambulance",
     ),
@@ -317,6 +330,16 @@ class MessageLookup extends MessageLookupByLibrary {
       "Update Ambulance Call Status",
     ),
     "emergency_view_viewAction": MessageLookupByLibrary.simpleMessage("View"),
+    "home_description": MessageLookupByLibrary.simpleMessage(
+      "A unified platform for hospital operations, finance, HR, supply chain, and more.",
+    ),
+    "home_getStarted": MessageLookupByLibrary.simpleMessage("Get Started"),
+    "home_streamlineMessage": MessageLookupByLibrary.simpleMessage(
+      "Streamline your hospital management with CarePulse.",
+    ),
+    "home_welcomeTitle": MessageLookupByLibrary.simpleMessage(
+      "Welcome to CarePulse",
+    ),
     "inpatient_add_admissionDiagnosis": MessageLookupByLibrary.simpleMessage(
       "Admission Diagnosis",
     ),
@@ -1059,6 +1082,12 @@ class MessageLookup extends MessageLookupByLibrary {
     "pharmacy_view_totalRx": MessageLookupByLibrary.simpleMessage("Total Rx"),
     "pharmacy_view_yesCancel": MessageLookupByLibrary.simpleMessage(
       "Yes, Cancel",
+    ),
+    "theme_switchToDark": MessageLookupByLibrary.simpleMessage(
+      "Switch to Dark Mode",
+    ),
+    "theme_switchToLight": MessageLookupByLibrary.simpleMessage(
+      "Switch to Light Mode",
     ),
     "utils_status_cancelled": MessageLookupByLibrary.simpleMessage("Cancelled"),
     "utils_status_closed": MessageLookupByLibrary.simpleMessage("Closed"),
