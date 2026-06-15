@@ -158,6 +158,6 @@ class AddEditPatientController extends Notifier<AddEditPatientDialogState> {
 }
 
 final addEditPatientControllerProvider =
-    NotifierProvider<AddEditPatientController, AddEditPatientDialogState>(
+    NotifierProvider.autoDispose<AddEditPatientController, AddEditPatientDialogState>(
       AddEditPatientController.new,
     );

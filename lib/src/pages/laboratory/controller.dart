@@ -15,7 +15,9 @@ class LaboratoryState {
 }
 
 final laboratoryControllerProvider =
-    NotifierProvider<LaboratoryController, LaboratoryState>(LaboratoryController.new);
+    NotifierProvider.autoDispose<LaboratoryController, LaboratoryState>(
+  LaboratoryController.new,
+);
 
 class LaboratoryController extends Notifier<LaboratoryState> {
   @override

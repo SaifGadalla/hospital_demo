@@ -4,10 +4,10 @@ class DioService {
   // 1. Make the Dio instance private
   late final Dio _dio;
 
-  DioService() {
+  DioService({required String baseUrl}) {
     _dio = Dio(
       BaseOptions(
-        baseUrl: 'https://tesseroapi.runasp.net',
+        baseUrl: baseUrl,
         connectTimeout: const Duration(seconds: 30),
         receiveTimeout: const Duration(seconds: 30),
         headers: {
@@ -28,6 +28,17 @@ class DioService {
         responseHeader: true,
         responseBody: true,
         error: true,
+      ),
+    );
+
+    // TODO: Add AuthInterceptor here to attach Bearer tokens
+    _dio.interceptors.add(
+      InterceptorsWrapper(
+        onRequest: (options, handler) {
+          // final token = ref.read(authProvider).token;
+          // if (token != null) options.headers['Authorization'] = 'Bearer $token';
+          return handler.next(options);
+        },
       ),
     );
   }

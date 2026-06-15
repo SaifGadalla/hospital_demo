@@ -1,4 +1,4 @@
-import 'package:hospital_demo/common.dart';
+import '../../../common.dart';
 
 abstract class AppointmentsService {
   Future<Appointment> checkInAppointment(String id, Appointment data);

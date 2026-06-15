@@ -1,4 +1,12 @@
-import 'package:flutter_riverpod/legacy.dart';
 import '../../common.dart';
 
-final langProvider = StateProvider<Locale>((ref) => const Locale('en'));
+class LangNotifier extends Notifier<Locale> {
+  @override
+  Locale build() => const Locale('en');
+
+  void setLocale(Locale locale) {
+    state = locale;
+  }
+}
+
+final langProvider = NotifierProvider<LangNotifier, Locale>(LangNotifier.new);

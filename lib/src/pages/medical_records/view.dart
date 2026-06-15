@@ -1,5 +1,6 @@
 import 'package:intl/intl.dart';
 import 'package:responsive_builder/responsive_builder.dart';
+
 import '../../../common.dart';
 import 'add_medical_record_dialog/dialog.dart';
 import 'controller.dart';

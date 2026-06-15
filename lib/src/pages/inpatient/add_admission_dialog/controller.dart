@@ -18,7 +18,7 @@ class AddAdmissionDialogState {
 }
 
 final addAdmissionDialogControllerProvider =
-    NotifierProvider<
+    NotifierProvider.autoDispose<
       AddAdmissionController,
       AddAdmissionDialogState
     >(AddAdmissionController.new);

@@ -192,13 +192,15 @@ class AppColors extends ThemeExtension<AppColors> {
   Color getStatusColor(String? status) {
     if (status == null) return textSecondary;
     final s = status.toLowerCase();
-    if (s == 'completed' || s == 'approved' || s == 'discharged') {
+    if (s == 'completed' || s == 'approved' || s == 'discharged' || s == 'closed') {
       return success;
     }
     if (s == 'pending' ||
         s == 'in_progress' ||
         s == 'inprogress' ||
-        s == 'admitted') {
+        s == 'admitted' ||
+        s == 'intreatment' ||
+        s == 'waiting') {
       return warning;
     }
     if (s == 'cancelled' || s == 'stat') return error;

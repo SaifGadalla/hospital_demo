@@ -15,7 +15,9 @@ class PatientsState {
 }
 
 final patientsControllerProvider =
-    NotifierProvider<PatientsController, PatientsState>(PatientsController.new);
+    NotifierProvider.autoDispose<PatientsController, PatientsState>(
+      PatientsController.new,
+    );
 
 class PatientsController extends Notifier<PatientsState> {
   @override
@@ -48,7 +50,7 @@ class PatientsController extends Notifier<PatientsState> {
     try {
       state = state.copyWith(isLoading: true);
       await ref.read(patientsServiceProvider).deletePatient(id);
-      AppToast.show('Patient deleted successfully');
+      AppToast.show(S.current.patients_view_deleteSuccess);
       await getPatients();
     } on Exception catch (e) {
       state = state.copyWith(isLoading: false);

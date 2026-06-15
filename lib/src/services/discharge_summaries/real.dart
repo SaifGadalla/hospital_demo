@@ -1,6 +1,6 @@
 import '../../models/_exports.dart';
-import 'base.dart';
 import '../dio_service.dart';
+import 'base.dart';
 
 class RealDischargeSummariesService implements DischargeSummariesService {
   final DioService _dioService;
@@ -8,14 +8,19 @@ class RealDischargeSummariesService implements DischargeSummariesService {
 
   @override
   Future<DischargeSummary> getDischargeSummaryById(String id) async {
-        final response = await _dioService.get('/api/hospital/discharge-summaries/$id');
+    final response = await _dioService.get(
+      '/api/hospital/discharge-summaries/$id',
+    );
     return DischargeSummary.fromJson(response.data);
   }
 
   @override
-  Future<DischargeSummary> getDischargeSummariesAdmission(String admissionid) async {
-        final response = await _dioService.get('/api/hospital/discharge-summaries/by-admission/$admissionid');
+  Future<DischargeSummary> getDischargeSummariesAdmission(
+    String admissionid,
+  ) async {
+    final response = await _dioService.get(
+      '/api/hospital/discharge-summaries/by-admission/$admissionid',
+    );
     return DischargeSummary.fromJson(response.data);
   }
-
 }

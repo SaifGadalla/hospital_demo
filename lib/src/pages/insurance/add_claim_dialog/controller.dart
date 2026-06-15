@@ -18,7 +18,7 @@ class AddClaimDialogState {
 }
 
 final addClaimDialogControllerProvider =
-    NotifierProvider<AddClaimController, AddClaimDialogState>(
+    NotifierProvider.autoDispose<AddClaimController, AddClaimDialogState>(
       AddClaimController.new,
     );
 

@@ -86,7 +86,7 @@ Widget statusWidget(String status) {
         _ => context.l10n.utils_status_unknown,
       };
       
-      final color = context.colors.getStatusColor(statusText);
+      final color = context.colors.getStatusColor(status);
       // Create a light background for the status color
       final bgColor = color.withValues(alpha: 0.1);
 

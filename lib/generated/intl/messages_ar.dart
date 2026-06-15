@@ -58,12 +58,17 @@ class MessageLookup extends MessageLookupByLibrary {
 
   static String m16(minutes) => "${minutes} دقائق";
 
-  static String m17(rxNumber) =>
+  static String m17(patientName) =>
+      "هل أنت متأكد من أنك تريد حذف المريض ${patientName}؟";
+
+  static String m18(patientName) => "هل أنت متأكد أنك تريد حذف ${patientName}؟";
+
+  static String m19(rxNumber) =>
       "هل أنت متأكد أنك تريد إلغاء الوصفة الطبية ${rxNumber}؟";
 
-  static String m18(rxNumber) => "هل تريد صرف الوصفة الطبية ${rxNumber}؟";
+  static String m20(rxNumber) => "هل تريد صرف الوصفة الطبية ${rxNumber}؟";
 
-  static String m19(triageLevel) => "ESI ${triageLevel}";
+  static String m21(triageLevel) => "ESI ${triageLevel}";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
@@ -113,6 +118,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "appointments_view_status": MessageLookupByLibrary.simpleMessage("الحالة"),
     "appointments_view_title": MessageLookupByLibrary.simpleMessage("المواعيد"),
     "appointments_view_type": MessageLookupByLibrary.simpleMessage("النوع"),
+    "common_middleName": MessageLookupByLibrary.simpleMessage("الاسم الأوسط"),
+    "common_na": MessageLookupByLibrary.simpleMessage("غير متوفر"),
+    "common_noTests": MessageLookupByLibrary.simpleMessage("لا توجد تحاليل"),
     "dashboard_view_acrossAllWards": MessageLookupByLibrary.simpleMessage(
       "عبر جميع الأجنحة",
     ),
@@ -316,6 +324,10 @@ class MessageLookup extends MessageLookupByLibrary {
       "تحديث حالة مكالمة الإسعاف",
     ),
     "emergency_view_viewAction": MessageLookupByLibrary.simpleMessage("عرض"),
+    "empty_state_subtitle": MessageLookupByLibrary.simpleMessage(
+      "لا توجد سجلات لعرضها في الوقت الحالي.",
+    ),
+    "empty_state_title": MessageLookupByLibrary.simpleMessage("لا توجد بيانات"),
     "home_description": MessageLookupByLibrary.simpleMessage(
       "منصة موحدة لعمليات المستشفى، الشؤون المالية، الموارد البشرية، سلسلة التوريد، وأكثر من ذلك.",
     ),
@@ -933,6 +945,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "patients_view_bloodType": MessageLookupByLibrary.simpleMessage(
       "فصيلة الدم",
     ),
+    "patients_view_cancel": MessageLookupByLibrary.simpleMessage("إلغاء"),
     "patients_view_close": MessageLookupByLibrary.simpleMessage("إغلاق"),
     "patients_view_columnActions": MessageLookupByLibrary.simpleMessage(
       "إجراءات",
@@ -953,6 +966,18 @@ class MessageLookup extends MessageLookupByLibrary {
     "patients_view_columnPhone": MessageLookupByLibrary.simpleMessage("الهاتف"),
     "patients_view_columnStatus": MessageLookupByLibrary.simpleMessage(
       "الحالة",
+    ),
+    "patients_view_confirmDeleteMsg": m17,
+    "patients_view_confirmDeleteTitle": MessageLookupByLibrary.simpleMessage(
+      "حذف المريض",
+    ),
+    "patients_view_deleteAction": MessageLookupByLibrary.simpleMessage("حذف"),
+    "patients_view_deleteMsg": m18,
+    "patients_view_deleteSuccess": MessageLookupByLibrary.simpleMessage(
+      "تم حذف المريض بنجاح",
+    ),
+    "patients_view_deleteTitle": MessageLookupByLibrary.simpleMessage(
+      "حذف المريض",
     ),
     "patients_view_description": MessageLookupByLibrary.simpleMessage(
       "بيانات المرضى المسجلين - الرقم الطبي، الديموغرافيا، التأمين، التواصل.",
@@ -988,6 +1013,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "patients_view_viewAction": MessageLookupByLibrary.simpleMessage("عرض"),
     "patients_view_vip": MessageLookupByLibrary.simpleMessage("كبار الشخصيات"),
     "patients_view_yes": MessageLookupByLibrary.simpleMessage("نعم"),
+    "patients_view_yesDelete": MessageLookupByLibrary.simpleMessage("نعم، حذف"),
     "pharmacy_add_addItem": MessageLookupByLibrary.simpleMessage("إضافة دواء"),
     "pharmacy_add_cancel": MessageLookupByLibrary.simpleMessage("إلغاء"),
     "pharmacy_add_diagnosis": MessageLookupByLibrary.simpleMessage("التشخيص"),
@@ -1015,7 +1041,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "جميع الحالات",
     ),
     "pharmacy_view_cancelAction": MessageLookupByLibrary.simpleMessage("إلغاء"),
-    "pharmacy_view_cancelMsg": m17,
+    "pharmacy_view_cancelMsg": m19,
     "pharmacy_view_cancelTitle": MessageLookupByLibrary.simpleMessage(
       "إلغاء الوصفة الطبية",
     ),
@@ -1043,7 +1069,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "الوصفات الطبية، الصرف، وتتبع الأدوية.",
     ),
     "pharmacy_view_dispenseAction": MessageLookupByLibrary.simpleMessage("صرف"),
-    "pharmacy_view_dispenseMsg": m18,
+    "pharmacy_view_dispenseMsg": m20,
     "pharmacy_view_dispenseTitle": MessageLookupByLibrary.simpleMessage(
       "صرف الوصفة الطبية",
     ),
@@ -1075,6 +1101,45 @@ class MessageLookup extends MessageLookupByLibrary {
     "theme_switchToLight": MessageLookupByLibrary.simpleMessage(
       "التبديل إلى الوضع الفاتح",
     ),
+    "toast_claimResubmitted": MessageLookupByLibrary.simpleMessage(
+      "تمت إعادة إرسال المطالبة بنجاح",
+    ),
+    "toast_labOrderCancelled": MessageLookupByLibrary.simpleMessage(
+      "تم إلغاء طلب المختبر بنجاح",
+    ),
+    "toast_medicalRecordDeleted": MessageLookupByLibrary.simpleMessage(
+      "تم حذف السجل الطبي بنجاح",
+    ),
+    "toast_patientCreated": MessageLookupByLibrary.simpleMessage(
+      "تم إنشاء المريض بنجاح",
+    ),
+    "toast_patientDeleted": MessageLookupByLibrary.simpleMessage(
+      "تم حذف المريض بنجاح",
+    ),
+    "toast_patientDischarged": MessageLookupByLibrary.simpleMessage(
+      "تم إخراج المريض بنجاح",
+    ),
+    "toast_patientTransferred": MessageLookupByLibrary.simpleMessage(
+      "تم نقل المريض بنجاح",
+    ),
+    "toast_patientUpdated": MessageLookupByLibrary.simpleMessage(
+      "تم تحديث المريض بنجاح",
+    ),
+    "toast_preAuthCancelled": MessageLookupByLibrary.simpleMessage(
+      "تم إلغاء الموافقة المسبقة بنجاح",
+    ),
+    "toast_prescriptionCancelled": MessageLookupByLibrary.simpleMessage(
+      "تم إلغاء الوصفة بنجاح",
+    ),
+    "toast_prescriptionDispensed": MessageLookupByLibrary.simpleMessage(
+      "تم صرف الوصفة بنجاح",
+    ),
+    "toast_surgeryCancelled": MessageLookupByLibrary.simpleMessage(
+      "تم إلغاء حجز الجراحة بنجاح",
+    ),
+    "toast_surgeryStarted": MessageLookupByLibrary.simpleMessage(
+      "بدأت الجراحة",
+    ),
     "utils_status_cancelled": MessageLookupByLibrary.simpleMessage("ملغى"),
     "utils_status_closed": MessageLookupByLibrary.simpleMessage("مغلق"),
     "utils_status_completed": MessageLookupByLibrary.simpleMessage("مكتمل"),
@@ -1088,6 +1153,6 @@ class MessageLookup extends MessageLookupByLibrary {
     "utils_status_waiting": MessageLookupByLibrary.simpleMessage(
       "قيد الانتظار",
     ),
-    "utils_triage_esiLevel": m19,
+    "utils_triage_esiLevel": m21,
   };
 }

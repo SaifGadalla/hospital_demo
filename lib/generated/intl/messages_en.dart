@@ -58,12 +58,18 @@ class MessageLookup extends MessageLookupByLibrary {
 
   static String m16(minutes) => "${minutes} minutes";
 
-  static String m17(rxNumber) =>
+  static String m17(patientName) =>
+      "Are you sure you want to delete patient ${patientName}?";
+
+  static String m18(patientName) =>
+      "Are you sure you want to delete ${patientName}?";
+
+  static String m19(rxNumber) =>
       "Are you sure you want to cancel prescription ${rxNumber}?";
 
-  static String m18(rxNumber) => "Mark prescription ${rxNumber} as dispensed?";
+  static String m20(rxNumber) => "Mark prescription ${rxNumber} as dispensed?";
 
-  static String m19(triageLevel) => "ESI ${triageLevel}";
+  static String m21(triageLevel) => "ESI ${triageLevel}";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
@@ -125,6 +131,9 @@ class MessageLookup extends MessageLookupByLibrary {
       "Appointments",
     ),
     "appointments_view_type": MessageLookupByLibrary.simpleMessage("Type"),
+    "common_middleName": MessageLookupByLibrary.simpleMessage("Middle Name"),
+    "common_na": MessageLookupByLibrary.simpleMessage("N/A"),
+    "common_noTests": MessageLookupByLibrary.simpleMessage("No tests"),
     "dashboard_view_acrossAllWards": MessageLookupByLibrary.simpleMessage(
       "Across all wards",
     ),
@@ -330,6 +339,12 @@ class MessageLookup extends MessageLookupByLibrary {
       "Update Ambulance Call Status",
     ),
     "emergency_view_viewAction": MessageLookupByLibrary.simpleMessage("View"),
+    "empty_state_subtitle": MessageLookupByLibrary.simpleMessage(
+      "There are no records to display at the moment.",
+    ),
+    "empty_state_title": MessageLookupByLibrary.simpleMessage(
+      "No data available",
+    ),
     "home_description": MessageLookupByLibrary.simpleMessage(
       "A unified platform for hospital operations, finance, HR, supply chain, and more.",
     ),
@@ -951,6 +966,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "patients_view_bloodType": MessageLookupByLibrary.simpleMessage(
       "Blood Type",
     ),
+    "patients_view_cancel": MessageLookupByLibrary.simpleMessage("Cancel"),
     "patients_view_close": MessageLookupByLibrary.simpleMessage("Close"),
     "patients_view_columnActions": MessageLookupByLibrary.simpleMessage(
       "Actions",
@@ -969,6 +985,20 @@ class MessageLookup extends MessageLookupByLibrary {
     "patients_view_columnPhone": MessageLookupByLibrary.simpleMessage("Phone"),
     "patients_view_columnStatus": MessageLookupByLibrary.simpleMessage(
       "Status",
+    ),
+    "patients_view_confirmDeleteMsg": m17,
+    "patients_view_confirmDeleteTitle": MessageLookupByLibrary.simpleMessage(
+      "Delete Patient",
+    ),
+    "patients_view_deleteAction": MessageLookupByLibrary.simpleMessage(
+      "Delete",
+    ),
+    "patients_view_deleteMsg": m18,
+    "patients_view_deleteSuccess": MessageLookupByLibrary.simpleMessage(
+      "Patient deleted successfully",
+    ),
+    "patients_view_deleteTitle": MessageLookupByLibrary.simpleMessage(
+      "Delete Patient",
     ),
     "patients_view_description": MessageLookupByLibrary.simpleMessage(
       "Registered patient master data — MRN, demographics, insurance, contact.",
@@ -1002,6 +1032,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "patients_view_viewAction": MessageLookupByLibrary.simpleMessage("View"),
     "patients_view_vip": MessageLookupByLibrary.simpleMessage("VIP"),
     "patients_view_yes": MessageLookupByLibrary.simpleMessage("Yes"),
+    "patients_view_yesDelete": MessageLookupByLibrary.simpleMessage(
+      "Yes, Delete",
+    ),
     "pharmacy_add_addItem": MessageLookupByLibrary.simpleMessage("Add Item"),
     "pharmacy_add_cancel": MessageLookupByLibrary.simpleMessage("Cancel"),
     "pharmacy_add_diagnosis": MessageLookupByLibrary.simpleMessage("Diagnosis"),
@@ -1031,7 +1064,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "pharmacy_view_cancelAction": MessageLookupByLibrary.simpleMessage(
       "Cancel",
     ),
-    "pharmacy_view_cancelMsg": m17,
+    "pharmacy_view_cancelMsg": m19,
     "pharmacy_view_cancelTitle": MessageLookupByLibrary.simpleMessage(
       "Cancel Prescription",
     ),
@@ -1059,7 +1092,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "pharmacy_view_dispenseAction": MessageLookupByLibrary.simpleMessage(
       "Dispense",
     ),
-    "pharmacy_view_dispenseMsg": m18,
+    "pharmacy_view_dispenseMsg": m20,
     "pharmacy_view_dispenseTitle": MessageLookupByLibrary.simpleMessage(
       "Dispense Prescription",
     ),
@@ -1089,6 +1122,45 @@ class MessageLookup extends MessageLookupByLibrary {
     "theme_switchToLight": MessageLookupByLibrary.simpleMessage(
       "Switch to Light Mode",
     ),
+    "toast_claimResubmitted": MessageLookupByLibrary.simpleMessage(
+      "Claim resubmitted successfully",
+    ),
+    "toast_labOrderCancelled": MessageLookupByLibrary.simpleMessage(
+      "Lab order cancelled successfully",
+    ),
+    "toast_medicalRecordDeleted": MessageLookupByLibrary.simpleMessage(
+      "Medical record deleted successfully",
+    ),
+    "toast_patientCreated": MessageLookupByLibrary.simpleMessage(
+      "Patient created successfully",
+    ),
+    "toast_patientDeleted": MessageLookupByLibrary.simpleMessage(
+      "Patient deleted successfully",
+    ),
+    "toast_patientDischarged": MessageLookupByLibrary.simpleMessage(
+      "Patient discharged successfully",
+    ),
+    "toast_patientTransferred": MessageLookupByLibrary.simpleMessage(
+      "Patient transferred successfully",
+    ),
+    "toast_patientUpdated": MessageLookupByLibrary.simpleMessage(
+      "Patient updated successfully",
+    ),
+    "toast_preAuthCancelled": MessageLookupByLibrary.simpleMessage(
+      "Pre-authorization cancelled successfully",
+    ),
+    "toast_prescriptionCancelled": MessageLookupByLibrary.simpleMessage(
+      "Prescription cancelled successfully",
+    ),
+    "toast_prescriptionDispensed": MessageLookupByLibrary.simpleMessage(
+      "Prescription dispensed successfully",
+    ),
+    "toast_surgeryCancelled": MessageLookupByLibrary.simpleMessage(
+      "Surgery booking cancelled successfully",
+    ),
+    "toast_surgeryStarted": MessageLookupByLibrary.simpleMessage(
+      "Surgery started",
+    ),
     "utils_status_cancelled": MessageLookupByLibrary.simpleMessage("Cancelled"),
     "utils_status_closed": MessageLookupByLibrary.simpleMessage("Closed"),
     "utils_status_completed": MessageLookupByLibrary.simpleMessage("Completed"),
@@ -1100,6 +1172,6 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "utils_status_unknown": MessageLookupByLibrary.simpleMessage("Unknown"),
     "utils_status_waiting": MessageLookupByLibrary.simpleMessage("Waiting"),
-    "utils_triage_esiLevel": m19,
+    "utils_triage_esiLevel": m21,
   };
 }

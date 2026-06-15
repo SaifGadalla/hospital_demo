@@ -15,7 +15,7 @@ class AddMedicalRecordDialogState {
 }
 
 final addMedicalRecordDialogControllerProvider =
-    NotifierProvider<AddMedicalRecordController, AddMedicalRecordDialogState>(
+    NotifierProvider.autoDispose<AddMedicalRecordController, AddMedicalRecordDialogState>(
       AddMedicalRecordController.new,
     );
 

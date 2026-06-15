@@ -18,7 +18,7 @@ class AddSurgeryBookingDialogState {
 }
 
 final addSurgeryBookingDialogControllerProvider =
-    NotifierProvider<
+    NotifierProvider.autoDispose<
       AddSurgeryBookingController,
       AddSurgeryBookingDialogState
     >(AddSurgeryBookingController.new);

@@ -209,12 +209,14 @@ class _LaboratoryPageState extends ConsumerState<LaboratoryPage>
                       Row(
                         children: [
                           IconButton(
-                            icon: const Icon(Icons.visibility),
                             tooltip: context.l10n.laboratory_view_viewDetails,
+                            icon: const Icon(Icons.visibility),
+                            color: context.colors.primary,
                             onPressed: () {
                               _showLabOrderDetails(context, order);
                             },
                           ),
+
                           IconButton(
                             icon: const Icon(Icons.cancel),
                             tooltip:
@@ -253,35 +255,36 @@ class _LaboratoryPageState extends ConsumerState<LaboratoryPage>
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisSize: MainAxisSize.min,
             children: [
-              _detailRow(
+              AppDetailRow(
                 context.l10n.laboratory_view_columnOrder,
                 order.orderNumber,
               ),
-              _detailRow(
-                context.l10n.laboratory_view_patientId,
-                order.patientId,
+              AppDetailRow(
+                context.l10n.laboratory_view_columnPatient,
+                order.patientId ?? 'Unknown',
               ),
-              _detailRow(context.l10n.laboratory_view_doctorId, order.doctorId),
-              _detailRow(
+              AppDetailRow(context.l10n.laboratory_view_patientId, order.patientId),
+              AppDetailRow(context.l10n.laboratory_view_doctorId, order.doctorId),
+              AppDetailRow(
                 context.l10n.laboratory_view_columnPriority,
                 order.priority,
               ),
-              _detailRow(
+              AppDetailRow(
                 context.l10n.laboratory_view_columnStatus,
                 order.status,
               ),
-              _detailRow(
+              AppDetailRow(
                 context.l10n.laboratory_view_clinicalIndication,
                 order.clinicalIndication,
               ),
-              _detailRow(
+              AppDetailRow(
                 context.l10n.laboratory_view_specimenType,
                 order.specimenType,
               ),
-              _detailRow(
+              AppDetailRow(
                 context.l10n.laboratory_view_orderDate,
                 order.orderDate != null
-                    ? DateFormat('yyyy-MM-dd HH:mm').format(order.orderDate!)
+                    ? DateFormat('MMM dd, yyyy HH:mm').format(order.orderDate!)
                     : null,
               ),
               if (order.tests != null && order.tests!.isNotEmpty) ...[
@@ -336,24 +339,6 @@ class _LaboratoryPageState extends ConsumerState<LaboratoryPage>
               }
             },
             child: Text(context.l10n.laboratory_view_yesCancel),
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget _detailRow(String label, String? value) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 4.0),
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          SizedBox(
-            width: 160,
-            child: Text(label, style: TextStyleManager.label),
-          ),
-          Expanded(
-            child: Text(value ?? 'N/A', style: TextStyleManager.bodyMedium),
           ),
         ],
       ),

@@ -18,7 +18,7 @@ class MedicalRecordsState {
 }
 
 final medicalRecordsControllerProvider =
-    NotifierProvider<MedicalRecordsController, MedicalRecordsState>(
+    NotifierProvider.autoDispose<MedicalRecordsController, MedicalRecordsState>(
       MedicalRecordsController.new,
     );
 

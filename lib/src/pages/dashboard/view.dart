@@ -1,8 +1,7 @@
+import 'package:intl/intl.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 
 import '../../../common.dart';
-import 'package:intl/intl.dart';
-
 import 'controller.dart';
 
 class DashboardPage extends ConsumerStatefulWidget {
@@ -61,13 +60,17 @@ class _DashboardPageState extends ConsumerState<DashboardPage>
           title: context.l10n.dashboard_view_todayAppointments,
           icon: Icons.calendar_today,
           value: state.todayAppointments?.length.toString() ?? '0',
-          subtitle: context.l10n.dashboard_view_totalAppointmentsOnFile(state.totalAppointments.toString()),
+          subtitle: context.l10n.dashboard_view_totalAppointmentsOnFile(
+            state.totalAppointments.toString(),
+          ),
         ),
         NumberCard(
           title: context.l10n.dashboard_view_erActive,
           icon: Icons.bed,
           value: state.activeER?.length.toString() ?? '0',
-          subtitle: context.l10n.dashboard_view_totalErToday(state.totalERToday.toString()),
+          subtitle: context.l10n.dashboard_view_totalErToday(
+            state.totalERToday.toString(),
+          ),
         ),
         NumberCard(
           title: context.l10n.dashboard_view_bedsFree,
@@ -99,9 +102,15 @@ class _DashboardPageState extends ConsumerState<DashboardPage>
               ),
               content: AppDataTable(
                 columns: [
-                  AppColumn(width: 70, label: context.l10n.dashboard_view_columnTime),
+                  AppColumn(
+                    width: 70,
+                    label: context.l10n.dashboard_view_columnTime,
+                  ),
                   AppColumn(label: context.l10n.dashboard_view_columnPatient),
-                  AppColumn(width: 120, label: context.l10n.dashboard_view_columnType),
+                  AppColumn(
+                    width: 120,
+                    label: context.l10n.dashboard_view_columnType,
+                  ),
                   AppColumn(label: context.l10n.dashboard_view_columnStatus),
                 ],
                 rows: state.todayAppointments != null
@@ -133,11 +142,17 @@ class _DashboardPageState extends ConsumerState<DashboardPage>
                 child: Text(context.l10n.dashboard_view_openEr),
               ),
               content: AppDataTable(
-                columns: const [
-                  AppColumn(width: 155, label: 'Call #'),
-                  AppColumn(label: 'Patient'),
-                  AppColumn(width: 90, label: 'Triage'),
-                  AppColumn(label: 'Status'),
+                columns: [
+                  AppColumn(
+                    width: 155,
+                    label: context.l10n.dashboard_view_columnCall,
+                  ),
+                  AppColumn(label: context.l10n.dashboard_view_columnPatient),
+                  AppColumn(
+                    width: 90,
+                    label: context.l10n.dashboard_view_columnTriage,
+                  ),
+                  AppColumn(label: context.l10n.dashboard_view_columnStatus),
                 ],
                 rows: state.activeER != null
                     ? state.activeER!
@@ -218,7 +233,7 @@ class _DashboardPageState extends ConsumerState<DashboardPage>
                     final e = state.insuranceClaims![index];
                     final claimed = e.claimedAmount ?? 0;
                     final total = e.totalAmount ?? 0;
-                    final value = claimed / total;
+                    final value = total > 0 ? claimed / total : 0.0;
                     return Column(
                       children: [
                         Row(
@@ -235,7 +250,7 @@ class _DashboardPageState extends ConsumerState<DashboardPage>
                                 minHeight: 4,
                               ),
                             ),
-                            Text(value.toInt().toString()),
+                            Text('${(value * 100).round()}%'),
                           ],
                         ),
                         SizedBox(height: 10),
@@ -317,7 +332,8 @@ class NumberCard extends ConsumerWidget {
           ),
           SizedBox(height: 16),
           Text(value, style: TextStyleManager.h2),
-          if (subtitle != null) Text(subtitle!, style: TextStyleManager.caption),
+          if (subtitle != null)
+            Text(subtitle!, style: TextStyleManager.caption),
         ],
       ),
     );
@@ -363,10 +379,7 @@ class StatisticsCard extends ConsumerWidget {
               padding: const EdgeInsets.all(16),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  title,
-                  action,
-                ],
+                children: [title, action],
               ),
             ),
             Expanded(

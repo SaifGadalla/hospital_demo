@@ -18,7 +18,7 @@ class AddLabOrderDialogState {
 }
 
 final addLabOrderDialogControllerProvider =
-    NotifierProvider<AddLabOrderController, AddLabOrderDialogState>(
+    NotifierProvider.autoDispose<AddLabOrderController, AddLabOrderDialogState>(
       AddLabOrderController.new,
     );
 

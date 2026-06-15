@@ -15,7 +15,7 @@ class InpatientState {
 }
 
 final inpatientControllerProvider =
-    NotifierProvider<InpatientController, InpatientState>(InpatientController.new);
+    NotifierProvider.autoDispose<InpatientController, InpatientState>(InpatientController.new);
 
 class InpatientController extends Notifier<InpatientState> {
   @override

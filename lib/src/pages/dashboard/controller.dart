@@ -53,7 +53,7 @@ class DashboardState {
 }
 
 final dashboardControllerProvider =
-    NotifierProvider<DashboardController, DashboardState>(
+    NotifierProvider.autoDispose<DashboardController, DashboardState>(
       DashboardController.new,
     );
 
@@ -63,59 +63,37 @@ class DashboardController extends Notifier<DashboardState> {
     return DashboardState();
   }
 
-  int patientsTotalCount = 0;
-  int totalAppointments = 0;
-  List<Appointment> todayAppointments = [];
-  int totalERToday = 0;
-  int totalBeds = 0;
-  List<Ward> wards = [];
-  List<ErRegistration> activeER = [];
-  int freeBeds = 0;
   List<Bed> beds = [];
-  List<ErRegistration> erRegistrationsWaiting = [];
-  List<ErRegistration> erRegistrationsInTreatment = [];
-  int erRegistrationsTotalCount = 0;
 
   Future<void> loadDashboardData() async {
     state = state.copyWith(isLoading: true);
     try {
-      patientsTotalCount = await ref
-          .read(patientsServiceProvider)
-          .getPatientsTotalCount();
+      // Parallelize independent API calls for faster loading
+      final results = await Future.wait([
+        ref.read(patientsServiceProvider).getPatientsTotalCount(),
+        ref.read(appointmentsServiceProvider).getAppointmentsTotalCount(),
+        ref.read(appointmentsServiceProvider).getAppointments(appointmentDateTo: DateTime.now()),
+        ref.read(erServiceProvider).getRegistrationsTotalCount(),
+        ref.read(erServiceProvider).getRegistrations(status: 'Waiting'),
+        ref.read(erServiceProvider).getRegistrations(status: 'InTreatment'),
+        ref.read(bedsServiceProvider).getBeds(),
+        ref.read(bedsServiceProvider).getBedsTotalCount(),
+        ref.read(wardsServiceProvider).getWards(),
+        ref.read(bedsServiceProvider).getBedsTotalCount(status: 'Available'),
+        ref.read(insuranceServiceProvider).getInsuranceClaims(),
+      ]);
 
-      totalAppointments = await ref
-          .read(appointmentsServiceProvider)
-          .getAppointmentsTotalCount();
-
-      todayAppointments = await ref
-          .read(appointmentsServiceProvider)
-          .getAppointments(appointmentDateTo: DateTime.now());
-
-      totalERToday = await ref
-          .read(erServiceProvider)
-          .getRegistrationsTotalCount();
-
-      erRegistrationsWaiting = await ref
-          .read(erServiceProvider)
-          .getRegistrations(status: 'Waiting');
-
-      erRegistrationsInTreatment = await ref
-          .read(erServiceProvider)
-          .getRegistrations(status: 'InTreatment');
-
-      beds = await ref.read(bedsServiceProvider).getBeds();
-
-      totalBeds = await ref.read(bedsServiceProvider).getBedsTotalCount();
-
-      wards = await ref.read(wardsServiceProvider).getWards();
-
-      freeBeds = await ref
-          .read(bedsServiceProvider)
-          .getBedsTotalCount(status: 'Available');
-
-      final insuranceClaims = await ref
-          .read(insuranceServiceProvider)
-          .getInsuranceClaims();
+      final patientsTotalCount = results[0] as int;
+      final totalAppointments = results[1] as int;
+      final todayAppointments = results[2] as List<Appointment>;
+      final totalERToday = results[3] as int;
+      final erRegistrationsWaiting = results[4] as List<ErRegistration>;
+      final erRegistrationsInTreatment = results[5] as List<ErRegistration>;
+      beds = results[6] as List<Bed>;
+      final totalBeds = results[7] as int;
+      final wards = results[8] as List<Ward>;
+      final freeBeds = results[9] as int;
+      final insuranceClaims = results[10] as List<InsuranceClaim>;
 
       state = state.copyWith(
         isLoading: false,
@@ -123,7 +101,7 @@ class DashboardController extends Notifier<DashboardState> {
         totalAppointments: totalAppointments,
         todayAppointments: todayAppointments,
         activeER: erRegistrationsInTreatment + erRegistrationsWaiting,
-        totalERToday: erRegistrationsTotalCount,
+        totalERToday: totalERToday,
         totalBeds: totalBeds,
         freeBeds: freeBeds,
         wards: wards,

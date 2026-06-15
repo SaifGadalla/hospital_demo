@@ -1,4 +1,4 @@
-import 'package:hospital_demo/common.dart';
+import '../../../common.dart';
 
 class FakeAppointmentsService implements AppointmentsService {
   final List<Appointment> _data = [

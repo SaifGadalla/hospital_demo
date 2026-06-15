@@ -18,7 +18,7 @@ class AppointmentsState {
 }
 
 final appointmentsControllerProvider =
-    NotifierProvider<AppointmentsController, AppointmentsState>(
+    NotifierProvider.autoDispose<AppointmentsController, AppointmentsState>(
       AppointmentsController.new,
     );
 

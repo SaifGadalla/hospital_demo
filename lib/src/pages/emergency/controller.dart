@@ -18,7 +18,7 @@ class EmergencyState {
 }
 
 final emergencyControllerProvider =
-    NotifierProvider<EmergencyController, EmergencyState>(
+    NotifierProvider.autoDispose<EmergencyController, EmergencyState>(
       EmergencyController.new,
     );
 

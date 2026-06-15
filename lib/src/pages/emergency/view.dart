@@ -48,17 +48,17 @@ class _EmergencyPageState extends ConsumerState<EmergencyPage> {
         ),
         NumberCard(
           title: context.l10n.emergency_view_todayTotal,
-          value: '10',
+          value: state.ambulanceCalls.where((c) => c.callTime?.day == DateTime.now().day).length.toString(),
           icon: Icons.today,
         ),
         NumberCard(
           title: context.l10n.emergency_view_notTriaged,
-          value: '30',
+          value: state.ambulanceCalls.where((c) => c.notes == null).length.toString(),
           icon: Icons.warning,
         ),
         NumberCard(
           title: context.l10n.emergency_view_level1Resus,
-          value: '10',
+          value: state.ambulanceCalls.where((c) => c.incidentType?.toLowerCase().contains('critical') == true).length.toString(),
           icon: Icons.warning_amber_outlined,
         ),
       ],
@@ -117,13 +117,18 @@ class _EmergencyPageState extends ConsumerState<EmergencyPage> {
                     DataCell(
                       Row(
                         children: [
-                          TextButton(
+                          IconButton(
+                            icon: const Icon(Icons.visibility),
+                            tooltip: context.l10n.emergency_view_viewAction,
+                            color: context.colors.primary,
                             onPressed: () {
                               _showCallDetails(context, call, index);
                             },
-                            child: Text(context.l10n.emergency_view_viewAction),
                           ),
-                          TextButton(
+                          IconButton(
+                            icon: const Icon(Icons.update),
+                            tooltip: context.l10n.emergency_view_updateStatusAction,
+                            color: context.colors.textPrimary,
                             onPressed: () {
                               _showUpdateStatusDialog(
                                 context,
@@ -131,9 +136,6 @@ class _EmergencyPageState extends ConsumerState<EmergencyPage> {
                                 controller,
                               );
                             },
-                            child: Text(
-                              context.l10n.emergency_view_updateStatusAction,
-                            ),
                           ),
                         ],
                       ),
@@ -157,25 +159,25 @@ class _EmergencyPageState extends ConsumerState<EmergencyPage> {
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisSize: MainAxisSize.min,
             children: [
-              _detailRow(
+              AppDetailRow(
                 context.l10n.emergency_view_columnPatient,
                 call.patientName,
               ),
-              _detailRow(
+              AppDetailRow(
                 context.l10n.emergency_view_callTime,
                 call.callTime != null
                     ? DateFormat('h:mm a, MMM dd').format(call.callTime!)
                     : null,
               ),
-              _detailRow(
+              AppDetailRow(
                 context.l10n.emergency_view_columnPickup,
                 call.pickupLocation,
               ),
-              _detailRow(
+              AppDetailRow(
                 context.l10n.emergency_view_incidentType,
                 call.incidentType,
               ),
-              _detailRow(context.l10n.emergency_view_notes, call.notes),
+              AppDetailRow(context.l10n.emergency_view_notes, call.notes),
             ],
           ),
         ),
@@ -241,21 +243,4 @@ class _EmergencyPageState extends ConsumerState<EmergencyPage> {
     );
   }
 
-  Widget _detailRow(String label, String? value) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 4.0),
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          SizedBox(
-            width: 140,
-            child: Text(label, style: TextStyleManager.label),
-          ),
-          Expanded(
-            child: Text(value ?? 'N/A', style: TextStyleManager.bodyMedium),
-          ),
-        ],
-      ),
-    );
-  }
 }

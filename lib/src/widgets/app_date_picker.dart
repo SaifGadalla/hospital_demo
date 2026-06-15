@@ -1,4 +1,4 @@
-import 'package:hospital_demo/common.dart';
+import '../../common.dart';
 
 class AppDatePicker extends StatelessWidget {
   const AppDatePicker({

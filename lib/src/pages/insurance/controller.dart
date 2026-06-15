@@ -29,7 +29,9 @@ class InsuranceState {
 }
 
 final insuranceControllerProvider =
-    NotifierProvider<InsuranceController, InsuranceState>(InsuranceController.new);
+    NotifierProvider.autoDispose<InsuranceController, InsuranceState>(
+      InsuranceController.new,
+    );
 
 class InsuranceController extends Notifier<InsuranceState> {
   @override

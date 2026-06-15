@@ -1,4 +1,4 @@
-import 'package:hospital_demo/src/pages/appointments/add_edit_appointment_dialog/dialog.dart';
+import 'add_edit_appointment_dialog/dialog.dart';
 import 'package:intl/intl.dart';
 
 import '../../../common.dart';
@@ -37,8 +37,14 @@ class _AppointmentsPageState extends ConsumerState<AppointmentsPage>
         }
       },
       secondarybuttons: [
-        TextButton(onPressed: () {}, child: Text(context.l10n.appointments_view_board)),
-        TextButton(onPressed: () {}, child: Text(context.l10n.appointments_view_list)),
+        TextButton(
+          onPressed: () {},
+          child: Text(context.l10n.appointments_view_board),
+        ),
+        TextButton(
+          onPressed: () {},
+          child: Text(context.l10n.appointments_view_list),
+        ),
       ],
       hasSearch: true,
       onSearchFieldChanged: (control) {
@@ -54,7 +60,10 @@ class _AppointmentsPageState extends ConsumerState<AppointmentsPage>
               AppDropDownButton(
                 formControlName: 'type',
                 items: [
-                  DropdownMenuItem(value: null, child: Text(context.l10n.appointments_view_allTypes)),
+                  DropdownMenuItem(
+                    value: null,
+                    child: Text(context.l10n.appointments_view_allTypes),
+                  ),
                   DropdownMenuItem(
                     value: 'Consultation',
                     child: Text(context.l10n.appointments_view_consultation),
@@ -100,10 +109,16 @@ class _AppointmentsPageState extends ConsumerState<AppointmentsPage>
               ),
             )
           : DataTable(
-              headingRowColor: WidgetStateProperty.all(context.colors.surfaceElevated),
+              headingRowColor: WidgetStateProperty.all(
+                context.colors.surfaceElevated,
+              ),
               columns: [
-                DataColumn(label: Text(context.l10n.appointments_view_apptNumber)),
-                DataColumn(label: Text(context.l10n.appointments_view_dateTime)),
+                DataColumn(
+                  label: Text(context.l10n.appointments_view_apptNumber),
+                ),
+                DataColumn(
+                  label: Text(context.l10n.appointments_view_dateTime),
+                ),
                 DataColumn(label: Text(context.l10n.appointments_view_patient)),
                 DataColumn(label: Text(context.l10n.appointments_view_type)),
                 DataColumn(label: Text(context.l10n.appointments_view_doctor)),

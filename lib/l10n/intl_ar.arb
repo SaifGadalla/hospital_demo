@@ -492,6 +492,11 @@
   "patients_view_inactive": "غير نشط",
   "patients_view_viewAction": "عرض",
   "patients_view_editAction": "تعديل",
+  "patients_view_deleteAction": "حذف",
+  "patients_view_confirmDeleteTitle": "حذف المريض",
+  "patients_view_confirmDeleteMsg": "هل أنت متأكد من أنك تريد حذف المريض {patientName}؟",
+  "patients_view_deleteSuccess": "تم حذف المريض بنجاح",
+  "patients_view_cancel": "إلغاء",
   "patients_view_patientDetails": "تفاصيل المريض",
   "patients_view_name": "الاسم",
   "patients_view_dob": "تاريخ الميلاد",
@@ -607,5 +612,38 @@
   "drawer_brandSubtitle": "أنظمة المستشفيات",
   "drawer_userInitials": "SJ",
   "drawer_userName": "د. س. جنكينز",
-  "drawer_userRole": "المدير العام"
+  "drawer_userRole": "المدير العام",
+
+  "toast_patientDeleted": "تم حذف المريض بنجاح",
+  "toast_patientCreated": "تم إنشاء المريض بنجاح",
+  "toast_patientUpdated": "تم تحديث المريض بنجاح",
+  "toast_patientDischarged": "تم إخراج المريض بنجاح",
+  "toast_patientTransferred": "تم نقل المريض بنجاح",
+  "toast_prescriptionCancelled": "تم إلغاء الوصفة بنجاح",
+  "toast_prescriptionDispensed": "تم صرف الوصفة بنجاح",
+  "toast_labOrderCancelled": "تم إلغاء طلب المختبر بنجاح",
+  "toast_surgeryCancelled": "تم إلغاء حجز الجراحة بنجاح",
+  "toast_surgeryStarted": "بدأت الجراحة",
+  "toast_claimResubmitted": "تمت إعادة إرسال المطالبة بنجاح",
+  "toast_preAuthCancelled": "تم إلغاء الموافقة المسبقة بنجاح",
+  "toast_medicalRecordDeleted": "تم حذف السجل الطبي بنجاح",
+
+  "common_na": "غير متوفر",
+  "common_noTests": "لا توجد تحاليل",
+  "common_middleName": "الاسم الأوسط",
+
+  "patients_view_deleteAction": "حذف",
+  "patients_view_deleteTitle": "حذف المريض",
+  "patients_view_deleteMsg": "هل أنت متأكد أنك تريد حذف {patientName}؟",
+  "@patients_view_deleteMsg": {
+    "placeholders": {
+      "patientName": {
+        "type": "String"
+      }
+    }
+  },
+  "patients_view_yesDelete": "نعم، حذف",
+
+  "empty_state_title": "لا توجد بيانات",
+  "empty_state_subtitle": "لا توجد سجلات لعرضها في الوقت الحالي."
 }

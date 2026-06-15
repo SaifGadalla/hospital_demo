@@ -1,4 +1,5 @@
 import 'package:intl/intl.dart';
+
 import '../../../common.dart';
 import 'add_surgery_booking_dialog/dialog.dart';
 import 'controller.dart';
@@ -134,21 +135,22 @@ class _OperatingRoomPageState extends ConsumerState<OperatingRoomPage> {
                     DataCell(
                       Row(
                         children: [
-                          TextButton(
+                          IconButton(
+                            tooltip:
+                                context.l10n.operating_room_view_viewAction,
+                            icon: const Icon(Icons.visibility),
+                            color: context.colors.primary,
                             onPressed: () {
                               _showBookingDetails(context, booking);
                             },
-                            child: Text(
-                              context.l10n.operating_room_view_viewAction,
-                            ),
                           ),
-                          TextButton(
+                          IconButton(
+                            icon: const Icon(Icons.cancel),
+                            tooltip:
+                                context.l10n.laboratory_view_cancelOrderTooltip,
                             onPressed: () {
                               _showCancelDialog(context, booking, controller);
                             },
-                            child: Text(
-                              context.l10n.operating_room_view_cancelAction,
-                            ),
                           ),
                         ],
                       ),
@@ -176,49 +178,48 @@ class _OperatingRoomPageState extends ConsumerState<OperatingRoomPage> {
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisSize: MainAxisSize.min,
             children: [
-              _detailRow(
+              AppDetailRow(
                 context.l10n.operating_room_view_columnPatient,
                 booking.patientName,
               ),
-              _detailRow(
+              AppDetailRow(
                 context.l10n.operating_room_view_columnProcedure,
                 booking.procedureName,
               ),
-              _detailRow(
-                context.l10n.operating_room_view_columnRoom,
-                booking.operatingRoomNumber,
-              ),
-              _detailRow(
+              AppDetailRow(
                 context.l10n.operating_room_view_columnDate,
                 booking.scheduledDate != null
-                    ? DateFormat('yyyy-MM-dd').format(booking.scheduledDate!)
+                    ? DateFormat('MMM dd, yyyy').format(booking.scheduledDate!)
                     : null,
               ),
-              _detailRow(
+              AppDetailRow(
                 context.l10n.operating_room_view_columnTime,
-                booking.scheduledStartTime != null
-                    ? DateFormat('h:mm a').format(booking.scheduledStartTime!)
+                booking.scheduledDate != null
+                    ? DateFormat('h:mm a').format(booking.scheduledDate!)
                     : null,
               ),
-              _detailRow(
+              AppDetailRow(
                 context.l10n.operating_room_view_duration,
                 context.l10n.operating_room_view_durationMin(
                   booking.estimatedDuration ?? 0,
                 ),
               ),
-              _detailRow(
-                context.l10n.operating_room_view_columnPriority,
-                booking.priority,
-              ),
-              _detailRow(
+              AppDetailRow(
                 context.l10n.operating_room_view_anesthesia,
                 booking.anesthesiaType,
               ),
-              _detailRow(
+              AppDetailRow(
+                context.l10n.operating_room_view_columnRoom,
+                booking.operatingRoomNumber,
+              ),
+              AppDetailRow(
                 context.l10n.operating_room_view_columnStatus,
                 booking.status,
               ),
-              _detailRow(context.l10n.operating_room_view_notes, booking.notes),
+              AppDetailRow(
+                context.l10n.operating_room_view_notes,
+                booking.notes,
+              ),
             ],
           ),
         ),
@@ -280,24 +281,6 @@ class _OperatingRoomPageState extends ConsumerState<OperatingRoomPage> {
               }
             },
             child: Text(context.l10n.operating_room_view_yesCancel),
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget _detailRow(String label, String? value) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 4.0),
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          SizedBox(
-            width: 160,
-            child: Text(label, style: TextStyleManager.label),
-          ),
-          Expanded(
-            child: Text(value ?? 'N/A', style: TextStyleManager.bodyMedium),
           ),
         ],
       ),

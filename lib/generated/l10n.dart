@@ -3674,6 +3674,56 @@ class S {
     );
   }
 
+  /// `Delete`
+  String get patients_view_deleteAction {
+    return Intl.message(
+      'Delete',
+      name: 'patients_view_deleteAction',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Delete Patient`
+  String get patients_view_confirmDeleteTitle {
+    return Intl.message(
+      'Delete Patient',
+      name: 'patients_view_confirmDeleteTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Are you sure you want to delete patient {patientName}?`
+  String patients_view_confirmDeleteMsg(Object patientName) {
+    return Intl.message(
+      'Are you sure you want to delete patient $patientName?',
+      name: 'patients_view_confirmDeleteMsg',
+      desc: '',
+      args: [patientName],
+    );
+  }
+
+  /// `Patient deleted successfully`
+  String get patients_view_deleteSuccess {
+    return Intl.message(
+      'Patient deleted successfully',
+      name: 'patients_view_deleteSuccess',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Cancel`
+  String get patients_view_cancel {
+    return Intl.message(
+      'Cancel',
+      name: 'patients_view_cancel',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Patient Details`
   String get patients_view_patientDetails {
     return Intl.message(
@@ -4619,6 +4669,206 @@ class S {
     return Intl.message(
       'Chief Administrator',
       name: 'drawer_userRole',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Patient deleted successfully`
+  String get toast_patientDeleted {
+    return Intl.message(
+      'Patient deleted successfully',
+      name: 'toast_patientDeleted',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Patient created successfully`
+  String get toast_patientCreated {
+    return Intl.message(
+      'Patient created successfully',
+      name: 'toast_patientCreated',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Patient updated successfully`
+  String get toast_patientUpdated {
+    return Intl.message(
+      'Patient updated successfully',
+      name: 'toast_patientUpdated',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Patient discharged successfully`
+  String get toast_patientDischarged {
+    return Intl.message(
+      'Patient discharged successfully',
+      name: 'toast_patientDischarged',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Patient transferred successfully`
+  String get toast_patientTransferred {
+    return Intl.message(
+      'Patient transferred successfully',
+      name: 'toast_patientTransferred',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Prescription cancelled successfully`
+  String get toast_prescriptionCancelled {
+    return Intl.message(
+      'Prescription cancelled successfully',
+      name: 'toast_prescriptionCancelled',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Prescription dispensed successfully`
+  String get toast_prescriptionDispensed {
+    return Intl.message(
+      'Prescription dispensed successfully',
+      name: 'toast_prescriptionDispensed',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Lab order cancelled successfully`
+  String get toast_labOrderCancelled {
+    return Intl.message(
+      'Lab order cancelled successfully',
+      name: 'toast_labOrderCancelled',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Surgery booking cancelled successfully`
+  String get toast_surgeryCancelled {
+    return Intl.message(
+      'Surgery booking cancelled successfully',
+      name: 'toast_surgeryCancelled',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Surgery started`
+  String get toast_surgeryStarted {
+    return Intl.message(
+      'Surgery started',
+      name: 'toast_surgeryStarted',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Claim resubmitted successfully`
+  String get toast_claimResubmitted {
+    return Intl.message(
+      'Claim resubmitted successfully',
+      name: 'toast_claimResubmitted',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Pre-authorization cancelled successfully`
+  String get toast_preAuthCancelled {
+    return Intl.message(
+      'Pre-authorization cancelled successfully',
+      name: 'toast_preAuthCancelled',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Medical record deleted successfully`
+  String get toast_medicalRecordDeleted {
+    return Intl.message(
+      'Medical record deleted successfully',
+      name: 'toast_medicalRecordDeleted',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `N/A`
+  String get common_na {
+    return Intl.message('N/A', name: 'common_na', desc: '', args: []);
+  }
+
+  /// `No tests`
+  String get common_noTests {
+    return Intl.message('No tests', name: 'common_noTests', desc: '', args: []);
+  }
+
+  /// `Middle Name`
+  String get common_middleName {
+    return Intl.message(
+      'Middle Name',
+      name: 'common_middleName',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Delete Patient`
+  String get patients_view_deleteTitle {
+    return Intl.message(
+      'Delete Patient',
+      name: 'patients_view_deleteTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Are you sure you want to delete {patientName}?`
+  String patients_view_deleteMsg(String patientName) {
+    return Intl.message(
+      'Are you sure you want to delete $patientName?',
+      name: 'patients_view_deleteMsg',
+      desc: '',
+      args: [patientName],
+    );
+  }
+
+  /// `Yes, Delete`
+  String get patients_view_yesDelete {
+    return Intl.message(
+      'Yes, Delete',
+      name: 'patients_view_yesDelete',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `No data available`
+  String get empty_state_title {
+    return Intl.message(
+      'No data available',
+      name: 'empty_state_title',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `There are no records to display at the moment.`
+  String get empty_state_subtitle {
+    return Intl.message(
+      'There are no records to display at the moment.',
+      name: 'empty_state_subtitle',
       desc: '',
       args: [],
     );

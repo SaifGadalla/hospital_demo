@@ -255,10 +255,7 @@ class AppDrawer extends ConsumerWidget {
                       ],
                     ),
                   ),
-                  ThemeToggleButton(
-                    color: context.colors.textInverse.withValues(alpha: 0.6),
-                    size: 18,
-                  ),
+
                   LangToggleButton(
                     color: context.colors.textInverse.withValues(alpha: 0.6),
                     size: 18,
@@ -332,9 +329,9 @@ class LangToggleButton extends ConsumerWidget {
 
     return IconButton(
       onPressed: () {
-        ref.read(langProvider.notifier).state = Locale(
+        ref.read(langProvider.notifier).setLocale(Locale(
           langState.languageCode == 'en' ? 'ar' : 'en',
-        );
+        ));
       },
       icon: Icon(Icons.language_rounded, color: color, size: size),
       tooltip: context.l10n.drawer_language,

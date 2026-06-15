@@ -1,4 +1,5 @@
 import 'package:intl/intl.dart';
+
 import '../../../common.dart';
 import 'add_claim_dialog/dialog.dart';
 import 'controller.dart';
@@ -171,17 +172,21 @@ class _InsurancePageState extends ConsumerState<InsurancePage> {
             DataCell(
               Row(
                 children: [
-                  TextButton(
+                  IconButton(
+                    tooltip: context.l10n.insurance_view_viewAction,
+                    icon: const Icon(Icons.visibility),
+                    color: context.colors.primary,
                     onPressed: () {
                       _showClaimDetails(context, claim);
                     },
-                    child: Text(context.l10n.insurance_view_viewAction),
                   ),
-                  TextButton(
+                  IconButton(
+                    tooltip: context.l10n.insurance_view_resubmitAction,
+                    icon: const Icon(Icons.refresh),
+                    color: context.colors.textPrimary,
                     onPressed: () {
                       _showResubmitConfirmation(context, claim, controller);
                     },
-                    child: Text(context.l10n.insurance_view_resubmitAction),
                   ),
                 ],
               ),
@@ -226,17 +231,21 @@ class _InsurancePageState extends ConsumerState<InsurancePage> {
             DataCell(
               Row(
                 children: [
-                  TextButton(
+                  IconButton(
+                    tooltip: context.l10n.insurance_view_viewAction,
+                    icon: const Icon(Icons.visibility),
+                    color: context.colors.primary,
                     onPressed: () {
                       _showPreAuthDetails(context, auth);
                     },
-                    child: Text(context.l10n.insurance_view_viewAction),
                   ),
-                  TextButton(
+                  IconButton(
+                    tooltip: context.l10n.insurance_view_cancelAction,
+                    icon: const Icon(Icons.cancel),
+                    color: context.colors.textPrimary,
                     onPressed: () {
                       _showCancelPreAuthConfirmation(context, auth, controller);
                     },
-                    child: Text(context.l10n.insurance_view_cancelAction),
                   ),
                 ],
               ),
@@ -302,49 +311,49 @@ class _InsurancePageState extends ConsumerState<InsurancePage> {
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisSize: MainAxisSize.min,
             children: [
-              _detailRow(
+              AppDetailRow(
                 context.l10n.insurance_view_columnClaim,
                 claim.claimNumber,
               ),
-              _detailRow(
+              AppDetailRow(
                 context.l10n.insurance_view_columnPatient,
                 claim.patientName,
               ),
-              _detailRow(
+              AppDetailRow(
                 context.l10n.insurance_view_columnPlan,
                 claim.insurancePlanName,
               ),
-              _detailRow(
+              AppDetailRow(
                 context.l10n.insurance_view_columnServiceDate,
                 claim.serviceDate != null
-                    ? DateFormat('yyyy-MM-dd').format(claim.serviceDate!)
+                    ? DateFormat('MMM dd, yyyy').format(claim.serviceDate!)
                     : null,
               ),
-              _detailRow(
+              AppDetailRow(
                 context.l10n.insurance_view_totalAmount,
-                '\$${claim.totalAmount ?? 0.0}',
+                claim.totalAmount?.toStringAsFixed(2),
               ),
-              _detailRow(
+              AppDetailRow(
                 context.l10n.insurance_view_claimedAmount,
-                '\$${claim.claimedAmount ?? 0.0}',
+                claim.claimedAmount?.toStringAsFixed(2),
               ),
-              _detailRow(
+              AppDetailRow(
                 context.l10n.insurance_view_paidAmount,
-                '\$${claim.paidAmount ?? 0.0}',
+                claim.paidAmount?.toStringAsFixed(2),
               ),
-              _detailRow(
+              AppDetailRow(
                 context.l10n.insurance_view_columnStatus,
                 claim.status,
               ),
-              _detailRow(
+              AppDetailRow(
                 context.l10n.insurance_view_diagnosisCodes,
                 claim.diagnosisCodes,
               ),
-              _detailRow(
+              AppDetailRow(
                 context.l10n.insurance_view_procedureCodes,
                 claim.procedureCodes,
               ),
-              _detailRow(context.l10n.insurance_view_notes, claim.notes),
+              AppDetailRow(context.l10n.insurance_view_notes, claim.notes),
             ],
           ),
         ),
@@ -375,39 +384,46 @@ class _InsurancePageState extends ConsumerState<InsurancePage> {
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisSize: MainAxisSize.min,
             children: [
-              _detailRow(
+              AppDetailRow(
                 context.l10n.insurance_view_columnAuth,
                 auth.authNumber,
               ),
-              _detailRow(
+              AppDetailRow(
                 context.l10n.insurance_view_columnPatient,
                 auth.patientName,
               ),
-              _detailRow(
+              AppDetailRow(
+                context.l10n.insurance_view_columnPlan,
+                auth.insurancePlanName,
+              ),
+              AppDetailRow(
                 context.l10n.insurance_view_serviceRequested,
                 auth.serviceRequested,
               ),
-              _detailRow(
+              AppDetailRow(
                 context.l10n.insurance_view_columnEstimatedCost,
-                '\$${auth.estimatedCost ?? 0.0}',
+                auth.estimatedCost?.toStringAsFixed(2),
               ),
-              _detailRow(
+              AppDetailRow(
                 context.l10n.insurance_view_columnStatus,
                 auth.approvalStatus,
               ),
-              _detailRow(
+              AppDetailRow(
                 context.l10n.insurance_view_validFrom,
                 auth.validFrom != null
-                    ? DateFormat('yyyy-MM-dd').format(auth.validFrom!)
+                    ? DateFormat('MMM dd, yyyy').format(auth.validFrom!)
                     : null,
               ),
-              _detailRow(
+              AppDetailRow(
                 context.l10n.insurance_view_validTo,
                 auth.validTo != null
-                    ? DateFormat('yyyy-MM-dd').format(auth.validTo!)
+                    ? DateFormat('MMM dd, yyyy').format(auth.validTo!)
                     : null,
               ),
-              _detailRow(context.l10n.insurance_view_notes, auth.remarks),
+              AppDetailRow(
+                context.l10n.insurance_view_notes,
+                auth.serviceRequested,
+              ), // no notes field in auth model
             ],
           ),
         ),
@@ -477,24 +493,6 @@ class _InsurancePageState extends ConsumerState<InsurancePage> {
               }
             },
             child: Text(context.l10n.insurance_view_yesCancel),
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget _detailRow(String label, String? value) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 4.0),
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          SizedBox(
-            width: 160,
-            child: Text(label, style: TextStyleManager.label),
-          ),
-          Expanded(
-            child: Text(value ?? 'N/A', style: TextStyleManager.bodyMedium),
           ),
         ],
       ),

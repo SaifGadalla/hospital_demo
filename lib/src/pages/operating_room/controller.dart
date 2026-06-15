@@ -15,7 +15,9 @@ class OperatingRoomState {
 }
 
 final operatingRoomControllerProvider =
-    NotifierProvider<OperatingRoomController, OperatingRoomState>(OperatingRoomController.new);
+    NotifierProvider.autoDispose<OperatingRoomController, OperatingRoomState>(
+      OperatingRoomController.new,
+    );
 
 class OperatingRoomController extends Notifier<OperatingRoomState> {
   @override

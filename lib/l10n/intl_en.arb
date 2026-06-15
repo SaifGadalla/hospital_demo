@@ -492,6 +492,11 @@
   "patients_view_inactive": "Inactive",
   "patients_view_viewAction": "View",
   "patients_view_editAction": "Edit",
+  "patients_view_deleteAction": "Delete",
+  "patients_view_confirmDeleteTitle": "Delete Patient",
+  "patients_view_confirmDeleteMsg": "Are you sure you want to delete patient {patientName}?",
+  "patients_view_deleteSuccess": "Patient deleted successfully",
+  "patients_view_cancel": "Cancel",
   "patients_view_patientDetails": "Patient Details",
   "patients_view_name": "Name",
   "patients_view_dob": "Date of Birth",
@@ -606,5 +611,38 @@
   "drawer_brandSubtitle": "Hospital Systems",
   "drawer_userInitials": "SJ",
   "drawer_userName": "Dr. S. Jenkins",
-  "drawer_userRole": "Chief Administrator"
+  "drawer_userRole": "Chief Administrator",
+
+  "toast_patientDeleted": "Patient deleted successfully",
+  "toast_patientCreated": "Patient created successfully",
+  "toast_patientUpdated": "Patient updated successfully",
+  "toast_patientDischarged": "Patient discharged successfully",
+  "toast_patientTransferred": "Patient transferred successfully",
+  "toast_prescriptionCancelled": "Prescription cancelled successfully",
+  "toast_prescriptionDispensed": "Prescription dispensed successfully",
+  "toast_labOrderCancelled": "Lab order cancelled successfully",
+  "toast_surgeryCancelled": "Surgery booking cancelled successfully",
+  "toast_surgeryStarted": "Surgery started",
+  "toast_claimResubmitted": "Claim resubmitted successfully",
+  "toast_preAuthCancelled": "Pre-authorization cancelled successfully",
+  "toast_medicalRecordDeleted": "Medical record deleted successfully",
+
+  "common_na": "N/A",
+  "common_noTests": "No tests",
+  "common_middleName": "Middle Name",
+
+  "patients_view_deleteAction": "Delete",
+  "patients_view_deleteTitle": "Delete Patient",
+  "patients_view_deleteMsg": "Are you sure you want to delete {patientName}?",
+  "@patients_view_deleteMsg": {
+    "placeholders": {
+      "patientName": {
+        "type": "String"
+      }
+    }
+  },
+  "patients_view_yesDelete": "Yes, Delete",
+
+  "empty_state_title": "No data available",
+  "empty_state_subtitle": "There are no records to display at the moment."
 }

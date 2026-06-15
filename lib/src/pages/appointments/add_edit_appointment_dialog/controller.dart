@@ -21,13 +21,12 @@ class AddEditAppointmentDialogState {
 }
 
 final addEditAppointmentDialogControllerProvider =
-    NotifierProvider<
+    NotifierProvider.autoDispose<
       AddEditAppointmentController,
       AddEditAppointmentDialogState
     >(AddEditAppointmentController.new);
 
-class AddEditAppointmentController
-    extends Notifier<AddEditAppointmentDialogState> {
+class AddEditAppointmentController extends Notifier<AddEditAppointmentDialogState> {
   List<Patient> patients = [];
 
   final formGroup = FormGroup({

@@ -3,6 +3,7 @@ export 'dashboard/view.dart';
 export 'patients/view.dart';
 export 'shell/view.dart';
 export 'appointments/view.dart';
+export 'auth/view.dart';
 export 'medical_records/view.dart';
 export 'pharmacy/view.dart';
 export 'laboratory/view.dart';

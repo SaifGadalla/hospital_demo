@@ -1,6 +1,7 @@
+import 'package:responsive_builder/responsive_builder.dart';
+
 import '../../../common.dart';
 import 'widgets/drawer.dart';
-import 'package:responsive_builder/responsive_builder.dart';
 
 class AppShell extends ConsumerWidget {
   final Widget child;

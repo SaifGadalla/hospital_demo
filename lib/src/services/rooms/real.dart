@@ -1,6 +1,6 @@
 import '../../models/_exports.dart';
-import 'base.dart';
 import '../dio_service.dart';
+import 'base.dart';
 
 class RealRoomsService implements RoomsService {
   final DioService _dioService;

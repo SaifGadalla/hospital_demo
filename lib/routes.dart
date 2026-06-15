@@ -85,7 +85,7 @@ final routes = GoRouter(
     GoRoute(
       path: '/auth',
       name: AppRoutes.auth,
-      builder: (context, state) => const SizedBox.shrink(),
+      builder: (context, state) => const AuthPage(),
     ),
   ],
 );

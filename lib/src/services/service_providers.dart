@@ -1,85 +1,90 @@
 import '../../common.dart';
 
-const bool isDev = bool.fromEnvironment('isDev', defaultValue: true);
+class Env {
+  static const bool isDev = bool.fromEnvironment('isDev', defaultValue: true);
+  static const String baseUrl = String.fromEnvironment(
+    'baseUrl',
+    defaultValue: 'https://tesseroapi.runasp.net',
+  );
+}
 
-// It's good practice to strongly type your Provider
 final dioProvider = Provider<DioService>((ref) {
-  return DioService();
+  return DioService(baseUrl: Env.baseUrl);
 });
 
 final admissionsServiceProvider = Provider<AdmissionsService>((ref) {
-  return isDev
+  return Env.isDev
       ? FakeAdmissionsService()
       : RealAdmissionsService(ref.watch(dioProvider));
 });
 
 final appointmentsServiceProvider = Provider<AppointmentsService>((ref) {
-  return isDev
+  return Env.isDev
       ? FakeAppointmentsService()
       : RealAppointmentsService(ref.watch(dioProvider));
 });
 
 final bedsServiceProvider = Provider<BedsService>((ref) {
-  return isDev ? FakeBedsService() : RealBedsService(ref.watch(dioProvider));
+  return Env.isDev ? FakeBedsService() : RealBedsService(ref.watch(dioProvider));
 });
 
 final dischargeSummariesServiceProvider = Provider<DischargeSummariesService>((
   ref,
 ) {
-  return isDev
+  return Env.isDev
       ? FakeDischargeSummariesService()
       : RealDischargeSummariesService(ref.watch(dioProvider));
 });
 
 final erServiceProvider = Provider<ErService>((ref) {
-  return isDev ? FakeErService() : RealErService(ref.watch(dioProvider));
+  return Env.isDev ? FakeErService() : RealErService(ref.watch(dioProvider));
 });
 
 final insuranceServiceProvider = Provider<InsuranceService>((ref) {
-  return isDev
+  return Env.isDev
       ? FakeInsuranceService()
       : RealInsuranceService(ref.watch(dioProvider));
 });
 
 final labOrderTestsServiceProvider = Provider<LabOrderTestsService>((ref) {
-  return isDev
+  return Env.isDev
       ? FakeLabOrderTestsService()
       : RealLabOrderTestsService(ref.watch(dioProvider));
 });
 
 final labOrdersServiceProvider = Provider<LabOrdersService>((ref) {
-  return isDev
+  return Env.isDev
       ? FakeLabOrdersService()
       : RealLabOrdersService(ref.watch(dioProvider));
 });
 
 final medicalRecordsServiceProvider = Provider<MedicalRecordsService>((ref) {
-  return isDev
+  return Env.isDev
       ? FakeMedicalRecordsService()
       : RealMedicalRecordsService(ref.watch(dioProvider));
 });
 
 final medicationAdministrationsServiceProvider =
     Provider<MedicationAdministrationsService>((ref) {
-      return isDev
+      return Env.isDev
           ? FakeMedicationAdministrationsService()
           : RealMedicationAdministrationsService(ref.watch(dioProvider));
     });
 
 final nursingNotesServiceProvider = Provider<NursingNotesService>((ref) {
-  return isDev
+  return Env.isDev
       ? FakeNursingNotesService()
       : RealNursingNotesService(ref.watch(dioProvider));
 });
 
 final operatingRoomsServiceProvider = Provider<OperatingRoomsService>((ref) {
-  return isDev
+  return Env.isDev
       ? FakeOperatingRoomsService()
       : RealOperatingRoomsService(ref.watch(dioProvider));
 });
 
 final patientsServiceProvider = Provider<PatientsService>((ref) {
-  return isDev
+  return Env.isDev
       ? FakePatientsService()
       : RealPatientsService(ref.watch(dioProvider));
 });
@@ -87,23 +92,23 @@ final patientsServiceProvider = Provider<PatientsService>((ref) {
 final prescriptionItemsServiceProvider = Provider<PrescriptionItemsService>((
   ref,
 ) {
-  return isDev
+  return Env.isDev
       ? FakePrescriptionItemsService()
       : RealPrescriptionItemsService(ref.watch(dioProvider));
 });
 
 final prescriptionsServiceProvider = Provider<PrescriptionsService>((ref) {
-  return isDev
+  return Env.isDev
       ? FakePrescriptionsService()
       : RealPrescriptionsService(ref.watch(dioProvider));
 });
 
 final roomsServiceProvider = Provider<RoomsService>((ref) {
-  return isDev ? FakeRoomsService() : RealRoomsService(ref.watch(dioProvider));
+  return Env.isDev ? FakeRoomsService() : RealRoomsService(ref.watch(dioProvider));
 });
 
 final surgeryBookingsServiceProvider = Provider<SurgeryBookingsService>((ref) {
-  return isDev
+  return Env.isDev
       ? FakeSurgeryBookingsService()
       : RealSurgeryBookingsService(ref.watch(dioProvider));
 });
@@ -111,11 +116,11 @@ final surgeryBookingsServiceProvider = Provider<SurgeryBookingsService>((ref) {
 final surgicalProceduresServiceProvider = Provider<SurgicalProceduresService>((
   ref,
 ) {
-  return isDev
+  return Env.isDev
       ? FakeSurgicalProceduresService()
       : RealSurgicalProceduresService(ref.watch(dioProvider));
 });
 
 final wardsServiceProvider = Provider<WardsService>((ref) {
-  return isDev ? FakeWardsService() : RealWardsService(ref.watch(dioProvider));
+  return Env.isDev ? FakeWardsService() : RealWardsService(ref.watch(dioProvider));
 });

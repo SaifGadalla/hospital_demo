@@ -15,7 +15,9 @@ class PharmacyState {
 }
 
 final pharmacyControllerProvider =
-    NotifierProvider<PharmacyController, PharmacyState>(PharmacyController.new);
+    NotifierProvider.autoDispose<PharmacyController, PharmacyState>(
+      PharmacyController.new,
+    );
 
 class PharmacyController extends Notifier<PharmacyState> {
   @override

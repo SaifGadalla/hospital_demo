@@ -1,4 +1,5 @@
 import 'package:intl/intl.dart';
+
 import '../../../common.dart';
 import 'add_admission_dialog/dialog.dart';
 import 'controller.dart';
@@ -51,12 +52,18 @@ class _InpatientPageState extends ConsumerState<InpatientPage> {
         ),
         NumberCard(
           title: context.l10n.inpatient_view_bedsAvailable,
-          value: '3', // static or derived if we had bedsService
+          value:
+              (30 -
+                      state.admissions
+                          .where((a) => a.status?.toLowerCase() == 'admitted')
+                          .length)
+                  .toString(),
           icon: Icons.local_hotel,
         ),
         NumberCard(
           title: context.l10n.inpatient_view_occupancyRate,
-          value: '80%',
+          value:
+              '${((state.admissions.where((a) => a.status?.toLowerCase() == 'admitted').length / 30) * 100).toStringAsFixed(0)}%',
           icon: Icons.percent,
         ),
       ],

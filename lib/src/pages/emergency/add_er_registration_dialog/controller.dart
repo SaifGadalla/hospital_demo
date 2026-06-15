@@ -18,7 +18,7 @@ class AddErRegistrationDialogState {
 }
 
 final addErRegistrationDialogControllerProvider =
-    NotifierProvider<
+    NotifierProvider.autoDispose<
       AddErRegistrationController,
       AddErRegistrationDialogState
     >(AddErRegistrationController.new);

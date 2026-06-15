@@ -18,7 +18,7 @@ class AddPrescriptionDialogState {
 }
 
 final addPrescriptionDialogControllerProvider =
-    NotifierProvider<
+    NotifierProvider.autoDispose<
       AddPrescriptionController,
       AddPrescriptionDialogState
     >(AddPrescriptionController.new);
