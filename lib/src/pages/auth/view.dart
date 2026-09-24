@@ -1,10 +1,10 @@
 import '../../../common.dart';
 
-class AuthPage extends StatelessWidget {
+class AuthPage extends ConsumerWidget {
   const AuthPage({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
       body: Center(
         child: Column(
@@ -16,7 +16,11 @@ class AuthPage extends StatelessWidget {
             ),
             const SizedBox(height: 16),
             ElevatedButton(
-              onPressed: () => context.go('/'),
+              onPressed: () {
+                // Mark the user as authenticated.
+                // The route guard will handle the redirect to '/'.
+                ref.read(authStateProvider.notifier).login();
+              },
               child: const Text('Login'),
             ),
           ],

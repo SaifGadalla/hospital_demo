@@ -163,6 +163,6 @@ class InsuranceClaim {
 
   @override
   String toString() {
-    return 'InsuranceClaim(id: $id, tenantId: $tenantId, claimNumber: $claimNumber, patientId: $patientId, patientName: $patientName, insurancePlanId: $insurancePlanId, insurancePlanName: $insurancePlanName, serviceDate: $serviceDate, serviceProviderId: $serviceProviderId, diagnosisCodes: $diagnosisCodes, procedureCodes: $procedureCodes, totalAmount: $totalAmount, claimedAmount: $claimedAmount, submissionDate: $submissionDate, status: $status, approvedAmount: $approvedAmount, paidAmount: $paidAmount, rejectionReason: $rejectionReason, paymentDate: $paymentDate, notes: $notes, createdAt: $createdAt, updatedAt: $updatedAt)';
+    return 'InsuranceClaim(id: $id, claimNumber: $claimNumber, status: $status)';
   }
 }

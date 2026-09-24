@@ -187,6 +187,6 @@ class MedicalRecord {
 
   @override
   String toString() {
-    return 'MedicalRecord(id: $id, tenantId: $tenantId, patientId: $patientId, appointmentId: $appointmentId, doctorId: $doctorId, visitDate: $visitDate, bloodPressureSystolic: $bloodPressureSystolic, bloodPressureDiastolic: $bloodPressureDiastolic, temperature: $temperature, heartRate: $heartRate, respiratoryRate: $respiratoryRate, weight: $weight, height: $height, bmi: $bmi, oxygenSaturation: $oxygenSaturation, subjective: $subjective, objective: $objective, assessment: $assessment, plan: $plan, diagnosisCode: $diagnosisCode, diagnosisDescription: $diagnosisDescription, allergies: $allergies, currentMedications: $currentMedications, clinicalNotes: $clinicalNotes, createdAt: $createdAt, updatedAt: $updatedAt)';
+    return 'MedicalRecord(id: $id, patientId: $patientId, visitDate: $visitDate)';
   }
 }

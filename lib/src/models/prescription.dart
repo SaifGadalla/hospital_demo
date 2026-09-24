@@ -129,6 +129,6 @@ class Prescription {
 
   @override
   String toString() {
-    return 'Prescription(id: $id, tenantId: $tenantId, prescriptionNumber: $prescriptionNumber, patientId: $patientId, doctorId: $doctorId, prescriptionDate: $prescriptionDate, appointmentId: $appointmentId, medicalRecordId: $medicalRecordId, diagnosis: $diagnosis, status: $status, dispensedDate: $dispensedDate, dispensedById: $dispensedById, notes: $notes, items: $items, createdAt: $createdAt, updatedAt: $updatedAt)';
+    return 'Prescription(id: $id, prescriptionNumber: $prescriptionNumber, patientId: $patientId, status: $status)';
   }
 }

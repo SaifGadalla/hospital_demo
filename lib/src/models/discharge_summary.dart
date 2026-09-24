@@ -98,6 +98,6 @@ class DischargeSummary {
 
   @override
   String toString() {
-    return 'DischargeSummary(id: $id, admissionId: $admissionId, dischargeDate: $dischargeDate, dischargeDiagnosis: $dischargeDiagnosis, proceduresPerformed: $proceduresPerformed, medicationsOnDischarge: $medicationsOnDischarge, followUpInstructions: $followUpInstructions, dischargeTo: $dischargeTo, approvedById: $approvedById, notes: $notes, doctorId: $doctorId, patientId: $patientId)';
+    return 'DischargeSummary(id: $id, admissionId: $admissionId, dischargeDate: $dischargeDate, patientId: $patientId)';
   }
 }

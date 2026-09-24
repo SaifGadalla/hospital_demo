@@ -94,6 +94,6 @@ class ErTreatment {
 
   @override
   String toString() {
-    return 'ErTreatment(treatmentEndTime: $treatmentEndTime, disposition: $disposition, erRegistrationId: $erRegistrationId, treatingDoctorId: $treatingDoctorId, treatmentStartTime: $treatmentStartTime, assessment: $assessment, diagnosis: $diagnosis, treatmentProvided: $treatmentProvided, investigationsOrdered: $investigationsOrdered, medicationsGiven: $medicationsGiven, notes: $notes)';
+    return 'ErTreatment(erRegistrationId: $erRegistrationId, disposition: $disposition)';
   }
 }

@@ -6,10 +6,14 @@ class Env {
     'baseUrl',
     defaultValue: 'https://tesseroapi.runasp.net',
   );
+  static const String tenantId = String.fromEnvironment(
+    'tenantId',
+    defaultValue: '00000000-0000-0000-0000-000000000001',
+  );
 }
 
 final dioProvider = Provider<DioService>((ref) {
-  return DioService(baseUrl: Env.baseUrl);
+  return DioService(baseUrl: Env.baseUrl, tenantId: Env.tenantId);
 });
 
 final admissionsServiceProvider = Provider<AdmissionsService>((ref) {

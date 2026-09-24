@@ -81,6 +81,6 @@ class MedicationAdministration {
 
   @override
   String toString() {
-    return 'MedicationAdministration(actualTime: $actualTime, notes: $notes, reason: $reason, admissionId: $admissionId, patientId: $patientId, prescriptionItemId: $prescriptionItemId, administeredById: $administeredById, scheduledTime: $scheduledTime, dose: $dose, route: $route)';
+    return 'MedicationAdministration(admissionId: $admissionId, patientId: $patientId, scheduledTime: $scheduledTime)';
   }
 }

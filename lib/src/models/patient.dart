@@ -229,6 +229,6 @@ class Patient {
 
   @override
   String toString() {
-    return 'Patient{id: $id, tenantId: $tenantId, mrn: $mrn, firstName: $firstName, lastName: $lastName, middleName: $middleName, fullName: $fullName, dateOfBirth: $dateOfBirth, age: $age, gender: $gender, nationalId: $nationalId, passportNumber: $passportNumber, email: $email, phone: $phone, mobile: $mobile, address: $address, city: $city, state: $state, country: $country, bloodType: $bloodType, maritalStatus: $maritalStatus, nationality: $nationality, photoUrl: $photoUrl, emergencyContactName: $emergencyContactName, emergencyContactPhone: $emergencyContactPhone, emergencyContactRelation: $emergencyContactRelationship, primaryInsuranceId: $primaryInsuranceId, insurancePolicyNumber: $insurancePolicyNumber, insuranceMemberNumber: $insuranceMemberNumber, isVIP: $isVIP, isActive: $isActive, createdAt: $createdAt, updatedAt: $updatedAt}';
+    return 'Patient{id: $id, mrn: $mrn, fullName: $fullName}';
   }
 }

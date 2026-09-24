@@ -105,6 +105,6 @@ class NursingNote {
 
   @override
   String toString() {
-    return 'NursingNote(admissionId: $admissionId, patientId: $patientId, nurseId: $nurseId, noteDate: $noteDate, noteTime: $noteTime, bloodPressure: $bloodPressure, temperature: $temperature, pulseRate: $pulseRate, respiratoryRate: $respiratoryRate, oxygenSaturation: $oxygenSaturation, intakeOutput: $intakeOutput, observations: $observations, careProvided: $careProvided)';
+    return 'NursingNote(admissionId: $admissionId, patientId: $patientId, noteDate: $noteDate)';
   }
 }

@@ -1,10 +1,11 @@
 import 'package:dio/dio.dart';
+import 'package:flutter/foundation.dart';
 
 class DioService {
   // 1. Make the Dio instance private
   late final Dio _dio;
 
-  DioService({required String baseUrl}) {
+  DioService({required String baseUrl, required String tenantId}) {
     _dio = Dio(
       BaseOptions(
         baseUrl: baseUrl,
@@ -13,23 +14,25 @@ class DioService {
         headers: {
           'Content-Type': 'application/json',
           'Accept': 'application/json',
-          //TODO model check
-          'X-Tenant-Id': '00000000-0000-0000-0000-000000000001',
+          'X-Tenant-Id': tenantId,
         },
       ),
     );
 
-    // 2. Add Interceptors
-    _dio.interceptors.add(
-      LogInterceptor(
-        request: true,
-        requestHeader: true,
-        requestBody: true,
-        responseHeader: true,
-        responseBody: true,
-        error: true,
-      ),
-    );
+    // 2. Add Interceptors — only log in debug mode to prevent
+    //    sensitive data (PHI/PII) from leaking into production logs.
+    if (kDebugMode) {
+      _dio.interceptors.add(
+        LogInterceptor(
+          request: true,
+          requestHeader: true,
+          requestBody: true,
+          responseHeader: false,
+          responseBody: true,
+          error: true,
+        ),
+      );
+    }
 
     // TODO: Add AuthInterceptor here to attach Bearer tokens
     _dio.interceptors.add(
@@ -115,17 +118,28 @@ class DioService {
   }
 
   // 4. Centralize Error Handling
+  //    Never expose raw server details to the UI — return generic user-facing
+  //    messages and log the real error in debug mode only.
   Exception _handleException(DioException e) {
-    // You can map DioExceptions to your own custom AppExceptions here
+    if (kDebugMode) {
+      debugPrint('DioException: ${e.type} — ${e.message}');
+    }
+
     switch (e.type) {
       case DioExceptionType.connectionTimeout:
       case DioExceptionType.sendTimeout:
       case DioExceptionType.receiveTimeout:
         return Exception('Connection timed out. Please check your internet.');
       case DioExceptionType.badResponse:
-        // Handle server errors (400, 401, 500, etc.)
         final statusCode = e.response?.statusCode;
-        return Exception('Server error: $statusCode');
+        if (statusCode == 401) {
+          return Exception('Session expired. Please log in again.');
+        }
+        if (statusCode == 403) {
+          return Exception('You do not have permission to perform this action.');
+        }
+        // Generic message — never echo the server's error body
+        return Exception('A server error occurred. Please try again later.');
       case DioExceptionType.connectionError:
         return Exception('No internet connection.');
       default:

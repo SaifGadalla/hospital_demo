@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Network Security Configuration for Hospital Demo.
+  - Blocks cleartext (HTTP) traffic in release builds.
+  - In debug builds, cleartext is allowed for localhost only (dev servers).
+  See: https://developer.android.com/training/articles/security-config
+-->
+<network-security-config>
+    <!-- Default: enforce HTTPS everywhere -->
+    <base-config cleartextTrafficPermitted="false">
+        <trust-anchors>
+            <certificates src="system" />
+        </trust-anchors>
+    </base-config>
+
+    <!-- Allow cleartext only to localhost for dev servers -->
+    <domain-config cleartextTrafficPermitted="true">
+        <domain includeSubdomains="false">localhost</domain>
+        <domain includeSubdomains="false">10.0.2.2</domain>
+    </domain-config>
+</network-security-config>

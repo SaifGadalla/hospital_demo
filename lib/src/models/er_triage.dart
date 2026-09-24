@@ -145,6 +145,6 @@ class ErTriage {
 
   @override
   String toString() {
-    return 'ErTriage(id: $id, tenantId: $tenantId, erRegistrationId: $erRegistrationId, patientId: $patientId, triagedById: $triagedById, triageTime: $triageTime, triageLevel: $triageLevel, triageColor: $triageColor, bloodPressure: $bloodPressure, temperature: $temperature, pulseRate: $pulseRate, respiratoryRate: $respiratoryRate, oxygenSaturation: $oxygenSaturation, painScale: $painScale, chiefComplaint: $chiefComplaint, briefHistory: $briefHistory, allergies: $allergies, currentMedications: $currentMedications, notes: $notes, createdAt: $createdAt)';
+    return 'ErTriage(id: $id, erRegistrationId: $erRegistrationId, patientId: $patientId, triageLevel: $triageLevel)';
   }
 }
